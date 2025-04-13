@@ -1,146 +1,65 @@
-/* Reset some default styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Body Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  background-image: url("488927318_122099325614824952_863216455383910497_n.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* Header */
 header {
-    background-color: #0066cc;
-    color: white;
-    padding: 20px;
-    text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px 10px;
 }
 
-/* Header h1 */
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+.logo {
+  width: 150px;
 }
 
-/* Main container */
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+main {
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 20px;
+  padding: 30px;
+  border-radius: 10px;
 }
 
-/* Hero Section */
-.hero {
-    background: url('path/to/your/image.jpg') no-repeat center center/cover;
-    height: 400px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: white;
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: #ffd700;
 }
 
-.hero h2 {
-    font-size: 3rem;
-    margin-bottom: 10px;
+.services {
+  font-size: 1.2em;
+  line-height: 2;
 }
 
-.hero p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
+.buttons {
+  margin-top: 30px;
 }
 
-.hero .cta-button {
-    background-color: #ff6600;
-    color: white;
-    font-size: 1.1rem;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.hero .cta-button:hover {
-    background-color: #cc5200;
-}
-
-/* Section Styles */
-section {
-    margin: 40px 0;
-}
-
-/* Footer */
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
-
-/* Footer links */
-footer a {
-    color: #ff6600;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
-
-/* Button styles */
 button {
-    background-color: #0066cc;
-    color: white;
-    font-size: 1.2rem;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  margin: 10px;
+  padding: 15px 25px;
+  font-size: 1em;
+  background-color: #25d366;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-button:hover {
-    background-color: #004d99;
+button.facebook {
+  background-color: #3b5998;
 }
 
-/* WhatsApp Button */
-.whatsapp-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #25d366;
-    border-radius: 50%;
-    padding: 15px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-}
-
-.whatsapp-button:hover {
-    transform: scale(1.1);
-}
-
-/* Facebook Button */
-.facebook-button {
-    position: fixed;
-    bottom: 90px;
-    right: 20px;
-    background-color: #3b5998;
-    border-radius: 50%;
-    padding: 15px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-}
-
-.facebook-button:hover {
-    transform: scale(1.1);
-}
-
-/* Text emphasis */
-em {
-    color: #ff6600;
+footer {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 15px;
+  font-size: 0.9em;
 }
