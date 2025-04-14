@@ -1,0 +1,135 @@
+<section class="hotel-deals">
+  <h2>عروض الفنادق | Hotel Deals</h2>
+
+  <div class="hotel">
+    <img src="hotels/marriott.jpg" alt="ماريوت شيشلي">
+    <h3>ماريوت شيشلي - Marriott Şişli</h3>
+    <p>فندق فاخر يقع في قلب شيشلي بالقرب من مراكز التسوق.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/marmara.jpg" alt="ذا مرمرة تقسيم">
+    <h3>ذا مرمرة تقسيم - The Marmara Taksim</h3>
+    <p>إطلالة ساحرة على ميدان تقسيم، وخدمات 5 نجوم.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/renaissance.jpg" alt="ريني سونس بولات بكر كوي">
+    <h3>ريني سونس بولات بكر كوي - Renaissance Polat Bakırköy</h3>
+    <p>يتميز بإطلالة بحرية وخدمة فندقية ممتازة.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/crowneplaza.jpg" alt="كراون بلازا بكر كوي">
+    <h3>كراون بلازا فلوريا - Crowne Plaza Florya</h3>
+    <p>موقع مميز بالقرب من أكواريوم إسطنبول.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/divan.jpg" alt="ديفان تقسيم">
+    <h3>ديفان تقسيم - Divan Taksim</h3>
+    <p>مناسب لرحلات العمل والعائلات، وسط تقسيم.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/cvk.jpg" alt="سي في كي بارك تقسيم">
+    <h3>سي في كي بارك تقسيم - CVK Park Taksim</h3>
+    <p>من أفخم فنادق تقسيم، خدمات راقية.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/wanda.jpg" alt="واندا فيستا">
+    <h3>واندا فيستا - Wanda Vista</h3>
+    <p>فندق أنيق وعصري في منطقة مركزية.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/centro.jpg" alt="سينترو جي روتانا">
+    <h3>سينترو جي روتانا - Centro by Rotana</h3>
+    <p>أسعار منافسة وخدمة احترافية.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/holidayinn.jpg" alt="هوليدي إن شيشلي">
+    <h3>هوليدي إن شيشلي - Holiday Inn Şişli</h3>
+    <p>موقع مميز وإقامة مريحة.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/keraton.jpg" alt="ذا كيراتون شيشلي">
+    <h3>ذا كيراتون شيشلي - The Keraton Şişli</h3>
+    <p>إقامة مريحة وخدمة عالية الجودة.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/mercury.jpg" alt="ميركوري بومونتي شيشلي">
+    <h3>ميركوري بومونتي شيشلي - Mercure Bomonti</h3>
+    <p>قريب من محطة المترو وأجواء هادئة.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/hiltonbomonti.jpg" alt="هيلتون بومونتي شيشلي">
+    <h3>هيلتون بومونتي - Hilton Bomonti</h3>
+    <p>أحد أرقى فنادق إسطنبول، خدمات فخمة.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/hiltonharbiye.jpg" alt="هيلتون حربية شيشلي">
+    <h3>هيلتون حربية - Hilton Harbiye</h3>
+    <p>موقع استراتيجي في قلب إسطنبول.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/clarion.jpg" alt="كلاريون محمود بيه">
+    <h3>كلاريون محمود بيه - Clarion Mahmutbey</h3>
+    <p>بيئة هادئة وخدمة مميزة للمسافرين.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/titanic.jpg" alt="تيتانيك تقسيم">
+    <h3>تيتانيك تقسيم - Titanic Taksim</h3>
+    <p>قريب من المطاعم والأسواق.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/wishmore.jpg" alt="ويش مور بيرم باشا">
+    <h3>ويش مور بيرم باشا - Wish More Bayrampaşa</h3>
+    <p>فندق راقٍ بأسعار مقبولة.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/ramada.jpg" alt="رمادا سلطان أحمد">
+    <h3>رمادا سلطان أحمد - Ramada Sultanahmet</h3>
+    <p>قريب من أهم المعالم السياحية في السلطان أحمد.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/eliteworld.jpg" alt="إيليت وورد تقسيم">
+    <h3>إيليت وورد تقسيم - Elite World Taksim</h3>
+    <p>5 نجوم وخدمة ممتازة للضيوف.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/sheraton.jpg" alt="شيراتون ليفينت">
+    <h3>شيراتون ليفينت - Sheraton Levent</h3>
+    <p>فندق أعمال فاخر في منطقة ليفينت.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/mozaik.jpg" alt="موزاييك لالالي">
+    <h3>موزاييك لالالي - Mosaic Laleli</h3>
+    <p>فندق اقتصادي قريب من السوق.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/beethoven.jpg" alt="بيتهوفن بريميوم">
+    <h3>بيتهوفن بريميوم - Beethoven Premium</h3>
+    <p>إقامة مريحة بأسعار منافسة في لالالي.</p>
+  </div>
+
+  <div class="hotel">
+    <img src="hotels/gülsuyu.jpg" alt="غراند غيلسوي فاتح">
+    <h3>غراند غيلسوي - Grand Gülsuyu</h3>
+    <p>فندق مناسب للرحلات العائلية.</p>
+  </div>
+</section>
