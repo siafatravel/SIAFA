@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>الفنادق التي نتعامل معها | سيافا ترافل</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#05060a;
+  --panel:#111217;
+  --gold:#d4af37;
+}
+body{
+  margin:0;
+  font-family:'Cairo',sans-serif;
+  background:var(--bg);
+  color:#fff;
+  direction:rtl;
+}
+.header{
+  padding:34px 18px;
+  text-align:center;
+  background:rgba(17,18,23,0.9);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.header h1{ margin:0 0 10px 0; font-size:30px; }
+.header p{ margin:0; opacity:0.85; line-height:1.8; }
+
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:28px 18px 70px;
+}
+.search{
+  display:flex;
+  gap:12px;
+  margin:18px 0 22px;
+  flex-wrap:wrap;
+}
+.search input{
+  flex:1;
+  min-width:240px;
+  padding:14px 14px;
+  border-radius:12px;
+  border:none;
+  font-family:'Cairo',sans-serif;
+}
+.btn{
+  background:var(--gold);
+  color:#000;
+  padding:14px 18px;
+  border-radius:999px;
+  font-weight:bold;
+  text-decoration:none;
+  border:none;
+  cursor:pointer;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:14px;
+}
+.hotel{
+  background:rgba(17,18,23,0.92);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:14px;
+  padding:16px;
+  line-height:1.8;
+}
+.hotel b{ display:block; font-size:16px; margin-bottom:6px; }
+.muted{ opacity:0.8; font-size:13px; }
+
+.footer-note{
+  margin-top:22px;
+  background:rgba(17,18,23,0.92);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:14px;
+  padding:16px;
+  line-height:1.9;
+}
+.footer-note a{ color:#fff; }
+.top-actions{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+.secondary{
+  background:transparent;
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.22);
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>الفنادق التي نتعامل معها</h1>
+  <p>اكتب اسم الفندق في البحث لتجده بسرعة ✅</p>
+  <div class="top-actions">
+    <a class="btn secondary" href="index.html">⬅ الرجوع للموقع الرئيسي</a>
+    <a class="btn" href="https://wa.me/905317387785">تواصل واتساب</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="search">
+    <input id="q" type="text" placeholder="ابحث عن فندق… مثال: Marriott" oninput="filterHotels()" />
+    <button class="btn" onclick="document.getElementById('q').value=''; filterHotels();">مسح</button>
+  </div>
+
+  <div class="grid" id="hotelList">
+
+    <!-- ✅ بدّل هذه الأسماء بأسماء فنادقك -->
+    <div class="hotel"><b>Marriott Hotel Şişli</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Hilton Istanbul Bomonti</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Sheraton Istanbul Levent</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Radisson Blu Şişli</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Ramada Plaza By Wyndham Sultanahmet</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Divan Istanbul Taksim</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Point Hotel Taksim</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Crowne Plaza Old City</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Mercure Istanbul Bomonti</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Holiday Inn Şişli</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Arts Hotel Harbiye</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Lions Royal Hotel</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Eresin Hotels Topkapi</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Mercure Istanbul Bomonti</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>The Craton Hotel</b><div class="muted">إسطنبول</div></div>
+
+  </div>
+
+  <div class="footer-note">
+    يوجد خيارات أخرى أيضاً حسب التوفر والتاريخ والمستوى المطلوب.<br>
+    للتأكد أو طلب فندق غير موجود في القائمة، تواصل معنا على واتساب:
+    <a href="https://wa.me/905317387785">905317387785</a>
+  </div>
+
+</div>
+
+<script>
+function filterHotels(){
+  const q = (document.getElementById('q').value || '').toLowerCase().trim();
+  const items = document.querySelectorAll('#hotelList .hotel');
+  items.forEach(item=>{
+    const text = item.innerText.toLowerCase();
+    item.style.display = text.includes(q) ? '' : 'none';
+  });
+}
+</script>
+
+</body>
+</html>
