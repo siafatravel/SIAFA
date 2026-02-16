@@ -31,8 +31,19 @@ header {
 }
 
 .logo {
-  width: 170px;
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+  width: 220px;                 /* كبرناه */
+  max-width: 90%;               /* ما يكسر الموبايل */
+  margin: 10px auto 20px auto;  /* مسافة مرتبة */
+  display: block;
+  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.7));
+  transition: transform 0.3s ease;
+}
+
+/* تأثير خفيف عند المرور */
+.logo:hover {
+  transform: scale(1.03);
+}
+
 }
 
 /* MAIN CARD */
