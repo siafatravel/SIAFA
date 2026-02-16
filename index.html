@@ -17,7 +17,6 @@ body{
   direction:rtl;
 }
 
-/* HERO */
 .hero{
   height:100vh;
   background:url('https://images.unsplash.com/photo-1524231757912-21f4fe3a7200') center/cover no-repeat;
@@ -45,9 +44,10 @@ h1{font-size:42px;margin-bottom:15px;}
   font-weight:bold;
   display:inline-block;
   margin-top:20px;
+  border:none;
+  cursor:pointer;
 }
 
-/* SECTIONS */
 .section{
   padding:80px 20px;
   max-width:1200px;
@@ -80,7 +80,6 @@ h1{font-size:42px;margin-bottom:15px;}
   border-radius:14px;
 }
 
-/* FORM */
 form{
   display:grid;
   gap:15px;
@@ -94,7 +93,6 @@ input,select{
   border-radius:8px;
 }
 
-/* WHATSAPP */
 .whatsapp{
   position:fixed;
   bottom:20px;
@@ -111,7 +109,6 @@ input,select{
   text-decoration:none;
 }
 
-/* FOOTER */
 footer{
   text-align:center;
   padding:40px;
@@ -122,7 +119,6 @@ footer{
 
 <body>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-box">
     <h1>سيافة ترافل — SIAFA TRAVEL</h1>
@@ -131,7 +127,6 @@ footer{
   </div>
 </section>
 
-<!-- OFFERS -->
 <section class="section">
   <h2>🔥 عروضنا الحالية</h2>
   <div class="cards">
@@ -150,7 +145,6 @@ footer{
   </div>
 </section>
 
-<!-- WHY US -->
 <section class="section">
   <h2>⭐ لماذا تختار سيافة ترافل؟</h2>
   <div class="cards">
@@ -163,7 +157,6 @@ footer{
   </div>
 </section>
 
-<!-- HOTEL CRITERIA -->
 <section class="section">
   <h2>🏨 معايير الفنادق التي نتعامل معها</h2>
   <div class="cards">
@@ -174,7 +167,6 @@ footer{
   </div>
 </section>
 
-<!-- BOOKING FORM -->
 <section class="section">
   <h2>📝 طلب حجز</h2>
 
@@ -182,7 +174,15 @@ footer{
     <input type="text" id="name" placeholder="الاسم" required>
     <input type="text" id="country" placeholder="الدولة">
     <input type="date" id="checkin">
-    <input type="number" id="persons" placeholder="عدد الأشخاص">
+
+    <input type="number" id="nights" placeholder="عدد الليالي" min="1">
+
+    <input type="number" id="adults" placeholder="عدد البالغين" min="1">
+
+    <input type="number" id="children" placeholder="عدد الأطفال (إن وجد)" min="0">
+
+    <input type="text" id="childrenAges" placeholder="أعمار الأطفال (مثال: 3, 7)">
+
     <select id="budget">
       <option>اقتصادي</option>
       <option>متوسط</option>
@@ -193,13 +193,11 @@ footer{
   </form>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <h3>SIAFA TRAVEL | سيافة ترافل</h3>
   <p>وكالتك الموثوقة لحجوزات تركيا 🇹🇷</p>
 </footer>
 
-<!-- FLOAT BUTTON -->
 <a class="whatsapp" href="https://wa.me/905317387785">💬</a>
 
 <script>
@@ -207,14 +205,20 @@ function sendWhatsApp(){
   var name=document.getElementById("name").value;
   var country=document.getElementById("country").value;
   var checkin=document.getElementById("checkin").value;
-  var persons=document.getElementById("persons").value;
+  var nights=document.getElementById("nights").value;
+  var adults=document.getElementById("adults").value;
+  var children=document.getElementById("children").value;
+  var childrenAges=document.getElementById("childrenAges").value;
   var budget=document.getElementById("budget").value;
 
   var message=`طلب حجز جديد:
 الاسم: ${name}
 الدولة: ${country}
 تاريخ الوصول: ${checkin}
-عدد الأشخاص: ${persons}
+عدد الليالي: ${nights}
+عدد البالغين: ${adults}
+عدد الأطفال: ${children}
+أعمار الأطفال: ${childrenAges}
 المستوى: ${budget}`;
 
   window.open(`https://wa.me/905317387785?text=${encodeURIComponent(message)}`);
