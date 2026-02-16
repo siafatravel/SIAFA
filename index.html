@@ -1,78 +1,225 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIAFA TRAVEL</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Cairo', sans-serif;
-      background-image: url('488927318_122099325614824952_863216455383910497_n.jpg');
-      background-size: cover;
-      background-position: center;
-      color: white;
-      text-align: center;
-    }
-    .overlay {
-      background-color: rgba(0,0,0,0.6);
-      padding: 20px;
-      min-height: 100vh;
-    }
-    img.logo {
-      width: 150px;
-      margin-top: 30px;
-    }
-    h1 {
-      font-size: 2.5em;
-      margin: 20px 0;
-      color: #ffd700;
-    }
-    .description {
-      font-size: 1.2em;
-      margin-bottom: 20px;
-    }
-    .button {
-      display: inline-block;
-      margin: 10px;
-      padding: 10px 20px;
-      background-color: #25D366;
-      color: white;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-    .facebook {
-      background-color: #1877F2;
-    }
-    footer {
-      margin-top: 40px;
-      font-size: 0.9em;
-      color: #ddd;
-    }
-  </style>
-</head>
-<body>
-  <div class="overlay">
-    <img class="logo" src="488601331_122099317958824952_3463393932187760688_n.jpg" alt="SIAFA Logo">
-    <h1>ننتظركم على موقعنا المحدث قريباً</h1>
-    <p class="description">
-      الموقع لا يزال قيد التطوير.<br>
-      خصم يصل إلى 20% على الأسعار بمناسبة الافتتاح!<br><br>
-      سـيافـا للسياحة والسفر تقدم لكم أفضل العروض السياحية،<br>
-      رحلات سياحة، حجوزات فنادق وشقق فندقية بأسعار منافسة.<br>
-      شركتنا متخصصة بالحجوزات داخل إسطنبول ونعمل أيضاً في جميع أنحاء تركيا.<br><br>
-      نسعد بأن نكون رفيقكم المثالي في السفر 😊<br><br>
-      موقع الشركة: إسطنبول – باشاك شهير – الإيتاب الأول<br>
-      نقدم لكم أرقى الفنادق داخل مدينة إسطنبول وقرب أهم المعالم السياحية و بأفضل الأسعار.
-    </p>
-    <a class="button whatsapp" href="https://wa.me/message/7DBBXS3GBRXRB1" target="_blank">تواصل عبر واتساب</a>
-    <a class="button facebook" href="https://www.facebook.com/profile.php?id=61574748573494" target="_blank">صفحتنا على فيسبوك</a>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <footer>
-      &copy; 2025 SIAFA TRAVEL. جميع الحقوق محفوظة.
-    </footer>
+<title>SIAFA TRAVEL | سيافة ترافل - حجوزات فنادق تركيا</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Cairo',sans-serif;
+  background:#0b0b0f;
+  color:#fff;
+  direction:rtl;
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  background:url('https://images.unsplash.com/photo-1524231757912-21f4fe3a7200') center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.hero-box{
+  background:rgba(0,0,0,0.65);
+  padding:40px;
+  border-radius:20px;
+  max-width:650px;
+}
+
+h1{font-size:42px;margin-bottom:15px;}
+
+.btn{
+  background:#d4af37;
+  color:#000;
+  padding:15px 30px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:bold;
+  display:inline-block;
+  margin-top:20px;
+}
+
+/* SECTIONS */
+.section{
+  padding:80px 20px;
+  max-width:1200px;
+  margin:auto;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:#16161d;
+  border-radius:16px;
+  overflow:hidden;
+}
+
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+.card h3{padding:15px;margin:0;}
+
+.feature{
+  background:#16161d;
+  padding:25px;
+  border-radius:14px;
+}
+
+/* FORM */
+form{
+  display:grid;
+  gap:15px;
+  max-width:500px;
+  margin:auto;
+}
+
+input,select{
+  padding:12px;
+  border:none;
+  border-radius:8px;
+}
+
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  background:#25D366;
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  color:#fff;
+  text-decoration:none;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:40px;
+  background:#050508;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-box">
+    <h1>سيافة ترافل — SIAFA TRAVEL</h1>
+    <p>حجوزات فنادق في تركيا 🇹🇷 بأسعار مميزة — دعم عربي كامل</p>
+    <a class="btn" href="https://wa.me/905317387785">احجز الآن عبر واتساب</a>
   </div>
+</section>
+
+<!-- OFFERS -->
+<section class="section">
+  <h2>🔥 عروضنا الحالية</h2>
+  <div class="cards">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210ef">
+      <h3>فنادق 5 نجوم في إسطنبول<br>تبدأ من 140$</h3>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb">
+      <h3>باكجات شهر العسل<br>تبدأ من 200$</h3>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b">
+      <h3>عروض عائلية مميزة<br>تبدأ من 160$</h3>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section">
+  <h2>⭐ لماذا تختار سيافة ترافل؟</h2>
+  <div class="cards">
+    <div class="feature">✔️ أسعار أقل من مواقع الحجز</div>
+    <div class="feature">✔️ حجوزات مؤكدة قبل الوصول</div>
+    <div class="feature">✔️ دعم عربي 24/7</div>
+    <div class="feature">✔️ إمكانية ترقية الغرف</div>
+    <div class="feature">✔️ تعامل مباشر مع الفنادق</div>
+    <div class="feature">✔️ بدون عمولات مخفية</div>
+  </div>
+</section>
+
+<!-- HOTEL CRITERIA -->
+<section class="section">
+  <h2>🏨 معايير الفنادق التي نتعامل معها</h2>
+  <div class="cards">
+    <div class="feature">✔️ مواقع آمنة وقريبة من المواصلات</div>
+    <div class="feature">✔️ تقييمات عالية من النزلاء</div>
+    <div class="feature">✔️ مناسبة للعائلات العربية</div>
+    <div class="feature">✔️ مستوى نظافة وخدمة ممتاز</div>
+  </div>
+</section>
+
+<!-- BOOKING FORM -->
+<section class="section">
+  <h2>📝 طلب حجز</h2>
+
+  <form onsubmit="sendWhatsApp(); return false;">
+    <input type="text" id="name" placeholder="الاسم" required>
+    <input type="text" id="country" placeholder="الدولة">
+    <input type="date" id="checkin">
+    <input type="number" id="persons" placeholder="عدد الأشخاص">
+    <select id="budget">
+      <option>اقتصادي</option>
+      <option>متوسط</option>
+      <option>فاخر</option>
+    </select>
+
+    <button class="btn" type="submit">إرسال الطلب</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <h3>SIAFA TRAVEL | سيافة ترافل</h3>
+  <p>وكالتك الموثوقة لحجوزات تركيا 🇹🇷</p>
+</footer>
+
+<!-- FLOAT BUTTON -->
+<a class="whatsapp" href="https://wa.me/905317387785">💬</a>
+
+<script>
+function sendWhatsApp(){
+  var name=document.getElementById("name").value;
+  var country=document.getElementById("country").value;
+  var checkin=document.getElementById("checkin").value;
+  var persons=document.getElementById("persons").value;
+  var budget=document.getElementById("budget").value;
+
+  var message=`طلب حجز جديد:
+الاسم: ${name}
+الدولة: ${country}
+تاريخ الوصول: ${checkin}
+عدد الأشخاص: ${persons}
+المستوى: ${budget}`;
+
+  window.open(`https://wa.me/905317387785?text=${encodeURIComponent(message)}`);
+}
+</script>
+
 </body>
 </html>
