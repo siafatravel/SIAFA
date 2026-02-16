@@ -30,20 +30,18 @@ header {
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
+/* LOGO */
 .logo {
-  width: 220px;                 /* كبرناه */
-  max-width: 90%;               /* ما يكسر الموبايل */
-  margin: 10px auto 20px auto;  /* مسافة مرتبة */
+  width: 240px;                 /* مكبر أكثر */
+  max-width: 90%;
+  margin: 15px auto 25px auto;
   display: block;
-  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.7));
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.7));
   transition: transform 0.3s ease;
 }
 
-/* تأثير خفيف عند المرور */
 .logo:hover {
-  transform: scale(1.03);
-}
-
+  transform: scale(1.05);
 }
 
 /* MAIN CARD */
@@ -88,17 +86,12 @@ button {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-}
-
-/* WhatsApp */
-button {
-  background: linear-gradient(135deg, #25d366, #1ebe57);
   color: white;
 }
 
-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+/* WhatsApp */
+button.whatsapp {
+  background: linear-gradient(135deg, #25d366, #1ebe57);
 }
 
 /* Facebook */
@@ -114,6 +107,11 @@ button.instagram {
     #8134af,
     #515bd4
   );
+}
+
+button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.6);
 }
 
 /* FOOTER */
