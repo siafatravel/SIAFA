@@ -22,15 +22,25 @@ body{
   direction:rtl;
 }
 
-/* HERO */
+/* HERO WITH VIDEO */
 .hero{
   height:100vh;
-  background:url('https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
   position:relative;
+  overflow:hidden;
+}
+
+.hero-video{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
 }
 
 .hero::after{
@@ -38,6 +48,7 @@ body{
   position:absolute;
   inset:0;
   background:rgba(0,0,0,0.55);
+  z-index:1;
 }
 
 .hero-box{
@@ -223,6 +234,12 @@ footer{
 
 <!-- HERO -->
 <section class="hero">
+
+  <!-- ✅ Video background -->
+  <video autoplay muted loop playsinline class="hero-video">
+    <source src="hero.mp4" type="video/mp4">
+  </video>
+
   <div class="hero-box">
 
     <!-- Logo -->
@@ -285,7 +302,7 @@ footer{
     <div class="small">ملاحظة: أي تفاصيل خاصة بالفندق أو الموسم بنوضحها لكم قبل تثبيت الحجز.</div>
   </section>
 
-  <!-- ✅ SERVICES (مُعاد تنظيمه كما طلبت) -->
+  <!-- ✅ SERVICES -->
   <section class="section" id="services">
     <h2>🧳 خدماتنا في تركيا</h2>
     <div class="cards">
