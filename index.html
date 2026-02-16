@@ -61,11 +61,21 @@ body{
 
 /* ✅ Logo in hero */
 .hero-logo{
-  width:170px;
-  margin:0 auto 22px auto;
+  width:240px;                 /* كبرناه بوضوح */
+  max-width:85%;               /* ما يكسر بالموبايل */
+  margin:0 auto 18px auto;
   display:block;
-  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
-  opacity:0.95;
+  filter: drop-shadow(0 22px 40px rgba(0,0,0,0.75));
+  opacity:0.98;
+}
+
+/* موبايل */
+@media (max-width: 768px){
+  .hero-logo{
+    width:190px;
+    margin-bottom:16px;
+  }
+  
 }
 
 h1{font-size:42px;margin:0 0 12px 0;}
