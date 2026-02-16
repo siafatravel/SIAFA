@@ -118,7 +118,7 @@ button:hover {
   box-shadow: 0 18px 40px rgba(0,0,0,0.6);
 }
 
-/* ✅ SOCIAL FLOATING ICONS (Luxury Clean) */
+/* ✅ FLOAT ICONS (Luxury Glass + Colored Icons) */
 .floats{
   position:fixed;
   left:18px;
@@ -137,36 +137,33 @@ button:hover {
   align-items:center;
   justify-content:center;
   text-decoration:none;
-  backdrop-filter:blur(10px);
   background:rgba(255,255,255,0.08);
   border:1px solid rgba(255,255,255,0.15);
   box-shadow:0 12px 25px rgba(0,0,0,0.45);
+  backdrop-filter:blur(10px);
   transition:all 0.3s ease;
 }
 
+/* أهم سطرين: نجبر الـ SVG يورّث اللون من الزر */
 .float-btn svg{
   width:22px;
   height:22px;
   display:block;
+  fill: currentColor !important;   /* ✅ هذا اللي بيحل 90% من المشاكل */
 }
 
-/* ألوان أيقونات خفيفة (مو فاقعة) */
-.float-btn.wa svg{ fill: rgba(37, 211, 102, 0.95); }
-.float-btn.fb svg{ fill: rgba(24, 119, 242, 0.95); }
-.float-btn.ig svg{ fill: rgba(221, 42, 123, 0.95); }
-}
+/* ألوان الأزرار (تأثر على الأيقونة لأن fill=currentColor) */
+.float-btn.wa{ color: rgba(37, 211, 102, 0.95); }
+.float-btn.fb{ color: rgba(24, 119, 242, 0.95); }
+.float-btn.ig{ color: rgba(221, 42, 123, 0.95); }
 
+/* Hover فاخر */
 .float-btn:hover{
   transform:translateY(-4px);
-  background:rgba(212,175,55,0.25);
+  background:rgba(212,175,55,0.22);
   border-color:rgba(212,175,55,0.6);
 }
 
-/* FOOTER */
-footer {
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(6px);
-  padding: 18px;
   font-size: 0.9em;
   border-top: 1px solid rgba(255,255,255,0.1);
   opacity: 0.9;
