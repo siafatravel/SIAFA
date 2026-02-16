@@ -12,7 +12,6 @@
 :root{
   --bg:#05060a;
   --panel:#111217;
-  --panel2:#0e0f14;
   --gold:#d4af37;
 }
 
@@ -24,7 +23,7 @@ body{
   direction:rtl;
 }
 
-/* HERO (فوق ممتاز — ما لمسناه) */
+/* HERO (فوق ممتاز — بدون blur قوي) */
 .hero{
   height:100vh;
   background:url('https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
@@ -45,7 +44,7 @@ body{
 .hero-box{
   position:relative;
   z-index:2;
-  max-width:760px;
+  max-width:820px;
   padding:0 16px;
 }
 
@@ -67,6 +66,12 @@ p{line-height:1.9; opacity:0.95; margin:0;}
 }
 .btn:hover{ transform:translateY(-3px); }
 
+.btn.secondary{
+  background:transparent;
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.22);
+}
+
 /* ✅ خلفية تحت + Blur خفيف جداً */
 .main{
   position:relative;
@@ -81,7 +86,7 @@ p{line-height:1.9; opacity:0.95; margin:0;}
     radial-gradient(900px 450px at 85% 15%, rgba(212,175,55,0.12), transparent 60%),
     radial-gradient(900px 450px at 15% 55%, rgba(24,119,242,0.10), transparent 60%),
     radial-gradient(700px 350px at 60% 90%, rgba(221,42,123,0.08), transparent 60%);
-  filter: blur(6px);       /* ✅ Blur خفيف جداً */
+  filter: blur(6px);       /* ✅ خفيف جداً */
   opacity:0.9;
   pointer-events:none;
 }
@@ -90,7 +95,7 @@ p{line-height:1.9; opacity:0.95; margin:0;}
   content:"";
   position:absolute;
   inset:0;
-  background:rgba(5,6,10,0.88); /* غمقان بسيط حتى يطلع فخم */
+  background:rgba(5,6,10,0.88);
   pointer-events:none;
 }
 
@@ -114,28 +119,6 @@ h2{margin:0 0 18px 0;}
   gap:22px;
 }
 
-.card{
-  background:rgba(17,18,23,0.92);
-  border-radius:16px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,0.06);
-  transition:0.25s;
-}
-.card:hover{ transform:translateY(-5px); }
-
-.card img{
-  width:100%;
-  height:200px;
-  object-fit:cover;
-  display:block;
-}
-
-.card h3{
-  padding:18px;
-  margin:0;
-  line-height:1.5;
-}
-
 .feature{
   background:rgba(17,18,23,0.92);
   padding:24px;
@@ -150,7 +133,41 @@ h2{margin:0 0 18px 0;}
   margin-top:14px;
 }
 
-/* FLOAT ICONS (أفخم شوي) */
+/* FORM */
+form{
+  display:grid;
+  gap:14px;
+  max-width:620px;
+  margin:auto;
+}
+
+.field label{
+  display:block;
+  font-size:14px;
+  opacity:0.9;
+  margin:0 4px 6px 0;
+}
+
+input,select{
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  width:100%;
+  box-sizing:border-box;
+  font-family:'Cairo',sans-serif;
+}
+
+input[type="date"]{
+  color:#111;
+}
+
+.hint{
+  font-size:12px;
+  opacity:0.75;
+  margin-top:-6px;
+}
+
+/* FLOAT ICONS */
 .floats{
   position:fixed;
   left:18px;
@@ -182,6 +199,7 @@ h2{margin:0 0 18px 0;}
 .float-fb{ background:rgba(24,119,242,0.92); }
 .float-ig{ background:linear-gradient(45deg, rgba(245,133,41,0.95), rgba(221,42,123,0.95), rgba(129,52,175,0.95), rgba(81,91,212,0.95)); }
 
+/* FOOTER */
 footer{
   text-align:center;
   padding:46px 20px;
@@ -200,10 +218,12 @@ footer{
     <h1>سيافا ترافل — SIAFA TRAVEL</h1>
     <p>حجوزات فنادق في تركيا 🇹🇷 — تركيز خاص على إسطنبول<br>أسعار منافسة — دعم سريع — حجوزات مؤكدة</p>
     <a class="btn" href="https://wa.me/905317387785">تواصل عبر واتساب</a>
+    <div style="margin-top:10px">
+      <a class="btn secondary" href="#booking">إرسال طلب حجز</a>
+    </div>
   </div>
 </section>
 
-<!-- ✅ كل اللي تحت داخل main حتى ياخذ الخلفية الغامقة + blur الخفيف -->
 <div class="main">
 
   <!-- WHY US -->
@@ -215,7 +235,7 @@ footer{
       <div class="feature">✔️ نرشح لك الأفضل حسب ميزانيتك ومكانك المفضل في إسطنبول وتركيا</div>
       <div class="feature">✔️ خدمة عملاء عبر واتساب: <b>عربي / English / Türkçe</b></div>
       <div class="feature">✔️ دعم ما بعد الحجز: تنسيق المطار والرحلات اليومية والداخلية</div>
-      <div class="feature">✔️ تعامل منظم وشفاف بدون تعقيد… كل شيء واضح قبل التثبيت</div>
+      <div class="feature">✔️ تعامل منظم وشفاف… كل شيء واضح قبل تثبيت الحجز</div>
     </div>
   </section>
 
@@ -240,9 +260,9 @@ footer{
     <h2>💬 طريقة الحجز والدفع</h2>
     <div class="feature">
       <b>1)</b> بتتواصلوا معنا على واتساب وبتحكوا مباشرة مع أحد ممثلي خدمة العملاء 👨‍💼👩‍💼<br>
-      <b>2)</b> بنسألكم كم سؤال بسيط (عدد الأشخاص – تاريخ الوصول – عدد الليالي – المستوى) وبنرشح لكم أفضل الفنادق 🏨<br>
+      <b>2)</b> بنسألكم كم سؤال بسيط (عدد الأشخاص – تاريخ الوصول – عدد الليالي – المستوى) وبنرشح لكم أفضل الخيارات 🏨<br>
       <b>3)</b> بعد ما تختاروا الفندق المناسب، بنطلب <b>صور الجوازات</b> و<b>تذاكر الطيران</b> ✈️<br>
-      <b>4)</b> بنثبت الحجز بشكل رسمي وبنرسل لكم <b>الإيصال/الفوتشر</b> 📄<br>
+      <b>4)</b> بنثبت الحجز رسميًا وبنرسل لكم <b>الإيصال/الفوتشر</b> 📄<br>
       <b>5)</b> <b>الدفع يكون نقداً عند الوصول للفندق</b> 💵
     </div>
     <div class="small">ملاحظة: أي تفاصيل خاصة بالفندق أو الموسم بنوضحها لكم قبل تثبيت الحجز.</div>
@@ -254,12 +274,81 @@ footer{
     <div class="cards">
       <div class="feature">🚖 توصيل من وإلى المطار (VIP)</div>
       <div class="feature">🌊 رحلة صبنجة ومعشوقة</div>
+      <div class="feature">🌲 رحلة شيلا وأغوا</div>
       <div class="feature">🏝️ جزر الأميرات</div>
       <div class="feature">🚢 سهرات سفن البوسفور</div>
-      <div class="feature">🌲 شيلا وأغوا</div>
       <div class="feature">🏔️ بورصة وجبال أولوداغ</div>
       <div class="feature">🌿 باكيدجات طرابزون + أكواخ</div>
       <div class="feature">🏖️ باكيدجات أنطاليا</div>
+    </div>
+  </section>
+
+  <!-- ✅ BOOKING FORM -->
+  <section class="section" id="booking">
+    <h2>📝 إرسال طلب حجز</h2>
+
+    <form onsubmit="sendWhatsApp(); return false;">
+
+      <div class="field">
+        <label for="name">الاسم</label>
+        <input type="text" id="name" placeholder="اكتب اسمك" required>
+      </div>
+
+      <div class="field">
+        <label for="country">الدولة</label>
+        <input type="text" id="country" placeholder="مثال: السعودية">
+      </div>
+
+      <div class="field">
+        <label for="checkin">تاريخ الوصول</label>
+        <input type="date" id="checkin">
+        <div class="hint">إذا التاريخ غير محدد، اختر تاريخ تقريبي.</div>
+      </div>
+
+      <div class="field">
+        <label for="nights">عدد الليالي</label>
+        <input type="number" id="nights" placeholder="مثال: 5" min="1">
+      </div>
+
+      <div class="field">
+        <label for="checkout">تاريخ المغادرة (يُحسب تلقائياً)</label>
+        <input type="text" id="checkout" placeholder="سيظهر بعد اختيار تاريخ الوصول وعدد الليالي" readonly>
+      </div>
+
+      <div class="field">
+        <label for="adults">عدد البالغين</label>
+        <input type="number" id="adults" placeholder="مثال: 2" min="1">
+      </div>
+
+      <div class="field">
+        <label for="children">عدد الأطفال (إن وجد)</label>
+        <input type="number" id="children" placeholder="مثال: 1" min="0">
+      </div>
+
+      <div class="field">
+        <label for="childrenAges">أعمار الأطفال (مثال: 3, 7)</label>
+        <input type="text" id="childrenAges" placeholder="مثال: 3, 7">
+      </div>
+
+      <div class="field">
+        <label for="budget">المستوى</label>
+        <select id="budget">
+          <option>اقتصادي</option>
+          <option>متوسط</option>
+          <option>فاخر</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="notes">ملاحظات (اختياري)</label>
+        <input type="text" id="notes" placeholder="مثال: منطقة شيشلي / قريب من تقسيم / إطلالة...">
+      </div>
+
+      <button class="btn" type="submit">إرسال الطلب عبر واتساب</button>
+    </form>
+
+    <div class="small" style="text-align:center;margin-top:14px;">
+      بعد الإرسال، سيقوم أحد ممثلي خدمة العملاء بالتواصل معك وتأكيد التفاصيل.
     </div>
   </section>
 
@@ -276,6 +365,64 @@ footer{
   <a class="float-btn float-fb" href="https://www.facebook.com/profile.php?id=61574748573494" target="_blank" rel="noopener" title="Facebook" aria-label="Facebook">f</a>
   <a class="float-btn float-ig" href="https://www.instagram.com/siafatravel/" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">⌁</a>
 </div>
+
+<script>
+function formatDateYYYYMMDDToArabic(yyyyMMdd){
+  if(!yyyyMMdd) return "";
+  const [y,m,d] = yyyyMMdd.split("-");
+  return `${d}-${m}-${y}`;
+}
+
+function calcCheckout(){
+  const checkin = document.getElementById("checkin").value;
+  const nights = parseInt(document.getElementById("nights").value || "0", 10);
+  const checkoutEl = document.getElementById("checkout");
+
+  if(!checkin || !nights || nights < 1){
+    checkoutEl.value = "";
+    return;
+  }
+
+  const dt = new Date(checkin + "T00:00:00");
+  dt.setDate(dt.getDate() + nights);
+
+  const y = dt.getFullYear();
+  const m = String(dt.getMonth()+1).padStart(2,"0");
+  const d = String(dt.getDate()).padStart(2,"0");
+
+  checkoutEl.value = `${d}-${m}-${y}`;
+}
+
+document.getElementById("checkin").addEventListener("change", calcCheckout);
+document.getElementById("nights").addEventListener("input", calcCheckout);
+
+function sendWhatsApp(){
+  const name = document.getElementById("name").value;
+  const country = document.getElementById("country").value;
+  const checkin = document.getElementById("checkin").value;
+  const nights = document.getElementById("nights").value;
+  const checkout = document.getElementById("checkout").value;
+  const adults = document.getElementById("adults").value;
+  const children = document.getElementById("children").value;
+  const childrenAges = document.getElementById("childrenAges").value;
+  const budget = document.getElementById("budget").value;
+  const notes = document.getElementById("notes").value;
+
+  const message = `طلب حجز جديد (سيافا ترافل - SIAFA TRAVEL):
+الاسم: ${name}
+الدولة: ${country}
+تاريخ الوصول: ${formatDateYYYYMMDDToArabic(checkin)} (إذا غير محدد، تاريخ تقريبي)
+عدد الليالي: ${nights}
+تاريخ المغادرة: ${checkout}
+عدد البالغين: ${adults}
+عدد الأطفال: ${children}
+أعمار الأطفال: ${childrenAges}
+المستوى: ${budget}
+ملاحظات: ${notes}`;
+
+  window.open(`https://wa.me/905317387785?text=${encodeURIComponent(message)}`);
+}
+</script>
 
 </body>
 </html>
