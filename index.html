@@ -46,6 +46,16 @@ body{
   z-index:2;
   max-width:820px;
   padding:0 16px;
+  transform: translateY(-35px);
+}
+
+/* ✅ Logo in hero */
+.hero-logo{
+  width:170px;
+  margin:0 auto 22px auto;
+  display:block;
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
+  opacity:0.95;
 }
 
 h1{font-size:42px;margin:0 0 12px 0;}
@@ -215,13 +225,20 @@ footer{
 <!-- HERO -->
 <section class="hero">
   <div class="hero-box">
+
+    <!-- Logo -->
+    <img src="logo.png" alt="SIAFA TRAVEL Logo" class="hero-logo">
+
     <h1>سيافا ترافل — SIAFA TRAVEL</h1>
     <p>حجوزات فنادق في تركيا 🇹🇷 <br>أسعار منافسة — دعم سريع — حجوزات مؤكدة</p>
+
     <a class="btn" href="https://wa.me/905317387785">تواصل عبر واتساب</a>
-   <div style="margin-top:10px">
-  <a class="btn secondary" href="#booking">إرسال طلب حجز</a>
-  <a class="btn secondary" href="hotels.html" style="margin-right:8px">الفنادق التي نتعامل معها</a>
-</div>
+
+    <div style="margin-top:10px">
+      <a class="btn secondary" href="#booking">إرسال طلب حجز</a>
+      <a class="btn secondary" href="hotels.html" style="margin-right:8px">الفنادق التي نتعامل معها</a>
+    </div>
+
   </div>
 </section>
 
