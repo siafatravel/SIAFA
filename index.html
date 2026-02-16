@@ -80,19 +80,45 @@ h1{font-size:42px;margin-bottom:15px;}
   border-radius:14px;
 }
 
+/* FORM */
 form{
   display:grid;
-  gap:15px;
-  max-width:500px;
+  gap:14px;
+  max-width:560px;
   margin:auto;
+}
+
+.field label{
+  display:block;
+  font-size:14px;
+  opacity:0.9;
+  margin:0 4px 6px 0;
 }
 
 input,select{
   padding:12px;
   border:none;
-  border-radius:8px;
+  border-radius:10px;
+  width:100%;
+  box-sizing:border-box;
+  font-family:'Cairo',sans-serif;
 }
 
+/* make date look nicer in dark mode */
+input[type="date"]{
+  color:#111;
+}
+input[type="date"]::-webkit-calendar-picker-indicator{
+  cursor:pointer;
+}
+
+.hint{
+  font-size:12px;
+  opacity:0.75;
+  margin-top:-6px;
+}
+
+/* WHATSAPP */
 .whatsapp{
   position:fixed;
   bottom:20px;
@@ -171,23 +197,56 @@ footer{
   <h2>📝 طلب حجز</h2>
 
   <form onsubmit="sendWhatsApp(); return false;">
-    <input type="text" id="name" placeholder="الاسم" required>
-    <input type="text" id="country" placeholder="الدولة">
-    <input type="date" id="checkin">
 
-    <input type="number" id="nights" placeholder="عدد الليالي" min="1">
+    <div class="field">
+      <label for="name">الاسم</label>
+      <input type="text" id="name" placeholder="اكتب اسمك" required>
+    </div>
 
-    <input type="number" id="adults" placeholder="عدد البالغين" min="1">
+    <div class="field">
+      <label for="country">الدولة</label>
+      <input type="text" id="country" placeholder="مثال: السعودية">
+    </div>
 
-    <input type="number" id="children" placeholder="عدد الأطفال (إن وجد)" min="0">
+    <div class="field">
+      <label for="checkin">تاريخ الوصول</label>
+      <input type="date" id="checkin">
+      <div class="hint">اضغط على الأيقونة لاختيار التاريخ</div>
+    </div>
 
-    <input type="text" id="childrenAges" placeholder="أعمار الأطفال (مثال: 3, 7)">
+    <div class="field">
+      <label for="nights">عدد الليالي</label>
+      <input type="number" id="nights" placeholder="مثال: 5" min="1">
+    </div>
 
-    <select id="budget">
-      <option>اقتصادي</option>
-      <option>متوسط</option>
-      <option>فاخر</option>
-    </select>
+    <div class="field">
+      <label for="checkout">تاريخ المغادرة (يُحسب تلقائياً)</label>
+      <input type="text" id="checkout" placeholder="سيظهر بعد اختيار تاريخ الوصول وعدد الليالي" readonly>
+    </div>
+
+    <div class="field">
+      <label for="adults">عدد البالغين</label>
+      <input type="number" id="adults" placeholder="مثال: 2" min="1">
+    </div>
+
+    <div class="field">
+      <label for="children">عدد الأطفال (إن وجد)</label>
+      <input type="number" id="children" placeholder="مثال: 1" min="0">
+    </div>
+
+    <div class="field">
+      <label for="childrenAges">أعمار الأطفال (مثال: 3, 7)</label>
+      <input type="text" id="childrenAges" placeholder="مثال: 3, 7">
+    </div>
+
+    <div class="field">
+      <label for="budget">المستوى</label>
+      <select id="budget">
+        <option>اقتصادي</option>
+        <option>متوسط</option>
+        <option>فاخر</option>
+      </select>
+    </div>
 
     <button class="btn" type="submit">إرسال الطلب</button>
   </form>
@@ -201,21 +260,52 @@ footer{
 <a class="whatsapp" href="https://wa.me/905317387785">💬</a>
 
 <script>
-function sendWhatsApp(){
-  var name=document.getElementById("name").value;
-  var country=document.getElementById("country").value;
-  var checkin=document.getElementById("checkin").value;
-  var nights=document.getElementById("nights").value;
-  var adults=document.getElementById("adults").value;
-  var children=document.getElementById("children").value;
-  var childrenAges=document.getElementById("childrenAges").value;
-  var budget=document.getElementById("budget").value;
+function formatDateYYYYMMDDToArabic(yyyyMMdd){
+  if(!yyyyMMdd) return "";
+  const [y,m,d] = yyyyMMdd.split("-");
+  return `${d}-${m}-${y}`; // DD-MM-YYYY
+}
 
-  var message=`طلب حجز جديد:
+function calcCheckout(){
+  const checkin = document.getElementById("checkin").value;
+  const nights = parseInt(document.getElementById("nights").value || "0", 10);
+  const checkoutEl = document.getElementById("checkout");
+
+  if(!checkin || !nights || nights < 1){
+    checkoutEl.value = "";
+    return;
+  }
+
+  const dt = new Date(checkin + "T00:00:00");
+  dt.setDate(dt.getDate() + nights);
+
+  const y = dt.getFullYear();
+  const m = String(dt.getMonth()+1).padStart(2,"0");
+  const d = String(dt.getDate()).padStart(2,"0");
+
+  checkoutEl.value = `${d}-${m}-${y}`;
+}
+
+document.getElementById("checkin").addEventListener("change", calcCheckout);
+document.getElementById("nights").addEventListener("input", calcCheckout);
+
+function sendWhatsApp(){
+  const name = document.getElementById("name").value;
+  const country = document.getElementById("country").value;
+  const checkin = document.getElementById("checkin").value;
+  const nights = document.getElementById("nights").value;
+  const checkout = document.getElementById("checkout").value;
+  const adults = document.getElementById("adults").value;
+  const children = document.getElementById("children").value;
+  const childrenAges = document.getElementById("childrenAges").value;
+  const budget = document.getElementById("budget").value;
+
+  const message = `طلب حجز جديد:
 الاسم: ${name}
 الدولة: ${country}
-تاريخ الوصول: ${checkin}
+تاريخ الوصول: ${formatDateYYYYMMDDToArabic(checkin)}
 عدد الليالي: ${nights}
+تاريخ المغادرة: ${checkout}
 عدد البالغين: ${adults}
 عدد الأطفال: ${children}
 أعمار الأطفال: ${childrenAges}
