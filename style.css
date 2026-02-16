@@ -26,22 +26,26 @@ body::before {
 header {
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(6px);
-  padding: 25px 10px;
+  padding: 15px 10px 5px 10px;
   border-bottom: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
 }
 
 /* LOGO */
 .logo {
-  width: 240px;                 /* مكبر أكثر */
-  max-width: 90%;
-  margin: 15px auto 25px auto;
+  width: 280px;
+  max-width: 85%;
+  margin: 0 auto 15px auto;
   display: block;
-  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.7));
-  transition: transform 0.3s ease;
+  filter: drop-shadow(0 25px 45px rgba(0,0,0,0.75));
 }
 
-.logo:hover {
-  transform: scale(1.05);
+/* موبايل */
+@media (max-width: 768px) {
+  .logo {
+    width: 210px;
+    margin-top: 10px;
+  }
 }
 
 /* MAIN CARD */
