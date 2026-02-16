@@ -147,8 +147,13 @@ button:hover {
 .float-btn svg{
   width:22px;
   height:22px;
-  fill:#ffffff;
   display:block;
+}
+
+/* ألوان أيقونات خفيفة (مو فاقعة) */
+.float-btn.wa svg{ fill: rgba(37, 211, 102, 0.95); }
+.float-btn.fb svg{ fill: rgba(24, 119, 242, 0.95); }
+.float-btn.ig svg{ fill: rgba(221, 42, 123, 0.95); }
 }
 
 .float-btn:hover{
