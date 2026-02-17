@@ -311,15 +311,32 @@
       return `https://picsum.photos/seed/${encodeURIComponent(seed)}/${width}/${height}`;
     }
 
+    // صور داخل الجاليري لكل فندق
     function hotelImages(hotelName){
       return Array.from({length: 8}, (_, i) => imageFromSeed(`${hotelName}-${i+1}`, 1200, 800));
+    }
+
+    // ✅ كوفر مخصص (مع fallback) لفندق معين
+    const hotelCoverOverrides = {
+      "Hilton Istanbul Bomonti": [
+        "https://www.instyle.gr/wp-content/uploads/2014/01/21/1-Hilton-Istanbul-Bomonti-Exterior1.jpg",
+        "https://x.cdrst.com/foto/hotel-sf/38cfa/granderesp/hilton-istanbul-bomonti-hotel-conference-center-exterior-1209b2d0.jpg"
+      ]
+    };
+
+    function pickCover(hotelName){
+      const fallback = imageFromSeed(`${hotelName}-cover`, 1200, 700);
+      const arr = hotelCoverOverrides[hotelName];
+      if(!arr || !arr.length) return { first: fallback, rest: [] };
+      return { first: arr[0], rest: [...arr.slice(1), fallback] };
     }
 
     function renderHotels(){
       const list = document.getElementById('hotelList');
 
       list.innerHTML = hotels.map((hotel, index) => {
-        const cover = imageFromSeed(`${hotel.name}-cover`, 1200, 700);
+        const coverObj = pickCover(hotel.name);
+
         const gallery = hotelImages(hotel.name).map((src, imgIndex) =>
           `<img src="${src}" data-hotel="${hotel.name}" data-index="${imgIndex}" alt="${hotel.name} - صورة ${imgIndex + 1}" loading="lazy">`
         ).join('');
@@ -327,7 +344,7 @@
         return `
           <details class="hotel" ${index === 0 ? 'open' : ''}>
             <summary>
-              <img class="hotel-cover" src="${cover}" alt="واجهة ${hotel.name}" loading="lazy">
+              <img class="hotel-cover" src="${coverObj.first}" data-fallbacks='${JSON.stringify(coverObj.rest)}' alt="واجهة ${hotel.name}" loading="lazy">
               <div class="hotel-head">
                 <div>
                   <b>${hotel.name}</b>
@@ -342,6 +359,18 @@
         `;
       }).join('');
     }
+
+    /* ✅ fallback لصور الكوفر إذا رابط خارجي ما فتح */
+    document.addEventListener('error', (e) => {
+      const img = e.target;
+      if(!(img instanceof HTMLImageElement)) return;
+      if(!img.classList.contains('hotel-cover')) return;
+
+      const fallbacks = JSON.parse(img.dataset.fallbacks || '[]');
+      const next = fallbacks.shift();
+      img.dataset.fallbacks = JSON.stringify(fallbacks);
+      if(next) img.src = next;
+    }, true);
 
     /* Search */
     function filterHotels(){

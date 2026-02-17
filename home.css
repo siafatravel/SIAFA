@@ -77,8 +77,8 @@ body::before{
 
 /* ✅ Logo in hero */
 .hero-logo{
-  width:240px;
-  max-width:85%;
+width:240px;                 /* كبرناه بوضوح */
+max-width:85%;               /* ما يكسر بالموبايل */
   margin:0 auto 18px auto;
   display:block;
   filter: drop-shadow(0 22px 40px rgba(0,0,0,0.75));
