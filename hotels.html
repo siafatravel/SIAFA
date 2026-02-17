@@ -82,7 +82,28 @@ body{
   background:#0b0c10;
 }
 .hotel-meta{ padding:8px 4px 4px; }
-.hotel b{ display:block; font-size:16px; margin-bottom:4px; }
+.hotel-headline{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+}
+.hotel b{ display:block; font-size:16px; margin-bottom:2px; line-height:1.5; }
+.hotel-ar{ font-size:14px; color:rgba(255,255,255,0.92); }
+.hotel-rating{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  line-height:1.2;
+  flex:0 0 auto;
+}
+.rating-label{ font-size:11px; opacity:0.78; }
+.rating-stars{
+  color:#f5c84b;
+  letter-spacing:1px;
+  font-size:14px;
+  text-shadow:0 1px 6px rgba(212,175,55,.35);
+}
 .muted{ opacity:0.8; font-size:13px; }
 .gallery-btn{
   margin-top:8px;
@@ -218,18 +239,17 @@ body{
   </div>
 
   <div class="grid" id="hotelList">
-    <div class="hotel" data-hotel="Marriott Hotel Şişli" data-city="إسطنبول"></div>
-    <div class="hotel" data-hotel="Hilton Istanbul Bomonti" data-city="إسطنبول"></div>
-    <div class="hotel" data-hotel="Sheraton Istanbul Levent" data-city="إسطنبول"></div>
-    <div class="hotel" data-hotel="Radisson Blu Şişli" data-city="إسطنبول"></div>
-    <div class="hotel" data-hotel="Ramada Plaza By Wyndham Sultanahmet" data-city="إسطنبول"></div>
-    <div class="hotel" data-hotel="Divan Istanbul Taksim" data-city="إسطنبول"></div>
-    <div class="hotel" data-hotel="Point Hotel Taksim" data-city="إسطنبول"></div>
-    <div class="hotel" data-hotel="Crowne Plaza Old City" data-city="إسطنبول"></div>
-    <div class="hotel" data-hotel="Mercure Istanbul Bomonti" data-city="إسطنبول"></div>
-    <div class="hotel" data-hotel="Holiday Inn Şişli" data-city="إسطنبول"></div>
-    <div class="hotel" data-hotel="Arts Hotel Harbiye" data-city="إسطنبول"></div>
-    <div class="hotel" data-hotel="Lions Royal Hotel" data-city="إسطنبول"></div>
+    <div class="hotel" data-hotel="Marriott Hotel Şişli" data-hotel-ar="ماريوت شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Hilton Istanbul Bomonti" data-hotel-ar="هيلتون بومونتي شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Sheraton Istanbul Levent" data-hotel-ar="شيراتون ليفينت" data-city="إسطنبول" data-area="ليفينت" data-stars="5"></div>
+    <div class="hotel" data-hotel="Ramada Plaza By Wyndham Sultanahmet" data-hotel-ar="رمادا سلطان احمد لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Divan Istanbul Taksim" data-hotel-ar="ديفان تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+    <div class="hotel" data-hotel="Point Hotel Taksim" data-hotel-ar="بوينت تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+    <div class="hotel" data-hotel="Crowne Plaza Old City" data-hotel-ar="كراون بلازا اولد سيتي لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Mercure Istanbul Bomonti" data-hotel-ar="ميركور بومونتي شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Holiday Inn Şişli" data-hotel-ar="هوليدي ان شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Arts Hotel Harbiye" data-hotel-ar="ارتس حربية تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+    <div class="hotel" data-hotel="Lions Royal Hotel" data-hotel-ar="ليونز رويال" data-city="إسطنبول" data-area="لالالي" data-stars="4" data-note="افتتاح حديث"></div>
   </div>
 
   <div class="footer-note">
@@ -240,7 +260,6 @@ body{
 
 </div>
 
-<!-- Lightbox -->
 <div class="lightbox" id="lightbox" aria-hidden="true">
   <div class="lightbox-box">
     <div class="lightbox-head">
@@ -329,7 +348,12 @@ function renderHotels(){
   const hotels = document.querySelectorAll('#hotelList .hotel');
   hotels.forEach((card) => {
     const hotel = card.dataset.hotel;
+    const hotelAr = card.dataset.hotelAr || hotel;
     const city = card.dataset.city;
+    const area = card.dataset.area || city;
+    const stars = Math.max(1, Math.min(parseInt(card.dataset.stars || "5", 10), 5));
+    const starsText = "★".repeat(stars);
+    const note = card.dataset.note ? ` (${card.dataset.note})` : "";
     const fallbackCover = imageFromSeed(`${hotel}-cover`, 1000, 620);
     const overrideCandidates = hotelCoverOverrides[hotel] || [];
     const cover = Array.isArray(overrideCandidates) ? (overrideCandidates[0] || fallbackCover) : overrideCandidates;
@@ -337,8 +361,17 @@ function renderHotels(){
     card.innerHTML = `
       <img class="hotel-thumb" src="${cover}" loading="lazy" alt="واجهة ${hotel}" data-fallbacks='${JSON.stringify(fallbackChain)}'>
       <div class="hotel-meta">
-        <b>${hotel}</b>
-        <div class="muted">${city}</div>
+        <div class="hotel-headline">
+          <div>
+            <b>${hotel}${note}</b>
+            <div class="hotel-ar">${hotelAr}${note}</div>
+          </div>
+          <div class="hotel-rating" aria-label="تصنيف ${stars} نجوم">
+            <span class="rating-label">التصنيف</span>
+            <span class="rating-stars">${starsText}</span>
+          </div>
+        </div>
+        <div class="muted">${city} - ${area}</div>
       </div>
       <button class="gallery-btn" type="button">عرض الصور</button>
     `;
