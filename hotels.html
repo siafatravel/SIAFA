@@ -1,426 +1,426 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>الفنادق التي نتعامل معها | سيافا ترافل</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الفنادق التي نتعامل معها | سيافا ترافل</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --bg:#05060a;
-  --panel:#111217;
-  --gold:#d4af37;
-}
-body{
-  margin:0;
-  font-family:'Cairo',sans-serif;
-  background:var(--bg);
-  color:#fff;
-  direction:rtl;
-}
-.header{
-  padding:34px 18px;
-  text-align:center;
-  background:rgba(17,18,23,0.9);
-  border-bottom:1px solid rgba(255,255,255,0.06);
-}
-.header h1{ margin:0 0 10px 0; font-size:30px; }
-.header p{ margin:0; opacity:0.85; line-height:1.8; }
+  <style>
+    :root{
+      --bg:#05060a;
+      --panel:#111217;
+      --gold:#d4af37;
+    }
+    body{
+      margin:0;
+      font-family:'Cairo',sans-serif;
+      background:var(--bg);
+      color:#fff;
+      direction:rtl;
+    }
+    .header{
+      padding:34px 18px;
+      text-align:center;
+      background:rgba(17,18,23,0.9);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .header h1{ margin:0 0 10px 0; font-size:30px; }
+    .header p{ margin:0; opacity:0.85; line-height:1.8; }
 
-.container{
-  max-width:1000px;
-  margin:auto;
-  padding:28px 18px 70px;
-}
-.search{
-  display:flex;
-  gap:12px;
-  margin:18px 0 22px;
-  flex-wrap:wrap;
-}
-.search input{
-  flex:1;
-  min-width:240px;
-  padding:14px 14px;
-  border-radius:12px;
-  border:none;
-  font-family:'Cairo',sans-serif;
-}
-.btn{
-  background:var(--gold);
-  color:#000;
-  padding:14px 18px;
-  border-radius:999px;
-  font-weight:bold;
-  text-decoration:none;
-  border:none;
-  cursor:pointer;
-}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:16px;
-}
+    .container{
+      max-width:1000px;
+      margin:auto;
+      padding:28px 18px 70px;
+    }
+    .search{
+      display:flex;
+      gap:12px;
+      margin:18px 0 22px;
+      flex-wrap:wrap;
+    }
+    .search input{
+      flex:1;
+      min-width:240px;
+      padding:14px 14px;
+      border-radius:12px;
+      border:none;
+      font-family:'Cairo',sans-serif;
+    }
+    .btn{
+      background:var(--gold);
+      color:#000;
+      padding:14px 18px;
+      border-radius:999px;
+      font-weight:bold;
+      text-decoration:none;
+      border:none;
+      cursor:pointer;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:16px;
+    }
 
-/* card */
-.hotel{
-  background:linear-gradient(165deg, rgba(20,22,30,0.95), rgba(11,12,16,0.95));
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:16px;
-  line-height:1.8;
-  overflow:hidden;
-}
+    /* card */
+    .hotel{
+      background:linear-gradient(165deg, rgba(20,22,30,0.95), rgba(11,12,16,0.95));
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      line-height:1.8;
+      overflow:hidden;
+    }
 
-.hotel summary{
-  list-style:none;
-  cursor:pointer;
-}
-.hotel summary::-webkit-details-marker{ display:none; }
+    .hotel summary{
+      list-style:none;
+      cursor:pointer;
+    }
+    .hotel summary::-webkit-details-marker{ display:none; }
 
-.hotel-cover{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  display:block;
-}
+    .hotel-cover{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      display:block;
+    }
 
-.hotel-head{
-  padding:14px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
+    .hotel-head{
+      padding:14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
 
-.hotel-head b{
-  display:block;
-  font-size:16px;
-  margin-bottom:4px;
-}
+    .hotel-head b{
+      display:block;
+      font-size:16px;
+      margin-bottom:4px;
+    }
 
-.muted{ opacity:0.8; font-size:13px; }
+    .muted{ opacity:0.8; font-size:13px; }
 
-.hotel-chevron{
-  color:var(--gold);
-  font-size:24px;
-  line-height:1;
-  transition:transform 0.25s ease;
-}
+    .hotel-chevron{
+      color:var(--gold);
+      font-size:24px;
+      line-height:1;
+      transition:transform 0.25s ease;
+    }
 
-.hotel[open] .hotel-chevron{
-  transform:rotate(180deg);
-}
+    .hotel[open] .hotel-chevron{
+      transform:rotate(180deg);
+    }
 
-.hotel-gallery{
-  padding:0 14px 14px;
-  display:grid;
-  grid-template-columns:repeat(4, minmax(0,1fr));
-  gap:8px;
-}
+    .hotel-gallery{
+      padding:0 14px 14px;
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:8px;
+    }
 
-.hotel-gallery img{
-  width:100%;
-  aspect-ratio:1 / 1;
-  object-fit:cover;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,0.1);
-  cursor:zoom-in;
-}
+    .hotel-gallery img{
+      width:100%;
+      aspect-ratio:1 / 1;
+      object-fit:cover;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.1);
+      cursor:zoom-in;
+    }
 
-.gallery-note{
-  padding:0 14px 14px;
-  font-size:12px;
-  opacity:0.8;
-}
+    .gallery-note{
+      padding:0 14px 14px;
+      font-size:12px;
+      opacity:0.8;
+    }
 
-.footer-note{
-  margin-top:22px;
-  background:rgba(17,18,23,0.92);
-  border:1px solid rgba(255,255,255,0.06);
-  border-radius:14px;
-  padding:16px;
-  line-height:1.9;
-}
-.footer-note a{ color:#fff; }
+    .footer-note{
+      margin-top:22px;
+      background:rgba(17,18,23,0.92);
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:14px;
+      padding:16px;
+      line-height:1.9;
+    }
+    .footer-note a{ color:#fff; }
 
-.top-actions{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:14px;
-}
-.secondary{
-  background:transparent;
-  color:#fff;
-  border:1px solid rgba(255,255,255,0.22);
-}
+    .top-actions{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .secondary{
+      background:transparent;
+      color:#fff;
+      border:1px solid rgba(255,255,255,0.22);
+    }
 
-/* ✅ Lightbox */
-.lightbox{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  background:rgba(5,6,10,0.90);
-  z-index:1200;
-  padding:14px;
-}
-.lightbox.open{ display:flex; }
-.lightbox-box{
-  width:min(1000px, 100%);
-  max-height:92vh;
-  background:rgba(14,15,20,0.95);
-  border:1px solid rgba(255,255,255,0.16);
-  border-radius:16px;
-  padding:10px;
-}
-.lightbox-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  padding:4px 4px 10px;
-}
-.lightbox-title{font-size:14px; opacity:0.88;}
-.lightbox-close,
-.lightbox-nav{
-  width:40px;
-  height:40px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,0.2);
-  background:rgba(255,255,255,0.06);
-  color:#fff;
-  cursor:pointer;
-  font-size:22px;
-}
-.lightbox-main{
-  position:relative;
-  border-radius:14px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,0.12);
-}
-.lightbox-image{
-  width:100%;
-  max-height:66vh;
-  object-fit:contain;
-  display:block;
-  background:#0b0c10;
-}
-.lightbox-prev,
-.lightbox-next{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-}
-.lightbox-prev{ left:8px; }
-.lightbox-next{ right:8px; }
-.lightbox-strip{
-  margin-top:10px;
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-}
-.lightbox-thumb{
-  width:62px;
-  height:62px;
-  object-fit:cover;
-  border-radius:8px;
-  border:2px solid transparent;
-  opacity:.8;
-  cursor:pointer;
-  flex:0 0 auto;
-}
-.lightbox-thumb.active{
-  border-color:var(--gold);
-  opacity:1;
-}
+    /* ✅ Lightbox */
+    .lightbox{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(5,6,10,0.90);
+      z-index:1200;
+      padding:14px;
+    }
+    .lightbox.open{ display:flex; }
+    .lightbox-box{
+      width:min(1000px, 100%);
+      max-height:92vh;
+      background:rgba(14,15,20,0.95);
+      border:1px solid rgba(255,255,255,0.16);
+      border-radius:16px;
+      padding:10px;
+    }
+    .lightbox-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      padding:4px 4px 10px;
+    }
+    .lightbox-title{font-size:14px; opacity:0.88;}
+    .lightbox-close,
+    .lightbox-nav{
+      width:40px;
+      height:40px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.2);
+      background:rgba(255,255,255,0.06);
+      color:#fff;
+      cursor:pointer;
+      font-size:22px;
+    }
+    .lightbox-main{
+      position:relative;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.12);
+    }
+    .lightbox-image{
+      width:100%;
+      max-height:66vh;
+      object-fit:contain;
+      display:block;
+      background:#0b0c10;
+    }
+    .lightbox-prev,
+    .lightbox-next{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+    }
+    .lightbox-prev{ left:8px; }
+    .lightbox-next{ right:8px; }
+    .lightbox-strip{
+      margin-top:10px;
+      display:flex;
+      gap:8px;
+      overflow-x:auto;
+    }
+    .lightbox-thumb{
+      width:62px;
+      height:62px;
+      object-fit:cover;
+      border-radius:8px;
+      border:2px solid transparent;
+      opacity:.8;
+      cursor:pointer;
+      flex:0 0 auto;
+    }
+    .lightbox-thumb.active{
+      border-color:var(--gold);
+      opacity:1;
+    }
 
-@media (max-width:700px){
-  .hotel-gallery{
-    grid-template-columns:repeat(3, minmax(0,1fr));
-  }
-}
-</style>
+    @media (max-width:700px){
+      .hotel-gallery{
+        grid-template-columns:repeat(3, minmax(0,1fr));
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="header">
-  <h1>الفنادق التي نتعامل معها</h1>
-  <p>اضغط على أي صورة لفندق لعرضها بشكل مكبر والتنقل بين الصور ✅</p>
-  <div class="top-actions">
-    <a class="btn secondary" href="index.html">⬅ الرجوع للموقع الرئيسي</a>
-    <a class="btn" href="https://wa.me/905317387785">تواصل واتساب</a>
-  </div>
-</div>
-
-<div class="container">
-
-  <div class="search">
-    <input id="q" type="text" placeholder="ابحث عن فندق… مثال: Marriott" oninput="filterHotels()" />
-    <button class="btn" onclick="document.getElementById('q').value=''; filterHotels();">مسح</button>
-  </div>
-
-  <div class="grid" id="hotelList"></div>
-
-  <div class="footer-note">
-    يوجد خيارات أخرى أيضاً حسب التوفر والتاريخ والمستوى المطلوب.<br>
-    للتأكد أو طلب فندق غير موجود في القائمة، تواصل معنا على واتساب:
-    <a href="https://wa.me/905317387785">905317387785</a>
-  </div>
-
-</div>
-
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" aria-hidden="true">
-  <div class="lightbox-box">
-    <div class="lightbox-head">
-      <div class="lightbox-title" id="lightboxTitle"></div>
-      <button class="lightbox-close" id="lightboxClose" aria-label="إغلاق">✕</button>
+  <div class="header">
+    <h1>الفنادق التي نتعامل معها</h1>
+    <p>اضغط على أي صورة لفندق لعرضها بشكل مكبر والتنقل بين الصور ✅</p>
+    <div class="top-actions">
+      <a class="btn secondary" href="index.html">⬅ الرجوع للموقع الرئيسي</a>
+      <a class="btn" href="https://wa.me/905317387785">تواصل واتساب</a>
     </div>
-    <div class="lightbox-main">
-      <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="السابق">‹</button>
-      <img id="lightboxImage" class="lightbox-image" alt="">
-      <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="التالي">›</button>
-    </div>
-    <div class="lightbox-strip" id="lightboxStrip"></div>
   </div>
-</div>
 
-<script>
-const hotels = [
-  { name: "Marriott Hotel Şişli", city: "إسطنبول" },
-  { name: "Hilton Istanbul Bomonti", city: "إسطنبول" },
-  { name: "Sheraton Istanbul Levent", city: "إسطنبول" },
-  { name: "Radisson Blu Şişli", city: "إسطنبول" },
-  { name: "Ramada Plaza By Wyndham Sultanahmet", city: "إسطنبول" },
-  { name: "Divan Istanbul Taksim", city: "إسطنبول" },
-  { name: "Point Hotel Taksim", city: "إسطنبول" },
-  { name: "Crowne Plaza Old City", city: "إسطنبول" },
-  { name: "Mercure Istanbul Bomonti", city: "إسطنبول" },
-  { name: "Holiday Inn Şişli", city: "إسطنبول" },
-  { name: "Arts Hotel Harbiye", city: "إسطنبول" },
-  { name: "Lions Royal Hotel", city: "إسطنبول" }
-];
+  <div class="container">
 
-function imageFromSeed(seed, width, height){
-  return `https://picsum.photos/seed/${encodeURIComponent(seed)}/${width}/${height}`;
-}
+    <div class="search">
+      <input id="q" type="text" placeholder="ابحث عن فندق… مثال: Marriott" oninput="filterHotels()" />
+      <button class="btn" onclick="document.getElementById('q').value=''; filterHotels();">مسح</button>
+    </div>
 
-function hotelImages(hotelName){
-  return Array.from({length: 8}, (_, i) => imageFromSeed(`${hotelName}-${i+1}`, 1200, 800));
-}
+    <div class="grid" id="hotelList"></div>
 
-function renderHotels(){
-  const list = document.getElementById('hotelList');
+    <div class="footer-note">
+      يوجد خيارات أخرى أيضاً حسب التوفر والتاريخ والمستوى المطلوب.<br>
+      للتأكد أو طلب فندق غير موجود في القائمة، تواصل معنا على واتساب:
+      <a href="https://wa.me/905317387785">905317387785</a>
+    </div>
 
-  list.innerHTML = hotels.map((hotel, index) => {
-    const cover = imageFromSeed(`${hotel.name}-cover`, 1200, 700);
-    const gallery = hotelImages(hotel.name).map((src, imgIndex) =>
-      `<img src="${src}" data-hotel="${hotel.name}" data-index="${imgIndex}" alt="${hotel.name} - صورة ${imgIndex + 1}" loading="lazy">`
-    ).join('');
+  </div>
 
-    return `
-      <details class="hotel" ${index === 0 ? 'open' : ''}>
-        <summary>
-          <img class="hotel-cover" src="${cover}" alt="واجهة ${hotel.name}" loading="lazy">
-          <div class="hotel-head">
-            <div>
-              <b>${hotel.name}</b>
-              <div class="muted">${hotel.city}</div>
-            </div>
-            <span class="hotel-chevron">⌄</span>
-          </div>
-        </summary>
-        <div class="hotel-gallery">${gallery}</div>
-        <div class="gallery-note">اضغط على أي صورة لعرضها بشكل مكبر ✅</div>
-      </details>
-    `;
-  }).join('');
-}
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-box">
+      <div class="lightbox-head">
+        <div class="lightbox-title" id="lightboxTitle"></div>
+        <button class="lightbox-close" id="lightboxClose" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="lightbox-main">
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="السابق">‹</button>
+        <img id="lightboxImage" class="lightbox-image" alt="">
+        <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="التالي">›</button>
+      </div>
+      <div class="lightbox-strip" id="lightboxStrip"></div>
+    </div>
+  </div>
 
-/* Search */
-function filterHotels(){
-  const q = (document.getElementById('q').value || '').toLowerCase().trim();
-  const items = document.querySelectorAll('#hotelList .hotel');
-  items.forEach(item=>{
-    const text = item.innerText.toLowerCase();
-    item.style.display = text.includes(q) ? '' : 'none';
-  });
-}
+  <script>
+    const hotels = [
+      { name: "Marriott Hotel Şişli", city: "إسطنبول" },
+      { name: "Hilton Istanbul Bomonti", city: "إسطنبول" },
+      { name: "Sheraton Istanbul Levent", city: "إسطنبول" },
+      { name: "Radisson Blu Şişli", city: "إسطنبول" },
+      { name: "Ramada Plaza By Wyndham Sultanahmet", city: "إسطنبول" },
+      { name: "Divan Istanbul Taksim", city: "إسطنبول" },
+      { name: "Point Hotel Taksim", city: "إسطنبول" },
+      { name: "Crowne Plaza Old City", city: "إسطنبول" },
+      { name: "Mercure Istanbul Bomonti", city: "إسطنبول" },
+      { name: "Holiday Inn Şişli", city: "إسطنبول" },
+      { name: "Arts Hotel Harbiye", city: "إسطنبول" },
+      { name: "Lions Royal Hotel", city: "إسطنبول" }
+    ];
 
-/* Lightbox logic */
-const lightbox = document.getElementById('lightbox');
-const lightboxImage = document.getElementById('lightboxImage');
-const lightboxTitle = document.getElementById('lightboxTitle');
-const lightboxStrip = document.getElementById('lightboxStrip');
+    function imageFromSeed(seed, width, height){
+      return `https://picsum.photos/seed/${encodeURIComponent(seed)}/${width}/${height}`;
+    }
 
-let activeImages = [];
-let activeIndex = 0;
-let activeHotel = '';
+    function hotelImages(hotelName){
+      return Array.from({length: 8}, (_, i) => imageFromSeed(`${hotelName}-${i+1}`, 1200, 800));
+    }
 
-function renderThumbs(){
-  lightboxStrip.innerHTML = activeImages.map((src, idx) => (
-    `<img src="${src}" class="lightbox-thumb ${idx===activeIndex?'active':''}" data-idx="${idx}" loading="lazy" alt="${activeHotel} ${idx+1}">`
-  )).join('');
-}
+    function renderHotels(){
+      const list = document.getElementById('hotelList');
 
-function showImage(index){
-  activeIndex = (index + activeImages.length) % activeImages.length;
-  lightboxImage.src = activeImages[activeIndex];
-  lightboxTitle.textContent = `${activeHotel} — صورة ${activeIndex + 1} من ${activeImages.length}`;
-  renderThumbs();
-}
+      list.innerHTML = hotels.map((hotel, index) => {
+        const cover = imageFromSeed(`${hotel.name}-cover`, 1200, 700);
+        const gallery = hotelImages(hotel.name).map((src, imgIndex) =>
+          `<img src="${src}" data-hotel="${hotel.name}" data-index="${imgIndex}" alt="${hotel.name} - صورة ${imgIndex + 1}" loading="lazy">`
+        ).join('');
 
-function openLightbox(hotelName, startIndex){
-  activeHotel = hotelName;
-  activeImages = hotelImages(hotelName);
-  lightbox.classList.add('open');
-  lightbox.setAttribute('aria-hidden', 'false');
-  showImage(startIndex);
-}
+        return `
+          <details class="hotel" ${index === 0 ? 'open' : ''}>
+            <summary>
+              <img class="hotel-cover" src="${cover}" alt="واجهة ${hotel.name}" loading="lazy">
+              <div class="hotel-head">
+                <div>
+                  <b>${hotel.name}</b>
+                  <div class="muted">${hotel.city}</div>
+                </div>
+                <span class="hotel-chevron">⌄</span>
+              </div>
+            </summary>
+            <div class="hotel-gallery">${gallery}</div>
+            <div class="gallery-note">اضغط على أي صورة لعرضها بشكل مكبر ✅</div>
+          </details>
+        `;
+      }).join('');
+    }
 
-function closeLightbox(){
-  lightbox.classList.remove('open');
-  lightbox.setAttribute('aria-hidden', 'true');
-  lightboxImage.src = '';
-}
+    /* Search */
+    function filterHotels(){
+      const q = (document.getElementById('q').value || '').toLowerCase().trim();
+      const items = document.querySelectorAll('#hotelList .hotel');
+      items.forEach(item=>{
+        const text = item.innerText.toLowerCase();
+        item.style.display = text.includes(q) ? '' : 'none';
+      });
+    }
 
-document.getElementById('hotelList').addEventListener('click', (e) => {
-  const img = e.target.closest('.hotel-gallery img');
-  if(!img) return;
-  const hotelName = img.dataset.hotel;
-  const idx = parseInt(img.dataset.index, 10) || 0;
-  openLightbox(hotelName, idx);
-});
+    /* Lightbox logic */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxStrip = document.getElementById('lightboxStrip');
 
-lightboxStrip.addEventListener('click', (e) => {
-  const thumb = e.target.closest('.lightbox-thumb');
-  if(!thumb) return;
-  showImage(parseInt(thumb.dataset.idx, 10));
-});
+    let activeImages = [];
+    let activeIndex = 0;
+    let activeHotel = '';
 
-document.getElementById('lightboxPrev').addEventListener('click', () => showImage(activeIndex - 1));
-document.getElementById('lightboxNext').addEventListener('click', () => showImage(activeIndex + 1));
-document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    function renderThumbs(){
+      lightboxStrip.innerHTML = activeImages.map((src, idx) => (
+        `<img src="${src}" class="lightbox-thumb ${idx===activeIndex?'active':''}" data-idx="${idx}" loading="lazy" alt="${activeHotel} ${idx+1}">`
+      )).join('');
+    }
 
-lightbox.addEventListener('click', (e) => {
-  if(e.target === lightbox) closeLightbox();
-});
+    function showImage(index){
+      activeIndex = (index + activeImages.length) % activeImages.length;
+      lightboxImage.src = activeImages[activeIndex];
+      lightboxTitle.textContent = `${activeHotel} — صورة ${activeIndex + 1} من ${activeImages.length}`;
+      renderThumbs();
+    }
 
-document.addEventListener('keydown', (e) => {
-  if(!lightbox.classList.contains('open')) return;
-  if(e.key === 'Escape') closeLightbox();
-  if(e.key === 'ArrowLeft') showImage(activeIndex - 1);
-  if(e.key === 'ArrowRight') showImage(activeIndex + 1);
-});
+    function openLightbox(hotelName, startIndex){
+      activeHotel = hotelName;
+      activeImages = hotelImages(hotelName);
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      showImage(startIndex);
+    }
 
-renderHotels();
-</script>
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightboxImage.src = '';
+    }
+
+    document.getElementById('hotelList').addEventListener('click', (e) => {
+      const img = e.target.closest('.hotel-gallery img');
+      if(!img) return;
+      const hotelName = img.dataset.hotel;
+      const idx = parseInt(img.dataset.index, 10) || 0;
+      openLightbox(hotelName, idx);
+    });
+
+    lightboxStrip.addEventListener('click', (e) => {
+      const thumb = e.target.closest('.lightbox-thumb');
+      if(!thumb) return;
+      showImage(parseInt(thumb.dataset.idx, 10));
+    });
+
+    document.getElementById('lightboxPrev').addEventListener('click', () => showImage(activeIndex - 1));
+    document.getElementById('lightboxNext').addEventListener('click', () => showImage(activeIndex + 1));
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+
+    lightbox.addEventListener('click', (e) => {
+      if(e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') showImage(activeIndex - 1);
+      if(e.key === 'ArrowRight') showImage(activeIndex + 1);
+    });
+
+    renderHotels();
+  </script>
 
 </body>
 </html>
