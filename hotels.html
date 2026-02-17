@@ -48,6 +48,15 @@ body{
   border:none;
   font-family:'Cairo',sans-serif;
 }
+.search select{
+  padding:14px 12px;
+  border-radius:12px;
+  border:none;
+  font-family:'Cairo',sans-serif;
+  background:#fff;
+  color:#111;
+  min-width:150px;
+}
 .btn{
   background:var(--gold);
   color:#000;
@@ -67,11 +76,52 @@ body{
   background:rgba(17,18,23,0.92);
   border:1px solid rgba(255,255,255,0.06);
   border-radius:14px;
-  padding:16px;
+  padding:12px;
   line-height:1.8;
 }
-.hotel b{ display:block; font-size:16px; margin-bottom:6px; }
+.hotel-thumb{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:10px;
+  display:block;
+  cursor:zoom-in;
+  border:1px solid rgba(255,255,255,0.12);
+}
+.hotel-meta{ padding:8px 4px 4px; }
+.hotel-headline{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+}
+.hotel b{ display:block; font-size:16px; margin-bottom:2px; line-height:1.5; }
+.hotel-ar{ font-size:14px; color:rgba(255,255,255,0.92); }
+.hotel-rating{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  line-height:1.2;
+  flex:0 0 auto;
+}
+.rating-label{ font-size:11px; opacity:0.78; }
+.rating-stars{
+  color:#f5c84b;
+  letter-spacing:1px;
+  font-size:14px;
+  text-shadow:0 1px 6px rgba(212,175,55,.35);
+}
 .muted{ opacity:0.8; font-size:13px; }
+.gallery-btn{
+  margin-top:8px;
+  width:100%;
+  background:transparent;
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:10px;
+  padding:10px;
+  cursor:pointer;
+}
 
 .footer-note{
   margin-top:22px;
@@ -94,6 +144,86 @@ body{
   color:#fff;
   border:1px solid rgba(255,255,255,0.22);
 }
+
+.lightbox{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(5,6,10,0.9);
+  z-index:1200;
+  padding:14px;
+}
+.lightbox.open{ display:flex; }
+.lightbox-box{
+  width:min(1000px, 100%);
+  max-height:92vh;
+  background:rgba(14,15,20,0.95);
+  border:1px solid rgba(255,255,255,0.16);
+  border-radius:16px;
+  padding:10px;
+}
+.lightbox-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:4px 4px 10px;
+}
+.lightbox-title{font-size:14px; opacity:0.88;}
+.lightbox-close,
+.lightbox-nav{
+  width:40px;
+  height:40px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.06);
+  color:#fff;
+  cursor:pointer;
+  font-size:22px;
+}
+.lightbox-main{
+  position:relative;
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.12);
+}
+.lightbox-image{
+  width:100%;
+  max-height:66vh;
+  object-fit:contain;
+  display:block;
+  background:#0b0c10;
+}
+.lightbox-prev,
+.lightbox-next{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+}
+.lightbox-prev{ left:8px; }
+.lightbox-next{ right:8px; }
+.lightbox-strip{
+  margin-top:10px;
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+}
+.lightbox-thumb{
+  width:62px;
+  height:62px;
+  object-fit:cover;
+  border-radius:8px;
+  border:2px solid transparent;
+  opacity:.8;
+  cursor:pointer;
+  flex:0 0 auto;
+}
+.lightbox-thumb.active{
+  border-color:var(--gold);
+  opacity:1;
+}
 </style>
 </head>
 
@@ -101,7 +231,7 @@ body{
 
 <div class="header">
   <h1>الفنادق التي نتعامل معها</h1>
-  <p>اكتب اسم الفندق في البحث لتجده بسرعة ✅</p>
+  <p>اضغط على أي صورة لفندق لعرضها بشكل مكبر والتنقل بين الصور ✅</p>
   <div class="top-actions">
     <a class="btn secondary" href="index.html">⬅ الرجوع للموقع الرئيسي</a>
     <a class="btn" href="https://wa.me/905317387785">تواصل واتساب</a>
@@ -112,28 +242,44 @@ body{
 
   <div class="search">
     <input id="q" type="text" placeholder="ابحث عن فندق… مثال: Marriott" oninput="filterHotels()" />
-    <button class="btn" onclick="document.getElementById('q').value=''; filterHotels();">مسح</button>
+    <select id="ratingFilter" onchange="filterHotels()" aria-label="فلتر التصنيف">
+      <option value="5">5 نجوم</option>
+      <option value="34">3-4 نجوم</option>
+      <option value="all" selected>كل التصنيفات</option>
+    </select>
+    <button class="btn" onclick="document.getElementById('q').value=''; document.getElementById('ratingFilter').value='all'; filterHotels();">مسح</button>
+  </div>
+
+  <div class="footer-note" style="margin:0 0 14px 0;">
+    الموقع قيد التطوير ويتم تحديثه باستمرار وإضافة فنادق جديدة بشكل دوري. إذا لم تجد الفندق المطلوب حالياً، تواصل معنا وسنوفّر لك خيارات إضافية مباشرة ✅
   </div>
 
   <div class="grid" id="hotelList">
-
-    <!-- ✅ بدّل هذه الأسماء بأسماء فنادقك -->
-    <div class="hotel"><b>Marriott Hotel Şişli</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Hilton Istanbul Bomonti</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Sheraton Istanbul Levent</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Radisson Blu Şişli</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Ramada Plaza By Wyndham Sultanahmet</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Divan Istanbul Taksim</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Point Hotel Taksim</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Crowne Plaza Old City</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Mercure Istanbul Bomonti</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Holiday Inn Şişli</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Arts Hotel Harbiye</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Lions Royal Hotel</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Eresin Hotels Topkapi</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Mercure Istanbul Bomonti</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>The Craton Hotel</b><div class="muted">إسطنبول</div></div>
-
+    <div class="hotel" data-hotel="Marriott Hotel Şişli" data-hotel-ar="ماريوت شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Hilton Istanbul Bomonti" data-hotel-ar="هيلتون بومونتي شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Sheraton Istanbul Levent" data-hotel-ar="شيراتون ليفينت" data-city="إسطنبول" data-area="ليفينت" data-stars="5"></div>
+    <div class="hotel" data-hotel="Ramada Plaza By Wyndham Sultanahmet" data-hotel-ar="رمادا سلطان احمد لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Divan Istanbul Taksim" data-hotel-ar="ديفان تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+    <div class="hotel" data-hotel="Point Hotel Taksim" data-hotel-ar="بوينت تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+    <div class="hotel" data-hotel="Crowne Plaza Old City" data-hotel-ar="كراون بلازا اولد سيتي لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Mercure Istanbul Bomonti" data-hotel-ar="ميركور بومونتي شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Holiday Inn Şişli" data-hotel-ar="هوليدي ان شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Arts Hotel Harbiye" data-hotel-ar="ارتس حربية تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+    <div class="hotel" data-hotel="Lions Royal Hotel" data-hotel-ar="ليونز رويال" data-city="إسطنبول" data-area="لالالي" data-stars="4" data-note="افتتاح حديث"></div>
+    <div class="hotel" data-hotel="Mosaic Hotel Laleli" data-hotel-ar="موزاييك لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
+    <div class="hotel" data-hotel="Beethoven Premium Hotel Laleli" data-hotel-ar="بيتهوفن بريميوم لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
+    <div class="hotel" data-hotel="The Parma Downtown Laleli" data-hotel-ar="ذا براما داون تاون لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
+    <div class="hotel" data-hotel="Martinenz Hotel Laleli" data-hotel-ar="مارتينينز لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
+    <div class="hotel" data-hotel="Four Sides Şişli" data-hotel-ar="فورسايدس شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="4"></div>
+    <div class="hotel" data-hotel="Mare Park Hotel Şişli" data-hotel-ar="ماري بارك شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="4"></div>
+    <div class="hotel" data-hotel="Akgün Istanbul Hotel Topkapı" data-hotel-ar="اكغون توب كابي" data-city="إسطنبول" data-area="توب كابي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Valide Hotel Şişli" data-hotel-ar="فاليدا شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="3"></div>
+    <div class="hotel" data-hotel="Eresin Hotels Topkapı" data-hotel-ar="ارسين فاتح - توب كابي" data-city="إسطنبول" data-area="فاتح - توب كابي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Holiday Inn Istanbul City Topkapı" data-hotel-ar="هوليدي ان فاتح - توب كابي" data-city="إسطنبول" data-area="فاتح - توب كابي" data-stars="5"></div>
+    <div class="hotel" data-hotel="The Marmara Pera" data-hotel-ar="ذا مرمرة بيرا تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+    <div class="hotel" data-hotel="Arts Hotel Taksim" data-hotel-ar="ارتس تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
+    <div class="hotel" data-hotel="Barceló Istanbul" data-hotel-ar="بارسيلو تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+    <div class="hotel" data-hotel="Nevi Hotel & Suites Taksim" data-hotel-ar="واجنحة نيفي تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
   </div>
 
   <div class="footer-note">
@@ -144,15 +290,267 @@ body{
 
 </div>
 
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lightbox-box">
+    <div class="lightbox-head">
+      <div class="lightbox-title" id="lightboxTitle"></div>
+      <button class="lightbox-close" id="lightboxClose" aria-label="إغلاق">✕</button>
+    </div>
+    <div class="lightbox-main">
+      <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="السابق">‹</button>
+      <img id="lightboxImage" class="lightbox-image" alt="">
+      <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="التالي">›</button>
+    </div>
+    <div class="lightbox-strip" id="lightboxStrip"></div>
+  </div>
+</div>
+
 <script>
-function filterHotels(){
-  const q = (document.getElementById('q').value || '').toLowerCase().trim();
-  const items = document.querySelectorAll('#hotelList .hotel');
-  items.forEach(item=>{
-    const text = item.innerText.toLowerCase();
-    item.style.display = text.includes(q) ? '' : 'none';
+function imageFromSeed(seed, width, height){
+  return `https://picsum.photos/seed/${encodeURIComponent(seed)}/${width}/${height}`;
+}
+
+function hotelImages(hotelName){
+  return Array.from({length: 9}, (_, i) => imageFromSeed(`${hotelName}-${i+1}`, 1000, 700));
+}
+
+const hotelCoverOverrides = {
+  "Marriott Hotel Şişli": [
+    "https://images.skyscrapercenter.com/building/istanbul-marriott-hotel-sisli_igor-butyrskii1.jpg",
+    "https://access.com.tr/wp-content/uploads/2021/08/istdt-exterior-0001-hor-feat.jpg",
+    "marriott sisli.jpg",
+    "marriott%20sisli.jpg",
+    "Marriott Sisli.jpg"
+  ],
+  "Hilton Istanbul Bomonti": [
+    "https://www.instyle.gr/wp-content/uploads/2014/01/21/1-Hilton-Istanbul-Bomonti-Exterior1.jpg",
+    "https://x.cdrst.com/foto/hotel-sf/38cfa/granderesp/hilton-istanbul-bomonti-hotel-conference-center-exterior-1209b2d0.jpg",
+    "hilton bomonti.jpg",
+    "hilton%20bomonti.jpg",
+    "Hilton Bomonti.jpg",
+    "hilton-bomonti.jpg"
+  ],
+  "Sheraton Istanbul Levent": [
+    "https://media-cdn.tripadvisor.com/media/photo-s/24/9b/1b/c8/exterior.jpg",
+    "https://cache.marriott.com/is/image/marriotts7prod/si-istsl-exterior-15986:Wide-Hor?wid=1336&fit=constrain",
+    "sheraton levent.webp",
+    "sheraton%20levent.webp",
+    "Sheraton Levent.webp"
+  ],
+  "Ramada Plaza By Wyndham Sultanahmet": [
+    "https://www.wyndhamhotels.com/content/dam/property-images/en-us/ra/tr/others/istanbul/56602/56602_exterior_view_1.jpg",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/522066005.jpg?k=6416ffa8debdeee8b9cec5656271a340ec73978555bbf3327b1a465b1e4e62da&o=&hp=1",
+    "ramada plaza sultanahmet.webp",
+    "ramada%20plaza%20sultanahmet.webp",
+    "Ramada Plaza Sultanahmet.webp"
+  ],
+  "Divan Istanbul Taksim": [
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/c3/02/df/divan-istanbul.jpg?w=1200&h=-1&s=1",
+    "https://thumbs.dreamstime.com/z/istanbul-turkey-may-divan-hotel-located-center-city-taksim-square-beyoglu-istanbul-divan-hotel-taksim-istanbul-101007800.jpg",
+    "divan taksim.jpg",
+    "divan%20taksim.jpg",
+    "Divan Taksim.jpg"
+  ],
+  "Lions Royal Hotel": [
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/724099678.jpg?k=190b162e8dd62b9fd4c4f5d7f6d85afb0d2d8864ffd9e7a9f3fca237ab761fac&o=",
+    "https://libertihotel.com/images/lion-royal-hotel-front-view.jpg",
+    "lions royal.webp",
+    "lions%20royal.webp",
+    "Lions Royal.webp"
+  ],
+  "Mercure Istanbul Bomonti": [
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/1e/bd/9f/exterior.jpg?w=700&h=-1&s=1",
+    "https://cdn.tatilsepeti.com/Files/Images/Tesis/06897/1050X700/tsr06897638193399451938550.jpg",
+    "mercure bomonti.webp",
+    "mercure%20bomonti.webp",
+    "Mercure Bomonti.webp"
+  ],
+  "Holiday Inn Şişli": [
+    "https://digital.ihg.com/is/image/ihg/holiday-inn-istanbul-5090389494-4x3",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/606882061.jpg?k=fd2fb71cf2e5a1ef763f55aaac771f90a109f8ae9d95ce15146f8f2fdd21474c&o=&hp=1",
+    "holiday inn sisli.jpg",
+    "holiday%20inn%20sisli.jpg",
+    "Holiday Inn Sisli.jpg"
+  ],
+  "Mosaic Hotel Laleli": [
+    "https://media-cdn.tripadvisor.com/media/photo-s/05/4c/56/34/exterior-view.jpg"
+  ],
+  "Beethoven Premium Hotel Laleli": [
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/286436520.jpg?k=45b8a3c6499d3fda73a63870a56f5709df5821364242f96140f603144fdd8f97&o="
+  ],
+  "The Parma Downtown Laleli": [
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/e3/2d/ad/the-parma-hotel.jpg?w=1400&h=-1&s=1"
+  ],
+  "Martinenz Hotel Laleli": [
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/289742660.jpg?k=a71b4f6a2a424b95b106d78453346c983e952a836b5b1fe392c47fa80c5d7eb8&o=&hp=1"
+  ],
+  "Four Sides Şişli": [
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/249173676.jpg?k=2dbfdbb457d6b0863358da918d84e43bea8c00bc1f2fc7d96af7358d847db89d&o=&hp=1"
+  ],
+  "Mare Park Hotel Şişli": [
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/319791347.jpg?k=2c06ff0bcf139f872294ef702ad9f9038bd2333d57b55072728ddb91d9eb9c53&o=&hp=1"
+  ],
+  "Akgün Istanbul Hotel Topkapı": [
+    "http://media-cdn.tripadvisor.com/media/photo-s/02/5d/f3/57/exterior.jpg"
+  ],
+  "Valide Hotel Şişli": [
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/1f/ff/a0/valide-hotel-sisli.jpg?w=700&h=-1&s=1"
+  ],
+  "Eresin Hotels Topkapı": [
+    "https://image-tc.galaxy.tf/wijpeg-99ed0ya4e1zgmfr1a93gt0lj8/standard.jpg?crop=247%2C0%2C1107%2C830"
+  ],
+  "Holiday Inn Istanbul City Topkapı": [
+    "https://digital.ihg.com/is/image/ihg/holiday-inn-istanbul-6224485588-4x3"
+  ],
+  "The Marmara Pera": [
+    "https://www.themarmarahotels.com/hs-fs/hubfs/Pera/Pictures/Exterior/pera-exterior-5.jpg?width=2400&height=3000&name=pera-exterior-5.jpg"
+  ],
+  "Arts Hotel Taksim": [
+    "https://media-cdn.tripadvisor.com/media/photo-s/29/5d/37/e3/exterior.jpg"
+  ],
+  "Barceló Istanbul": [
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/5e/5a/55/bist-view.jpg?w=700&h=-1&s=1"
+  ],
+  "Nevi Hotel & Suites Taksim": [
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/306099602.jpg?k=b67e38a7cfab1fe46121d526b511d931d2dc471411a6e7de077db508b976fd27&o=&hp=1"
+  ]
+};
+
+function renderHotels(){
+  const hotels = document.querySelectorAll('#hotelList .hotel');
+  hotels.forEach((card) => {
+    const hotel = card.dataset.hotel;
+    const hotelAr = card.dataset.hotelAr || hotel;
+    const city = card.dataset.city;
+    const area = card.dataset.area || city;
+    const stars = Math.max(1, Math.min(parseInt(card.dataset.stars || "5", 10), 5));
+    const starsText = "★".repeat(stars);
+    const note = card.dataset.note ? ` (${card.dataset.note})` : "";
+    const fallbackCover = imageFromSeed(`${hotel}-cover`, 1000, 620);
+    const overrideCandidates = hotelCoverOverrides[hotel] || [];
+    const cover = Array.isArray(overrideCandidates) ? (overrideCandidates[0] || fallbackCover) : overrideCandidates;
+    const fallbackChain = [...overrideCandidates.slice(1), fallbackCover];
+    card.innerHTML = `
+      <img class="hotel-thumb" src="${cover}" loading="lazy" alt="واجهة ${hotel}" data-fallbacks='${JSON.stringify(fallbackChain)}'>
+      <div class="hotel-meta">
+        <div class="hotel-headline">
+          <div>
+            <b>${hotel}${note}</b>
+            <div class="hotel-ar">${hotelAr}${note}</div>
+          </div>
+          <div class="hotel-rating" aria-label="تصنيف ${stars} نجوم">
+            <span class="rating-label">التصنيف</span>
+            <span class="rating-stars">${starsText}</span>
+          </div>
+        </div>
+        <div class="muted">${city} - ${area}</div>
+      </div>
+      <button class="gallery-btn" type="button">عرض الصور</button>
+    `;
   });
 }
+
+function filterHotels(){
+  const q = (document.getElementById('q').value || '').toLowerCase().trim();
+  const rating = document.getElementById('ratingFilter')?.value || 'all';
+  const items = document.querySelectorAll('#hotelList .hotel');
+
+  items.forEach(item=>{
+    const text = item.innerText.toLowerCase();
+    const stars = parseInt(item.dataset.stars || '0', 10);
+
+    const textMatch = text.includes(q);
+    const ratingMatch = rating === 'all'
+      ? true
+      : rating === '5'
+        ? stars === 5
+        : stars >= 3 && stars <= 4;
+
+    item.style.display = (textMatch && ratingMatch) ? '' : 'none';
+  });
+}
+
+const lightbox = document.getElementById('lightbox');
+const lightboxImage = document.getElementById('lightboxImage');
+const lightboxTitle = document.getElementById('lightboxTitle');
+const lightboxStrip = document.getElementById('lightboxStrip');
+let activeImages = [];
+let activeIndex = 0;
+let activeHotel = '';
+
+function renderThumbs(){
+  lightboxStrip.innerHTML = activeImages.map((src, idx) => (
+    `<img src="${src}" class="lightbox-thumb ${idx===activeIndex?'active':''}" data-idx="${idx}" loading="lazy" alt="${activeHotel} ${idx+1}">`
+  )).join('');
+}
+
+function showImage(index){
+  activeIndex = (index + activeImages.length) % activeImages.length;
+  lightboxImage.src = activeImages[activeIndex];
+  lightboxTitle.textContent = `${activeHotel} — صورة ${activeIndex + 1} من ${activeImages.length}`;
+  renderThumbs();
+}
+
+function openLightbox(hotel, startIndex){
+  activeHotel = hotel;
+  activeImages = hotelImages(hotel);
+  lightbox.classList.add('open');
+  lightbox.setAttribute('aria-hidden', 'false');
+  showImage(startIndex);
+}
+
+function closeLightbox(){
+  lightbox.classList.remove('open');
+  lightbox.setAttribute('aria-hidden', 'true');
+  lightboxImage.src = '';
+}
+
+renderHotels();
+
+document.getElementById('hotelList').addEventListener('error', (e) => {
+  const img = e.target.closest('.hotel-thumb');
+  if(!img) return;
+
+  const fallbacks = JSON.parse(img.dataset.fallbacks || '[]');
+  const next = fallbacks.shift();
+  img.dataset.fallbacks = JSON.stringify(fallbacks);
+
+  if(next){
+    img.src = next;
+  }
+}, true);
+
+document.getElementById('hotelList').addEventListener('click', (e) => {
+  const card = e.target.closest('.hotel');
+  if(!card) return;
+
+  const isImageClick = !!e.target.closest('.hotel-thumb');
+  const isButtonClick = !!e.target.closest('.gallery-btn');
+  if(!isImageClick && !isButtonClick) return;
+
+  openLightbox(card.dataset.hotel, 0);
+});
+
+lightboxStrip.addEventListener('click', (e) => {
+  const thumb = e.target.closest('.lightbox-thumb');
+  if(!thumb) return;
+  showImage(parseInt(thumb.dataset.idx, 10));
+});
+
+document.getElementById('lightboxPrev').addEventListener('click', () => showImage(activeIndex - 1));
+document.getElementById('lightboxNext').addEventListener('click', () => showImage(activeIndex + 1));
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+
+lightbox.addEventListener('click', (e) => {
+  if(e.target === lightbox) closeLightbox();
+});
+
+document.addEventListener('keydown', (e) => {
+  if(!lightbox.classList.contains('open')) return;
+  if(e.key === 'Escape') closeLightbox();
+  if(e.key === 'ArrowLeft') showImage(activeIndex + 1);
+  if(e.key === 'ArrowRight') showImage(activeIndex - 1);
+});
 </script>
 
 </body>
