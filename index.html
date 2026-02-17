@@ -43,15 +43,23 @@
 
   <!-- WHY US -->
   <section class="section" id="why">
-    <h2>⭐ لماذا تختار سيافا ترافل؟</h2>
-    <div class="cards">
-      <div class="feature">✔️ حجوزات مؤكدة قبل الوصول وإرسال إيصال رسمي (Voucher)</div>
-      <div class="feature">✔️ أسعار منافسة وقيمة مقابل المال (اقتصادي / متوسط / فاخر)</div>
-      <div class="feature">✔️ نرشح لك الأفضل حسب ميزانيتك ومكانك المفضل في إسطنبول وتركيا</div>
-      <div class="feature">✔️ خدمة عملاء عبر واتساب: <b>عربي / English / Türkçe</b></div>
-      <div class="feature">✔️ دعم ما بعد الحجز: تنسيق المطار والرحلات</div>
-      <div class="feature">✔️ تعامل منظم وشفاف… كل شيء واضح قبل تثبيت الحجز</div>
-    </div>
+    <details class="acc acc-primary" open>
+      <summary>
+        <span class="acc-title"><span class="acc-icon">⭐</span> لماذا تختار سيافا ترافل؟</span>
+        <span class="acc-chevron">⌄</span>
+      </summary>
+
+      <div class="acc-body">
+        <div class="cards">
+          <div class="feature">✔️ حجوزات مؤكدة قبل الوصول وإرسال إيصال رسمي (Voucher)</div>
+          <div class="feature">✔️ أسعار منافسة وقيمة مقابل المال (اقتصادي / متوسط / فاخر)</div>
+          <div class="feature">✔️ نرشح لك الأفضل حسب ميزانيتك ومكانك المفضل في إسطنبول وتركيا</div>
+          <div class="feature">✔️ خدمة عملاء عبر واتساب: <b>عربي / English / Türkçe</b></div>
+          <div class="feature">✔️ دعم ما بعد الحجز: تنسيق المطار والرحلات</div>
+          <div class="feature">✔️ تعامل منظم وشفاف… كل شيء واضح قبل تثبيت الحجز</div>
+        </div>
+      </div>
+    </details>
   </section>
 
   <!-- CRITERIA (8) -->
@@ -260,6 +268,27 @@ function calcCheckout(){
 
 document.getElementById("checkin").addEventListener("change", calcCheckout);
 document.getElementById("nights").addEventListener("input", calcCheckout);
+
+const primaryAcc = document.querySelector("#why .acc");
+const otherAccordions = [...document.querySelectorAll(".acc")].filter(acc => acc !== primaryAcc);
+
+primaryAcc.addEventListener("toggle", () => {
+  if(!primaryAcc.open){
+    primaryAcc.open = true;
+  }
+});
+
+otherAccordions.forEach((acc) => {
+  acc.addEventListener("toggle", () => {
+    if(acc.open){
+      otherAccordions.forEach((other) => {
+        if(other !== acc){
+          other.open = false;
+        }
+      });
+    }
+  });
+});
 
 function sendWhatsApp(){
   const name = document.getElementById("name").value;
