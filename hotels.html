@@ -61,16 +61,73 @@ body{
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:14px;
+  gap:16px;
 }
 .hotel{
-  background:rgba(17,18,23,0.92);
-  border:1px solid rgba(255,255,255,0.06);
-  border-radius:14px;
-  padding:16px;
+  background:linear-gradient(165deg, rgba(20,22,30,0.95), rgba(11,12,16,0.95));
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;
   line-height:1.8;
+  overflow:hidden;
 }
-.hotel b{ display:block; font-size:16px; margin-bottom:6px; }
+.hotel summary{
+  list-style:none;
+  cursor:pointer;
+}
+.hotel summary::-webkit-details-marker{ display:none; }
+
+.hotel-cover{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  display:block;
+}
+
+.hotel-head{
+  padding:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.hotel-head b{
+  display:block;
+  font-size:16px;
+  margin-bottom:4px;
+}
+
+.hotel-chevron{
+  color:var(--gold);
+  font-size:24px;
+  line-height:1;
+  transition:transform 0.25s ease;
+}
+
+.hotel[open] .hotel-chevron{
+  transform:rotate(180deg);
+}
+
+.hotel-gallery{
+  padding:0 14px 14px;
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:8px;
+}
+
+.hotel-gallery img{
+  width:100%;
+  aspect-ratio:1 / 1;
+  object-fit:cover;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.1);
+}
+
+.gallery-note{
+  padding:0 14px 14px;
+  font-size:12px;
+  opacity:0.8;
+}
 .muted{ opacity:0.8; font-size:13px; }
 
 .footer-note{
@@ -94,6 +151,12 @@ body{
   color:#fff;
   border:1px solid rgba(255,255,255,0.22);
 }
+
+@media (max-width:700px){
+  .hotel-gallery{
+    grid-template-columns:repeat(3, minmax(0,1fr));
+  }
+}
 </style>
 </head>
 
@@ -115,26 +178,7 @@ body{
     <button class="btn" onclick="document.getElementById('q').value=''; filterHotels();">مسح</button>
   </div>
 
-  <div class="grid" id="hotelList">
-
-    <!-- ✅ بدّل هذه الأسماء بأسماء فنادقك -->
-    <div class="hotel"><b>Marriott Hotel Şişli</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Hilton Istanbul Bomonti</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Sheraton Istanbul Levent</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Radisson Blu Şişli</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Ramada Plaza By Wyndham Sultanahmet</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Divan Istanbul Taksim</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Point Hotel Taksim</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Crowne Plaza Old City</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Mercure Istanbul Bomonti</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Holiday Inn Şişli</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Arts Hotel Harbiye</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Lions Royal Hotel</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Eresin Hotels Topkapi</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Mercure Istanbul Bomonti</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>The Craton Hotel</b><div class="muted">إسطنبول</div></div>
-
-  </div>
+  <div class="grid" id="hotelList"></div>
 
   <div class="footer-note">
     يوجد خيارات أخرى أيضاً حسب التوفر والتاريخ والمستوى المطلوب.<br>
@@ -145,6 +189,55 @@ body{
 </div>
 
 <script>
+const hotels = [
+  { name: "Marriott Hotel Şişli", city: "إسطنبول" },
+  { name: "Hilton Istanbul Bomonti", city: "إسطنبول" },
+  { name: "Sheraton Istanbul Levent", city: "إسطنبول" },
+  { name: "Radisson Blu Şişli", city: "إسطنبول" },
+  { name: "Ramada Plaza By Wyndham Sultanahmet", city: "إسطنبول" },
+  { name: "Divan Istanbul Taksim", city: "إسطنبول" },
+  { name: "Point Hotel Taksim", city: "إسطنبول" },
+  { name: "Crowne Plaza Old City", city: "إسطنبول" },
+  { name: "Mercure Istanbul Bomonti", city: "إسطنبول" },
+  { name: "Holiday Inn Şişli", city: "إسطنبول" },
+  { name: "Arts Hotel Harbiye", city: "إسطنبول" },
+  { name: "Lions Royal Hotel", city: "إسطنبول" }
+];
+
+function imageFromSeed(seed, width, height){
+  return `https://picsum.photos/seed/${encodeURIComponent(seed)}/${width}/${height}`;
+}
+
+function renderHotels(){
+  const list = document.getElementById('hotelList');
+  list.innerHTML = hotels.map((hotel, index) => {
+    const gallery = Array.from({ length: 8 }, (_, imgIndex) => {
+      const seed = `${hotel.name}-${imgIndex + 1}`;
+      const imgSrc = imageFromSeed(seed, 600, 600);
+      return `<img src="${imgSrc}" alt="${hotel.name} - صورة ${imgIndex + 1}" loading="lazy">`;
+    }).join('');
+
+    const cover = imageFromSeed(`${hotel.name}-cover`, 1000, 620);
+
+    return `
+      <details class="hotel" ${index === 0 ? 'open' : ''}>
+        <summary>
+          <img class="hotel-cover" src="${cover}" alt="واجهة ${hotel.name}" loading="lazy">
+          <div class="hotel-head">
+            <div>
+              <b>${hotel.name}</b>
+              <div class="muted">${hotel.city}</div>
+            </div>
+            <span class="hotel-chevron">⌄</span>
+          </div>
+        </summary>
+        <div class="hotel-gallery">${gallery}</div>
+        <div class="gallery-note">اضغط على اسم الفندق لإظهار/إخفاء الصور.</div>
+      </details>
+    `;
+  }).join('');
+}
+
 function filterHotels(){
   const q = (document.getElementById('q').value || '').toLowerCase().trim();
   const items = document.querySelectorAll('#hotelList .hotel');
@@ -153,6 +246,8 @@ function filterHotels(){
     item.style.display = text.includes(q) ? '' : 'none';
   });
 }
+
+renderHotels();
 </script>
 
 </body>
