@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -78,6 +78,7 @@ body{
   border-radius:14px;
   padding:12px;
   line-height:1.8;
+  overflow:hidden;
 }
 .hotel-thumb{
   width:100%;
@@ -87,6 +88,7 @@ body{
   display:block;
   cursor:zoom-in;
   border:1px solid rgba(255,255,255,0.12);
+  background:#0b0c10;
 }
 .hotel-meta{ padding:8px 4px 4px; }
 .hotel-headline{
@@ -266,6 +268,7 @@ body{
     <div class="hotel" data-hotel="Holiday Inn Şişli" data-hotel-ar="هوليدي ان شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
     <div class="hotel" data-hotel="Arts Hotel Harbiye" data-hotel-ar="ارتس حربية تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
     <div class="hotel" data-hotel="Lions Royal Hotel" data-hotel-ar="ليونز رويال" data-city="إسطنبول" data-area="لالالي" data-stars="4" data-note="افتتاح حديث"></div>
+
     <div class="hotel" data-hotel="Mosaic Hotel Laleli" data-hotel-ar="موزاييك لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
     <div class="hotel" data-hotel="Beethoven Premium Hotel Laleli" data-hotel-ar="بيتهوفن بريميوم لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
     <div class="hotel" data-hotel="The Parma Downtown Laleli" data-hotel-ar="ذا براما داون تاون لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
@@ -330,11 +333,12 @@ function hotelImages(hotelName, cover){
     return custom.slice(0,9);
   }
 
-  const images = [cover];
-  for(let i=1; i<=8; i++){
+  const images = [];
+  if(cover){ images.push(cover); }
+  for(let i=1; i<=9; i++){
     images.push(imageFromSeed(`${hotelName}-${i}`, 1000, 700));
   }
-  return images;
+  return images.slice(0,9);
 }
 
 const hotelCoverOverrides = {
@@ -408,15 +412,13 @@ const hotelCoverOverrides = {
     "Holiday Inn Sisli.jpg"
   ],
   "Mosaic Hotel Laleli": [
-    "https://c8.alamy.com/comp/B5GR5T/turkey-istanbul-the-mosaic-hotel-B5GR5T.jpg",
     "https://media-cdn.tripadvisor.com/media/photo-s/05/4c/56/34/exterior-view.jpg"
   ],
   "Beethoven Premium Hotel Laleli": [
     "https://cf.bstatic.com/xdata/images/hotel/max1024x768/286436520.jpg?k=45b8a3c6499d3fda73a63870a56f5709df5821364242f96140f603144fdd8f97&o="
   ],
   "The Parma Downtown Laleli": [
-    "https://img.poehalisnami.ua/static/hotels/turciya/stambul/h5131/orig/booking5131_15131_638693277766955544.jpg",
-    "https://ak-d.tripcdn.com/images/220k0p000000ftrnd46B8_R_960_660_R5_D.jpg"
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/e3/2d/ad/the-parma-hotel.jpg?w=1400&h=-1&s=1"
   ],
   "Martinenz Hotel Laleli": [
     "https://cf.bstatic.com/xdata/images/hotel/max1024x768/289742660.jpg?k=a71b4f6a2a424b95b106d78453346c983e952a836b5b1fe392c47fa80c5d7eb8&o=&hp=1"
@@ -431,7 +433,6 @@ const hotelCoverOverrides = {
     "http://media-cdn.tripadvisor.com/media/photo-s/02/5d/f3/57/exterior.jpg"
   ],
   "Valide Hotel Şişli": [
-    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/521397934.jpg?k=ac86f6d8f2f8108646ea33d4be3f4ebf8fcb1a63f17b6ba95a6f264b5a67f541&o=&hp=1",
     "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/1f/ff/a0/valide-hotel-sisli.jpg?w=700&h=-1&s=1"
   ],
   "Eresin Hotels Topkapı": [
@@ -441,8 +442,7 @@ const hotelCoverOverrides = {
     "https://digital.ihg.com/is/image/ihg/holiday-inn-istanbul-6224485588-4x3"
   ],
   "The Marmara Pera": [
-    "https://exp.cdn-hotels.com/hotels/1000000/20000/11700/11691/891b87a1_z.jpg",
-    "https://www.hotel-board.com/picture/the-marmara-pera-hotel-6693957.jpg"
+    "https://www.themarmarahotels.com/hs-fs/hubfs/Pera/Pictures/Exterior/pera-exterior-5.jpg?width=2400&height=3000&name=pera-exterior-5.jpg"
   ],
   "Arts Hotel Taksim": [
     "https://media-cdn.tripadvisor.com/media/photo-s/29/5d/37/e3/exterior.jpg"
