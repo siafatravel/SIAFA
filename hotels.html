@@ -48,6 +48,15 @@ body{
   border:none;
   font-family:'Cairo',sans-serif;
 }
+.search select{
+  padding:14px 12px;
+  border-radius:12px;
+  border:none;
+  font-family:'Cairo',sans-serif;
+  background:#fff;
+  color:#111;
+  min-width:150px;
+}
 .btn{
   background:var(--gold);
   color:#000;
@@ -235,7 +244,16 @@ body{
 
   <div class="search">
     <input id="q" type="text" placeholder="ابحث عن فندق… مثال: Marriott" oninput="filterHotels()" />
-    <button class="btn" onclick="document.getElementById('q').value=''; filterHotels();">مسح</button>
+    <select id="ratingFilter" onchange="filterHotels()" aria-label="فلتر التصنيف">
+      <option value="5">5 نجوم</option>
+      <option value="34">3-4 نجوم</option>
+      <option value="all" selected>كل التصنيفات</option>
+    </select>
+    <button class="btn" onclick="document.getElementById('q').value=''; document.getElementById('ratingFilter').value='all'; filterHotels();">مسح</button>
+  </div>
+
+  <div class="footer-note" style="margin:0 0 14px 0;">
+    الموقع قيد التطوير ويتم تحديثه باستمرار وإضافة فنادق جديدة بشكل دوري. إذا لم تجد الفندق المطلوب حالياً، تواصل معنا وسنوفّر لك خيارات إضافية مباشرة ✅
   </div>
 
   <div class="grid" id="hotelList">
@@ -250,6 +268,21 @@ body{
     <div class="hotel" data-hotel="Holiday Inn Şişli" data-hotel-ar="هوليدي ان شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
     <div class="hotel" data-hotel="Arts Hotel Harbiye" data-hotel-ar="ارتس حربية تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
     <div class="hotel" data-hotel="Lions Royal Hotel" data-hotel-ar="ليونز رويال" data-city="إسطنبول" data-area="لالالي" data-stars="4" data-note="افتتاح حديث"></div>
+
+    <div class="hotel" data-hotel="Mosaic Hotel Laleli" data-hotel-ar="موزاييك لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
+    <div class="hotel" data-hotel="Beethoven Premium Hotel Laleli" data-hotel-ar="بيتهوفن بريميوم لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
+    <div class="hotel" data-hotel="The Parma Downtown Laleli" data-hotel-ar="ذا براما داون تاون لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
+    <div class="hotel" data-hotel="Martinenz Hotel Laleli" data-hotel-ar="مارتينينز لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
+    <div class="hotel" data-hotel="Four Sides Şişli" data-hotel-ar="فورسايدس شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="4"></div>
+    <div class="hotel" data-hotel="Mare Park Hotel Şişli" data-hotel-ar="ماري بارك شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="4"></div>
+    <div class="hotel" data-hotel="Akgün Istanbul Hotel Topkapı" data-hotel-ar="اكغون توب كابي" data-city="إسطنبول" data-area="توب كابي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Valide Hotel Şişli" data-hotel-ar="فاليدا شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="3"></div>
+    <div class="hotel" data-hotel="Eresin Hotels Topkapı" data-hotel-ar="ارسين فاتح - توب كابي" data-city="إسطنبول" data-area="فاتح - توب كابي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Holiday Inn Istanbul City Topkapı" data-hotel-ar="هوليدي ان فاتح - توب كابي" data-city="إسطنبول" data-area="فاتح - توب كابي" data-stars="5"></div>
+    <div class="hotel" data-hotel="The Marmara Pera" data-hotel-ar="ذا مرمرة بيرا تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+    <div class="hotel" data-hotel="Arts Hotel Taksim" data-hotel-ar="ارتس تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
+    <div class="hotel" data-hotel="Barceló Istanbul" data-hotel-ar="بارسيلو تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+    <div class="hotel" data-hotel="Nevi Hotel & Suites Taksim" data-hotel-ar="واجنحة نيفي تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
   </div>
 
   <div class="footer-note">
@@ -341,6 +374,48 @@ const hotelCoverOverrides = {
     "holiday inn sisli.jpg",
     "holiday%20inn%20sisli.jpg",
     "Holiday Inn Sisli.jpg"
+  ],
+  "Mosaic Hotel Laleli": [
+    "https://media-cdn.tripadvisor.com/media/photo-s/05/4c/56/34/exterior-view.jpg"
+  ],
+  "Beethoven Premium Hotel Laleli": [
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/286436520.jpg?k=45b8a3c6499d3fda73a63870a56f5709df5821364242f96140f603144fdd8f97&o="
+  ],
+  "The Parma Downtown Laleli": [
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/e3/2d/ad/the-parma-hotel.jpg?w=1400&h=-1&s=1"
+  ],
+  "Martinenz Hotel Laleli": [
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/289742660.jpg?k=a71b4f6a2a424b95b106d78453346c983e952a836b5b1fe392c47fa80c5d7eb8&o=&hp=1"
+  ],
+  "Four Sides Şişli": [
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/249173676.jpg?k=2dbfdbb457d6b0863358da918d84e43bea8c00bc1f2fc7d96af7358d847db89d&o=&hp=1"
+  ],
+  "Mare Park Hotel Şişli": [
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/319791347.jpg?k=2c06ff0bcf139f872294ef702ad9f9038bd2333d57b55072728ddb91d9eb9c53&o=&hp=1"
+  ],
+  "Akgün Istanbul Hotel Topkapı": [
+    "http://media-cdn.tripadvisor.com/media/photo-s/02/5d/f3/57/exterior.jpg"
+  ],
+  "Valide Hotel Şişli": [
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/1f/ff/a0/valide-hotel-sisli.jpg?w=700&h=-1&s=1"
+  ],
+  "Eresin Hotels Topkapı": [
+    "https://image-tc.galaxy.tf/wijpeg-99ed0ya4e1zgmfr1a93gt0lj8/standard.jpg?crop=247%2C0%2C1107%2C830"
+  ],
+  "Holiday Inn Istanbul City Topkapı": [
+    "https://digital.ihg.com/is/image/ihg/holiday-inn-istanbul-6224485588-4x3"
+  ],
+  "The Marmara Pera": [
+    "https://www.themarmarahotels.com/hs-fs/hubfs/Pera/Pictures/Exterior/pera-exterior-5.jpg?width=2400&height=3000&name=pera-exterior-5.jpg"
+  ],
+  "Arts Hotel Taksim": [
+    "https://media-cdn.tripadvisor.com/media/photo-s/29/5d/37/e3/exterior.jpg"
+  ],
+  "Barceló Istanbul": [
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/5e/5a/55/bist-view.jpg?w=700&h=-1&s=1"
+  ],
+  "Nevi Hotel & Suites Taksim": [
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/306099602.jpg?k=b67e38a7cfab1fe46121d526b511d931d2dc471411a6e7de077db508b976fd27&o=&hp=1"
   ]
 };
 
@@ -380,10 +455,21 @@ function renderHotels(){
 
 function filterHotels(){
   const q = (document.getElementById('q').value || '').toLowerCase().trim();
+  const rating = document.getElementById('ratingFilter')?.value || 'all';
   const items = document.querySelectorAll('#hotelList .hotel');
+
   items.forEach(item=>{
     const text = item.innerText.toLowerCase();
-    item.style.display = text.includes(q) ? '' : 'none';
+    const stars = parseInt(item.dataset.stars || '0', 10);
+
+    const textMatch = text.includes(q);
+    const ratingMatch = rating === 'all'
+      ? true
+      : rating === '5'
+        ? stars === 5
+        : stars >= 3 && stars <= 4;
+
+    item.style.display = (textMatch && ratingMatch) ? '' : 'none';
   });
 }
 
