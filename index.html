@@ -7,243 +7,8 @@
 <title>SIAFA TRAVEL | سيافا ترافل حجوزات فنادق تركيا</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --bg:#05060a;
-  --panel:#111217;
-  --gold:#d4af37;
-}
+<link rel="stylesheet" href="style.css">
 
-body{
-  margin:0;
-  font-family:'Cairo',sans-serif;
-  background:var(--bg);
-  color:#fff;
-  direction:rtl;
-}
-
-/* HERO WITH VIDEO */
-.hero{
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-}
-
-.hero-video{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:0;
-}
-
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.55);
-  z-index:1;
-}
-
-.hero-box{
-  position:relative;
-  z-index:2;
-  max-width:820px;
-  padding:0 16px;
-  transform: translateY(-35px);
-}
-
-/* ✅ Logo in hero */
-.hero-logo{
-  width:240px;                 /* كبرناه بوضوح */
-  max-width:85%;               /* ما يكسر بالموبايل */
-  margin:0 auto 18px auto;
-  display:block;
-  filter: drop-shadow(0 22px 40px rgba(0,0,0,0.75));
-  opacity:0.98;
-}
-
-/* موبايل */
-@media (max-width: 768px){
-  .hero-logo{
-    width:190px;
-    margin-bottom:16px;
-  }
-}
-
-h1{font-size:42px;margin:0 0 12px 0;}
-p{line-height:1.9; opacity:0.95; margin:0;}
-
-.btn{
-  background:var(--gold);
-  color:#000;
-  padding:15px 30px;
-  border-radius:999px;
-  text-decoration:none;
-  font-weight:bold;
-  display:inline-block;
-  margin-top:20px;
-  border:none;
-  cursor:pointer;
-  transition:0.25s;
-}
-.btn:hover{ transform:translateY(-3px); }
-
-.btn.secondary{
-  background:transparent;
-  color:#fff;
-  border:1px solid rgba(255,255,255,0.22);
-}
-
-/* ✅ خلفية تحت + Blur خفيف جداً */
-.main{
-  position:relative;
-  overflow:hidden;
-}
-
-.main::before{
-  content:"";
-  position:absolute;
-  inset:-40px;
-  background:
-    radial-gradient(900px 450px at 85% 15%, rgba(212,175,55,0.12), transparent 60%),
-    radial-gradient(900px 450px at 15% 55%, rgba(24,119,242,0.10), transparent 60%),
-    radial-gradient(700px 350px at 60% 90%, rgba(221,42,123,0.08), transparent 60%);
-  filter: blur(6px);
-  opacity:0.9;
-  pointer-events:none;
-}
-
-.main::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(5,6,10,0.88);
-  pointer-events:none;
-}
-
-.main > *{
-  position:relative;
-  z-index:1;
-}
-
-/* SECTIONS */
-.section{
-  padding:85px 20px;
-  max-width:1200px;
-  margin:auto;
-}
-
-h2{margin:0 0 18px 0;}
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:22px;
-}
-
-.feature{
-  background:rgba(17,18,23,0.92);
-  padding:24px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,0.06);
-  line-height:1.9;
-}
-
-.small{
-  font-size:13px;
-  opacity:0.75;
-  margin-top:14px;
-}
-
-/* FORM */
-form{
-  display:grid;
-  gap:14px;
-  max-width:620px;
-  margin:auto;
-}
-
-.field label{
-  display:block;
-  font-size:14px;
-  opacity:0.9;
-  margin:0 4px 6px 0;
-}
-
-input,select{
-  padding:12px;
-  border:none;
-  border-radius:10px;
-  width:100%;
-  box-sizing:border-box;
-  font-family:'Cairo',sans-serif;
-}
-
-input[type="date"]{
-  color:#111;
-}
-
-.hint{
-  font-size:12px;
-  opacity:0.75;
-  margin-top:-6px;
-}
-
-/* ✅ FLOAT ICONS (Luxury Glass) */
-.floats{
-  position:fixed;
-  left:18px;
-  bottom:25px;
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-  z-index:999;
-}
-
-.float-btn{
-  width:52px;
-  height:52px;
-  border-radius:14px; /* زوايا ناعمة */
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-decoration:none;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.15);
-  box-shadow:0 12px 25px rgba(0,0,0,0.45);
-  backdrop-filter:blur(10px);
-  transition:all 0.3s ease;
-}
-
-.float-btn svg{
-  width:22px;
-  height:22px;
-  fill:#fff;
-  display:block;
-}
-
-.float-btn:hover{
-  transform:translateY(-4px);
-  background:rgba(212,175,55,0.25);
-  border-color:rgba(212,175,55,0.6);
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:46px 20px;
-  background:#0b0c10;
-  border-top:1px solid rgba(255,255,255,0.06);
-  opacity:0.9;
-}
-</style>
 </head>
 
 <body>
@@ -278,15 +43,23 @@ footer{
 
   <!-- WHY US -->
   <section class="section" id="why">
-    <h2>⭐ لماذا تختار سيافا ترافل؟</h2>
-    <div class="cards">
-      <div class="feature">✔️ حجوزات مؤكدة قبل الوصول وإرسال إيصال رسمي (Voucher)</div>
-      <div class="feature">✔️ أسعار منافسة وقيمة مقابل المال (اقتصادي / متوسط / فاخر)</div>
-      <div class="feature">✔️ نرشح لك الأفضل حسب ميزانيتك ومكانك المفضل في إسطنبول وتركيا</div>
-      <div class="feature">✔️ خدمة عملاء عبر واتساب: <b>عربي / English / Türkçe</b></div>
-      <div class="feature">✔️ دعم ما بعد الحجز: تنسيق المطار والرحلات</div>
-      <div class="feature">✔️ تعامل منظم وشفاف… كل شيء واضح قبل تثبيت الحجز</div>
-    </div>
+    <details class="acc acc-primary" open>
+      <summary>
+        <span class="acc-title"><span class="acc-icon">⭐</span> لماذا تختار سيافا ترافل؟</span>
+        <span class="acc-chevron">⌄</span>
+      </summary>
+
+      <div class="acc-body">
+        <div class="cards">
+          <div class="feature">✔️ حجوزات مؤكدة قبل الوصول وإرسال إيصال رسمي (Voucher)</div>
+          <div class="feature">✔️ أسعار منافسة وقيمة مقابل المال (اقتصادي / متوسط / فاخر)</div>
+          <div class="feature">✔️ نرشح لك الأفضل حسب ميزانيتك ومكانك المفضل في إسطنبول وتركيا</div>
+          <div class="feature">✔️ خدمة عملاء عبر واتساب: <b>عربي / English / Türkçe</b></div>
+          <div class="feature">✔️ دعم ما بعد الحجز: تنسيق المطار والرحلات</div>
+          <div class="feature">✔️ تعامل منظم وشفاف… كل شيء واضح قبل تثبيت الحجز</div>
+        </div>
+      </div>
+    </details>
   </section>
 
   <!-- CRITERIA (8) -->
@@ -495,6 +268,27 @@ function calcCheckout(){
 
 document.getElementById("checkin").addEventListener("change", calcCheckout);
 document.getElementById("nights").addEventListener("input", calcCheckout);
+
+const primaryAcc = document.querySelector("#why .acc");
+const otherAccordions = [...document.querySelectorAll(".acc")].filter(acc => acc !== primaryAcc);
+
+primaryAcc.addEventListener("toggle", () => {
+  if(!primaryAcc.open){
+    primaryAcc.open = true;
+  }
+});
+
+otherAccordions.forEach((acc) => {
+  acc.addEventListener("toggle", () => {
+    if(acc.open){
+      otherAccordions.forEach((other) => {
+        if(other !== acc){
+          other.open = false;
+        }
+      });
+    }
+  });
+});
 
 function sendWhatsApp(){
   const name = document.getElementById("name").value;
