@@ -61,80 +61,16 @@ body{
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:16px;
+  gap:14px;
 }
 .hotel{
-  background:linear-gradient(165deg, rgba(20,22,30,0.95), rgba(11,12,16,0.95));
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:16px;
+  background:rgba(17,18,23,0.92);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:14px;
+  padding:16px;
   line-height:1.8;
-  overflow:hidden;
 }
-.hotel summary{
-  list-style:none;
-  cursor:pointer;
-}
-.hotel summary::-webkit-details-marker{ display:none; }
-
-.hotel-cover{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  display:block;
-}
-
-.hotel-head{
-  padding:14px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-
-.hotel-head b{
-  display:block;
-  font-size:16px;
-  margin-bottom:4px;
-}
-
-.hotel-chevron{
-  color:var(--gold);
-  font-size:24px;
-  line-height:1;
-  transition:transform 0.25s ease;
-}
-
-.hotel[open] .hotel-chevron{
-  transform:rotate(180deg);
-}
-
-.hotel-gallery{
-  padding:0 14px 14px;
-  display:grid;
-  grid-template-columns:repeat(4, minmax(0,1fr));
-  gap:8px;
-}
-
-.hotel-gallery img{
-  width:100%;
-  aspect-ratio:1 / 1;
-  object-fit:cover;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,0.1);
-  cursor:zoom-in;
-  transition:transform 0.2s ease, border-color 0.2s ease;
-}
-
-.hotel-gallery img:hover{
-  transform:translateY(-2px);
-  border-color:rgba(212,175,55,0.45);
-}
-
-.gallery-note{
-  padding:0 14px 14px;
-  font-size:12px;
-  opacity:0.8;
-}
+.hotel b{ display:block; font-size:16px; margin-bottom:6px; }
 .muted{ opacity:0.8; font-size:13px; }
 
 .footer-note{
@@ -158,112 +94,6 @@ body{
   color:#fff;
   border:1px solid rgba(255,255,255,0.22);
 }
-
-.lightbox{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  background:rgba(5,6,10,0.88);
-  backdrop-filter:blur(4px);
-  z-index:1200;
-  padding:24px;
-}
-
-.lightbox.open{ display:flex; }
-
-.lightbox-frame{
-  width:min(1100px, 100%);
-  max-height:90vh;
-  display:grid;
-  grid-template-rows:auto 1fr auto;
-  gap:10px;
-}
-
-.lightbox-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.lightbox-title{ font-size:14px; opacity:0.86; }
-
-.lightbox-close,
-.lightbox-nav{
-  border:1px solid rgba(255,255,255,0.2);
-  background:rgba(17,18,23,0.72);
-  color:#fff;
-  border-radius:12px;
-  width:42px;
-  height:42px;
-  cursor:pointer;
-  font-size:22px;
-}
-
-.lightbox-main{
-  position:relative;
-  border:1px solid rgba(255,255,255,0.12);
-  border-radius:16px;
-  overflow:hidden;
-  background:rgba(11,12,16,0.9);
-}
-
-.lightbox-image{
-  width:100%;
-  max-height:70vh;
-  object-fit:contain;
-  display:block;
-}
-
-.lightbox-main .lightbox-nav{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-}
-
-.lightbox-prev{ left:10px; }
-.lightbox-next{ right:10px; }
-
-.lightbox-strip{
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  padding-bottom:2px;
-}
-
-.lightbox-thumb{
-  width:68px;
-  height:68px;
-  object-fit:cover;
-  border-radius:10px;
-  border:2px solid transparent;
-  cursor:pointer;
-  opacity:0.8;
-  flex:0 0 auto;
-}
-
-.lightbox-thumb.active{
-  border-color:var(--gold);
-  opacity:1;
-}
-
-@media (max-width:700px){
-  .hotel-gallery{
-    grid-template-columns:repeat(3, minmax(0,1fr));
-  }
-
-  .lightbox{
-    padding:14px;
-  }
-
-  .lightbox-close,
-  .lightbox-nav{
-    width:38px;
-    height:38px;
-  }
-}
 </style>
 </head>
 
@@ -285,7 +115,26 @@ body{
     <button class="btn" onclick="document.getElementById('q').value=''; filterHotels();">مسح</button>
   </div>
 
-  <div class="grid" id="hotelList"></div>
+  <div class="grid" id="hotelList">
+
+    <!-- ✅ بدّل هذه الأسماء بأسماء فنادقك -->
+    <div class="hotel"><b>Marriott Hotel Şişli</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Hilton Istanbul Bomonti</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Sheraton Istanbul Levent</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Radisson Blu Şişli</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Ramada Plaza By Wyndham Sultanahmet</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Divan Istanbul Taksim</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Point Hotel Taksim</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Crowne Plaza Old City</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Mercure Istanbul Bomonti</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Holiday Inn Şişli</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Arts Hotel Harbiye</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Lions Royal Hotel</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Eresin Hotels Topkapi</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>Mercure Istanbul Bomonti</b><div class="muted">إسطنبول</div></div>
+    <div class="hotel"><b>The Craton Hotel</b><div class="muted">إسطنبول</div></div>
+
+  </div>
 
   <div class="footer-note">
     يوجد خيارات أخرى أيضاً حسب التوفر والتاريخ والمستوى المطلوب.<br>
@@ -295,76 +144,7 @@ body{
 
 </div>
 
-<div class="lightbox" id="lightbox" aria-hidden="true">
-  <div class="lightbox-frame">
-    <div class="lightbox-top">
-      <div class="lightbox-title" id="lightboxTitle"></div>
-      <button class="lightbox-close" id="lightboxClose" aria-label="إغلاق">✕</button>
-    </div>
-
-    <div class="lightbox-main">
-      <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="السابق">‹</button>
-      <img class="lightbox-image" id="lightboxImage" alt="" decoding="async">
-      <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="التالي">›</button>
-    </div>
-
-    <div class="lightbox-strip" id="lightboxStrip"></div>
-  </div>
-</div>
-
 <script>
-const hotels = [
-  { name: "Marriott Hotel Şişli", city: "إسطنبول" },
-  {
-    name: "Hilton Istanbul Bomonti",
-    city: "إسطنبول"
-  },
-  { name: "Sheraton Istanbul Levent", city: "إسطنبول" },
-  { name: "Radisson Blu Şişli", city: "إسطنبول" },
-  { name: "Ramada Plaza By Wyndham Sultanahmet", city: "إسطنبول" },
-  { name: "Divan Istanbul Taksim", city: "إسطنبول" },
-  { name: "Point Hotel Taksim", city: "إسطنبول" },
-  { name: "Crowne Plaza Old City", city: "إسطنبول" },
-  { name: "Mercure Istanbul Bomonti", city: "إسطنبول" },
-  { name: "Holiday Inn Şişli", city: "إسطنبول" },
-  { name: "Arts Hotel Harbiye", city: "إسطنبول" },
-  { name: "Lions Royal Hotel", city: "إسطنبول" }
-];
-
-function imageFromSeed(seed, width, height){
-  return `https://picsum.photos/seed/${encodeURIComponent(seed)}/${width}/${height}`;
-}
-
-function renderHotels(){
-  const list = document.getElementById('hotelList');
-  list.innerHTML = hotels.map((hotel, index) => {
-    const gallery = Array.from({ length: 8 }, (_, imgIndex) => {
-      const seed = `${hotel.name}-${imgIndex + 1}`;
-      const imgSrc = imageFromSeed(seed, 600, 600);
-      return `<img src="${imgSrc}" alt="${hotel.name} - صورة ${imgIndex + 1}" loading="lazy" data-hotel="${hotel.name}">`;
-    }).join('');
-
-    const cover = hotel.cover || imageFromSeed(`${hotel.name}-cover`, 1000, 620);
-
-    return `
-      <details class="hotel" ${index === 0 ? 'open' : ''}>
-        <summary>
-          <img class="hotel-cover" src="${cover}" alt="واجهة ${hotel.name}" loading="lazy">
-          <div class="hotel-head">
-            <div>
-              <b>${hotel.name}</b>
-              <div class="muted">${hotel.city}</div>
-            </div>
-            <span class="hotel-chevron">⌄</span>
-          </div>
-        </summary>
-        <div class="hotel-gallery">${gallery}</div>
-        <div class="gallery-note">اضغط على اسم الفندق لإظهار/إخفاء الصور.</div>
-      </details>
-    `;
-  }).join('');
-}
-
 function filterHotels(){
   const q = (document.getElementById('q').value || '').toLowerCase().trim();
   const items = document.querySelectorAll('#hotelList .hotel');
@@ -373,78 +153,6 @@ function filterHotels(){
     item.style.display = text.includes(q) ? '' : 'none';
   });
 }
-
-renderHotels();
-
-const lightbox = document.getElementById('lightbox');
-const lightboxImage = document.getElementById('lightboxImage');
-const lightboxTitle = document.getElementById('lightboxTitle');
-const lightboxStrip = document.getElementById('lightboxStrip');
-let activeGallery = [];
-let activeIndex = 0;
-let activeHotelName = '';
-
-function renderLightboxThumbs(){
-  lightboxStrip.innerHTML = activeGallery.map((src, i) => (
-    `<img class="lightbox-thumb ${i === activeIndex ? 'active' : ''}" src="${src}" data-idx="${i}" alt="صورة مصغرة ${i+1}" loading="lazy">`
-  )).join('');
-}
-
-function showImage(index){
-  if(!activeGallery.length) return;
-  activeIndex = (index + activeGallery.length) % activeGallery.length;
-  lightboxImage.src = activeGallery[activeIndex];
-  lightboxTitle.textContent = `${activeHotelName} — صورة ${activeIndex + 1} من ${activeGallery.length}`;
-  renderLightboxThumbs();
-}
-
-function openLightbox(images, hotelName, startIndex){
-  activeGallery = images;
-  activeHotelName = hotelName;
-  lightbox.classList.add('open');
-  lightbox.setAttribute('aria-hidden', 'false');
-  showImage(startIndex);
-}
-
-function closeLightbox(){
-  lightbox.classList.remove('open');
-  lightbox.setAttribute('aria-hidden', 'true');
-  lightboxImage.src = '';
-}
-
-document.getElementById('hotelList').addEventListener('click', (e) => {
-  const img = e.target.closest('.hotel-gallery img');
-  if(!img) return;
-
-  const galleryImgs = [...img.closest('.hotel-gallery').querySelectorAll('img')];
-  const images = galleryImgs.map(item => item.src);
-  const startIndex = galleryImgs.indexOf(img);
-  const hotelName = img.dataset.hotel || 'الفندق';
-  openLightbox(images, hotelName, startIndex);
-});
-
-lightboxStrip.addEventListener('click', (e) => {
-  const thumb = e.target.closest('.lightbox-thumb');
-  if(!thumb) return;
-  showImage(parseInt(thumb.dataset.idx, 10));
-});
-
-document.getElementById('lightboxPrev').addEventListener('click', () => showImage(activeIndex - 1));
-document.getElementById('lightboxNext').addEventListener('click', () => showImage(activeIndex + 1));
-document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-
-lightbox.addEventListener('click', (e) => {
-  if(e.target === lightbox){
-    closeLightbox();
-  }
-});
-
-document.addEventListener('keydown', (e) => {
-  if(!lightbox.classList.contains('open')) return;
-  if(e.key === 'Escape') closeLightbox();
-  if(e.key === 'ArrowRight') showImage(activeIndex - 1);
-  if(e.key === 'ArrowLeft') showImage(activeIndex + 1);
-});
 </script>
 
 </body>
