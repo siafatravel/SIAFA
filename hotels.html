@@ -313,8 +313,32 @@ function imageFromSeed(seed, width, height){
   return `https://picsum.photos/seed/${encodeURIComponent(seed)}/${width}/${height}`;
 }
 
-function hotelImages(hotelName){
-  return Array.from({length: 9}, (_, i) => imageFromSeed(`${hotelName}-${i+1}`, 1000, 700));
+const customHotelGalleries = {
+  "Mercure Istanbul Bomonti": [
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/1e/bd/9f/exterior.jpg?w=700&h=-1&s=1",
+    "https://www.ahstatic.com/photos/a4n1_rokgb_00_p_1024x768.jpg",
+    "https://www.ahstatic.com/photos/a4n1_ho_00_p_1024x768.jpg",
+    "https://www.ahstatic.com/photos/a4n1_rsr001_00_p_2048x1536.jpg",
+    "https://images.trvl-media.com/lodging/9000000/8800000/8796900/8796816/3d8691e6.jpg?impolicy=resizecrop&rw=598&ra=fit",
+    "https://cf.bstatic.com/xdata/images/hotel/max500/467247046.jpg?k=48837db6f61fc6c147feaae2c848f351e9c013e1771edf6df78c6d3fdad450cd&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768229.jpg?k=5dcecb13248a27d19085536ece1547b212d0dd085399c661846464f992fcea6a&o=",
+    "https://cf.bstatic.com/xdata/images/hotel/max500/265768232.jpg?k=0f3e057e3bfcd0454150a8af620b08bed6a8390fe79c367030ad652bfe5fd8c1&o=",
+    "https://mercure-istanbul-bomonti.hotel-of-istanbul.com/data/Pics/OriginalPhoto/12809/1280995/1280995144/pic-mercure-bomonti-hotel-istanbul-10.JPEG"
+  ]
+};
+
+function hotelImages(hotelName, cover){
+  const custom = customHotelGalleries[hotelName];
+  if(custom && custom.length){
+    return custom.slice(0,9);
+  }
+
+  const images = [];
+  if(cover){ images.push(cover); }
+  for(let i=1; i<=9; i++){
+    images.push(imageFromSeed(`${hotelName}-${i}`, 1000, 700));
+  }
+  return images.slice(0,9);
 }
 
 const hotelCoverOverrides = {
@@ -346,6 +370,18 @@ const hotelCoverOverrides = {
     "ramada plaza sultanahmet.webp",
     "ramada%20plaza%20sultanahmet.webp",
     "Ramada Plaza Sultanahmet.webp"
+  ],
+  "Crowne Plaza Old City": [
+    "https://digital.ihg.com/is/image/ihg/crowne-plaza-istanbul-6228414074-2x1?wid=1440&fit=fit,1",
+    "https://www.cpoldcity.com/upload/Exterior2.jpeg"
+  ],
+  "Point Hotel Taksim": [
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/6b/90/9e/point-day-time.jpg?w=700&h=-1&s=1",
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/e5/08/ef/exterior-picture.jpg?w=900&h=500&s=1"
+  ],
+  "Arts Hotel Harbiye": [
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/0f/e4/06/arts-hotel-istanbul.jpg?w=900&h=-1&s=1",
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/42/8a/91/arts-hotel-istanbul.jpg?w=700&h=-1&s=1"
   ],
   "Divan Istanbul Taksim": [
     "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/c3/02/df/divan-istanbul.jpg?w=1200&h=-1&s=1",
@@ -494,9 +530,9 @@ function showImage(index){
   renderThumbs();
 }
 
-function openLightbox(hotel, startIndex){
+function openLightbox(hotel, startIndex, cover){
   activeHotel = hotel;
-  activeImages = hotelImages(hotel);
+  activeImages = hotelImages(hotel, cover);
   lightbox.classList.add('open');
   lightbox.setAttribute('aria-hidden', 'false');
   showImage(startIndex);
@@ -531,7 +567,8 @@ document.getElementById('hotelList').addEventListener('click', (e) => {
   const isButtonClick = !!e.target.closest('.gallery-btn');
   if(!isImageClick && !isButtonClick) return;
 
-  openLightbox(card.dataset.hotel, 0);
+  const coverSrc = card.querySelector('.hotel-thumb')?.currentSrc || card.querySelector('.hotel-thumb')?.src || '';
+  openLightbox(card.dataset.hotel, 0, coverSrc);
 });
 
 lightboxStrip.addEventListener('click', (e) => {
