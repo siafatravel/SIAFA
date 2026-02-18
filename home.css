@@ -6,9 +6,7 @@
   --line:rgba(255,255,255,0.08);
 }
 
-html{
-  scroll-behavior:smooth;
-}
+html{ scroll-behavior:smooth; }
 
 body{
   margin:0;
@@ -75,17 +73,16 @@ body::before{
   transform: translateY(-35px);
 }
 
-/* ✅ Logo in hero */
+/* Logo in hero */
 .hero-logo{
-  width:240px;                 /* كبرناه بوضوح */
-  max-width:85%;               /* ما يكسر بالموبايل */
+  width:240px;
+  max-width:85%;
   margin:0 auto 18px auto;
   display:block;
   filter: drop-shadow(0 22px 40px rgba(0,0,0,0.75));
   opacity:0.98;
 }
 
-/* موبايل */
 @media (max-width: 768px){
   .hero-logo{
     width:190px;
@@ -93,8 +90,8 @@ body::before{
   }
 }
 
-h1{font-size:42px;margin:0 0 12px 0;}
-p{line-height:1.9; opacity:0.95; margin:0;}
+h1{ font-size:42px; margin:0 0 12px 0; }
+p{ line-height:1.9; opacity:0.95; margin:0; }
 
 .btn{
   background:var(--gold);
@@ -117,7 +114,7 @@ p{line-height:1.9; opacity:0.95; margin:0;}
   border:1px solid rgba(255,255,255,0.22);
 }
 
-/* ✅ خلفية تحت + Blur خفيف جداً */
+/* خلفية تحت + Blur خفيف جداً */
 .main{
   position:relative;
   overflow:hidden;
@@ -168,11 +165,9 @@ p{line-height:1.9; opacity:0.95; margin:0;}
   background:linear-gradient(90deg, transparent, var(--line), transparent);
 }
 
-.section:last-of-type::after{
-  display:none;
-}
+.section:last-of-type::after{ display:none; }
 
-h2{margin:0 0 18px 0;}
+h2{ margin:0 0 18px 0; }
 
 .cards{
   display:grid;
@@ -201,7 +196,9 @@ h2{margin:0 0 18px 0;}
   margin-top:14px;
 }
 
+/* ABOUT + FAQ */
 .about-wrap{ width:100%; }
+
 .about-intro{
   margin:0 0 18px;
   background:linear-gradient(165deg, rgba(20,22,30,0.88), rgba(11,12,16,0.9));
@@ -216,11 +213,13 @@ h2{margin:0 0 18px 0;}
   display:grid;
   gap:12px;
 }
+
 .faq-item h3{
   margin:0 0 8px;
   font-size:18px;
   color:#fff7d6;
 }
+
 .faq-item p{
   margin:0;
   line-height:1.9;
@@ -303,9 +302,7 @@ h2{margin:0 0 18px 0;}
     padding:16px;
   }
 
-  form{
-    padding:16px;
-  }
+  form{ padding:16px; }
 }
 
 /* FORM */
@@ -337,9 +334,7 @@ input,select{
   font-family:'Cairo',sans-serif;
 }
 
-input[type="date"]{
-  color:#111;
-}
+input[type="date"]{ color:#111; }
 
 .hint{
   font-size:12px;
@@ -347,7 +342,7 @@ input[type="date"]{
   margin-top:-6px;
 }
 
-/* ✅ FLOAT ICONS (Luxury Glass + Brand Tint) */
+/* FLOAT ICONS */
 .floats{
   position:fixed;
   left:18px;
