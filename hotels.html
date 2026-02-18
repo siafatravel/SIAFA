@@ -61,34 +61,82 @@ body{
 /* Area map */
 .area-map{
   margin:0 0 16px;
-  background:rgba(17,18,23,0.94);
-  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(17,18,23,0.95);
+  border:1px solid rgba(255,255,255,0.10);
   border-radius:16px;
   padding:16px;
 }
-.area-map h2{ margin:0 0 8px; font-size:19px; }
-.area-map p{ margin:0 0 12px; opacity:.86; font-size:14px; line-height:1.8; }
-.map-controls{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
-.map-chip{ display:flex; align-items:center; gap:8px; font-size:13px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:999px; padding:7px 12px; }
+.area-map h2{ margin:0 0 8px; font-size:24px; }
+.area-map p{ margin:0 0 12px; opacity:.92; font-size:16px; line-height:1.9; }
+.map-controls{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px; }
+.map-chip{
+  display:flex; align-items:center; gap:8px;
+  font-size:13px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  padding:8px 12px;
+}
 .map-chip input{ accent-color:#d4af37; }
-.map-wrap{ position:relative; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,.08); background:radial-gradient(900px 300px at 60% -20%, rgba(212,175,55,.12), transparent 60%), linear-gradient(180deg,#10131b,#0a0d13); }
+.map-wrap{
+  position:relative;
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(180deg,#1f4a69 0%,#173d5a 50%,#12324a 100%);
+}
 #istanbulMap{ width:100%; height:auto; display:block; }
-.bosphorus{ stroke:#4da3ff; stroke-width:6; fill:none; opacity:.5; }
-.metro-line{ stroke:#e24a8d; stroke-width:5; fill:none; stroke-dasharray:2 0; }
-.tram-line{ stroke:#34d399; stroke-width:5; fill:none; }
-.map-zone{ fill:rgba(212,175,55,.13); stroke:rgba(212,175,55,.55); stroke-width:1.2; }
-.map-zone-label{ fill:#fff; font-size:12px; font-family:'Cairo',sans-serif; opacity:.9; }
-.poi{ fill:#f7d77a; stroke:#1e2128; stroke-width:2; cursor:pointer; transition:.2s; }
-.poi:hover{ transform:scale(1.08); transform-origin:center; }
-.poi-label{ fill:#fff; font-size:11px; font-family:'Cairo',sans-serif; opacity:.95; }
-.map-legend{ display:flex; gap:14px; flex-wrap:wrap; font-size:12px; opacity:.85; margin-top:10px; }
+.land-mass{ fill:#f2f4f6; stroke:#cad1d8; stroke-width:2; pointer-events:none; }
+.coast-line{ stroke:#5f7890; stroke-width:2; fill:none; opacity:.7; pointer-events:none; }
+.bosphorus-fill{ fill:#72c2e8; pointer-events:none; }
+.marmara-fill{ fill:#67b9de; pointer-events:none; }
+.golden-horn-fill{ fill:#79c7ea; pointer-events:none; }
+.metro-line{ stroke:#e9558f; stroke-width:5; fill:none; pointer-events:none; }
+.tram-line{ stroke:#2dcf96; stroke-width:5; fill:none; pointer-events:none; }
+.zone-bubble{ fill:rgba(212,175,55,.14); stroke:rgba(212,175,55,.45); stroke-width:2; pointer-events:none; }
+
+.poi-group{ cursor:pointer; }
+.poi-core{ fill:#ffcf5a; stroke:#0f1720; stroke-width:2; transition:.2s; }
+.poi-ring{ fill:none; stroke:rgba(255,208,99,.45); stroke-width:2; }
+.poi-label-bg{ fill:rgba(8,11,17,.82); stroke:rgba(255,255,255,.26); stroke-width:1; rx:8; pointer-events:none; }
+.poi-label{ fill:#fff; font-size:15px; font-family:'Cairo',sans-serif; pointer-events:none; font-weight:700; }
+.poi-group.is-active .poi-core{ fill:#fff2b7; transform:scale(1.1); transform-origin:center; }
+.poi-group.is-active .poi-ring{ stroke:rgba(255,208,99,.95); }
+.poi-hit{ fill:transparent; r:18; }
+
+.water-label{ fill:rgba(255,255,255,.92); font-size:24px; font-family:'Cairo',sans-serif; font-weight:700; }
+.water-sub{ fill:rgba(255,255,255,.85); font-size:16px; font-family:'Cairo',sans-serif; }
+
+.map-legend{ display:flex; gap:12px; flex-wrap:wrap; font-size:12px; opacity:.92; margin-top:12px; }
 .legend-item{ display:flex; align-items:center; gap:6px; }
-.legend-line{ width:20px; height:4px; border-radius:4px; }
-.metro-swatch{ background:#e24a8d; }
-.tram-swatch{ background:#34d399; }
-.info-badge{ position:absolute; left:12px; bottom:12px; max-width:280px; background:rgba(9,11,16,.88); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:10px 12px; font-size:12px; line-height:1.7; }
+.legend-line{ width:22px; height:4px; border-radius:4px; }
+.metro-swatch{ background:#e9558f; }
+.tram-swatch{ background:#2dcf96; }
+.legend-dot{ width:10px; height:10px; border-radius:50%; background:#ffcf5a; display:inline-block; }
+
+.info-badge{
+  position:absolute;
+  left:12px;
+  bottom:12px;
+  max-width:420px;
+  background:rgba(8,11,17,.92);
+  border:1px solid rgba(255,255,255,.20);
+  border-radius:12px;
+  padding:12px 14px;
+  font-size:14px;
+  line-height:1.9;
+}
+.info-badge b{ color:#ffe08f; }
+
+@media (max-width:900px){
+  .poi-label{ font-size:13px; }
+}
 @media (max-width:768px){
-  .info-badge{ max-width:220px; font-size:11px; }
+  .area-map{ padding:14px; }
+  .area-map p{ font-size:15px; }
+  .map-chip{ font-size:12px; }
+  .info-badge{ position:static; margin-top:10px; max-width:100%; font-size:13px; }
+  .poi-label{ font-size:12px; }
 }
 
 .btn{
@@ -148,8 +196,8 @@ body{
   font-size:14px;
   text-shadow:0 1px 6px rgba(212,175,55,.35);
 }
-
 .muted{ opacity:0.8; font-size:13px; }
+
 .gallery-btn{
   margin-top:8px;
   width:100%;
@@ -289,68 +337,82 @@ body{
     <select id="areaFilter" onchange="filterHotels()" aria-label="فلتر المنطقة">
       <option value="all" selected>كل المناطق</option>
     </select>
-    <button class="btn" onclick="resetFilters()">مسح</button>
+    <button class="btn" onclick="document.getElementById('q').value=''; document.getElementById('ratingFilter').value='all'; document.getElementById('areaFilter').value='all'; filterHotels();">مسح</button>
   </div>
 
-  <section class="area-map" aria-label="خريطة تفاعلية لمناطق إسطنبول السياحية">
-    <h2>🗺️ خريطة إسطنبول السياحية (تفاعلية)</h2>
-    <p>اضغط على أي نقطة لمعرفة المنطقة. يمكنك إظهار/إخفاء خطوط النقل لمعاينة قرب الفندق من خط الترامواي T1 وخطوط المترو المركزية.</p>
+  <section class="area-map" aria-label="خريطة تفاعلية مبسطة لسنتر إسطنبول">
+    <h2>🗺️ خريطة سنتر إسطنبول — واضحة وبسيطة</h2>
+    <p>مناطق رئيسية + معلم سياحي بشكل مختصر، مع خطوط مترو وترام واضحة. اضغط على أي نقطة في الخريطة.</p>
 
     <div class="map-controls">
-      <label class="map-chip"><input type="checkbox" id="toggleMetro" checked> إظهار خطوط المترو</label>
-      <label class="map-chip"><input type="checkbox" id="toggleTram" checked> إظهار خط الترامواي T1</label>
+      <label class="map-chip"><input type="checkbox" id="toggleMetro" checked> خطوط المترو</label>
+      <label class="map-chip"><input type="checkbox" id="toggleTram" checked> خط ترامواي T1</label>
     </div>
 
     <div class="map-wrap">
-      <svg id="istanbulMap" viewBox="0 0 980 420" role="img" aria-label="خريطة اسطنبول مع نقاط سياحية وخطوط النقل">
-        <rect x="0" y="0" width="980" height="420" fill="rgba(255,255,255,0.02)"/>
-        <path class="bosphorus" d="M540 10 C510 85, 525 130, 560 185 C595 240, 610 305, 590 410"/>
+      <svg id="istanbulMap" viewBox="0 0 1200 620" role="img" aria-label="خريطة سنتر إسطنبول مع المناطق والمعالم">
+        <rect x="0" y="0" width="1200" height="620" fill="rgba(118,196,232,.36)"/>
 
-        <path class="metro-line" data-layer="metro" d="M120 90 L250 80 L390 88 L505 95 L650 115 L800 135"/>
-        <path class="metro-line" data-layer="metro" d="M210 300 L330 255 L450 230 L580 220 L720 235"/>
-        <path class="tram-line" data-layer="tram" d="M145 195 L220 200 L300 208 L370 216 L435 224 L500 233"/>
+        <path class="land-mass" d="M0 60 C180 70, 300 130, 390 230 C450 295, 520 330, 612 372 C666 398, 695 462, 680 620 L0 620 Z"/>
+        <path class="land-mass" d="M548 0 C650 70, 732 130, 805 220 C874 306, 958 360, 1088 410 C1155 438, 1190 495, 1200 620 L1200 0 Z"/>
 
-        <ellipse class="map-zone" cx="240" cy="215" rx="160" ry="120"/>
-        <text class="map-zone-label" x="240" y="215" text-anchor="middle">المدينة التاريخية</text>
+        <path class="bosphorus-fill" d="M585 0 C542 75, 530 143, 542 212 C558 288, 602 344, 640 395 C675 443, 683 515, 670 620 L602 620 C617 510, 609 446, 574 398 C534 343, 487 286, 472 214 C459 141, 478 73, 521 0 Z"/>
+        <path class="golden-horn-fill" d="M372 257 C430 224, 489 215, 548 228 C533 259, 510 286, 483 309 C448 337, 417 361, 397 391 C360 357, 348 306, 372 257 Z"/>
+        <path class="marmara-fill" d="M0 530 L660 620 L0 620 Z"/>
 
-        <ellipse class="map-zone" cx="470" cy="165" rx="130" ry="95"/>
-        <text class="map-zone-label" x="470" y="165" text-anchor="middle">غلاطة - كاراكوي</text>
+        <path class="coast-line" d="M0 60 C180 70, 300 130, 390 230 C450 295, 520 330, 612 372 C666 398, 695 462, 680 620"/>
+        <path class="coast-line" d="M548 0 C650 70, 732 130, 805 220 C874 306, 958 360, 1088 410 C1155 438, 1190 495, 1200 620"/>
 
-        <ellipse class="map-zone" cx="690" cy="170" rx="190" ry="130"/>
-        <text class="map-zone-label" x="690" y="170" text-anchor="middle">بيوغلو - شيشلي - بيشكتاش</text>
+        <path class="metro-line" data-layer="metro" d="M140 230 L280 244 L418 258 L574 274 L744 292 L914 307"/>
+        <path class="metro-line" data-layer="metro" d="M640 160 L720 210 L805 248"/>
+        <path class="tram-line" data-layer="tram" d="M145 275 L244 283 L337 292 L430 301 L518 309 L586 316"/>
 
-        <circle class="poi" data-name="الفاتح" data-info="منطقة تاريخية قريبة من جامع الفاتح ومناسبة للإقامة القريبة من الأسواق." cx="170" cy="230" r="8"/>
-        <text class="poi-label" x="182" y="234">الفاتح</text>
+        <circle class="zone-bubble" cx="290" cy="312" r="150"/>
+        <circle class="zone-bubble" cx="590" cy="275" r="135"/>
+        <circle class="zone-bubble" cx="840" cy="275" r="150"/>
 
-        <circle class="poi" data-name="سلطان أحمد" data-info="قلب إسطنبول السياحي: الجامع الأزرق، آيا صوفيا، وقصر توبكابي." cx="255" cy="210" r="8"/>
-        <text class="poi-label" x="268" y="214">سلطان أحمد</text>
+        <g class="poi-group" tabindex="0" role="button" aria-label="جامع الفاتح" data-name="جامع الفاتح" data-info="ضمن منطقة الفاتح التاريخية." data-transit="M2 + ترام T1" transform="translate(176,304)">
+          <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+          <rect class="poi-label-bg" x="18" y="-20" width="152" height="26"/><text class="poi-label" x="94" y="-3" text-anchor="middle">الفاتح — جامع الفاتح</text>
+        </g>
 
-        <circle class="poi" data-name="سيركجي" data-info="نقطة مواصلات قوية وقريبة من ميناء أمينونو وخط الترامواي T1." cx="315" cy="212" r="8"/>
-        <text class="poi-label" x="328" y="216">سيركجي</text>
+        <g class="poi-group" tabindex="0" role="button" aria-label="جامع آيا صوفيا" data-name="جامع آيا صوفيا" data-info="ضمن قلب منطقة سلطان أحمد." data-transit="ترام T1" transform="translate(292,320)">
+          <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+          <rect class="poi-label-bg" x="18" y="-20" width="170" height="26"/><text class="poi-label" x="103" y="-3" text-anchor="middle">سلطان أحمد — آيا صوفيا</text>
+        </g>
 
-        <circle class="poi" data-name="أمينونو" data-info="مركز بحري وتجاري مهم، منه سهل الوصول للبازار المصري والعبّارات." cx="365" cy="222" r="8"/>
-        <text class="poi-label" x="378" y="226">أمينونو</text>
+        <g class="poi-group" tabindex="0" role="button" aria-label="جامع السليمانية" data-name="جامع السليمانية" data-info="قريب من أمينونو والقرن الذهبي." data-transit="T1 + مشي قصير" transform="translate(420,352)">
+          <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+          <rect class="poi-label-bg" x="18" y="-20" width="184" height="26"/><text class="poi-label" x="110" y="-3" text-anchor="middle">أمينونو — جامع السليمانية</text>
+        </g>
 
-        <circle class="poi" data-name="كاراكوي" data-info="منطقة نابضة بالقرب من برج غلاطة ومقاهي ومطاعم حديثة." cx="455" cy="195" r="8"/>
-        <text class="poi-label" x="468" y="199">كاراكوي</text>
+        <g class="poi-group" tabindex="0" role="button" aria-label="كاراكوي" data-name="كاراكوي" data-info="منطقة عبور بحرية وقرب برج غلاطة." data-transit="M2 + T1" transform="translate(610,275)">
+          <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+          <rect class="poi-label-bg" x="18" y="-20" width="154" height="26"/><text class="poi-label" x="95" y="-3" text-anchor="middle">كراكوي — برج غلاطة</text>
+        </g>
 
-        <circle class="poi" data-name="تقسيم" data-info="وسط بيوغلو الحيوي وقرب شارع الاستقلال ومحطات مترو رئيسية." cx="605" cy="184" r="8"/>
-        <text class="poi-label" x="618" y="188">تقسيم</text>
+        <g class="poi-group" tabindex="0" role="button" aria-label="تقسيم وشارع الاستقلال" data-name="تقسيم وشارع الاستقلال" data-info="قلب بيوغلو العصري والحركة السياحية." data-transit="M2 + F1" transform="translate(785,300)">
+          <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+          <rect class="poi-label-bg" x="18" y="-20" width="182" height="26"/><text class="poi-label" x="109" y="-3" text-anchor="middle">تقسيم — شارع الاستقلال</text>
+        </g>
 
-        <circle class="poi" data-name="شيشلي" data-info="منطقة فنادق ومولات ومواصلات قوية وتعتبر نقطة إقامة مفضلة." cx="688" cy="168" r="8"/>
-        <text class="poi-label" x="701" y="172">شيشلي</text>
+        <g class="poi-group" tabindex="0" role="button" aria-label="مول جواهر شيشلي" data-name="مول جواهر شيشلي" data-info="أحد أشهر المولات في منطقة شيشلي." data-transit="M2 + متروباص" transform="translate(890,261)">
+          <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+          <rect class="poi-label-bg" x="18" y="-20" width="166" height="26"/><text class="poi-label" x="101" y="-3" text-anchor="middle">شيشلي — مول جواهر</text>
+        </g>
 
-        <circle class="poi" data-name="بيشكتاش" data-info="قريبة من البوسفور، مناسبة للإطلالات والوصول السريع لمناطق متعددة." cx="760" cy="205" r="8"/>
-        <text class="poi-label" x="773" y="209">بيشكتاش</text>
+        <text class="water-label" x="546" y="352" transform="rotate(-73 546,352)">البوسفور</text>
+        <text class="water-sub" x="80" y="572">بحر مرمرة</text>
+        <text class="water-sub" x="408" y="262">القرن الذهبي</text>
       </svg>
 
-      <div class="info-badge" id="mapInfo">اختر أي منطقة على الخريطة لعرض نبذة سريعة عنها.</div>
+      <div class="info-badge" id="mapInfo"><b>معلومة سريعة:</b> اضغط على نقطة من الخريطة لعرض شرح المنطقة والمعلم. يمكنك الضغط على اسم المعلم أو النقطة نفسها.</div>
     </div>
 
     <div class="map-legend">
-      <span class="legend-item"><span class="legend-line metro-swatch"></span>خطوط المترو</span>
-      <span class="legend-item"><span class="legend-line tram-swatch"></span>خط الترامواي T1</span>
-      <span class="legend-item">● نقاط سياحية وفندقية بارزة</span>
+      <span class="legend-item"><span class="legend-line metro-swatch"></span>مترو</span>
+      <span class="legend-item"><span class="legend-line tram-swatch"></span>ترامواي T1</span>
+      <span class="legend-item"><span class="legend-dot"></span>منطقة + معلم مختصر</span>
     </div>
   </section>
 
@@ -412,21 +474,62 @@ body{
 </div>
 
 <script>
-function imageFromSeed(seed, width, height){
-  return `https://picsum.photos/seed/${encodeURIComponent(seed)}/${width}/${height}`;
+function imageFromSeed(){
+  return "background123.jpg";
+}
+
+function defaultGalleryImages(cover){
+  return [
+    cover,
+    "background123.jpg",
+    "488601331_122099317958824952_3463393932187760688_n.jpg",
+    "background123.jpg",
+    "488601331_122099317958824952_3463393932187760688_n.jpg",
+    "background123.jpg",
+    "488601331_122099317958824952_3463393932187760688_n.jpg",
+    "background123.jpg",
+    "488601331_122099317958824952_3463393932187760688_n.jpg"
+  ];
 }
 
 const customHotelGalleries = {
   "Mercure Istanbul Bomonti": [
     "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/1e/bd/9f/exterior.jpg?w=700&h=-1&s=1",
-    "https://www.ahstatic.com/photos/a4n1_rokgb_00_p_1024x768.jpg",
-    "https://www.ahstatic.com/photos/a4n1_ho_00_p_1024x768.jpg",
-    "https://www.ahstatic.com/photos/a4n1_rsr001_00_p_2048x1536.jpg",
-    "https://images.trvl-media.com/lodging/9000000/8800000/8796900/8796816/3d8691e6.jpg?impolicy=resizecrop&rw=598&ra=fit",
-    "https://cf.bstatic.com/xdata/images/hotel/max500/467247046.jpg?k=48837db6f61fc6c147feaae2c848f351e9c013e1771edf6df78c6d3fdad450cd&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/467247046.jpg?k=48837db6f61fc6c147feaae2c848f351e9c013e1771edf6df78c6d3fdad450cd&o=&hp=1",
     "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768229.jpg?k=5dcecb13248a27d19085536ece1547b212d0dd085399c661846464f992fcea6a&o=",
-    "https://cf.bstatic.com/xdata/images/hotel/max500/265768232.jpg?k=0f3e057e3bfcd0454150a8af620b08bed6a8390fe79c367030ad652bfe5fd8c1&o=",
-    "https://mercure-istanbul-bomonti.hotel-of-istanbul.com/data/Pics/OriginalPhoto/12809/1280995/1280995144/pic-mercure-bomonti-hotel-istanbul-10.JPEG"
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768232.jpg?k=0f3e057e3bfcd0454150a8af620b08bed6a8390fe79c367030ad652bfe5fd8c1&o=",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768236.jpg?k=4d4f6272b2eab529a9fd89abf2cf20a4ac2ec5b16d06ac535f83f50cbcb9f670&o=",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768247.jpg?k=a1d640f4507fa8ebafdf5ab66df2837bd1dbf28dc0f4d1647f41c252d5c78836&o=",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768238.jpg?k=f8388867bc64da11ad71f58f0ffd8c8d6ddf87ec0e680b8c5f76d6773d3cfd2b&o=",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768243.jpg?k=e5a6ec428f44920d908379f4f7112922e4d9a8f95ff9ad6d7f4c1a4f4f59e0f5&o=",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768251.jpg?k=c9fb3409b6d40422f6b4623a4f56de39d6ef8cc58e4458b4f4e72b8ff06ddfe4&o="
+  ],
+  "The Parma Downtown Laleli": [
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/252640058.jpg?k=d9690f5fdbcc89f8588874b73de266802f890198bcf43a4adf9a66ac6f8ceecf&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/252640061.jpg?k=e865b2f48e840bc98e8d2be1ed093190f3f54f31e7a6bc3edd5f658f3033d6bf&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/252640064.jpg?k=6ffb11f8e2f6be4de99539c1232d7acf56d5d98077f68e3c7ce3d73f8f89f337&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/252640083.jpg?k=f94ea6ac4cb7d66e90985f6d942df7b5a3786cfe4f66bf7d26f77f1f9dadd4c9&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/252640095.jpg?k=64f49b3ab6b92e1cbb91124a4e0fc68e3f4202d992aa79ce2f8c08f0997cf129&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/252640102.jpg?k=b624f7cfcdf930735ec4506a66ca17c26dcb59156a26b9221e9f71f1ac05f844&o=&hp=1",
+    "background123.jpg","488601331_122099317958824952_3463393932187760688_n.jpg","background123.jpg"
+  ],
+  "The Marmara Pera": [
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/387397754.jpg?k=4e7271e2f2adfbe113de4f1827e4496714f9f7dc24466ad376969ddadbd4f7ce&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/387397752.jpg?k=57c26143e3410d80f45362de214f3db393f31f2f6cc58095ba5d50657f075444&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/387397744.jpg?k=59754f7573f8dc6637d7c27eb53d26c8156953834ea8a6b600188a846f8e5ca2&o=&hp=1",
+    "background123.jpg","488601331_122099317958824952_3463393932187760688_n.jpg","background123.jpg","488601331_122099317958824952_3463393932187760688_n.jpg","background123.jpg","488601331_122099317958824952_3463393932187760688_n.jpg"
+  ],
+  "Point Hotel Taksim": [
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/596024063.jpg?k=f5c1223f445451432a0174aad0f5f0efb6f5570f555fecf212ac16f3317676de&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/421447486.jpg?k=73c6562e5d03e3282f01337e28475e64403ce4fb267fabb3ce74f28e5755ea55&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/421447487.jpg?k=75cfb2a7eb5ad6e2e3fe61b6ab1d267953f7c1c9d58b4dc3b7f7f4ea85f9f3e7&o=&hp=1",
+    "background123.jpg","488601331_122099317958824952_3463393932187760688_n.jpg","background123.jpg","488601331_122099317958824952_3463393932187760688_n.jpg","background123.jpg","488601331_122099317958824952_3463393932187760688_n.jpg"
+  ],
+  "Arts Hotel Harbiye": [
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/421589915.jpg?k=7a5cb9a91b3485f2c410e0ec08a047cf63f7044fdd021a8ec916ac6cc4747f4a&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/421589914.jpg?k=7de1cc4dd66180be7e7f6f5ac6b55a1b5f85f9067323f7e24f17d80ef0fbe65f&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/421589903.jpg?k=5f2ee05bcf760a203bb09011e78818dc39b29b7a9f5f10527f9d01932f9da207&o=&hp=1",
+    "background123.jpg","488601331_122099317958824952_3463393932187760688_n.jpg","background123.jpg","488601331_122099317958824952_3463393932187760688_n.jpg","background123.jpg","488601331_122099317958824952_3463393932187760688_n.jpg"
   ],
   "Renaissance Istanbul Polat Bosphorus Hotel": [
     "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/4a/2a/58/renaissance-istanbul.jpg?w=1200&h=-1&s=1",
@@ -443,14 +546,10 @@ const customHotelGalleries = {
 
 function hotelImages(hotelName, cover){
   const custom = customHotelGalleries[hotelName];
-  if(custom && custom.length) return custom.slice(0,9);
-
-  const images = [];
-  if(cover) images.push(cover);
-  for(let i=1; i<=9; i++){
-    images.push(imageFromSeed(`${hotelName}-${i}`, 1000, 700));
+  if(custom && custom.length){
+    return custom.slice(0,9);
   }
-  return images.slice(0,9);
+  return defaultGalleryImages(cover);
 }
 
 const hotelCoverOverrides = {
@@ -484,86 +583,19 @@ const hotelCoverOverrides = {
     "Ramada Plaza Sultanahmet.webp"
   ],
   "Crowne Plaza Old City": [
-    "https://digital.ihg.com/is/image/ihg/crowne-plaza-istanbul-6228414074-2x1?wid=1440&fit=fit,1",
-    "https://www.cpoldcity.com/upload/Exterior2.jpeg"
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/374857713.jpg?k=b56a592d9edc6eb567b93d5f347f98e8f70f39ebad0c8be7f2c3650a4db208f0&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/374857711.jpg?k=5efe52f56af9f7de4806cbebfe89ad2cb6b0a2507479044a0e52f2f34adca52e&o=&hp=1",
+    "background123.jpg"
   ],
   "Point Hotel Taksim": [
-    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/6b/90/9e/point-day-time.jpg?w=700&h=-1&s=1",
-    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/e5/08/ef/exterior-picture.jpg?w=900&h=500&s=1"
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/596024063.jpg?k=f5c1223f445451432a0174aad0f5f0efb6f5570f555fecf212ac16f3317676de&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/421447486.jpg?k=73c6562e5d03e3282f01337e28475e64403ce4fb267fabb3ce74f28e5755ea55&o=&hp=1",
+    "background123.jpg"
   ],
   "Arts Hotel Harbiye": [
-    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/0f/e4/06/arts-hotel-istanbul.jpg?w=900&h=-1&s=1",
-    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/42/8a/91/arts-hotel-istanbul.jpg?w=700&h=-1&s=1"
-  ],
-  "Divan Istanbul Taksim": [
-    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/c3/02/df/divan-istanbul.jpg?w=1200&h=-1&s=1",
-    "https://thumbs.dreamstime.com/z/istanbul-turkey-may-divan-hotel-located-center-city-taksim-square-beyoglu-istanbul-divan-hotel-taksim-istanbul-101007800.jpg",
-    "divan taksim.jpg",
-    "divan%20taksim.jpg",
-    "Divan Taksim.jpg"
-  ],
-  "Lions Royal Hotel": [
-    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/724099678.jpg?k=190b162e8dd62b9fd4c4f5d7f6d85afb0d2d8864ffd9e7a9f3fca237ab761fac&o=",
-    "https://libertihotel.com/images/lion-royal-hotel-front-view.jpg",
-    "lions royal.webp",
-    "lions%20royal.webp",
-    "Lions Royal.webp"
-  ],
-  "Mercure Istanbul Bomonti": [
-    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/1e/bd/9f/exterior.jpg?w=700&h=-1&s=1",
-    "https://cdn.tatilsepeti.com/Files/Images/Tesis/06897/1050X700/tsr06897638193399451938550.jpg",
-    "mercure bomonti.webp",
-    "mercure%20bomonti.webp",
-    "Mercure Bomonti.webp"
-  ],
-  "Holiday Inn Şişli": [
-    "https://digital.ihg.com/is/image/ihg/holiday-inn-istanbul-5090389494-4x3",
-    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/606882061.jpg?k=fd2fb71cf2e5a1ef763f55aaac771f90a109f8ae9d95ce15146f8f2fdd21474c&o=&hp=1",
-    "holiday inn sisli.jpg",
-    "holiday%20inn%20sisli.jpg",
-    "Holiday Inn Sisli.jpg"
-  ],
-  "Mosaic Hotel Laleli": [
-    "https://media-cdn.tripadvisor.com/media/photo-s/05/4c/56/34/exterior-view.jpg"
-  ],
-  "Beethoven Premium Hotel Laleli": [
-    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/286436520.jpg?k=45b8a3c6499d3fda73a63870a56f5709df5821364242f96140f603144fdd8f97&o="
-  ],
-  "The Parma Downtown Laleli": [
-    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/e3/2d/ad/the-parma-hotel.jpg?w=1400&h=-1&s=1"
-  ],
-  "Martinenz Hotel Laleli": [
-    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/289742660.jpg?k=a71b4f6a2a424b95b106d78453346c983e952a836b5b1fe392c47fa80c5d7eb8&o=&hp=1"
-  ],
-  "Four Sides Şişli": [
-    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/249173676.jpg?k=2dbfdbb457d6b0863358da918d84e43bea8c00bc1f2fc7d96af7358d847db89d&o=&hp=1"
-  ],
-  "Mare Park Hotel Şişli": [
-    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/319791347.jpg?k=2c06ff0bcf139f872294ef702ad9f9038bd2333d57b55072728ddb91d9eb9c53&o=&hp=1"
-  ],
-  "Akgün Istanbul Hotel Topkapı": [
-    "http://media-cdn.tripadvisor.com/media/photo-s/02/5d/f3/57/exterior.jpg"
-  ],
-  "Valide Hotel Şişli": [
-    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/1f/ff/a0/valide-hotel-sisli.jpg?w=700&h=-1&s=1"
-  ],
-  "Eresin Hotels Topkapı": [
-    "https://image-tc.galaxy.tf/wijpeg-99ed0ya4e1zgmfr1a93gt0lj8/standard.jpg?crop=247%2C0%2C1107%2C830"
-  ],
-  "Holiday Inn Istanbul City Topkapı": [
-    "https://digital.ihg.com/is/image/ihg/holiday-inn-istanbul-6224485588-4x3"
-  ],
-  "The Marmara Pera": [
-    "https://www.themarmarahotels.com/hs-fs/hubfs/Pera/Pictures/Exterior/pera-exterior-5.jpg?width=2400&height=3000&name=pera-exterior-5.jpg"
-  ],
-  "Arts Hotel Taksim": [
-    "https://media-cdn.tripadvisor.com/media/photo-s/29/5d/37/e3/exterior.jpg"
-  ],
-  "Barceló Istanbul": [
-    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/5e/5a/55/bist-view.jpg?w=700&h=-1&s=1"
-  ],
-  "Nevi Hotel & Suites Taksim": [
-    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/306099602.jpg?k=b67e38a7cfab1fe46121d526b511d931d2dc471411a6e7de077db508b976fd27&o=&hp=1"
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/421589915.jpg?k=7a5cb9a91b3485f2c410e0ec08a047cf63f7044fdd021a8ec916ac6cc4747f4a&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/421589914.jpg?k=7de1cc4dd66180be7e7f6f5ac6b55a1b5f85f9067323f7e24f17d80ef0fbe65f&o=&hp=1",
+    "background123.jpg"
   ]
 };
 
@@ -573,6 +605,7 @@ function initMapInteractions(){
   const mapInfo = document.getElementById('mapInfo');
   const metroLines = document.querySelectorAll('[data-layer="metro"]');
   const tramLines = document.querySelectorAll('[data-layer="tram"]');
+  const poiGroups = document.querySelectorAll('.poi-group');
 
   const setLayerState = (elements, visible) => {
     elements.forEach((el) => {
@@ -580,22 +613,40 @@ function initMapInteractions(){
     });
   };
 
+  const activatePoi = (poi) => {
+    if(!poi || !mapInfo) return;
+    poiGroups.forEach((node) => node.classList.remove('is-active'));
+    poi.classList.add('is-active');
+
+    const name = poi.dataset.name || '';
+    const info = poi.dataset.info || '';
+    const transit = poi.dataset.transit || '—';
+    mapInfo.innerHTML = `<b>${name}</b><br>${info}<br><span style="opacity:.9">النقل الأقرب: ${transit}</span>`;
+  };
+
   metroToggle?.addEventListener('change', () => setLayerState(metroLines, metroToggle.checked));
   tramToggle?.addEventListener('change', () => setLayerState(tramLines, tramToggle.checked));
 
-  document.querySelectorAll('.poi').forEach((poi) => {
-    poi.addEventListener('click', () => {
-      const name = poi.dataset.name || '';
-      const info = poi.dataset.info || '';
-      if(mapInfo) mapInfo.textContent = `${name}: ${info}`;
+  poiGroups.forEach((poi) => {
+    poi.addEventListener('click', (e) => {
+      e.stopPropagation();
+      activatePoi(poi);
+    });
+    poi.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        activatePoi(poi);
+      }
     });
   });
+
+  if(poiGroups.length) activatePoi(poiGroups[0]);
 }
 
 function initAreaFilter(){
   const areas = [...new Set(
     Array.from(document.querySelectorAll('#hotelList .hotel'))
-      .map(h => (h.dataset.area || '').trim())
+      .map((h)=> (h.dataset.area || '').trim())
       .filter(Boolean)
   )];
   const areaFilter = document.getElementById('areaFilter');
@@ -619,9 +670,9 @@ function renderHotels(){
     const starsText = "★".repeat(stars);
     const note = card.dataset.note ? ` (${card.dataset.note})` : "";
 
-    const fallbackCover = imageFromSeed(`${hotel}-cover`, 1000, 620);
+    const fallbackCover = "background123.jpg";
     const overrideCandidates = hotelCoverOverrides[hotel] || [];
-    const cover = (overrideCandidates[0] || fallbackCover);
+    const cover = Array.isArray(overrideCandidates) ? (overrideCandidates[0] || fallbackCover) : overrideCandidates;
     const fallbackChain = [...overrideCandidates.slice(1), fallbackCover];
 
     card.innerHTML = `
@@ -665,13 +716,6 @@ function filterHotels(){
 
     item.style.display = (textMatch && ratingMatch && areaMatch) ? '' : 'none';
   });
-}
-
-function resetFilters(){
-  document.getElementById('q').value='';
-  document.getElementById('ratingFilter').value='all';
-  document.getElementById('areaFilter').value='all';
-  filterHotels();
 }
 
 const lightbox = document.getElementById('lightbox');
@@ -724,7 +768,9 @@ document.getElementById('hotelList').addEventListener('error', (e) => {
   const next = fallbacks.shift();
   img.dataset.fallbacks = JSON.stringify(fallbacks);
 
-  if(next) img.src = next;
+  if(next){
+    img.src = next;
+  }
 }, true);
 
 /* open gallery */
