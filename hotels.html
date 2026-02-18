@@ -61,30 +61,35 @@ body{
 /* Area map */
 .area-map{
   margin:0 0 16px;
-  background:rgba(17,18,23,0.92);
+  background:rgba(17,18,23,0.94);
   border:1px solid rgba(255,255,255,0.08);
-  border-radius:14px;
-  padding:14px;
+  border-radius:16px;
+  padding:16px;
 }
-.area-map h2{
-  margin:0 0 8px;
-  font-size:18px;
+.area-map h2{ margin:0 0 8px; font-size:19px; }
+.area-map p{ margin:0 0 12px; opacity:.86; font-size:14px; line-height:1.8; }
+.map-controls{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+.map-chip{ display:flex; align-items:center; gap:8px; font-size:13px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:999px; padding:7px 12px; }
+.map-chip input{ accent-color:#d4af37; }
+.map-wrap{ position:relative; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,.08); background:radial-gradient(900px 300px at 60% -20%, rgba(212,175,55,.12), transparent 60%), linear-gradient(180deg,#10131b,#0a0d13); }
+#istanbulMap{ width:100%; height:auto; display:block; }
+.bosphorus{ stroke:#4da3ff; stroke-width:6; fill:none; opacity:.5; }
+.metro-line{ stroke:#e24a8d; stroke-width:5; fill:none; stroke-dasharray:2 0; }
+.tram-line{ stroke:#34d399; stroke-width:5; fill:none; }
+.map-zone{ fill:rgba(212,175,55,.13); stroke:rgba(212,175,55,.55); stroke-width:1.2; }
+.map-zone-label{ fill:#fff; font-size:12px; font-family:'Cairo',sans-serif; opacity:.9; }
+.poi{ fill:#f7d77a; stroke:#1e2128; stroke-width:2; cursor:pointer; transition:.2s; }
+.poi:hover{ transform:scale(1.08); transform-origin:center; }
+.poi-label{ fill:#fff; font-size:11px; font-family:'Cairo',sans-serif; opacity:.95; }
+.map-legend{ display:flex; gap:14px; flex-wrap:wrap; font-size:12px; opacity:.85; margin-top:10px; }
+.legend-item{ display:flex; align-items:center; gap:6px; }
+.legend-line{ width:20px; height:4px; border-radius:4px; }
+.metro-swatch{ background:#e24a8d; }
+.tram-swatch{ background:#34d399; }
+.info-badge{ position:absolute; left:12px; bottom:12px; max-width:280px; background:rgba(9,11,16,.88); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:10px 12px; font-size:12px; line-height:1.7; }
+@media (max-width:768px){
+  .info-badge{ max-width:220px; font-size:11px; }
 }
-.area-map p{
-  margin:0 0 10px;
-  opacity:.85;
-  font-size:14px;
-}
-.area-map svg{
-  width:100%;
-  height:auto;
-  display:block;
-  border-radius:12px;
-  background:linear-gradient(180deg,#0f1118,#0b0d12);
-  border:1px solid rgba(255,255,255,.06);
-}
-.map-pill{ fill:rgba(212,175,55,.18); stroke:rgba(212,175,55,.7); stroke-width:1.5 }
-.map-label{ fill:#fff; font-size:13px; font-family:'Cairo',sans-serif }
 
 .btn{
   background:var(--gold);
@@ -143,6 +148,7 @@ body{
   font-size:14px;
   text-shadow:0 1px 6px rgba(212,175,55,.35);
 }
+
 .muted{ opacity:0.8; font-size:13px; }
 .gallery-btn{
   margin-top:8px;
@@ -286,25 +292,66 @@ body{
     <button class="btn" onclick="resetFilters()">مسح</button>
   </div>
 
-  <section class="area-map" aria-label="خريطة توضيحية لمناطق الفنادق">
-    <h2>🗺️ خريطة سريعة لمناطق الفنادق</h2>
-    <p>أغلب خياراتنا ضمن سنتر إسطنبول (شيشلي، تقسيم، لالالي، بيشكتاش، توب كابي) لتكون قريب من الحركة والمواصلات.</p>
-    <svg viewBox="0 0 900 320" role="img" aria-label="مخطط مناطق وسط إسطنبول">
-      <rect x="0" y="0" width="900" height="320" fill="rgba(255,255,255,0.02)"/>
-      <path d="M40 250 C180 180, 260 190, 360 220 C460 250, 560 170, 700 200 C770 215, 830 205, 880 180" stroke="rgba(24,119,242,0.4)" stroke-width="8" fill="none"/>
-      <rect class="map-pill" x="82" y="110" rx="26" ry="26" width="150" height="46"/>
-      <text class="map-label" x="157" y="139" text-anchor="middle">لالالي</text>
-      <rect class="map-pill" x="265" y="72" rx="26" ry="26" width="150" height="46"/>
-      <text class="map-label" x="340" y="101" text-anchor="middle">توب كابي / فاتح</text>
-      <rect class="map-pill" x="430" y="122" rx="26" ry="26" width="120" height="46"/>
-      <text class="map-label" x="490" y="151" text-anchor="middle">شيشلي</text>
-      <rect class="map-pill" x="570" y="68" rx="26" ry="26" width="120" height="46"/>
-      <text class="map-label" x="630" y="97" text-anchor="middle">ليفينت</text>
-      <rect class="map-pill" x="606" y="165" rx="26" ry="26" width="120" height="46"/>
-      <text class="map-label" x="666" y="194" text-anchor="middle">تقسيم</text>
-      <rect class="map-pill" x="742" y="116" rx="26" ry="26" width="130" height="46"/>
-      <text class="map-label" x="807" y="145" text-anchor="middle">بيشكتاش</text>
-    </svg>
+  <section class="area-map" aria-label="خريطة تفاعلية لمناطق إسطنبول السياحية">
+    <h2>🗺️ خريطة إسطنبول السياحية (تفاعلية)</h2>
+    <p>اضغط على أي نقطة لمعرفة المنطقة. يمكنك إظهار/إخفاء خطوط النقل لمعاينة قرب الفندق من خط الترامواي T1 وخطوط المترو المركزية.</p>
+
+    <div class="map-controls">
+      <label class="map-chip"><input type="checkbox" id="toggleMetro" checked> إظهار خطوط المترو</label>
+      <label class="map-chip"><input type="checkbox" id="toggleTram" checked> إظهار خط الترامواي T1</label>
+    </div>
+
+    <div class="map-wrap">
+      <svg id="istanbulMap" viewBox="0 0 980 420" role="img" aria-label="خريطة اسطنبول مع نقاط سياحية وخطوط النقل">
+        <rect x="0" y="0" width="980" height="420" fill="rgba(255,255,255,0.02)"/>
+        <path class="bosphorus" d="M540 10 C510 85, 525 130, 560 185 C595 240, 610 305, 590 410"/>
+
+        <path class="metro-line" data-layer="metro" d="M120 90 L250 80 L390 88 L505 95 L650 115 L800 135"/>
+        <path class="metro-line" data-layer="metro" d="M210 300 L330 255 L450 230 L580 220 L720 235"/>
+        <path class="tram-line" data-layer="tram" d="M145 195 L220 200 L300 208 L370 216 L435 224 L500 233"/>
+
+        <ellipse class="map-zone" cx="240" cy="215" rx="160" ry="120"/>
+        <text class="map-zone-label" x="240" y="215" text-anchor="middle">المدينة التاريخية</text>
+
+        <ellipse class="map-zone" cx="470" cy="165" rx="130" ry="95"/>
+        <text class="map-zone-label" x="470" y="165" text-anchor="middle">غلاطة - كاراكوي</text>
+
+        <ellipse class="map-zone" cx="690" cy="170" rx="190" ry="130"/>
+        <text class="map-zone-label" x="690" y="170" text-anchor="middle">بيوغلو - شيشلي - بيشكتاش</text>
+
+        <circle class="poi" data-name="الفاتح" data-info="منطقة تاريخية قريبة من جامع الفاتح ومناسبة للإقامة القريبة من الأسواق." cx="170" cy="230" r="8"/>
+        <text class="poi-label" x="182" y="234">الفاتح</text>
+
+        <circle class="poi" data-name="سلطان أحمد" data-info="قلب إسطنبول السياحي: الجامع الأزرق، آيا صوفيا، وقصر توبكابي." cx="255" cy="210" r="8"/>
+        <text class="poi-label" x="268" y="214">سلطان أحمد</text>
+
+        <circle class="poi" data-name="سيركجي" data-info="نقطة مواصلات قوية وقريبة من ميناء أمينونو وخط الترامواي T1." cx="315" cy="212" r="8"/>
+        <text class="poi-label" x="328" y="216">سيركجي</text>
+
+        <circle class="poi" data-name="أمينونو" data-info="مركز بحري وتجاري مهم، منه سهل الوصول للبازار المصري والعبّارات." cx="365" cy="222" r="8"/>
+        <text class="poi-label" x="378" y="226">أمينونو</text>
+
+        <circle class="poi" data-name="كاراكوي" data-info="منطقة نابضة بالقرب من برج غلاطة ومقاهي ومطاعم حديثة." cx="455" cy="195" r="8"/>
+        <text class="poi-label" x="468" y="199">كاراكوي</text>
+
+        <circle class="poi" data-name="تقسيم" data-info="وسط بيوغلو الحيوي وقرب شارع الاستقلال ومحطات مترو رئيسية." cx="605" cy="184" r="8"/>
+        <text class="poi-label" x="618" y="188">تقسيم</text>
+
+        <circle class="poi" data-name="شيشلي" data-info="منطقة فنادق ومولات ومواصلات قوية وتعتبر نقطة إقامة مفضلة." cx="688" cy="168" r="8"/>
+        <text class="poi-label" x="701" y="172">شيشلي</text>
+
+        <circle class="poi" data-name="بيشكتاش" data-info="قريبة من البوسفور، مناسبة للإطلالات والوصول السريع لمناطق متعددة." cx="760" cy="205" r="8"/>
+        <text class="poi-label" x="773" y="209">بيشكتاش</text>
+      </svg>
+
+      <div class="info-badge" id="mapInfo">اختر أي منطقة على الخريطة لعرض نبذة سريعة عنها.</div>
+    </div>
+
+    <div class="map-legend">
+      <span class="legend-item"><span class="legend-line metro-swatch"></span>خطوط المترو</span>
+      <span class="legend-item"><span class="legend-line tram-swatch"></span>خط الترامواي T1</span>
+      <span class="legend-item">● نقاط سياحية وفندقية بارزة</span>
+    </div>
   </section>
 
   <div class="footer-note" style="margin:0 0 14px 0;">
@@ -520,6 +567,31 @@ const hotelCoverOverrides = {
   ]
 };
 
+function initMapInteractions(){
+  const metroToggle = document.getElementById('toggleMetro');
+  const tramToggle = document.getElementById('toggleTram');
+  const mapInfo = document.getElementById('mapInfo');
+  const metroLines = document.querySelectorAll('[data-layer="metro"]');
+  const tramLines = document.querySelectorAll('[data-layer="tram"]');
+
+  const setLayerState = (elements, visible) => {
+    elements.forEach((el) => {
+      el.style.display = visible ? '' : 'none';
+    });
+  };
+
+  metroToggle?.addEventListener('change', () => setLayerState(metroLines, metroToggle.checked));
+  tramToggle?.addEventListener('change', () => setLayerState(tramLines, tramToggle.checked));
+
+  document.querySelectorAll('.poi').forEach((poi) => {
+    poi.addEventListener('click', () => {
+      const name = poi.dataset.name || '';
+      const info = poi.dataset.info || '';
+      if(mapInfo) mapInfo.textContent = `${name}: ${info}`;
+    });
+  });
+}
+
 function initAreaFilter(){
   const areas = [...new Set(
     Array.from(document.querySelectorAll('#hotelList .hotel'))
@@ -546,6 +618,7 @@ function renderHotels(){
     const stars = Math.max(1, Math.min(parseInt(card.dataset.stars || "5", 10), 5));
     const starsText = "★".repeat(stars);
     const note = card.dataset.note ? ` (${card.dataset.note})` : "";
+
     const fallbackCover = imageFromSeed(`${hotel}-cover`, 1000, 620);
     const overrideCandidates = hotelCoverOverrides[hotel] || [];
     const cover = (overrideCandidates[0] || fallbackCover);
@@ -639,6 +712,7 @@ function closeLightbox(){
 /* init */
 renderHotels();
 initAreaFilter();
+initMapInteractions();
 filterHotels();
 
 /* image fallbacks */
