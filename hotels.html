@@ -102,8 +102,8 @@ body{
 .poi-label{ fill:#fff; font-size:15px; font-family:'Cairo',sans-serif; pointer-events:none; font-weight:700; }
 .poi-group.is-active .poi-core{ fill:#fff2b7; transform:scale(1.1); transform-origin:center; }
 .poi-group.is-active .poi-ring{ stroke:rgba(255,208,99,.95); }
-.poi-hit{ fill:transparent; r:18; }
 
+.poi-hit{ fill:transparent; r:18; }
 .water-label{ fill:rgba(255,255,255,.92); font-size:24px; font-family:'Cairo',sans-serif; font-weight:700; }
 .water-sub{ fill:rgba(255,255,255,.85); font-size:16px; font-family:'Cairo',sans-serif; }
 
@@ -196,7 +196,20 @@ body{
   font-size:14px;
   text-shadow:0 1px 6px rgba(212,175,55,.35);
 }
+
 .muted{ opacity:0.8; font-size:13px; }
+.gallery-btn{
+  margin-top:8px;
+  width:100%;
+  background:transparent;
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:10px;
+  padding:10px;
+  cursor:pointer;
+}
+</style>
+</head>
 
 .gallery-btn{
   margin-top:8px;
@@ -370,6 +383,22 @@ body{
         <circle class="zone-bubble" cx="290" cy="312" r="150"/>
         <circle class="zone-bubble" cx="590" cy="275" r="135"/>
         <circle class="zone-bubble" cx="840" cy="275" r="150"/>
+
+        <g class="poi-group" tabindex="0" role="button" aria-label="جامع الفاتح" data-name="جامع الفاتح" data-info="ضمن منطقة الفاتح التاريخية." data-transit="M2 + ترام T1" transform="translate(176,304)">
+          <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+          <rect class="poi-label-bg" x="18" y="-20" width="152" height="26"/><text class="poi-label" x="94" y="-3" text-anchor="middle">الفاتح — جامع الفاتح</text>
+        </g>
+
+        <g class="poi-group" tabindex="0" role="button" aria-label="جامع آيا صوفيا" data-name="جامع آيا صوفيا" data-info="ضمن قلب منطقة سلطان أحمد." data-transit="ترام T1" transform="translate(292,320)">
+          <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+          <rect class="poi-label-bg" x="18" y="-20" width="170" height="26"/><text class="poi-label" x="103" y="-3" text-anchor="middle">سلطان أحمد — آيا صوفيا</text>
+        </g>
+
+        <g class="poi-group" tabindex="0" role="button" aria-label="جامع السليمانية" data-name="جامع السليمانية" data-info="قريب من أمينونو والقرن الذهبي." data-transit="T1 + مشي قصير" transform="translate(420,352)">
+          <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+          <rect class="poi-label-bg" x="18" y="-20" width="184" height="26"/><text class="poi-label" x="110" y="-3" text-anchor="middle">أمينونو — جامع السليمانية</text>
+        </g>
+
 
         <g class="poi-group" tabindex="0" role="button" aria-label="جامع الفاتح" data-name="جامع الفاتح" data-info="ضمن منطقة الفاتح التاريخية." data-transit="M2 + ترام T1" transform="translate(176,304)">
           <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>

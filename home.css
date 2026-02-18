@@ -83,7 +83,7 @@ body::before{
   opacity:0.98;
 }
 
-@media (max-width: 768px){
+@media (max-width:768px){
   .hero-logo{
     width:190px;
     margin-bottom:16px;
