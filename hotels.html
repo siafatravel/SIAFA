@@ -80,6 +80,7 @@ body{
   line-height:1.8;
   overflow:hidden;
 }
+
 .hotel-thumb{
   width:100%;
   height:150px;
@@ -90,15 +91,19 @@ body{
   border:1px solid rgba(255,255,255,0.12);
   background:#0b0c10;
 }
+
 .hotel-meta{ padding:8px 4px 4px; }
+
 .hotel-headline{
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
   gap:10px;
 }
+
 .hotel b{ display:block; font-size:16px; margin-bottom:2px; line-height:1.5; }
 .hotel-ar{ font-size:14px; color:rgba(255,255,255,0.92); }
+
 .hotel-rating{
   display:flex;
   flex-direction:column;
@@ -113,6 +118,7 @@ body{
   font-size:14px;
   text-shadow:0 1px 6px rgba(212,175,55,.35);
 }
+
 .muted{ opacity:0.8; font-size:13px; }
 .gallery-btn{
   margin-top:8px;
@@ -134,6 +140,7 @@ body{
   line-height:1.9;
 }
 .footer-note a{ color:#fff; }
+
 .top-actions{
   display:flex;
   justify-content:center;
@@ -329,12 +336,10 @@ const customHotelGalleries = {
 
 function hotelImages(hotelName, cover){
   const custom = customHotelGalleries[hotelName];
-  if(custom && custom.length){
-    return custom.slice(0,9);
-  }
+  if(custom && custom.length) return custom.slice(0,9);
 
   const images = [];
-  if(cover){ images.push(cover); }
+  if(cover) images.push(cover);
   for(let i=1; i<=9; i++){
     images.push(imageFromSeed(`${hotelName}-${i}`, 1000, 700));
   }
@@ -468,7 +473,8 @@ function renderHotels(){
     const fallbackCover = imageFromSeed(`${hotel}-cover`, 1000, 620);
     const overrideCandidates = hotelCoverOverrides[hotel] || [];
     const cover = Array.isArray(overrideCandidates) ? (overrideCandidates[0] || fallbackCover) : overrideCandidates;
-    const fallbackChain = [...overrideCandidates.slice(1), fallbackCover];
+    const fallbackChain = Array.isArray(overrideCandidates) ? [...overrideCandidates.slice(1), fallbackCover] : [fallbackCover];
+
     card.innerHTML = `
       <img class="hotel-thumb" src="${cover}" loading="lazy" alt="واجهة ${hotel}" data-fallbacks='${JSON.stringify(fallbackChain)}'>
       <div class="hotel-meta">
