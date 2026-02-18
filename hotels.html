@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>الفنادق التي نتعامل معها | سيافا ترافل</title>
-
+<link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
 
 <style>
@@ -57,6 +57,35 @@ body{
   color:#111;
   min-width:150px;
 }
+
+/* Area map */
+.area-map{
+  margin:0 0 16px;
+  background:rgba(17,18,23,0.92);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px;
+  padding:14px;
+}
+.area-map h2{
+  margin:0 0 8px;
+  font-size:18px;
+}
+.area-map p{
+  margin:0 0 10px;
+  opacity:.85;
+  font-size:14px;
+}
+.area-map svg{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:12px;
+  background:linear-gradient(180deg,#0f1118,#0b0d12);
+  border:1px solid rgba(255,255,255,.06);
+}
+.map-pill{ fill:rgba(212,175,55,.18); stroke:rgba(212,175,55,.7); stroke-width:1.5 }
+.map-label{ fill:#fff; font-size:13px; font-family:'Cairo',sans-serif }
+
 .btn{
   background:var(--gold);
   color:#000;
@@ -80,7 +109,6 @@ body{
   line-height:1.8;
   overflow:hidden;
 }
-
 .hotel-thumb{
   width:100%;
   height:150px;
@@ -91,16 +119,13 @@ body{
   border:1px solid rgba(255,255,255,0.12);
   background:#0b0c10;
 }
-
 .hotel-meta{ padding:8px 4px 4px; }
-
 .hotel-headline{
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
   gap:10px;
 }
-
 .hotel b{ display:block; font-size:16px; margin-bottom:2px; line-height:1.5; }
 .hotel-ar{ font-size:14px; color:rgba(255,255,255,0.92); }
 
@@ -118,7 +143,6 @@ body{
   font-size:14px;
   text-shadow:0 1px 6px rgba(212,175,55,.35);
 }
-
 .muted{ opacity:0.8; font-size:13px; }
 .gallery-btn{
   margin-top:8px;
@@ -256,8 +280,32 @@ body{
       <option value="34">3-4 نجوم</option>
       <option value="all" selected>كل التصنيفات</option>
     </select>
-    <button class="btn" onclick="document.getElementById('q').value=''; document.getElementById('ratingFilter').value='all'; filterHotels();">مسح</button>
+    <select id="areaFilter" onchange="filterHotels()" aria-label="فلتر المنطقة">
+      <option value="all" selected>كل المناطق</option>
+    </select>
+    <button class="btn" onclick="resetFilters()">مسح</button>
   </div>
+
+  <section class="area-map" aria-label="خريطة توضيحية لمناطق الفنادق">
+    <h2>🗺️ خريطة سريعة لمناطق الفنادق</h2>
+    <p>أغلب خياراتنا ضمن سنتر إسطنبول (شيشلي، تقسيم، لالالي، بيشكتاش، توب كابي) لتكون قريب من الحركة والمواصلات.</p>
+    <svg viewBox="0 0 900 320" role="img" aria-label="مخطط مناطق وسط إسطنبول">
+      <rect x="0" y="0" width="900" height="320" fill="rgba(255,255,255,0.02)"/>
+      <path d="M40 250 C180 180, 260 190, 360 220 C460 250, 560 170, 700 200 C770 215, 830 205, 880 180" stroke="rgba(24,119,242,0.4)" stroke-width="8" fill="none"/>
+      <rect class="map-pill" x="82" y="110" rx="26" ry="26" width="150" height="46"/>
+      <text class="map-label" x="157" y="139" text-anchor="middle">لالالي</text>
+      <rect class="map-pill" x="265" y="72" rx="26" ry="26" width="150" height="46"/>
+      <text class="map-label" x="340" y="101" text-anchor="middle">توب كابي / فاتح</text>
+      <rect class="map-pill" x="430" y="122" rx="26" ry="26" width="120" height="46"/>
+      <text class="map-label" x="490" y="151" text-anchor="middle">شيشلي</text>
+      <rect class="map-pill" x="570" y="68" rx="26" ry="26" width="120" height="46"/>
+      <text class="map-label" x="630" y="97" text-anchor="middle">ليفينت</text>
+      <rect class="map-pill" x="606" y="165" rx="26" ry="26" width="120" height="46"/>
+      <text class="map-label" x="666" y="194" text-anchor="middle">تقسيم</text>
+      <rect class="map-pill" x="742" y="116" rx="26" ry="26" width="130" height="46"/>
+      <text class="map-label" x="807" y="145" text-anchor="middle">بيشكتاش</text>
+    </svg>
+  </section>
 
   <div class="footer-note" style="margin:0 0 14px 0;">
     الموقع قيد التطوير ويتم تحديثه باستمرار وإضافة فنادق جديدة بشكل دوري. إذا لم تجد الفندق المطلوب حالياً، تواصل معنا وسنوفّر لك خيارات إضافية مباشرة ✅
@@ -290,6 +338,7 @@ body{
     <div class="hotel" data-hotel="Arts Hotel Taksim" data-hotel-ar="ارتس تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
     <div class="hotel" data-hotel="Barceló Istanbul" data-hotel-ar="بارسيلو تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
     <div class="hotel" data-hotel="Nevi Hotel & Suites Taksim" data-hotel-ar="واجنحة نيفي تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
+    <div class="hotel" data-hotel="Renaissance Istanbul Polat Bosphorus Hotel" data-hotel-ar="رينيسانس بولات بوسفورس" data-city="إسطنبول" data-area="بيشكتاش" data-stars="5"></div>
   </div>
 
   <div class="footer-note">
@@ -331,6 +380,17 @@ const customHotelGalleries = {
     "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768229.jpg?k=5dcecb13248a27d19085536ece1547b212d0dd085399c661846464f992fcea6a&o=",
     "https://cf.bstatic.com/xdata/images/hotel/max500/265768232.jpg?k=0f3e057e3bfcd0454150a8af620b08bed6a8390fe79c367030ad652bfe5fd8c1&o=",
     "https://mercure-istanbul-bomonti.hotel-of-istanbul.com/data/Pics/OriginalPhoto/12809/1280995/1280995144/pic-mercure-bomonti-hotel-istanbul-10.JPEG"
+  ],
+  "Renaissance Istanbul Polat Bosphorus Hotel": [
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/4a/2a/58/renaissance-istanbul.jpg?w=1200&h=-1&s=1",
+    "https://cache.marriott.com/content/dam/marriott-renditions/ISTBR/istbr-deluxe-king-guestroom-9069-hor-feat.jpg",
+    "https://cache.marriott.com/content/dam/marriott-renditions/ISTBR/istbr-breakfast-restaurant-9067-hor-feat.jpg",
+    "https://cache.marriott.com/content/dam/marriott-renditions/ISTBR/istbr-lobby-9073-hor-feat.jpg",
+    "https://cache.marriott.com/content/dam/marriott-renditions/ISTBR/istbr-guest-bathroom-9068-hor-feat.jpg",
+    "https://cache.marriott.com/content/dam/marriott-renditions/ISTBR/istbr-bosphorus-view-9071-hor-feat.jpg",
+    "https://cache.marriott.com/content/dam/marriott-renditions/ISTBR/istbr-rooftop-9075-hor-feat.jpg",
+    "https://cache.marriott.com/content/dam/marriott-renditions/ISTBR/istbr-fitness-center-9072-hor-feat.jpg",
+    "https://cache.marriott.com/content/dam/marriott-renditions/ISTBR/istbr-restaurant-9076-hor-feat.jpg"
   ]
 };
 
@@ -460,20 +520,36 @@ const hotelCoverOverrides = {
   ]
 };
 
+function initAreaFilter(){
+  const areas = [...new Set(
+    Array.from(document.querySelectorAll('#hotelList .hotel'))
+      .map(h => (h.dataset.area || '').trim())
+      .filter(Boolean)
+  )];
+  const areaFilter = document.getElementById('areaFilter');
+  areas.sort((a,b)=>a.localeCompare(b,'ar'));
+  areas.forEach((area)=>{
+    const opt = document.createElement('option');
+    opt.value = area;
+    opt.textContent = area;
+    areaFilter.appendChild(opt);
+  });
+}
+
 function renderHotels(){
   const hotels = document.querySelectorAll('#hotelList .hotel');
   hotels.forEach((card) => {
     const hotel = card.dataset.hotel;
     const hotelAr = card.dataset.hotelAr || hotel;
-    const city = card.dataset.city;
+    const city = card.dataset.city || '';
     const area = card.dataset.area || city;
     const stars = Math.max(1, Math.min(parseInt(card.dataset.stars || "5", 10), 5));
     const starsText = "★".repeat(stars);
     const note = card.dataset.note ? ` (${card.dataset.note})` : "";
     const fallbackCover = imageFromSeed(`${hotel}-cover`, 1000, 620);
     const overrideCandidates = hotelCoverOverrides[hotel] || [];
-    const cover = Array.isArray(overrideCandidates) ? (overrideCandidates[0] || fallbackCover) : overrideCandidates;
-    const fallbackChain = Array.isArray(overrideCandidates) ? [...overrideCandidates.slice(1), fallbackCover] : [fallbackCover];
+    const cover = (overrideCandidates[0] || fallbackCover);
+    const fallbackChain = [...overrideCandidates.slice(1), fallbackCover];
 
     card.innerHTML = `
       <img class="hotel-thumb" src="${cover}" loading="lazy" alt="واجهة ${hotel}" data-fallbacks='${JSON.stringify(fallbackChain)}'>
@@ -488,7 +564,7 @@ function renderHotels(){
             <span class="rating-stars">${starsText}</span>
           </div>
         </div>
-        <div class="muted">${city} - ${area}</div>
+        <div class="muted">${city}${area ? ` - ${area}` : ''}</div>
       </div>
       <button class="gallery-btn" type="button">عرض الصور</button>
     `;
@@ -498,6 +574,7 @@ function renderHotels(){
 function filterHotels(){
   const q = (document.getElementById('q').value || '').toLowerCase().trim();
   const rating = document.getElementById('ratingFilter')?.value || 'all';
+  const area = document.getElementById('areaFilter')?.value || 'all';
   const items = document.querySelectorAll('#hotelList .hotel');
 
   items.forEach(item=>{
@@ -511,8 +588,17 @@ function filterHotels(){
         ? stars === 5
         : stars >= 3 && stars <= 4;
 
-    item.style.display = (textMatch && ratingMatch) ? '' : 'none';
+    const areaMatch = area === 'all' ? true : (item.dataset.area || '') === area;
+
+    item.style.display = (textMatch && ratingMatch && areaMatch) ? '' : 'none';
   });
+}
+
+function resetFilters(){
+  document.getElementById('q').value='';
+  document.getElementById('ratingFilter').value='all';
+  document.getElementById('areaFilter').value='all';
+  filterHotels();
 }
 
 const lightbox = document.getElementById('lightbox');
@@ -550,8 +636,12 @@ function closeLightbox(){
   lightboxImage.src = '';
 }
 
+/* init */
 renderHotels();
+initAreaFilter();
+filterHotels();
 
+/* image fallbacks */
 document.getElementById('hotelList').addEventListener('error', (e) => {
   const img = e.target.closest('.hotel-thumb');
   if(!img) return;
@@ -560,11 +650,10 @@ document.getElementById('hotelList').addEventListener('error', (e) => {
   const next = fallbacks.shift();
   img.dataset.fallbacks = JSON.stringify(fallbacks);
 
-  if(next){
-    img.src = next;
-  }
+  if(next) img.src = next;
 }, true);
 
+/* open gallery */
 document.getElementById('hotelList').addEventListener('click', (e) => {
   const card = e.target.closest('.hotel');
   if(!card) return;
@@ -577,6 +666,7 @@ document.getElementById('hotelList').addEventListener('click', (e) => {
   openLightbox(card.dataset.hotel, 0, coverSrc);
 });
 
+/* thumbs */
 lightboxStrip.addEventListener('click', (e) => {
   const thumb = e.target.closest('.lightbox-thumb');
   if(!thumb) return;
