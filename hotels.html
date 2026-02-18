@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>الفنادق التي نتعامل معها | سيافا ترافل</title>
 <link rel="icon" type="image/png" href="logo.png">
-
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
 
 <style>
@@ -59,6 +58,7 @@ body{
   min-width:150px;
 }
 
+/* Area map */
 .area-map{
   margin:0 0 16px;
   background:rgba(17,18,23,0.92);
@@ -75,9 +75,17 @@ body{
   opacity:.85;
   font-size:14px;
 }
-.area-map svg{width:100%;height:auto;display:block;border-radius:12px;background:linear-gradient(180deg,#0f1118,#0b0d12);border:1px solid rgba(255,255,255,.06)}
-.map-pill{fill:rgba(212,175,55,.18);stroke:rgba(212,175,55,.7);stroke-width:1.5}
-.map-label{fill:#fff;font-size:13px;font-family:'Cairo',sans-serif}
+.area-map svg{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:12px;
+  background:linear-gradient(180deg,#0f1118,#0b0d12);
+  border:1px solid rgba(255,255,255,.06);
+}
+.map-pill{ fill:rgba(212,175,55,.18); stroke:rgba(212,175,55,.7); stroke-width:1.5 }
+.map-label{ fill:#fff; font-size:13px; font-family:'Cairo',sans-serif }
+
 .btn{
   background:var(--gold);
   color:#000;
@@ -99,6 +107,7 @@ body{
   border-radius:14px;
   padding:12px;
   line-height:1.8;
+  overflow:hidden;
 }
 .hotel-thumb{
   width:100%;
@@ -108,6 +117,7 @@ body{
   display:block;
   cursor:zoom-in;
   border:1px solid rgba(255,255,255,0.12);
+  background:#0b0c10;
 }
 .hotel-meta{ padding:8px 4px 4px; }
 .hotel-headline{
@@ -118,6 +128,7 @@ body{
 }
 .hotel b{ display:block; font-size:16px; margin-bottom:2px; line-height:1.5; }
 .hotel-ar{ font-size:14px; color:rgba(255,255,255,0.92); }
+
 .hotel-rating{
   display:flex;
   flex-direction:column;
@@ -153,6 +164,7 @@ body{
   line-height:1.9;
 }
 .footer-note a{ color:#fff; }
+
 .top-actions{
   display:flex;
   justify-content:center;
@@ -271,7 +283,7 @@ body{
     <select id="areaFilter" onchange="filterHotels()" aria-label="فلتر المنطقة">
       <option value="all" selected>كل المناطق</option>
     </select>
-    <button class="btn" onclick="document.getElementById('q').value=''; document.getElementById('ratingFilter').value='all'; document.getElementById('areaFilter').value='all'; filterHotels();">مسح</button>
+    <button class="btn" onclick="resetFilters()">مسح</button>
   </div>
 
   <section class="area-map" aria-label="خريطة توضيحية لمناطق الفنادق">
@@ -311,6 +323,7 @@ body{
     <div class="hotel" data-hotel="Holiday Inn Şişli" data-hotel-ar="هوليدي ان شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
     <div class="hotel" data-hotel="Arts Hotel Harbiye" data-hotel-ar="ارتس حربية تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
     <div class="hotel" data-hotel="Lions Royal Hotel" data-hotel-ar="ليونز رويال" data-city="إسطنبول" data-area="لالالي" data-stars="4" data-note="افتتاح حديث"></div>
+
     <div class="hotel" data-hotel="Mosaic Hotel Laleli" data-hotel-ar="موزاييك لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
     <div class="hotel" data-hotel="Beethoven Premium Hotel Laleli" data-hotel-ar="بيتهوفن بريميوم لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
     <div class="hotel" data-hotel="The Parma Downtown Laleli" data-hotel-ar="ذا براما داون تاون لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
@@ -362,11 +375,11 @@ const customHotelGalleries = {
     "https://www.ahstatic.com/photos/a4n1_rokgb_00_p_1024x768.jpg",
     "https://www.ahstatic.com/photos/a4n1_ho_00_p_1024x768.jpg",
     "https://www.ahstatic.com/photos/a4n1_rsr001_00_p_2048x1536.jpg",
-    "https://www.ahstatic.com/photos/a4n1_rosk_00_p_1024x768.jpg",
-    "https://www.ahstatic.com/photos/a4n1_rokg_00_p_1024x768.jpg",
-    "https://www.ahstatic.com/photos/a4n1_ror001_00_p_1024x768.jpg",
-    "https://www.ahstatic.com/photos/a4n1_ror002_00_p_1024x768.jpg",
-    "https://www.ahstatic.com/photos/a4n1_ho_02_p_1024x768.jpg"
+    "https://images.trvl-media.com/lodging/9000000/8800000/8796900/8796816/3d8691e6.jpg?impolicy=resizecrop&rw=598&ra=fit",
+    "https://cf.bstatic.com/xdata/images/hotel/max500/467247046.jpg?k=48837db6f61fc6c147feaae2c848f351e9c013e1771edf6df78c6d3fdad450cd&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768229.jpg?k=5dcecb13248a27d19085536ece1547b212d0dd085399c661846464f992fcea6a&o=",
+    "https://cf.bstatic.com/xdata/images/hotel/max500/265768232.jpg?k=0f3e057e3bfcd0454150a8af620b08bed6a8390fe79c367030ad652bfe5fd8c1&o=",
+    "https://mercure-istanbul-bomonti.hotel-of-istanbul.com/data/Pics/OriginalPhoto/12809/1280995/1280995144/pic-mercure-bomonti-hotel-istanbul-10.JPEG"
   ],
   "Renaissance Istanbul Polat Bosphorus Hotel": [
     "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/4a/2a/58/renaissance-istanbul.jpg?w=1200&h=-1&s=1",
@@ -383,15 +396,14 @@ const customHotelGalleries = {
 
 function hotelImages(hotelName, cover){
   const custom = customHotelGalleries[hotelName];
-  if(custom && custom.length){
-    return custom.slice(0,9);
-  }
+  if(custom && custom.length) return custom.slice(0,9);
 
-  const images = [cover];
-  for(let i=1; i<=8; i++){
+  const images = [];
+  if(cover) images.push(cover);
+  for(let i=1; i<=9; i++){
     images.push(imageFromSeed(`${hotelName}-${i}`, 1000, 700));
   }
-  return images;
+  return images.slice(0,9);
 }
 
 const hotelCoverOverrides = {
@@ -465,16 +477,13 @@ const hotelCoverOverrides = {
     "Holiday Inn Sisli.jpg"
   ],
   "Mosaic Hotel Laleli": [
-    "https://c8.alamy.com/comp/B5GR5T/turkey-istanbul-the-mosaic-hotel-B5GR5T.jpg",
     "https://media-cdn.tripadvisor.com/media/photo-s/05/4c/56/34/exterior-view.jpg"
   ],
   "Beethoven Premium Hotel Laleli": [
     "https://cf.bstatic.com/xdata/images/hotel/max1024x768/286436520.jpg?k=45b8a3c6499d3fda73a63870a56f5709df5821364242f96140f603144fdd8f97&o="
   ],
   "The Parma Downtown Laleli": [
-    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/252640058.jpg?k=d9690f5fdbcc89f8588874b73de266802f890198bcf43a4adf9a66ac6f8ceecf&o=&hp=1",
-    "https://www.theparmahoteldowntown.com/wp-content/uploads/2022/09/black-bird-hotel-exterior.jpg",
-    "https://ak-d.tripcdn.com/images/220k0p000000ftrnd46B8_R_960_660_R5_D.jpg"
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/e3/2d/ad/the-parma-hotel.jpg?w=1400&h=-1&s=1"
   ],
   "Martinenz Hotel Laleli": [
     "https://cf.bstatic.com/xdata/images/hotel/max1024x768/289742660.jpg?k=a71b4f6a2a424b95b106d78453346c983e952a836b5b1fe392c47fa80c5d7eb8&o=&hp=1"
@@ -489,7 +498,6 @@ const hotelCoverOverrides = {
     "http://media-cdn.tripadvisor.com/media/photo-s/02/5d/f3/57/exterior.jpg"
   ],
   "Valide Hotel Şişli": [
-    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/521397934.jpg?k=ac86f6d8f2f8108646ea33d4be3f4ebf8fcb1a63f17b6ba95a6f264b5a67f541&o=&hp=1",
     "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/1f/ff/a0/valide-hotel-sisli.jpg?w=700&h=-1&s=1"
   ],
   "Eresin Hotels Topkapı": [
@@ -499,8 +507,7 @@ const hotelCoverOverrides = {
     "https://digital.ihg.com/is/image/ihg/holiday-inn-istanbul-6224485588-4x3"
   ],
   "The Marmara Pera": [
-    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/9b/2f/9f/the-marmara-pera.jpg?w=1200&h=-1&s=1",
-    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/387397754.jpg?k=4e7271e2f2adfbe113de4f1827e4496714f9f7dc24466ad376969ddadbd4f7ce&o=&hp=1"
+    "https://www.themarmarahotels.com/hs-fs/hubfs/Pera/Pictures/Exterior/pera-exterior-5.jpg?width=2400&height=3000&name=pera-exterior-5.jpg"
   ],
   "Arts Hotel Taksim": [
     "https://media-cdn.tripadvisor.com/media/photo-s/29/5d/37/e3/exterior.jpg"
@@ -510,16 +517,15 @@ const hotelCoverOverrides = {
   ],
   "Nevi Hotel & Suites Taksim": [
     "https://cf.bstatic.com/xdata/images/hotel/max1024x768/306099602.jpg?k=b67e38a7cfab1fe46121d526b511d931d2dc471411a6e7de077db508b976fd27&o=&hp=1"
-  ],
-  "Renaissance Istanbul Polat Bosphorus Hotel": [
-    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/4a/2a/58/renaissance-istanbul.jpg?w=1200&h=-1&s=1",
-    "https://cache.marriott.com/content/dam/marriott-renditions/ISTBR/istbr-exterior-9065-hor-feat.jpg"
   ]
 };
 
-
 function initAreaFilter(){
-  const areas = [...new Set(Array.from(document.querySelectorAll('#hotelList .hotel')).map((h)=>h.dataset.area).filter(Boolean))];
+  const areas = [...new Set(
+    Array.from(document.querySelectorAll('#hotelList .hotel'))
+      .map(h => (h.dataset.area || '').trim())
+      .filter(Boolean)
+  )];
   const areaFilter = document.getElementById('areaFilter');
   areas.sort((a,b)=>a.localeCompare(b,'ar'));
   areas.forEach((area)=>{
@@ -535,15 +541,16 @@ function renderHotels(){
   hotels.forEach((card) => {
     const hotel = card.dataset.hotel;
     const hotelAr = card.dataset.hotelAr || hotel;
-    const city = card.dataset.city;
+    const city = card.dataset.city || '';
     const area = card.dataset.area || city;
     const stars = Math.max(1, Math.min(parseInt(card.dataset.stars || "5", 10), 5));
     const starsText = "★".repeat(stars);
     const note = card.dataset.note ? ` (${card.dataset.note})` : "";
     const fallbackCover = imageFromSeed(`${hotel}-cover`, 1000, 620);
     const overrideCandidates = hotelCoverOverrides[hotel] || [];
-    const cover = Array.isArray(overrideCandidates) ? (overrideCandidates[0] || fallbackCover) : overrideCandidates;
+    const cover = (overrideCandidates[0] || fallbackCover);
     const fallbackChain = [...overrideCandidates.slice(1), fallbackCover];
+
     card.innerHTML = `
       <img class="hotel-thumb" src="${cover}" loading="lazy" alt="واجهة ${hotel}" data-fallbacks='${JSON.stringify(fallbackChain)}'>
       <div class="hotel-meta">
@@ -557,7 +564,7 @@ function renderHotels(){
             <span class="rating-stars">${starsText}</span>
           </div>
         </div>
-        <div class="muted">${city} - ${area}</div>
+        <div class="muted">${city}${area ? ` - ${area}` : ''}</div>
       </div>
       <button class="gallery-btn" type="button">عرض الصور</button>
     `;
@@ -580,10 +587,18 @@ function filterHotels(){
       : rating === '5'
         ? stars === 5
         : stars >= 3 && stars <= 4;
+
     const areaMatch = area === 'all' ? true : (item.dataset.area || '') === area;
 
     item.style.display = (textMatch && ratingMatch && areaMatch) ? '' : 'none';
   });
+}
+
+function resetFilters(){
+  document.getElementById('q').value='';
+  document.getElementById('ratingFilter').value='all';
+  document.getElementById('areaFilter').value='all';
+  filterHotels();
 }
 
 const lightbox = document.getElementById('lightbox');
@@ -621,9 +636,12 @@ function closeLightbox(){
   lightboxImage.src = '';
 }
 
+/* init */
 renderHotels();
 initAreaFilter();
+filterHotels();
 
+/* image fallbacks */
 document.getElementById('hotelList').addEventListener('error', (e) => {
   const img = e.target.closest('.hotel-thumb');
   if(!img) return;
@@ -632,11 +650,10 @@ document.getElementById('hotelList').addEventListener('error', (e) => {
   const next = fallbacks.shift();
   img.dataset.fallbacks = JSON.stringify(fallbacks);
 
-  if(next){
-    img.src = next;
-  }
+  if(next) img.src = next;
 }, true);
 
+/* open gallery */
 document.getElementById('hotelList').addEventListener('click', (e) => {
   const card = e.target.closest('.hotel');
   if(!card) return;
@@ -649,6 +666,7 @@ document.getElementById('hotelList').addEventListener('click', (e) => {
   openLightbox(card.dataset.hotel, 0, coverSrc);
 });
 
+/* thumbs */
 lightboxStrip.addEventListener('click', (e) => {
   const thumb = e.target.closest('.lightbox-thumb');
   if(!thumb) return;
