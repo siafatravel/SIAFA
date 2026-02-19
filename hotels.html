@@ -491,66 +491,21 @@
   </div>
 
   <script>
-    // ========= Utilities =========
-    const IMG_EXTS = ["jpg","jpeg","webp","png"];
-    const MAX_SCAN = 60;         // حد أقصى نفحصه (يرجع حسب عندك، 60 كفاية)
-    const STOP_AFTER_MISSES = 5; // إذا لقينا 5 أرقام متتالية مافيها صور، منوقف
-
-    function normalizeFolderName(s){
-      // تحويل التركي/اللاتيني إلى slug بسيط (fallback إذا ما كان في data-folder)
-      return (s || "")
-        .toLowerCase()
-        .replace(/ş/g,"s").replace(/ı/g,"i").replace(/ğ/g,"g").replace(/ü/g,"u").replace(/ö/g,"o").replace(/ç/g,"c")
-        .replace(/[^a-z0-9]+/g,"-")
-        .replace(/^-+|-+$/g,"");
+    // ========= Manifest loader (FAST) =========
+    async function loadManifest(folder){
+      // cache-bust بسيط حتى GitHub Pages يجيب آخر نسخة بسرعة
+      const url = `assets/hotels/${folder}/manifest.json?v=${Date.now()}`;
+      const res = await fetch(url, { cache: "no-store" });
+      if(!res.ok) throw new Error("manifest not found");
+      return res.json();
     }
 
-    function hotelFolder(card){
-      return (card.dataset.folder || normalizeFolderName(card.dataset.hotel || "") || "hotel");
+    function buildLocalUrl(folder, filename){
+      return `assets/hotels/${folder}/${filename}`;
     }
 
-    function buildCoverCandidates(folder){
-      return IMG_EXTS.map(ext => `assets/hotels/${folder}/cover.${ext}`);
-    }
-
-    function buildNumberCandidates(folder, n){
-      return IMG_EXTS.map(ext => `assets/hotels/${folder}/${n}.${ext}`);
-    }
-
-    function imageExists(url){
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-        img.src = url + (url.includes("?") ? "&" : "?") + "v=" + Date.now();
-      });
-    }
-
-    async function pickFirstExisting(urls){
-      for(const u of urls){
-        // eslint-disable-next-line no-await-in-loop
-        const ok = await imageExists(u);
-        if(ok) return u;
-      }
-      return "";
-    }
-
-    async function scanGallery(folder){
-      const found = [];
-      let misses = 0;
-
-      for(let i=1; i<=MAX_SCAN; i++){
-        // eslint-disable-next-line no-await-in-loop
-        const imgUrl = await pickFirstExisting(buildNumberCandidates(folder, i));
-        if(imgUrl){
-          found.push(imgUrl);
-          misses = 0;
-        }else{
-          misses++;
-          if(misses >= STOP_AFTER_MISSES) break;
-        }
-      }
-      return found;
+    function getFolderFromCard(card){
+      return (card.dataset.folder || "").trim();
     }
 
     // ========= Map interactions (as-is) =========
@@ -609,10 +564,11 @@
       });
     }
 
-    // ========= Render hotel cards =========
-    function renderHotels(){
+    // ========= Render hotel cards (cover from manifest) =========
+    async function renderHotels(){
       const hotels = document.querySelectorAll('#hotelList .hotel');
-      hotels.forEach((card) => {
+
+      for(const card of hotels){
         const hotel = card.dataset.hotel || '';
         const hotelAr = card.dataset.hotelAr || hotel;
         const city = card.dataset.city || '';
@@ -620,17 +576,23 @@
         const stars = Math.max(1, Math.min(parseInt(card.dataset.stars || "5", 10), 5));
         const starsText = "★".repeat(stars);
         const note = card.dataset.note ? ` (${card.dataset.note})` : "";
-
-        const folder = hotelFolder(card);
-
-        // نبدأ بغلاف محلي… وبعدين fallback عالمي لو ما في شي
-        const coverCandidates = buildCoverCandidates(folder);
+        const folder = getFolderFromCard(card);
         const fallbackCover = "background123.jpg";
 
+        let coverUrl = fallbackCover;
+
+        // حاول نقرأ manifest لنجيب cover بسرعة
+        try{
+          const m = await loadManifest(folder);
+          const coverName = (m.cover || "cover.jpg").trim();
+          coverUrl = buildLocalUrl(folder, coverName);
+        }catch(e){
+          // إذا ما في manifest لهالفندق… خلّيها fallback
+          coverUrl = fallbackCover;
+        }
+
         card.innerHTML = `
-          <img class="hotel-thumb" src="${coverCandidates[0]}" loading="lazy" alt="واجهة ${hotel}"
-               data-folder="${folder}"
-               data-fallbacks='${JSON.stringify([...coverCandidates.slice(1), fallbackCover])}'>
+          <img class="hotel-thumb" src="${coverUrl}" loading="lazy" alt="واجهة ${hotel}">
           <div class="hotel-meta">
             <div class="hotel-headline">
               <div>
@@ -646,7 +608,7 @@
           </div>
           <button class="gallery-btn" type="button">عرض الصور</button>
         `;
-      });
+      }
     }
 
     function filterHotels(){
@@ -699,38 +661,35 @@
 
     async function openLightbox(card){
       activeHotel = card.dataset.hotel || '';
-      const folder = card.querySelector('.hotel-thumb')?.dataset.folder || hotelFolder(card);
+      const folder = getFolderFromCard(card);
+      const fallbackCover = "background123.jpg";
 
       lightbox.classList.add('open');
       lightbox.setAttribute('aria-hidden', 'false');
 
-      // UI loading
+      // loading UI
       lightboxLoading.style.display = '';
       lightboxImage.style.display = 'none';
-      lightboxTitle.textContent = `${activeHotel} — جارِ تجهيز الصور…`;
+      lightboxTitle.textContent = `${activeHotel} — جارِ تحميل الصور…`;
       lightboxStrip.innerHTML = '';
 
-      // غلاف: نستخدم الغلاف اللي على الكرت (إذا موجود) وإلا نختار أول cover موجود
-      const currentCover = card.querySelector('.hotel-thumb')?.currentSrc || card.querySelector('.hotel-thumb')?.src || '';
-      let cover = currentCover;
-      if(!cover || cover.includes("background123.jpg")){
-        cover = await pickFirstExisting(buildCoverCandidates(folder));
+      try{
+        const m = await loadManifest(folder);
+
+        const coverName = (m.cover || "cover.jpg").trim();
+        const coverUrl = buildLocalUrl(folder, coverName);
+
+        const imgs = Array.isArray(m.images) ? m.images : [];
+        const galleryUrls = imgs.map(name => buildLocalUrl(folder, String(name).trim())).filter(Boolean);
+
+        // cover + gallery (بدون تكرار)
+        const merged = [coverUrl, ...galleryUrls.filter(u => u !== coverUrl)];
+        activeImages = merged.length ? merged : [fallbackCover];
+      }catch(e){
+        // إذا صار شي غلط بالـ manifest
+        activeImages = [fallbackCover];
       }
 
-      // صور مرقمة: 1..N (أي عدد)
-      const gallery = await scanGallery(folder);
-
-      // نجمع: cover + gallery (ونتجنب تكرار نفس الرابط)
-      const merged = [];
-      if(cover) merged.push(cover);
-      gallery.forEach((u) => { if(!merged.includes(u)) merged.push(u); });
-
-      // لو ما لقى شي… نعطي fallback بسيط
-      if(!merged.length){
-        merged.push("background123.jpg");
-      }
-
-      activeImages = merged;
       activeIndex = 0;
 
       // show
@@ -750,24 +709,12 @@
     }
 
     // ========= init =========
-    renderHotels();
-    initAreaFilter();
-    initMapInteractions();
-    filterHotels();
-
-    // image fallbacks (cover image)
-    document.getElementById('hotelList').addEventListener('error', (e) => {
-      const img = e.target.closest('.hotel-thumb');
-      if(!img) return;
-
-      const fallbacks = JSON.parse(img.dataset.fallbacks || '[]');
-      const next = fallbacks.shift();
-      img.dataset.fallbacks = JSON.stringify(fallbacks);
-
-      if(next){
-        img.src = next;
-      }
-    }, true);
+    (async function init(){
+      await renderHotels();
+      initAreaFilter();
+      initMapInteractions();
+      filterHotels();
+    })();
 
     // open gallery
     document.getElementById('hotelList').addEventListener('click', (e) => {
