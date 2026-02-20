@@ -204,3 +204,10 @@ footer{
   border-top:1px solid rgba(255,255,255,0.06);
   opacity:0.9;
 }
+/* Fix: منع تلوين الكروت من تدرجات الخلفية */
+.feature{
+  position:relative;
+  background: linear-gradient(165deg, rgba(17,18,23,0.97), rgba(10,11,15,0.97)) !important;
+  border:1px solid rgba(255,255,255,0.08) !important;
+  box-shadow:0 12px 26px rgba(0,0,0,0.28);
+}
