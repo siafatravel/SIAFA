@@ -242,76 +242,162 @@
           </div>
         </div>
       </details>
-    </section>
+    <section class="section booking-pro" id="booking">
+  <div class="booking-head">
+    <div class="booking-badge">SIAFA BOOKING</div>
+    <h2>📝 إرسال طلب حجز</h2>
+    <p class="booking-sub">خطوات بسيطة — وتواصل مباشر عبر واتساب خلال دقائق.</p>
+  </div>
 
-    <!-- BOOKING FORM -->
-    <section class="section" id="booking">
-      <h2>📝 إرسال طلب حجز</h2>
-
-      <form onsubmit="sendWhatsApp(); return false;">
-        <div class="field">
-          <label for="name">الاسم</label>
-          <input type="text" id="name" placeholder="اكتب اسمك" required>
-        </div>
-
-        <div class="field">
-          <label for="country">الدولة</label>
-          <input type="text" id="country" placeholder="مثال: السعودية">
-        </div>
-
-        <div class="field">
-          <label for="checkin">تاريخ الوصول</label>
-          <input type="date" id="checkin">
-          <div class="hint">إذا التاريخ غير محدد، اختر تاريخ تقريبي.</div>
-        </div>
-
-        <div class="field">
-          <label for="nights">عدد الليالي</label>
-          <input type="number" id="nights" placeholder="مثال: 5" min="1">
-        </div>
-
-        <div class="field">
-          <label for="checkout">تاريخ المغادرة (يُحسب تلقائياً)</label>
-          <input type="text" id="checkout" placeholder="سيظهر بعد اختيار تاريخ الوصول وعدد الليالي" readonly>
-        </div>
-
-        <div class="field">
-          <label for="adults">عدد البالغين</label>
-          <input type="number" id="adults" placeholder="مثال: 2" min="1">
-        </div>
-
-        <div class="field">
-          <label for="children">عدد الأطفال (إن وجد)</label>
-          <input type="number" id="children" placeholder="مثال: 1" min="0">
-        </div>
-
-        <div class="field">
-          <label for="childrenAges">أعمار الأطفال (مثال: 3, 7)</label>
-          <input type="text" id="childrenAges" placeholder="مثال: 3, 7">
-        </div>
-
-        <div class="field">
-          <label for="budget">المستوى</label>
-          <select id="budget">
-            <option>اقتصادي</option>
-            <option>متوسط</option>
-            <option>فاخر</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="notes">ملاحظات (اختياري)</label>
-          <input type="text" id="notes" placeholder="مثال: منطقة شيشلي / قريب من تقسيم / إطلالة...">
-        </div>
-
-        <button class="btn" type="submit">إرسال الطلب عبر واتساب</button>
-      </form>
-
-      <div class="small" style="text-align:center;margin-top:14px;">
-        بعد الإرسال، سيقوم أحد ممثلي خدمة العملاء بالتواصل معك وتأكيد التفاصيل.
+  <!-- Graphic steps -->
+  <div class="booking-steps" aria-label="خطوات الحجز">
+    <div class="bstep">
+      <div class="bicon" aria-hidden="true">
+        <!-- Chat / Agent -->
+        <svg viewBox="0 0 120 120" class="bsvg" role="img" aria-label="تواصل">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="rgba(212,175,55,.85)"/>
+              <stop offset="1" stop-color="rgba(255,255,255,.25)"/>
+            </linearGradient>
+          </defs>
+          <path d="M20 28c0-6 5-11 11-11h58c6 0 11 5 11 11v34c0 6-5 11-11 11H55l-17 15v-15H31c-6 0-11-5-11-11V28z"
+                fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.22)" stroke-width="2.5"/>
+          <circle cx="46" cy="46" r="6" fill="url(#g1)"/>
+          <circle cx="60" cy="46" r="6" fill="url(#g1)"/>
+          <circle cx="74" cy="46" r="6" fill="url(#g1)"/>
+          <path class="spark" d="M92 22l4 8 8 4-8 4-4 8-4-8-8-4 8-4 4-8z" fill="rgba(212,175,55,.55)"/>
+        </svg>
       </div>
-    </section>
+      <div class="btxt">
+        <b>1) تواصل سريع</b>
+        <span>بتعبّي الطلب… وبنحكي معك فوراً على واتساب.</span>
+      </div>
+    </div>
 
+    <div class="bstep">
+      <div class="bicon" aria-hidden="true">
+        <!-- Passport / Docs -->
+        <svg viewBox="0 0 120 120" class="bsvg" role="img" aria-label="وثائق">
+          <rect x="28" y="18" width="64" height="84" rx="14"
+                fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.22)" stroke-width="2.5"/>
+          <rect x="42" y="34" width="36" height="8" rx="4" fill="rgba(212,175,55,.35)"/>
+          <circle cx="60" cy="62" r="12" fill="rgba(212,175,55,.18)" stroke="rgba(212,175,55,.45)" stroke-width="2"/>
+          <path d="M48 84h24" stroke="rgba(255,255,255,.35)" stroke-width="3" stroke-linecap="round"/>
+          <path class="pulse" d="M18 70c10-18 18-10 28-2" fill="none" stroke="rgba(212,175,55,.40)" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="btxt">
+        <b>2) تفاصيل بسيطة</b>
+        <span>عدد الأشخاص، التواريخ، والمدينة… وبنرشّح الأفضل.</span>
+      </div>
+    </div>
+
+    <div class="bstep">
+      <div class="bicon" aria-hidden="true">
+        <!-- Voucher -->
+        <svg viewBox="0 0 120 120" class="bsvg" role="img" aria-label="فاتورة">
+          <path d="M32 18h56a8 8 0 0 1 8 8v72l-10-6-10 6-10-6-10 6-10-6-10 6V26a8 8 0 0 1 8-8z"
+                fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.22)" stroke-width="2.5"/>
+          <path d="M44 38h32" stroke="rgba(212,175,55,.45)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M44 52h40" stroke="rgba(255,255,255,.35)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M44 66h36" stroke="rgba(255,255,255,.35)" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="82" cy="78" r="10" fill="rgba(212,175,55,.14)" stroke="rgba(212,175,55,.55)" stroke-width="2"/>
+          <path class="tick" d="M78 78l3 3 6-7" fill="none" stroke="rgba(212,175,55,.9)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="btxt">
+        <b>3) تثبيت + Voucher</b>
+        <span>بعد التثبيت بنرسل لك فاتورة/فاوتشر رسمي.</span>
+      </div>
+    </div>
+
+    <div class="bstep">
+      <div class="bicon" aria-hidden="true">
+        <!-- Hotel / Key -->
+        <svg viewBox="0 0 120 120" class="bsvg" role="img" aria-label="وصول">
+          <rect x="26" y="26" width="44" height="66" rx="10"
+                fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.22)" stroke-width="2.5"/>
+          <path d="M34 38h28M34 50h28M34 62h28" stroke="rgba(255,255,255,.28)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M76 66a12 12 0 1 1 10 10l-6 6h-8v-8l6-6a12 12 0 0 1 -2-2z"
+                fill="rgba(212,175,55,.16)" stroke="rgba(212,175,55,.55)" stroke-width="2.5"/>
+          <circle class="glow" cx="86" cy="66" r="4.5" fill="rgba(212,175,55,.85)"/>
+        </svg>
+      </div>
+      <div class="btxt">
+        <b>4) الدفع عند الوصول</b>
+        <span>الدفع يكون عند وصولك للفندق وبنفس السعر المثبّت.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form card -->
+  <div class="booking-form-wrap">
+    <form onsubmit="sendWhatsApp(); return false;">
+      <div class="field">
+        <label for="name">الاسم</label>
+        <input type="text" id="name" placeholder="اكتب اسمك" required>
+      </div>
+
+      <div class="field">
+        <label for="country">الدولة</label>
+        <input type="text" id="country" placeholder="مثال: السعودية">
+      </div>
+
+      <div class="field">
+        <label for="checkin">تاريخ الوصول</label>
+        <input type="date" id="checkin">
+        <div class="hint">إذا التاريخ غير محدد، اختر تاريخ تقريبي.</div>
+      </div>
+
+      <div class="field">
+        <label for="nights">عدد الليالي</label>
+        <input type="number" id="nights" placeholder="مثال: 5" min="1">
+      </div>
+
+      <div class="field">
+        <label for="checkout">تاريخ المغادرة (يُحسب تلقائياً)</label>
+        <input type="text" id="checkout" placeholder="سيظهر بعد اختيار تاريخ الوصول وعدد الليالي" readonly>
+      </div>
+
+      <div class="field">
+        <label for="adults">عدد البالغين</label>
+        <input type="number" id="adults" placeholder="مثال: 2" min="1">
+      </div>
+
+      <div class="field">
+        <label for="children">عدد الأطفال (إن وجد)</label>
+        <input type="number" id="children" placeholder="مثال: 1" min="0">
+      </div>
+
+      <div class="field">
+        <label for="childrenAges">أعمار الأطفال (مثال: 3, 7)</label>
+        <input type="text" id="childrenAges" placeholder="مثال: 3, 7">
+      </div>
+
+      <div class="field">
+        <label for="budget">المستوى</label>
+        <select id="budget">
+          <option>اقتصادي</option>
+          <option>متوسط</option>
+          <option>فاخر</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="notes">ملاحظات (اختياري)</label>
+        <input type="text" id="notes" placeholder="مثال: منطقة شيشلي / قريب من تقسيم / إطلالة...">
+      </div>
+
+      <button class="btn" type="submit">إرسال الطلب عبر واتساب</button>
+    </form>
+
+    <div class="small booking-foot">
+      بعد الإرسال، سيقوم أحد ممثلي خدمة العملاء بالتواصل معك وتأكيد التفاصيل.
+    </div>
+  </div>
+</section>
+      
     <footer>
       جميع الحقوق محفوظة © 2026 SIAFA TRAVEL
     </footer>
