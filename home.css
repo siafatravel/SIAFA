@@ -1,25 +1,27 @@
 /* =========================
-   HOME.CSS (SIAFA) - Premium UI Layer
-   Applies "Guarantees vibe" across the homepage
+   HOME.CSS (SIAFA) - Premium Layer (Overrides style.css)
+   الهدف: يخلي كل أقسام الصفحة الرئيسية بنفس "فخامة" ستايل الضمانات
    ========================= */
 
-/* --- Small helpers --- */
 :root{
   --gold:#d4af37;
   --gold-soft:rgba(212,175,55,0.16);
+  --gold-glow:rgba(212,175,55,0.22);
   --line:rgba(255,255,255,0.08);
+  --card-border:rgba(255,255,255,0.10);
+  --card-bg-a:rgba(24,26,34,0.95);
+  --card-bg-b:rgba(13,14,19,0.92);
 }
 
-/* Section spacing */
-.section{
-  padding:72px 20px;
-  max-width:1200px;
-  margin:auto;
-  position:relative;
+/* ====== Section layout & dividers ====== */
+.main .section{
+  padding:72px 20px !important;
+  max-width:1200px !important;
+  margin:auto !important;
+  position:relative !important;
 }
 
-/* Elegant divider between sections */
-.section::after{
+.main .section::after{
   content:"";
   position:absolute;
   right:20px;
@@ -27,204 +29,174 @@
   bottom:0;
   height:1px;
   background:linear-gradient(90deg, transparent, var(--line), transparent);
+  opacity:.95;
 }
 
-.section:last-of-type::after{ display:none; }
+.main .section:last-of-type::after{ display:none; }
 
-/* Headings refinement */
-h2{
-  margin:0 0 18px 0;
-  font-size:28px;
+.main h2{
+  margin:0 0 18px 0 !important;
+  font-size:28px !important;
   letter-spacing:.2px;
 }
 
 @media (max-width:768px){
-  .section{ padding:56px 16px; }
-  h2{ font-size:24px; }
+  .main .section{ padding:56px 16px !important; }
+  .main h2{ font-size:24px !important; }
+}
+
+/* ====== Cards grid ====== */
+.main .cards{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr)) !important;
+  gap:18px !important;
 }
 
 /* =========================
-   CARDS GRID
+   PREMIUM FEATURE CARD (Overrides)
    ========================= */
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:18px;
-}
+.main .feature{
+  position:relative !important;
+  overflow:hidden !important;
+  border-radius:18px !important;
 
-/* =========================
-   PREMIUM CARD (same vibe as Guarantees .g-card)
-   This upgrades all .feature blocks sitewide
-   ========================= */
-.feature{
-  position:relative;
-  overflow:hidden;
-  border-radius:18px;
-  padding:22px 20px;
+  padding:22px 20px !important;
+
   background:
-    radial-gradient(600px 260px at 20% 0%, rgba(212,175,55,0.16), transparent 60%),
-    linear-gradient(165deg, rgba(24,26,34,0.95), rgba(13,14,19,0.92));
-  border:1px solid rgba(255,255,255,0.08);
-  box-shadow:0 16px 34px rgba(0,0,0,0.26);
-  line-height:1.9;
-  transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    radial-gradient(700px 320px at 18% 0%, rgba(212,175,55,0.17), transparent 62%) !important,
+    radial-gradient(700px 320px at 88% 10%, rgba(24,119,242,0.10), transparent 60%) !important,
+    linear-gradient(165deg, var(--card-bg-a), var(--card-bg-b)) !important;
+
+  border:1px solid var(--card-border) !important;
+
+  box-shadow:
+    0 16px 34px rgba(0,0,0,0.28) !important,
+    0 0 0 1px rgba(212,175,55,0.06) inset !important;
+
+  line-height:1.95 !important;
+  transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease, filter .25s ease !important;
 }
 
-.feature::before{
+/* لمعان خفيف مثل “Luxury sheen” */
+.main .feature::before{
   content:"";
   position:absolute;
   inset:-2px;
-  background:radial-gradient(420px 220px at 85% 15%, rgba(212,175,55,.22), transparent 60%);
+  pointer-events:none;
+
+  background:
+    radial-gradient(420px 220px at 85% 15%, rgba(212,175,55,.20), transparent 60%),
+    linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.06) 28%, transparent 58%);
+
   opacity:.55;
+  transform:translateX(-18%);
+}
+
+/* خط ذهبي رفيع أعلى الكرت */
+.main .feature::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:2px;
+  background:linear-gradient(90deg, transparent, rgba(212,175,55,0.55), transparent);
+  opacity:.65;
   pointer-events:none;
 }
 
-.feature:hover{
-  transform:translateY(-4px);
-  border-color:rgba(212,175,55,0.28);
-  box-shadow:0 18px 40px rgba(0,0,0,0.34), 0 0 22px rgba(212,175,55,0.10);
+.main .feature:hover{
+  transform:translateY(-5px) !important;
+  border-color:rgba(212,175,55,0.28) !important;
+
+  box-shadow:
+    0 20px 46px rgba(0,0,0,0.36) !important,
+    0 0 26px rgba(212,175,55,0.10) !important,
+    0 0 0 1px rgba(212,175,55,0.10) inset !important;
+
+  filter:saturate(1.04);
 }
 
-.feature b{
-  color:#fff7d6;
+.main .feature b{
+  color:#fff7d6 !important;
 }
 
-/* Small note text */
-.small{
-  font-size:13px;
-  opacity:0.78;
-  margin-top:14px;
-  line-height:1.9;
+/* النصوص داخل الكروت */
+.main .feature p{
+  margin:0 !important;
+  opacity:.92 !important;
 }
 
-/* =========================
-   ABOUT section refinements
-   ========================= */
-.about-wrap{ width:100%; }
+/* ====== small text ====== */
+.main .small{
+  font-size:13px !important;
+  opacity:0.78 !important;
+  margin-top:14px !important;
+  line-height:1.9 !important;
+}
 
-.about-intro{
-  margin:0 0 18px;
+/* ====== About intro premium ====== */
+.main .about-intro{
+  margin:0 0 18px !important;
+  border-radius:16px !important;
+  padding:16px 18px !important;
+
   background:
-    radial-gradient(600px 260px at 20% 0%, rgba(24,119,242,0.10), transparent 62%),
-    linear-gradient(165deg, rgba(20,22,30,0.88), rgba(11,12,16,0.9));
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:16px;
-  padding:16px 18px;
-  line-height:1.95;
+    radial-gradient(760px 340px at 18% 0%, rgba(24,119,242,0.12), transparent 62%) !important,
+    radial-gradient(760px 340px at 88% 12%, rgba(212,175,55,0.14), transparent 60%) !important,
+    linear-gradient(165deg, rgba(20,22,30,0.90), rgba(11,12,16,0.92)) !important;
+
+  border:1px solid rgba(255,255,255,0.10) !important;
+  box-shadow:0 14px 28px rgba(0,0,0,0.20) !important;
+  line-height:1.95 !important;
 }
 
-/* =========================
-   FAQ list: keep premium style but make it readable
-   ========================= */
-.faq-list{
-  display:grid;
-  gap:12px;
+/* ====== FAQ polish ====== */
+.main .faq-list{
+  display:grid !important;
+  gap:12px !important;
 }
 
-.faq-item h3{
-  margin:0 0 8px;
-  font-size:18px;
-  color:#fff7d6;
-  letter-spacing:.2px;
+.main .faq-item h3{
+  margin:0 0 8px !important;
+  font-size:18px !important;
+  color:#fff7d6 !important;
 }
 
-.faq-item p{
-  margin:0;
-  line-height:1.95;
-  opacity:.92;
+.main .faq-item p{
+  margin:0 !important;
+  opacity:.92 !important;
+  line-height:1.95 !important;
 }
 
-/* =========================
-   FORM: premium container
-   ========================= */
-form{
-  display:grid;
-  gap:14px;
-  max-width:620px;
-  margin:auto;
+/* ====== Form premium container ====== */
+.main form{
+  display:grid !important;
+  gap:14px !important;
+  max-width:620px !important;
+  margin:auto !important;
+
+  border-radius:16px !important;
+  padding:20px !important;
+
   background:
-    radial-gradient(650px 300px at 18% 0%, rgba(212,175,55,0.14), transparent 62%),
-    linear-gradient(165deg, rgba(17,18,23,0.86), rgba(10,11,15,0.9));
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:16px;
-  padding:20px;
-  box-shadow:0 18px 30px rgba(0,0,0,0.28);
+    radial-gradient(700px 320px at 18% 0%, rgba(212,175,55,0.14), transparent 62%) !important,
+    linear-gradient(165deg, rgba(17,18,23,0.86), rgba(10,11,15,0.90)) !important;
+
+  border:1px solid rgba(255,255,255,0.10) !important;
+  box-shadow:0 18px 32px rgba(0,0,0,0.28) !important;
 }
 
-.field label{
-  display:block;
-  font-size:14px;
-  opacity:0.92;
-  margin:0 4px 6px 0;
+.main input, .main select{
+  border-radius:10px !important;
+  outline:none !important;
 }
 
-input, select{
-  padding:12px;
-  border:none;
-  border-radius:10px;
-  width:100%;
-  box-sizing:border-box;
-  font-family:'Cairo',sans-serif;
-  outline:none;
+.main input:focus, .main select:focus{
+  box-shadow:0 0 0 3px rgba(212,175,55,0.18) !important;
 }
 
-input{
-  background:#ffffff;
-  color:#111;
-}
-
-select{
-  background:#ffffff;
-  color:#111;
-}
-
-input[type="date"]{ color:#111; }
-
-input:focus, select:focus{
-  box-shadow:0 0 0 3px rgba(212,175,55,0.18);
-}
-
-.hint{
-  font-size:12px;
-  opacity:0.75;
-  margin-top:-6px;
-  line-height:1.8;
-}
-
-/* =========================
-   ACCORDION: subtle premium tune
-   (keeps your existing accordion behavior)
-   ========================= */
-.acc{
-  border-radius:18px;
-  overflow:hidden;
-}
-
-.acc summary{
-  -webkit-tap-highlight-color:transparent;
-  user-select:none;
-}
-
-.acc[open] summary{
-  background:linear-gradient(90deg, var(--gold-soft), rgba(212,175,55,0.05));
-  color:#fff7d6;
-  border-bottom:1px solid rgba(212,175,55,0.18);
-}
-
-/* =========================
-   FLOAT ICONS: keep as-is (just tiny polish)
-   ========================= */
-.floats{
-  gap:12px;
-}
-
-.float-btn{
-  border-radius:16px;
-}
-
-/* =========================
-   FOOTER: consistent with premium theme
-   ========================= */
+/* ====== Footer stays consistent ====== */
 footer{
   text-align:center;
   padding:46px 20px;
