@@ -1,16 +1,19 @@
 /* =========================
    HOME.CSS (SIAFA) - Premium Layer (Overrides style.css)
-   الهدف: يخلي كل أقسام الصفحة الرئيسية بنفس "فخامة" ستايل الضمانات
+   نسخة مُصححة: بدون تعارضات + بدون "نص دهبي/نص كحلي" على الموبايل
    ========================= */
 
 :root{
   --gold:#d4af37;
-  --gold-soft:rgba(212,175,55,0.16);
-  --gold-glow:rgba(212,175,55,0.22);
+  --gold-soft:rgba(212,175,55,0.14);
+  --gold-glow:rgba(212,175,55,0.18);
+
   --line:rgba(255,255,255,0.08);
   --card-border:rgba(255,255,255,0.10);
-  --card-bg-a:rgba(24,26,34,0.95);
-  --card-bg-b:rgba(13,14,19,0.92);
+
+  /* خلفية كروت ثابتة (بدون تدرج يقسم الشكل) */
+  --card-solid:rgba(14,15,20,0.94);
+  --card-solid-2:rgba(10,11,15,0.94);
 }
 
 /* ====== Section layout & dividers ====== */
@@ -53,43 +56,38 @@
 }
 
 /* =========================
-   PREMIUM FEATURE CARD (Overrides)
+   PREMIUM FEATURE CARD (Fixed)
    ========================= */
 .main .feature{
   position:relative !important;
   overflow:hidden !important;
   border-radius:18px !important;
-
   padding:22px 20px !important;
 
-  background:
-    radial-gradient(700px 320px at 18% 0%, rgba(212,175,55,0.17), transparent 62%) !important,
-    radial-gradient(700px 320px at 88% 10%, rgba(24,119,242,0.10), transparent 60%) !important,
-    linear-gradient(165deg, var(--card-bg-a), var(--card-bg-b)) !important;
+  /* ✅ أهم تعديل: خلفية ثابتة بدون تدرجات واسعة تسبب "نص دهبي/نص كحلي" */
+  background: linear-gradient(165deg, var(--card-solid), var(--card-solid-2)) !important;
 
   border:1px solid var(--card-border) !important;
 
   box-shadow:
-    0 16px 34px rgba(0,0,0,0.28) !important,
-    0 0 0 1px rgba(212,175,55,0.06) inset !important;
+    0 14px 28px rgba(0,0,0,0.28) !important,
+    0 0 0 1px rgba(255,255,255,0.03) inset !important;
 
   line-height:1.95 !important;
-  transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease, filter .25s ease !important;
+  transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease !important;
 }
 
-/* لمعان خفيف مثل “Luxury sheen” */
+/* لمعة ذهبية "ناعمة" (بدون حركة/انزياح تسبب تقسيم) */
 .main .feature::before{
   content:"";
   position:absolute;
-  inset:-2px;
+  inset:-1px;
   pointer-events:none;
 
   background:
-    radial-gradient(420px 220px at 85% 15%, rgba(212,175,55,.20), transparent 60%),
-    linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.06) 28%, transparent 58%);
-
-  opacity:.55;
-  transform:translateX(-18%);
+    radial-gradient(520px 260px at 35% 5%, rgba(212,175,55,0.14), transparent 60%),
+    radial-gradient(520px 260px at 85% 20%, rgba(255,255,255,0.05), transparent 62%);
+  opacity:.65;
 }
 
 /* خط ذهبي رفيع أعلى الكرت */
@@ -100,28 +98,21 @@
   left:0;
   right:0;
   height:2px;
-  background:linear-gradient(90deg, transparent, rgba(212,175,55,0.55), transparent);
-  opacity:.65;
+  background:linear-gradient(90deg, transparent, rgba(212,175,55,0.45), transparent);
+  opacity:.55;
   pointer-events:none;
 }
 
 .main .feature:hover{
-  transform:translateY(-5px) !important;
-  border-color:rgba(212,175,55,0.28) !important;
-
+  transform:translateY(-4px) !important;
+  border-color:rgba(212,175,55,0.22) !important;
   box-shadow:
-    0 20px 46px rgba(0,0,0,0.36) !important,
-    0 0 26px rgba(212,175,55,0.10) !important,
-    0 0 0 1px rgba(212,175,55,0.10) inset !important;
-
-  filter:saturate(1.04);
+    0 18px 40px rgba(0,0,0,0.34) !important,
+    0 0 18px rgba(212,175,55,0.10) !important;
 }
 
-.main .feature b{
-  color:#fff7d6 !important;
-}
+.main .feature b{ color:#fff7d6 !important; }
 
-/* النصوص داخل الكروت */
 .main .feature p{
   margin:0 !important;
   opacity:.92 !important;
@@ -141,14 +132,23 @@
   border-radius:16px !important;
   padding:16px 18px !important;
 
-  background:
-    radial-gradient(760px 340px at 18% 0%, rgba(24,119,242,0.12), transparent 62%) !important,
-    radial-gradient(760px 340px at 88% 12%, rgba(212,175,55,0.14), transparent 60%) !important,
-    linear-gradient(165deg, rgba(20,22,30,0.90), rgba(11,12,16,0.92)) !important;
+  /* ثابت وناعم */
+  background: linear-gradient(165deg, rgba(14,15,20,0.92), rgba(10,11,15,0.92)) !important;
 
   border:1px solid rgba(255,255,255,0.10) !important;
   box-shadow:0 14px 28px rgba(0,0,0,0.20) !important;
   line-height:1.95 !important;
+  position:relative !important;
+  overflow:hidden !important;
+}
+
+.main .about-intro::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  pointer-events:none;
+  background: radial-gradient(620px 260px at 35% 0%, rgba(212,175,55,0.12), transparent 62%);
+  opacity:.7;
 }
 
 /* ====== FAQ polish ====== */
@@ -169,6 +169,28 @@
   line-height:1.95 !important;
 }
 
+/* =========================
+   ACCORDION FIX (مهم للموبايل)
+   الهدف: الأكورديون ما يشرب ألوان الخلفية
+   ========================= */
+.main .acc{
+  background: rgba(14,15,20,0.94) !important;
+  border:1px solid rgba(255,255,255,0.10) !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  box-shadow:0 16px 34px rgba(0,0,0,0.26) !important;
+}
+
+.main .acc summary{
+  background: rgba(14,15,20,0.94) !important;
+}
+
+.main .acc[open] summary{
+  background: rgba(14,15,20,0.97) !important;
+  border-bottom:1px solid rgba(212,175,55,0.18) !important;
+  box-shadow: inset 0 1px 0 rgba(212,175,55,0.12) !important;
+}
+
 /* ====== Form premium container ====== */
 .main form{
   display:grid !important;
@@ -179,12 +201,21 @@
   border-radius:16px !important;
   padding:20px !important;
 
-  background:
-    radial-gradient(700px 320px at 18% 0%, rgba(212,175,55,0.14), transparent 62%) !important,
-    linear-gradient(165deg, rgba(17,18,23,0.86), rgba(10,11,15,0.90)) !important;
-
+  background: linear-gradient(165deg, rgba(14,15,20,0.92), rgba(10,11,15,0.92)) !important;
   border:1px solid rgba(255,255,255,0.10) !important;
   box-shadow:0 18px 32px rgba(0,0,0,0.28) !important;
+
+  position:relative !important;
+  overflow:hidden !important;
+}
+
+.main form::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  pointer-events:none;
+  background: radial-gradient(720px 320px at 30% 0%, rgba(212,175,55,0.12), transparent 62%);
+  opacity:.7;
 }
 
 .main input, .main select{
@@ -203,46 +234,4 @@ footer{
   background:#0b0c10;
   border-top:1px solid rgba(255,255,255,0.06);
   opacity:0.9;
-}
-/* Fix: منع تلوين الكروت من تدرجات الخلفية */
-.feature{
-  position:relative;
-  background: linear-gradient(165deg, rgba(17,18,23,0.97), rgba(10,11,15,0.97)) !important;
-  border:1px solid rgba(255,255,255,0.08) !important;
-  box-shadow:0 12px 26px rgba(0,0,0,0.28);
-}
-/* =========================
-   FIX: منع تلوين/تقطيع الخلفية داخل الأقسام (موبايل خصوصاً)
-   ========================= */
-
-/* خفف تدرجات الخلفية اللي تحت الأقسام */
-.main::before{
-  opacity:0.35 !important;
-  filter: blur(10px) !important;
-}
-
-/* خلي الأكورديون نفسه معتم (ما يشرب ذهبي/أزرق من الخلفية) */
-.acc{
-  background: rgba(14,15,20,0.94) !important;
-  border: 1px solid rgba(255,255,255,0.10) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-/* رأس الأكورديون (الـ summary) يكون لون واحد نظيف */
-.acc summary{
-  background: rgba(14,15,20,0.94) !important;
-}
-
-/* عند الفتح: لمعة ذهبية خفيفة بدون تدرج يقسم الشكل */
-.acc[open] summary{
-  background: rgba(14,15,20,0.97) !important;
-  border-bottom: 1px solid rgba(212,175,55,0.18) !important;
-  box-shadow: inset 0 1px 0 rgba(212,175,55,0.12) !important;
-}
-
-/* كروت المحتوى داخل الأقسام */
-.feature{
-  background: rgba(14,15,20,0.94) !important;
-  border: 1px solid rgba(255,255,255,0.10) !important;
 }
