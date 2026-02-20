@@ -1,67 +1,76 @@
 /* =========================
-   GUARANTEES SECTION (SIAFA)
+   HOME.CSS (SIAFA) - Premium UI Layer
+   Applies "Guarantees vibe" across the homepage
    ========================= */
-.guarantees{
-  padding-top:54px;
-  padding-bottom:54px;
+
+/* --- Small helpers --- */
+:root{
+  --gold:#d4af37;
+  --gold-soft:rgba(212,175,55,0.16);
+  --line:rgba(255,255,255,0.08);
 }
 
-.guarantees .guarantees-head{
-  text-align:center;
-  max-width:860px;
-  margin:0 auto 22px;
+/* Section spacing */
+.section{
+  padding:72px 20px;
+  max-width:1200px;
+  margin:auto;
+  position:relative;
 }
 
-.guarantees .g-badge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  padding:8px 14px;
-  border-radius:999px;
-  font-weight:700;
-  letter-spacing:0.5px;
-  font-size:12px;
-  color:#fff7d6;
-  background:linear-gradient(90deg, rgba(212,175,55,.18), rgba(255,255,255,.06));
-  border:1px solid rgba(212,175,55,.22);
-  box-shadow:0 10px 22px rgba(0,0,0,.22);
-  margin-bottom:12px;
+/* Elegant divider between sections */
+.section::after{
+  content:"";
+  position:absolute;
+  right:20px;
+  left:20px;
+  bottom:0;
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--line), transparent);
 }
 
-.guarantees .g-title{
-  margin:0 0 10px 0;
-  font-size:30px;
-  color:#fff;
+.section:last-of-type::after{ display:none; }
+
+/* Headings refinement */
+h2{
+  margin:0 0 18px 0;
+  font-size:28px;
+  letter-spacing:.2px;
 }
 
-.guarantees .g-sub{
-  margin:0;
-  opacity:.9;
-  line-height:1.9;
+@media (max-width:768px){
+  .section{ padding:56px 16px; }
+  h2{ font-size:24px; }
 }
 
-.guarantees .g-grid{
+/* =========================
+   CARDS GRID
+   ========================= */
+.cards{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:18px;
-  margin-top:22px;
 }
 
-.guarantees .g-card{
+/* =========================
+   PREMIUM CARD (same vibe as Guarantees .g-card)
+   This upgrades all .feature blocks sitewide
+   ========================= */
+.feature{
   position:relative;
   overflow:hidden;
   border-radius:18px;
-  padding:20px 18px 18px;
+  padding:22px 20px;
   background:
     radial-gradient(600px 260px at 20% 0%, rgba(212,175,55,0.16), transparent 60%),
     linear-gradient(165deg, rgba(24,26,34,0.95), rgba(13,14,19,0.92));
   border:1px solid rgba(255,255,255,0.08);
   box-shadow:0 16px 34px rgba(0,0,0,0.26);
+  line-height:1.9;
   transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
 }
 
-.guarantees .g-card::before{
+.feature::before{
   content:"";
   position:absolute;
   inset:-2px;
@@ -70,69 +79,156 @@
   pointer-events:none;
 }
 
-.guarantees .g-card:hover{
+.feature:hover{
   transform:translateY(-4px);
   border-color:rgba(212,175,55,0.28);
   box-shadow:0 18px 40px rgba(0,0,0,0.34), 0 0 22px rgba(212,175,55,0.10);
 }
 
-.guarantees .g-icon{
-  width:46px;
-  height:46px;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06)),
-    radial-gradient(120% 120% at 20% 12%, rgba(212,175,55,0.22), rgba(8,9,13,0.78));
-  border:1px solid rgba(255,255,255,0.18);
-  box-shadow:0 10px 22px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.22);
-  margin-bottom:12px;
-}
-
-.guarantees .g-card h3{
-  margin:0 0 8px 0;
-  font-size:18px;
+.feature b{
   color:#fff7d6;
 }
 
-.guarantees .g-card p{
-  margin:0;
-  opacity:.92;
-  line-height:1.9;
-  font-size:14px;
-}
-
-.guarantees .g-footer{
-  margin-top:18px;
-  text-align:center;
-}
-
-.guarantees .g-line{
-  height:1px;
-  max-width:760px;
-  margin:18px auto 16px;
-  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-}
-
-.guarantees .g-actions{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:10px;
-}
-
-.guarantees .g-note{
+/* Small note text */
+.small{
   font-size:13px;
-  opacity:.78;
+  opacity:0.78;
+  margin-top:14px;
   line-height:1.9;
 }
 
-/* ضمانات: تحسين العنوان على الموبايل */
-@media (max-width:768px){
-  .guarantees .g-title{ font-size:24px; }
-  .guarantees .g-grid{ gap:14px; }
+/* =========================
+   ABOUT section refinements
+   ========================= */
+.about-wrap{ width:100%; }
+
+.about-intro{
+  margin:0 0 18px;
+  background:
+    radial-gradient(600px 260px at 20% 0%, rgba(24,119,242,0.10), transparent 62%),
+    linear-gradient(165deg, rgba(20,22,30,0.88), rgba(11,12,16,0.9));
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;
+  padding:16px 18px;
+  line-height:1.95;
+}
+
+/* =========================
+   FAQ list: keep premium style but make it readable
+   ========================= */
+.faq-list{
+  display:grid;
+  gap:12px;
+}
+
+.faq-item h3{
+  margin:0 0 8px;
+  font-size:18px;
+  color:#fff7d6;
+  letter-spacing:.2px;
+}
+
+.faq-item p{
+  margin:0;
+  line-height:1.95;
+  opacity:.92;
+}
+
+/* =========================
+   FORM: premium container
+   ========================= */
+form{
+  display:grid;
+  gap:14px;
+  max-width:620px;
+  margin:auto;
+  background:
+    radial-gradient(650px 300px at 18% 0%, rgba(212,175,55,0.14), transparent 62%),
+    linear-gradient(165deg, rgba(17,18,23,0.86), rgba(10,11,15,0.9));
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;
+  padding:20px;
+  box-shadow:0 18px 30px rgba(0,0,0,0.28);
+}
+
+.field label{
+  display:block;
+  font-size:14px;
+  opacity:0.92;
+  margin:0 4px 6px 0;
+}
+
+input, select{
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  width:100%;
+  box-sizing:border-box;
+  font-family:'Cairo',sans-serif;
+  outline:none;
+}
+
+input{
+  background:#ffffff;
+  color:#111;
+}
+
+select{
+  background:#ffffff;
+  color:#111;
+}
+
+input[type="date"]{ color:#111; }
+
+input:focus, select:focus{
+  box-shadow:0 0 0 3px rgba(212,175,55,0.18);
+}
+
+.hint{
+  font-size:12px;
+  opacity:0.75;
+  margin-top:-6px;
+  line-height:1.8;
+}
+
+/* =========================
+   ACCORDION: subtle premium tune
+   (keeps your existing accordion behavior)
+   ========================= */
+.acc{
+  border-radius:18px;
+  overflow:hidden;
+}
+
+.acc summary{
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+
+.acc[open] summary{
+  background:linear-gradient(90deg, var(--gold-soft), rgba(212,175,55,0.05));
+  color:#fff7d6;
+  border-bottom:1px solid rgba(212,175,55,0.18);
+}
+
+/* =========================
+   FLOAT ICONS: keep as-is (just tiny polish)
+   ========================= */
+.floats{
+  gap:12px;
+}
+
+.float-btn{
+  border-radius:16px;
+}
+
+/* =========================
+   FOOTER: consistent with premium theme
+   ========================= */
+footer{
+  text-align:center;
+  padding:46px 20px;
+  background:#0b0c10;
+  border-top:1px solid rgba(255,255,255,0.06);
+  opacity:0.9;
 }
