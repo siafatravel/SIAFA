@@ -1,6 +1,7 @@
 /* =========================
    HOME.CSS (SIAFA) - Premium Layer (Overrides style.css)
-   نسخة مُصححة + مدموج معها ستايل Booking SVG (بدون تعارضات)
+   Clean + Mobile-safe (No half-gold/half-navy)
+   Includes: Booking SVG styles
    ========================= */
 
 :root{
@@ -11,12 +12,25 @@
   --line:rgba(255,255,255,0.08);
   --card-border:rgba(255,255,255,0.10);
 
-  /* خلفية كروت ثابتة (بدون تدرج يقسم الشكل) */
+  /* Solid card bases (prevents weird tint split on mobile) */
   --card-solid:rgba(14,15,20,0.94);
   --card-solid-2:rgba(10,11,15,0.94);
 }
 
-/* ====== Section layout & dividers ====== */
+/* =========================
+   Global fixes for mobile tint
+   ========================= */
+
+/* خفف تدرجات الخلفية اللي تحت الأقسام (حتى ما تلون الكروت) */
+.main::before{
+  opacity:0.32 !important;
+  filter:blur(10px) !important;
+}
+
+/* =========================
+   Section layout & dividers
+   ========================= */
+
 .main .section{
   padding:72px 20px !important;
   max-width:1200px !important;
@@ -48,7 +62,10 @@
   .main h2{ font-size:24px !important; }
 }
 
-/* ====== Cards grid ====== */
+/* =========================
+   Cards grid
+   ========================= */
+
 .main .cards{
   display:grid !important;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr)) !important;
@@ -56,17 +73,18 @@
 }
 
 /* =========================
-   PREMIUM FEATURE CARD (Fixed)
+   Premium Feature Card (FIXED)
+   - solid background
+   - correct z-index layering (prevents half tint)
    ========================= */
+
 .main .feature{
   position:relative !important;
   overflow:hidden !important;
   border-radius:18px !important;
   padding:22px 20px !important;
 
-  /* ✅ خلفية ثابتة */
-  background: linear-gradient(165deg, var(--card-solid), var(--card-solid-2)) !important;
-
+  background:linear-gradient(165deg, var(--card-solid), var(--card-solid-2)) !important;
   border:1px solid var(--card-border) !important;
 
   box-shadow:
@@ -77,16 +95,24 @@
   transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease !important;
 }
 
-/* لمعة ذهبية ناعمة */
+/* كل المحتوى فوق اللمعة */
+.main .feature > *{
+  position:relative;
+  z-index:2;
+}
+
+/* لمعة ذهبية ناعمة "خلف" النص */
 .main .feature::before{
   content:"";
   position:absolute;
   inset:-1px;
   pointer-events:none;
+  z-index:1;
+
   background:
-    radial-gradient(520px 260px at 35% 5%, rgba(212,175,55,0.14), transparent 60%),
-    radial-gradient(520px 260px at 85% 20%, rgba(255,255,255,0.05), transparent 62%);
-  opacity:.65;
+    radial-gradient(520px 260px at 35% 5%, rgba(212,175,55,0.12), transparent 60%),
+    radial-gradient(520px 260px at 85% 20%, rgba(255,255,255,0.04), transparent 62%);
+  opacity:.70;
 }
 
 /* خط ذهبي رفيع أعلى الكرت */
@@ -97,7 +123,8 @@
   left:0;
   right:0;
   height:2px;
-  background:linear-gradient(90deg, transparent, rgba(212,175,55,0.45), transparent);
+  z-index:1;
+  background:linear-gradient(90deg, transparent, rgba(212,175,55,0.42), transparent);
   opacity:.55;
   pointer-events:none;
 }
@@ -117,7 +144,7 @@
   opacity:.92 !important;
 }
 
-/* ====== small text ====== */
+/* small text */
 .main .small{
   font-size:13px !important;
   opacity:0.78 !important;
@@ -125,31 +152,40 @@
   line-height:1.9 !important;
 }
 
-/* ====== About intro premium ====== */
+/* =========================
+   About intro premium
+   ========================= */
+
 .main .about-intro{
   margin:0 0 18px !important;
   border-radius:16px !important;
   padding:16px 18px !important;
 
-  background: linear-gradient(165deg, rgba(14,15,20,0.92), rgba(10,11,15,0.92)) !important;
-
+  background:linear-gradient(165deg, rgba(14,15,20,0.92), rgba(10,11,15,0.92)) !important;
   border:1px solid rgba(255,255,255,0.10) !important;
   box-shadow:0 14px 28px rgba(0,0,0,0.20) !important;
   line-height:1.95 !important;
+
   position:relative !important;
   overflow:hidden !important;
 }
+
+.main .about-intro > *{ position:relative; z-index:2; }
 
 .main .about-intro::before{
   content:"";
   position:absolute;
   inset:-1px;
   pointer-events:none;
-  background: radial-gradient(620px 260px at 35% 0%, rgba(212,175,55,0.12), transparent 62%);
-  opacity:.7;
+  z-index:1;
+  background:radial-gradient(620px 260px at 35% 0%, rgba(212,175,55,0.10), transparent 62%);
+  opacity:.75;
 }
 
-/* ====== FAQ polish ====== */
+/* =========================
+   FAQ polish
+   ========================= */
+
 .main .faq-list{
   display:grid !important;
   gap:12px !important;
@@ -168,10 +204,13 @@
 }
 
 /* =========================
-   ACCORDION FIX (مهم للموبايل)
+   ACCORDION FIX (Mobile)
+   - remove backdrop filter
+   - keep clean single-tone header
    ========================= */
+
 .main .acc{
-  background: rgba(14,15,20,0.94) !important;
+  background:rgba(14,15,20,0.94) !important;
   border:1px solid rgba(255,255,255,0.10) !important;
   backdrop-filter:none !important;
   -webkit-backdrop-filter:none !important;
@@ -179,16 +218,19 @@
 }
 
 .main .acc summary{
-  background: rgba(14,15,20,0.94) !important;
+  background:rgba(14,15,20,0.94) !important;
 }
 
 .main .acc[open] summary{
-  background: rgba(14,15,20,0.97) !important;
+  background:rgba(14,15,20,0.97) !important;
   border-bottom:1px solid rgba(212,175,55,0.18) !important;
-  box-shadow: inset 0 1px 0 rgba(212,175,55,0.12) !important;
+  box-shadow:inset 0 1px 0 rgba(212,175,55,0.10) !important;
 }
 
-/* ====== Form premium container ====== */
+/* =========================
+   Form premium container
+   ========================= */
+
 .main form{
   display:grid !important;
   gap:14px !important;
@@ -198,7 +240,7 @@
   border-radius:16px !important;
   padding:20px !important;
 
-  background: linear-gradient(165deg, rgba(14,15,20,0.92), rgba(10,11,15,0.92)) !important;
+  background:linear-gradient(165deg, rgba(14,15,20,0.92), rgba(10,11,15,0.92)) !important;
   border:1px solid rgba(255,255,255,0.10) !important;
   box-shadow:0 18px 32px rgba(0,0,0,0.28) !important;
 
@@ -206,13 +248,16 @@
   overflow:hidden !important;
 }
 
+.main form > *{ position:relative; z-index:2; }
+
 .main form::before{
   content:"";
   position:absolute;
   inset:-1px;
   pointer-events:none;
-  background: radial-gradient(720px 320px at 30% 0%, rgba(212,175,55,0.12), transparent 62%);
-  opacity:.7;
+  z-index:1;
+  background:radial-gradient(720px 320px at 30% 0%, rgba(212,175,55,0.10), transparent 62%);
+  opacity:.75;
 }
 
 .main input, .main select{
@@ -226,7 +271,6 @@
 
 /* =========================
    BOOKING-PRO (SVG Graphics + Light Motion)
-   آمن للموبايل + بدون تلوين نصف/نصف
    ========================= */
 
 .booking-pro .booking-head{
@@ -257,7 +301,6 @@
   line-height:1.9;
 }
 
-/* شبكة الخطوات */
 .booking-pro .booking-steps{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
@@ -266,28 +309,34 @@
   margin-bottom:18px;
 }
 
-/* كرت الخطوة */
 .booking-pro .bstep{
   display:flex;
   gap:12px;
   align-items:flex-start;
+
   padding:18px 16px;
   border-radius:18px;
-  background: linear-gradient(165deg, var(--card-solid), var(--card-solid-2));
+
+  background:linear-gradient(165deg, var(--card-solid), var(--card-solid-2));
   border:1px solid rgba(255,255,255,0.10);
   box-shadow:0 14px 28px rgba(0,0,0,0.22);
+
   position:relative;
   overflow:hidden;
   transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease;
 }
+
+/* content above sheen */
+.booking-pro .bstep > *{ position:relative; z-index:2; }
 
 .booking-pro .bstep::before{
   content:"";
   position:absolute;
   inset:-2px;
   pointer-events:none;
-  background:radial-gradient(520px 220px at 80% 10%, rgba(212,175,55,.14), transparent 60%);
-  opacity:.7;
+  z-index:1;
+  background:radial-gradient(520px 220px at 80% 10%, rgba(212,175,55,.12), transparent 60%);
+  opacity:.78;
 }
 
 .booking-pro .bstep:hover{
@@ -296,15 +345,16 @@
   box-shadow:0 18px 34px rgba(0,0,0,0.28), 0 0 18px rgba(212,175,55,0.08);
 }
 
-/* أيقونة */
 .booking-pro .bicon{
   width:58px;
   height:58px;
   border-radius:16px;
+
   background:
     linear-gradient(145deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05)),
-    radial-gradient(120% 120% at 20% 12%, rgba(212,175,55,0.18), rgba(8,9,13,0.72));
+    radial-gradient(120% 120% at 20% 12%, rgba(212,175,55,0.16), rgba(8,9,13,0.72));
   border:1px solid rgba(255,255,255,0.18);
+
   box-shadow:0 12px 24px rgba(0,0,0,0.26), inset 0 1px 0 rgba(255,255,255,0.20);
   display:flex;
   align-items:center;
@@ -331,63 +381,28 @@
   font-size:14px;
 }
 
-/* فورم وذيل */
-.booking-pro .booking-form-wrap{
-  margin-top:6px;
-}
+.booking-pro .booking-form-wrap{ margin-top:6px; }
+.booking-pro .booking-foot{ text-align:center; margin-top:14px; }
 
-.booking-pro .booking-foot{
-  text-align:center;
-  margin-top:14px;
-}
+/* Animations (subtle) */
+@keyframes siafaFloat{ 0%,100%{ transform:translateY(0); opacity:.95; } 50%{ transform:translateY(-3px); opacity:1; } }
+@keyframes siafaPulse{ 0%,100%{ opacity:.35; transform:translateX(0); } 50%{ opacity:.75; transform:translateX(6px); } }
+@keyframes siafaGlow{ 0%,100%{ opacity:.45; } 50%{ opacity:.95; } }
+@keyframes tickDraw{ 0%{ stroke-dashoffset:18; opacity:.6; } 35%{ stroke-dashoffset:0; opacity:1; } 100%{ stroke-dashoffset:0; opacity:.85; } }
 
-/* Animations (خفيفة وراقية) */
-@keyframes siafaFloat{
-  0%,100%{ transform:translateY(0); opacity:.95; }
-  50%{ transform:translateY(-3px); opacity:1; }
-}
-@keyframes siafaPulse{
-  0%,100%{ opacity:.35; transform:translateX(0); }
-  50%{ opacity:.75; transform:translateX(6px); }
-}
-@keyframes siafaGlow{
-  0%,100%{ opacity:.45; }
-  50%{ opacity:.95; }
-}
-@keyframes tickDraw{
-  0%{ stroke-dashoffset:18; opacity:.6; }
-  35%{ stroke-dashoffset:0; opacity:1; }
-  100%{ stroke-dashoffset:0; opacity:.85; }
-}
+.booking-pro .bsvg .spark{ animation:siafaFloat 2.8s ease-in-out infinite; transform-origin:center; }
+.booking-pro .bsvg .pulse{ animation:siafaPulse 2.6s ease-in-out infinite; }
+.booking-pro .bsvg .tick{ stroke-dasharray:18; stroke-dashoffset:18; animation:tickDraw 2.2s ease-in-out infinite; }
+.booking-pro .bsvg .glow{ animation:siafaGlow 2.2s ease-in-out infinite; }
 
-/* نطبّق الحركة فقط على العناصر المسمّاة */
-.booking-pro .bsvg .spark{
-  animation:siafaFloat 2.8s ease-in-out infinite;
-  transform-origin:center;
-}
-.booking-pro .bsvg .pulse{
-  animation:siafaPulse 2.6s ease-in-out infinite;
-}
-.booking-pro .bsvg .tick{
-  stroke-dasharray:18;
-  stroke-dashoffset:18;
-  animation:tickDraw 2.2s ease-in-out infinite;
-}
-.booking-pro .bsvg .glow{
-  animation:siafaGlow 2.2s ease-in-out infinite;
-}
-
-/* تقليل الحركة للي عنده تفضيل */
 @media (prefers-reduced-motion: reduce){
   .booking-pro .bsvg .spark,
   .booking-pro .bsvg .pulse,
   .booking-pro .bsvg .tick,
-  .booking-pro .bsvg .glow{
-    animation:none !important;
-  }
+  .booking-pro .bsvg .glow{ animation:none !important; }
 }
 
-/* ====== Footer stays consistent ====== */
+/* Footer (leave as is; style.css can also define it) */
 footer{
   text-align:center;
   padding:46px 20px;
