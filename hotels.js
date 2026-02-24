@@ -1,18 +1,18 @@
-function imageFromQuery(query, width=1200, height=760){
-  return `https://source.unsplash.com/${width}x${height}/?${encodeURIComponent(query)}`;
+function imageFromSeed(seed, width=1200, height=760){
+  return `https://picsum.photos/seed/${encodeURIComponent(seed)}/${width}/${height}`;
 }
 
 function defaultGalleryImages(hotelName, cover){
   return [
     cover,
-    imageFromQuery(`${hotelName} exterior building istanbul`, 1200, 760),
-    imageFromQuery(`${hotelName} standard double room`, 1200, 760),
-    imageFromQuery(`${hotelName} breakfast buffet`, 1200, 760),
-    imageFromQuery(`${hotelName} bathroom`, 1200, 760),
-    imageFromQuery(`${hotelName} lobby`, 1200, 760),
-    imageFromQuery(`${hotelName} pool`, 1200, 760),
-    imageFromQuery(`${hotelName} sauna`, 1200, 760),
-    imageFromQuery(`${hotelName} steam room`, 1200, 760)
+    imageFromSeed(`${hotelName}-gallery-1`, 1200, 760),
+    imageFromSeed(`${hotelName}-gallery-2`, 1200, 760),
+    imageFromSeed(`${hotelName}-gallery-3`, 1200, 760),
+    imageFromSeed(`${hotelName}-gallery-4`, 1200, 760),
+    imageFromSeed(`${hotelName}-gallery-5`, 1200, 760),
+    imageFromSeed(`${hotelName}-gallery-6`, 1200, 760),
+    imageFromSeed(`${hotelName}-gallery-7`, 1200, 760),
+    imageFromSeed(`${hotelName}-gallery-8`, 1200, 760)
   ];
 }
 
@@ -149,7 +149,7 @@ function renderHotels(){
     const stars = Math.max(1, Math.min(parseInt(card.dataset.stars || "5", 10), 5));
     const starsText = "★".repeat(stars);
     const note = card.dataset.note ? ` (${card.dataset.note})` : "";
-    const fallbackCover = imageFromQuery(`${hotel} exterior building istanbul`, 1200, 760);
+    const fallbackCover = imageFromSeed(`${hotel}-cover`, 1200, 760);
     const overrideCandidates = hotelCoverOverrides[hotel] || [];
     const cover = Array.isArray(overrideCandidates) ? (overrideCandidates[0] || fallbackCover) : overrideCandidates;
     const fallbackChain = [...overrideCandidates.slice(1), fallbackCover];
