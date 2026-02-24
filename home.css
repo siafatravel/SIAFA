@@ -402,7 +402,10 @@
   .booking-pro .bsvg .glow{ animation:none !important; }
 }
 
-/* Footer (leave as is; style.css can also define it) */
+/* =========================
+   Footer
+   ========================= */
+
 footer{
   text-align:center;
   padding:46px 20px;
