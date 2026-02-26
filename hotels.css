@@ -3,6 +3,7 @@
   --panel:#111217;
   --gold:#d4af37;
 }
+
 body{
   margin:0;
   font-family:'Cairo',sans-serif;
@@ -10,6 +11,7 @@ body{
   color:#fff;
   direction:rtl;
 }
+
 .header{
   padding:34px 18px;
   text-align:center;
@@ -24,6 +26,7 @@ body{
   margin:auto;
   padding:28px 18px 70px;
 }
+
 .search{
   display:flex;
   gap:12px;
@@ -48,6 +51,40 @@ body{
   min-width:150px;
 }
 
+/* ===== Brand marquee (optional) ===== */
+.brand-marquee{
+  margin:0 0 18px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  background:rgba(17,18,23,.9);
+}
+.brand-track{
+  display:flex;
+  gap:10px;
+  width:max-content;
+  padding:10px;
+  animation: brandScroll 42s linear infinite;
+}
+.brand-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid rgba(212,175,55,.35);
+  background:rgba(255,255,255,.04);
+  color:#f1d37d;
+  font-weight:700;
+  font-size:13px;
+  white-space:nowrap;
+}
+@keyframes brandScroll{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
+}
+
+/* ===== Map ===== */
 .area-map{
   margin:0 0 16px;
   background:rgba(17,18,23,0.95);
@@ -67,6 +104,7 @@ body{
   padding:8px 12px;
 }
 .map-chip input{ accent-color:#d4af37; }
+
 .map-wrap{
   position:relative;
   border-radius:14px;
@@ -83,6 +121,7 @@ body{
 .metro-line{ stroke:#e9558f; stroke-width:5; fill:none; pointer-events:none; }
 .tram-line{ stroke:#2dcf96; stroke-width:5; fill:none; pointer-events:none; }
 .zone-bubble{ fill:rgba(212,175,55,.14); stroke:rgba(212,175,55,.45); stroke-width:2; pointer-events:none; }
+
 .poi-group{ cursor:pointer; }
 .poi-core{ fill:#ffcf5a; stroke:#0f1720; stroke-width:2; transition:.2s; }
 .poi-ring{ fill:none; stroke:rgba(255,208,99,.45); stroke-width:2; }
@@ -90,16 +129,18 @@ body{
 .poi-label{ fill:#fff; font-size:15px; font-family:'Cairo',sans-serif; pointer-events:none; font-weight:700; }
 .poi-group.is-active .poi-core{ fill:#fff2b7; transform:scale(1.1); transform-origin:center; }
 .poi-group.is-active .poi-ring{ stroke:rgba(255,208,99,.95); }
-
 .poi-hit{ fill:transparent; r:18; }
+
 .water-label{ fill:rgba(255,255,255,.92); font-size:24px; font-family:'Cairo',sans-serif; font-weight:700; }
 .water-sub{ fill:rgba(255,255,255,.85); font-size:16px; font-family:'Cairo',sans-serif; }
+
 .map-legend{ display:flex; gap:12px; flex-wrap:wrap; font-size:12px; opacity:.92; margin-top:12px; }
 .legend-item{ display:flex; align-items:center; gap:6px; }
 .legend-line{ width:22px; height:4px; border-radius:4px; }
 .metro-swatch{ background:#e9558f; }
 .tram-swatch{ background:#2dcf96; }
 .legend-dot{ width:10px; height:10px; border-radius:50%; background:#ffcf5a; display:inline-block; }
+
 .info-badge{
   position:absolute;
   left:12px;
@@ -113,6 +154,7 @@ body{
   line-height:1.9;
 }
 .info-badge b{ color:#ffe08f; }
+
 @media (max-width:900px){
   .poi-label{ font-size:13px; }
 }
@@ -123,6 +165,8 @@ body{
   .info-badge{ position:static; margin-top:10px; max-width:100%; font-size:13px; }
   .poi-label{ font-size:12px; }
 }
+
+/* ===== List ===== */
 .btn{
   background:var(--gold);
   color:#000;
@@ -133,11 +177,13 @@ body{
   border:none;
   cursor:pointer;
 }
+
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:14px;
 }
+
 .hotel{
   background:rgba(17,18,23,0.92);
   border:1px solid rgba(255,255,255,0.06);
@@ -145,6 +191,7 @@ body{
   padding:12px;
   line-height:1.8;
 }
+
 .hotel-thumb{
   width:100%;
   height:150px;
@@ -154,15 +201,19 @@ body{
   cursor:zoom-in;
   border:1px solid rgba(255,255,255,0.12);
 }
+
 .hotel-meta{ padding:8px 4px 4px; }
+
 .hotel-headline{
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
   gap:10px;
 }
+
 .hotel b{ display:block; font-size:16px; margin-bottom:2px; line-height:1.5; }
 .hotel-ar{ font-size:14px; color:rgba(255,255,255,0.92); }
+
 .hotel-rating{
   display:flex;
   flex-direction:column;
@@ -177,7 +228,9 @@ body{
   font-size:14px;
   text-shadow:0 1px 6px rgba(212,175,55,.35);
 }
+
 .muted{ opacity:0.8; font-size:13px; }
+
 .gallery-btn{
   margin-top:8px;
   width:100%;
@@ -198,6 +251,7 @@ body{
   line-height:1.9;
 }
 .footer-note a{ color:#fff; }
+
 .top-actions{
   display:flex;
   justify-content:center;
@@ -211,6 +265,7 @@ body{
   border:1px solid rgba(255,255,255,0.22);
 }
 
+/* ===== Lightbox ===== */
 .lightbox{
   position:fixed;
   inset:0;
@@ -222,6 +277,7 @@ body{
   padding:14px;
 }
 .lightbox.open{ display:flex; }
+
 .lightbox-box{
   width:min(1000px, 100%);
   max-height:92vh;
@@ -230,6 +286,7 @@ body{
   border-radius:16px;
   padding:10px;
 }
+
 .lightbox-head{
   display:flex;
   justify-content:space-between;
@@ -238,6 +295,7 @@ body{
   padding:4px 4px 10px;
 }
 .lightbox-title{font-size:14px; opacity:0.88;}
+
 .lightbox-close,
 .lightbox-nav{
   width:40px;
@@ -249,12 +307,14 @@ body{
   cursor:pointer;
   font-size:22px;
 }
+
 .lightbox-main{
   position:relative;
   border-radius:14px;
   overflow:hidden;
   border:1px solid rgba(255,255,255,0.12);
 }
+
 .lightbox-image{
   width:100%;
   max-height:66vh;
@@ -262,6 +322,7 @@ body{
   display:block;
   background:#0b0c10;
 }
+
 .lightbox-prev,
 .lightbox-next{
   position:absolute;
@@ -270,12 +331,14 @@ body{
 }
 .lightbox-prev{ left:8px; }
 .lightbox-next{ right:8px; }
+
 .lightbox-strip{
   margin-top:10px;
   display:flex;
   gap:8px;
   overflow-x:auto;
 }
+
 .lightbox-thumb{
   width:62px;
   height:62px;
@@ -319,39 +382,4 @@ body{
 
 .hotel:hover .hotel-thumb {
   transform: scale(1.03);
-}
-
-.brand-marquee{
-  margin:0 0 18px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:14px;
-  background:rgba(17,18,23,.9);
-}
-
-.brand-track{
-  display:flex;
-  gap:10px;
-  width:max-content;
-  padding:10px;
-  animation: brandScroll 42s linear infinite;
-}
-
-.brand-pill{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:8px 14px;
-  border-radius:999px;
-  border:1px solid rgba(212,175,55,.35);
-  background:rgba(255,255,255,.04);
-  color:#f1d37d;
-  font-weight:700;
-  font-size:13px;
-  white-space:nowrap;
-}
-
-@keyframes brandScroll{
-  from{ transform:translateX(0); }
-  to{ transform:translateX(-50%); }
 }
