@@ -1,4 +1,4 @@
-/* hotels.js — Clean version (Manifest-based) */
+/* hotels.js */
 
 (() => {
   "use strict";
@@ -21,6 +21,10 @@
     const res = await fetch(url, { cache: "no-store" });
     if (!res.ok) throw new Error("manifest not found");
     return res.json();
+  }
+
+  function uniq(arr) {
+    return [...new Set((arr || []).filter(Boolean))];
   }
 
   // ===== Map interactions =====
@@ -90,9 +94,10 @@
     }
   }
 
-  // ===== Render hotels cards (cover from manifest) =====
+  // ===== Render hotel cards (cover from manifest + fallback) =====
   async function renderHotels() {
     const cards = $$("#hotelList .hotel");
+    const fallbackCover = "background123.jpg";
 
     for (const card of cards) {
       const hotel = card.dataset.hotel || "";
@@ -104,7 +109,6 @@
       const note = card.dataset.note ? ` (${card.dataset.note})` : "";
       const folder = getFolderFromCard(card);
 
-      const fallbackCover = "background123.jpg"; // موجود عندك غالباً
       let coverUrl = fallbackCover;
 
       try {
@@ -147,7 +151,6 @@
       const stars = parseInt(item.dataset.stars || "0", 10);
 
       const textMatch = text.includes(q);
-
       const ratingMatch =
         rating === "all"
           ? true
@@ -212,7 +215,6 @@
     lightbox.classList.add("open");
     lightbox.setAttribute("aria-hidden", "false");
 
-    // Loading state
     if (lightboxLoading) lightboxLoading.style.display = "";
     if (lightboxImage) lightboxImage.style.display = "none";
     if (lightboxTitle) lightboxTitle.textContent = `${activeHotel} — جارِ تحميل الصور…`;
@@ -225,20 +227,18 @@
       const coverUrl = buildLocalUrl(folder, coverName);
 
       const imgs = Array.isArray(m.images) ? m.images : [];
-      const galleryUrls = imgs
-        .map((name) => buildLocalUrl(folder, String(name).trim()))
-        .filter(Boolean);
+      const galleryUrls = uniq(
+        imgs.map((name) => buildLocalUrl(folder, String(name).trim()))
+      );
 
-      // cover + gallery (بدون تكرار)
-      const merged = [coverUrl, ...galleryUrls.filter((u) => u !== coverUrl)];
-      activeImages = merged.length ? merged : [fallbackCover];
+      const merged = uniq([coverUrl, ...galleryUrls]);
+      activeImages = merged.length ? merged.slice(0, 60) : [fallbackCover];
     } catch (_) {
       activeImages = [fallbackCover];
     }
 
     activeIndex = 0;
 
-    // Show
     if (lightboxLoading) lightboxLoading.style.display = "none";
     if (lightboxImage) lightboxImage.style.display = "";
     showImage(0);
@@ -263,13 +263,11 @@
     initMapInteractions();
     filterHotels();
 
-    // UI events
     $("#q")?.addEventListener("input", filterHotels);
     $("#ratingFilter")?.addEventListener("change", filterHotels);
     $("#areaFilter")?.addEventListener("change", filterHotels);
     $("#clearBtn")?.addEventListener("click", clearFilters);
 
-    // Open lightbox from list
     $("#hotelList")?.addEventListener("click", (e) => {
       const target = e.target;
       const card = target?.closest?.(".hotel");
@@ -282,7 +280,6 @@
       openLightbox(card);
     });
 
-    // Thumbs click
     lightboxStrip?.addEventListener("click", (e) => {
       const thumb = e.target?.closest?.(".lightbox-thumb");
       if (!thumb) return;
@@ -307,6 +304,6 @@
 
   document.addEventListener("DOMContentLoaded", init);
 
-  // لو حابب تضلّ الدوال Global (مش ضروري بس ما بضر)
+  // keep global for inline calls (if any)
   window.filterHotels = filterHotels;
 })();
