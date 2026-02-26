@@ -22,7 +22,7 @@
   <link rel="icon" type="image/png" href="logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
 
-  <!-- خلي استدعاء واحد فقط -->
+  <!-- استدعاء واحد فقط -->
   <link rel="stylesheet" href="hotels.css">
 </head>
 
@@ -46,19 +46,18 @@
 
     <!-- Filters -->
     <div class="search">
-      <input id="q" type="text" placeholder="ابحث عن فندق… مثال: Marriott" oninput="filterHotels()" />
-      <select id="ratingFilter" onchange="filterHotels()" aria-label="فلتر التصنيف">
+      <input id="q" type="text" placeholder="ابحث عن فندق… مثال: Marriott" />
+      <select id="ratingFilter" aria-label="فلتر التصنيف">
         <option value="all" selected>كل التصنيفات</option>
         <option value="5">5 نجوم</option>
         <option value="34">3-4 نجوم</option>
       </select>
-      <select id="areaFilter" onchange="filterHotels()" aria-label="فلتر المنطقة">
+      <select id="areaFilter" aria-label="فلتر المنطقة">
         <option value="all" selected>كل المناطق</option>
       </select>
-      <button class="btn" type="button"
-        onclick="document.getElementById('q').value=''; document.getElementById('ratingFilter').value='all'; document.getElementById('areaFilter').value='all'; filterHotels();">
-        مسح
-      </button>
+
+      <!-- زر مسح متوافق مع hotels.js -->
+      <button class="btn" type="button" id="clearBtn">مسح</button>
     </div>
 
     <!-- Brand marquee -->
@@ -191,7 +190,7 @@
       الموقع قيد التطوير ويتم تحديثه باستمرار وإضافة فنادق جديدة بشكل دوري. إذا لم تجد الفندق المطلوب حالياً، تواصل معنا وسنوفّر لك خيارات إضافية مباشرة ✅
     </div>
 
-    <!-- Hotels list (مرة واحدة فقط) -->
+    <!-- Hotels list -->
     <div class="grid" id="hotelList">
       <div class="hotel" data-hotel="Marriott Hotel Şişli" data-hotel-ar="ماريوت شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
       <div class="hotel" data-hotel="Hilton Istanbul Bomonti" data-hotel-ar="هيلتون بومونتي شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
@@ -215,7 +214,7 @@
       <div class="hotel" data-hotel="Akgün Istanbul Hotel Topkapı" data-hotel-ar="اكغون توب كابي" data-city="إسطنبول" data-area="توب كابي" data-stars="5"></div>
       <div class="hotel" data-hotel="Valide Hotel Şişli" data-hotel-ar="فاليدا شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="3"></div>
 
-      <div class="hotel" data-hotel="The Marmara Pera" data-hotel-ar="ذا مرمرة بيرا تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+      <div class="hotel" data-hotel="The Marmara Taksim" data-hotel-ar="ذا مرمرة تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
       <div class="hotel" data-hotel="Arts Hotel Taksim" data-hotel-ar="ارتس تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
       <div class="hotel" data-hotel="Barceló Istanbul" data-hotel-ar="بارسيلو تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
       <div class="hotel" data-hotel="Nevi Hotel & Suites Taksim" data-hotel-ar="واجنحة نيفي تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
@@ -254,7 +253,7 @@
     </div>
   </div>
 
-  <!-- JS واحد فقط (خليه آخر شي) -->
+  <!-- JS واحد فقط -->
   <script src="hotels.js" defer></script>
 </body>
 </html>
