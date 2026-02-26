@@ -33,10 +33,6 @@
     "Divan Istanbul": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/42160386.jpg?k=b4fa2f801f4a5cefa00dd0c1fe5ab2b4ef4cb3b4bb944188d2f1384f4b5237ac&o=&hp=1",
     ],
-    "Divan Istanbul Taksim": [
-      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/42160386.jpg?k=b4fa2f801f4a5cefa00dd0c1fe5ab2b4ef4cb3b4bb944188d2f1384f4b5237ac&o=&hp=1",
-    ],
-
     "Point Hotel Taksim": [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/06/3a/b8/point-hotel.jpg?w=900&h=500&s=1",
     ],
@@ -85,14 +81,9 @@
     "Holiday Inn Istanbul City Topkapı": [
       "https://digital.ihg.com/is/image/ihg/holiday-inn-istanbul-6224485588-4x3",
     ],
-
     "The Marmara Pera": [
       "https://www.hotel-board.com/picture/the-marmara-pera-hotel-6693957.jpg",
     ],
-    "The Marmara Taksim": [
-      "https://picsum.photos/seed/the-marmara-taksim-exterior/1200/760",
-    ],
-
     "Arts Hotel Taksim": [
       "https://media-cdn.tripadvisor.com/media/photo-s/29/5d/37/e3/exterior.jpg",
     ],
@@ -123,7 +114,7 @@
   };
 
   // =========================
-  // Local assets (manifest) support (optional)
+  // Local assets (manifest) support
   // =========================
   function buildLocalUrl(folder, filename) {
     return `assets/hotels/${folder}/${filename}`;
@@ -149,8 +140,12 @@
     const imgs = Array.isArray(m.images) ? m.images : [];
     const galleryUrls = uniq(imgs.map((name) => buildLocalUrl(folder, String(name).trim())));
 
+    // cover first
     const merged = uniq([coverUrl, ...galleryUrls]);
-    return { coverUrl, images: merged };
+    return {
+      coverUrl,
+      images: merged,
+    };
   }
 
   // =========================
@@ -237,6 +232,7 @@
       const note = card.dataset.note ? ` (${card.dataset.note})` : "";
       const folder = getFolderFromCard(card);
 
+      // choose cover:
       let coverUrl = fallbackCover;
       let fallbackCandidates = [];
 
@@ -245,7 +241,9 @@
         try {
           const { coverUrl: localCover } = await galleryFromManifest(folder);
           coverUrl = localCover;
-        } catch (_) {}
+        } catch (_) {
+          // ignore, go fallback to overrides
+        }
       }
 
       // 2) override by hotel name if exists
@@ -379,7 +377,7 @@
 
     openLightboxUI(hotel);
 
-    // 1) custom gallery
+    // 1) If custom hotel gallery exists: use it first
     const custom = customHotelGalleries[hotel];
     if (Array.isArray(custom) && custom.length) {
       activeImages = uniq(custom).slice(0, 9);
@@ -390,20 +388,22 @@
       return;
     }
 
-    // 2) manifest local
+    // 2) If manifest exists: use local images
     if (folder) {
       try {
-        const { images } = await galleryFromManifest(folder);
+        const { coverUrl, images } = await galleryFromManifest(folder);
         activeImages = uniq(images).slice(0, 60);
         activeIndex = 0;
         if (lightboxLoading) lightboxLoading.style.display = "none";
         if (lightboxImage) lightboxImage.style.display = "";
         showImage(0);
         return;
-      } catch (_) {}
+      } catch (_) {
+        // fall back to overrides/default
+      }
     }
 
-    // 3) fallback
+    // 3) Fallback: cover from card image + overrides + shared extras
     const coverSrc =
       card.querySelector(".hotel-thumb")?.currentSrc ||
       card.querySelector(".hotel-thumb")?.src ||
@@ -421,7 +421,7 @@
   }
 
   // =========================
-  // Image fallback chain (covers)
+  // Image fallback chain (for covers)
   // =========================
   function initImageFallback() {
     const list = $("#hotelList");
