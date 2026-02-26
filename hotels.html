@@ -21,6 +21,8 @@
 
   <link rel="icon" type="image/png" href="logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- خلي استدعاء واحد فقط -->
   <link rel="stylesheet" href="hotels.css">
 </head>
 
@@ -36,21 +38,56 @@
     </div>
   </header>
 
+  <noscript class="nojs-note">
+    الصفحة تحتاج تفعيل JavaScript لعرض بطاقات الفنادق بشكل كامل.
+  </noscript>
+
   <main class="container">
 
     <!-- Filters -->
     <div class="search">
-      <input id="q" type="text" placeholder="ابحث عن فندق… مثال: Marriott" />
-      <select id="ratingFilter" aria-label="فلتر التصنيف">
+      <input id="q" type="text" placeholder="ابحث عن فندق… مثال: Marriott" oninput="filterHotels()" />
+      <select id="ratingFilter" onchange="filterHotels()" aria-label="فلتر التصنيف">
         <option value="all" selected>كل التصنيفات</option>
         <option value="5">5 نجوم</option>
         <option value="34">3-4 نجوم</option>
       </select>
-      <select id="areaFilter" aria-label="فلتر المنطقة">
+      <select id="areaFilter" onchange="filterHotels()" aria-label="فلتر المنطقة">
         <option value="all" selected>كل المناطق</option>
       </select>
-      <button class="btn" id="clearBtn" type="button">مسح</button>
+      <button class="btn" type="button"
+        onclick="document.getElementById('q').value=''; document.getElementById('ratingFilter').value='all'; document.getElementById('areaFilter').value='all'; filterHotels();">
+        مسح
+      </button>
     </div>
+
+    <!-- Brand marquee -->
+    <section class="brand-marquee" aria-label="أبرز سلاسل الفنادق في إسطنبول">
+      <div class="brand-track" role="list">
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/marriott.com" alt="Marriott logo" loading="lazy"><b>Marriott</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/hilton.com" alt="Hilton logo" loading="lazy"><b>Hilton</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/wyndhamhotels.com" alt="Wyndham logo" loading="lazy"><b>Wyndham</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/ihg.com" alt="IHG logo" loading="lazy"><b>IHG</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/radissonhotels.com" alt="Radisson logo" loading="lazy"><b>Radisson</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/accor.com" alt="Accor logo" loading="lazy"><b>Accor</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/barcelo.com" alt="Barcelo logo" loading="lazy"><b>Barceló</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/rotana.com" alt="Rotana logo" loading="lazy"><b>Rotana</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/divan.com.tr" alt="Divan logo" loading="lazy"><b>Divan</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/titanic.com.tr" alt="Titanic logo" loading="lazy"><b>Titanic</b></span>
+
+        <!-- تكرار مرة ثانية للـscroll السلس -->
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/marriott.com" alt="Marriott logo" loading="lazy"><b>Marriott</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/hilton.com" alt="Hilton logo" loading="lazy"><b>Hilton</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/wyndhamhotels.com" alt="Wyndham logo" loading="lazy"><b>Wyndham</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/ihg.com" alt="IHG logo" loading="lazy"><b>IHG</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/radissonhotels.com" alt="Radisson logo" loading="lazy"><b>Radisson</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/accor.com" alt="Accor logo" loading="lazy"><b>Accor</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/barcelo.com" alt="Barcelo logo" loading="lazy"><b>Barceló</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/rotana.com" alt="Rotana logo" loading="lazy"><b>Rotana</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/divan.com.tr" alt="Divan logo" loading="lazy"><b>Divan</b></span>
+        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/titanic.com.tr" alt="Titanic logo" loading="lazy"><b>Titanic</b></span>
+      </div>
+    </section>
 
     <!-- Map -->
     <section class="area-map" aria-label="خريطة تفاعلية مبسطة لسنتر إسطنبول">
@@ -154,35 +191,35 @@
       الموقع قيد التطوير ويتم تحديثه باستمرار وإضافة فنادق جديدة بشكل دوري. إذا لم تجد الفندق المطلوب حالياً، تواصل معنا وسنوفّر لك خيارات إضافية مباشرة ✅
     </div>
 
-    <!-- Hotels list -->
+    <!-- Hotels list (مرة واحدة فقط) -->
     <div class="grid" id="hotelList">
-      <div class="hotel" data-hotel="Marriott Hotel Şişli" data-folder="marriott-hotel-sisli" data-hotel-ar="ماريوت شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
-      <div class="hotel" data-hotel="Hilton Istanbul Bomonti" data-folder="hilton-istanbul-bomonti" data-hotel-ar="هيلتون بومونتي شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
-      <div class="hotel" data-hotel="Sheraton Istanbul Levent" data-folder="sheraton-istanbul-levent" data-hotel-ar="شيراتون ليفينت" data-city="إسطنبول" data-area="ليفينت" data-stars="5"></div>
-      <div class="hotel" data-hotel="Ramada Plaza By Wyndham Sultanahmet" data-folder="ramada-plaza-by-wyndham-sultanahmet" data-hotel-ar="رمادا سلطان احمد لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="5"></div>
-      <div class="hotel" data-hotel="Divan Istanbul Taksim" data-folder="divan-istanbul-taksim" data-hotel-ar="ديفان تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
-      <div class="hotel" data-hotel="Point Hotel Taksim" data-folder="point-hotel-taksim" data-hotel-ar="بوينت تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
-      <div class="hotel" data-hotel="Crowne Plaza Old City" data-folder="crowne-plaza-old-city" data-hotel-ar="كراون بلازا اولد سيتي لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="5"></div>
-      <div class="hotel" data-hotel="Mercure Istanbul Bomonti" data-folder="mercure-istanbul-bomonti" data-hotel-ar="ميركور بومونتي شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
-      <div class="hotel" data-hotel="Holiday Inn Şişli" data-folder="holiday-inn-sisli" data-hotel-ar="هوليدي ان شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
-      <div class="hotel" data-hotel="Arts Hotel Harbiye" data-folder="arts-hotel-harbiye" data-hotel-ar="ارتس حربية تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
-      <div class="hotel" data-hotel="Lions Royal Hotel" data-folder="lions-royal-hotel" data-hotel-ar="ليونز رويال" data-city="إسطنبول" data-area="لالالي" data-stars="4" data-note="افتتاح حديث"></div>
+      <div class="hotel" data-hotel="Marriott Hotel Şişli" data-hotel-ar="ماريوت شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
+      <div class="hotel" data-hotel="Hilton Istanbul Bomonti" data-hotel-ar="هيلتون بومونتي شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
+      <div class="hotel" data-hotel="Sheraton Istanbul Levent" data-hotel-ar="شيراتون ليفينت" data-city="إسطنبول" data-area="ليفينت" data-stars="5"></div>
+      <div class="hotel" data-hotel="Ramada Plaza By Wyndham Sultanahmet" data-hotel-ar="رمادا سلطان احمد لالالي" data-city="إسطنبول" data-area="فاتح-لالالي" data-stars="5"></div>
+      <div class="hotel" data-hotel="Divan Istanbul Taksim" data-hotel-ar="ديفان تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+      <div class="hotel" data-hotel="Point Hotel Taksim" data-hotel-ar="بوينت تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+      <div class="hotel" data-hotel="Crowne Plaza Old City" data-hotel-ar="كراون بلازا اولد سيتي لالالي" data-city="إسطنبول" data-area="فاتح-لالالي" data-stars="5"></div>
+      <div class="hotel" data-hotel="Mercure Istanbul Bomonti" data-hotel-ar="ميركور بومونتي شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
+      <div class="hotel" data-hotel="Holiday Inn Şişli" data-hotel-ar="هوليدي ان شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
+      <div class="hotel" data-hotel="Arts Hotel Harbiye" data-hotel-ar="ارتس حربية تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
 
-      <div class="hotel" data-hotel="Mosaic Hotel Laleli" data-folder="mosaic-hotel-laleli" data-hotel-ar="موزاييك لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
-      <div class="hotel" data-hotel="Beethoven Premium Hotel Laleli" data-folder="beethoven-premium-hotel-laleli" data-hotel-ar="بيتهوفن بريميوم لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
-      <div class="hotel" data-hotel="The Parma Downtown Laleli" data-folder="the-parma-downtown-laleli" data-hotel-ar="ذا براما داون تاون لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
-      <div class="hotel" data-hotel="Martinenz Hotel Laleli" data-folder="martinenz-hotel-laleli" data-hotel-ar="مارتينينز لالالي" data-city="إسطنبول" data-area="لالالي" data-stars="4"></div>
-      <div class="hotel" data-hotel="Four Sides Şişli" data-folder="four-sides-sisli" data-hotel-ar="فورسايدس شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="4"></div>
-      <div class="hotel" data-hotel="Mare Park Hotel Şişli" data-folder="mare-park-hotel-sisli" data-hotel-ar="ماري بارك شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="4"></div>
-      <div class="hotel" data-hotel="Akgün Istanbul Hotel Topkapı" data-folder="akgun-istanbul-hotel-topkapi" data-hotel-ar="اكغون توب كابي" data-city="إسطنبول" data-area="توب كابي" data-stars="5"></div>
-      <div class="hotel" data-hotel="Valide Hotel Şişli" data-folder="valide-hotel-sisli" data-hotel-ar="فاليدا شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="3"></div>
-      <div class="hotel" data-hotel="Eresin Hotels Topkapı" data-folder="eresin-hotels-topkapi" data-hotel-ar="ارسين فاتح - توب كابي" data-city="إسطنبول" data-area="فاتح - توب كابي" data-stars="5"></div>
-      <div class="hotel" data-hotel="Holiday Inn Istanbul City Topkapı" data-folder="holiday-inn-istanbul-city-topkapi" data-hotel-ar="هوليدي ان فاتح - توب كابي" data-city="إسطنبول" data-area="فاتح - توب كابي" data-stars="5"></div>
-      <div class="hotel" data-hotel="The Marmara Pera" data-folder="the-marmara-pera" data-hotel-ar="ذا مرمرة بيرا تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
-      <div class="hotel" data-hotel="Arts Hotel Taksim" data-folder="arts-hotel-taksim" data-hotel-ar="ارتس تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
-      <div class="hotel" data-hotel="Barceló Istanbul" data-folder="barcelo-istanbul" data-hotel-ar="بارسيلو تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
-      <div class="hotel" data-hotel="Nevi Hotel & Suites Taksim" data-folder="nevi-hotel-suites-taksim" data-hotel-ar="واجنحة نيفي تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
-      <div class="hotel" data-hotel="Renaissance Istanbul Polat Bosphorus Hotel" data-folder="renaissance-istanbul-polat-bosphorus-hotel" data-hotel-ar="رينيسانس بولات بوسفورس" data-city="إسطنبول" data-area="بيشكتاش" data-stars="5"></div>
+      <div class="hotel" data-hotel="Lions Royal Hotel" data-hotel-ar="ليونز رويال" data-city="إسطنبول" data-area="فاتح-لالالي" data-stars="4" data-note="افتتاح حديث"></div>
+      <div class="hotel" data-hotel="Mosaic Hotel Laleli" data-hotel-ar="موزاييك لالالي" data-city="إسطنبول" data-area="فاتح-لالالي" data-stars="4"></div>
+      <div class="hotel" data-hotel="Beethoven Premium Hotel Laleli" data-hotel-ar="بيتهوفن بريميوم لالالي" data-city="إسطنبول" data-area="فاتح-لالالي" data-stars="4"></div>
+      <div class="hotel" data-hotel="The Parma Downtown Laleli" data-hotel-ar="ذا براما داون تاون لالالي" data-city="إسطنبول" data-area="فاتح-لالالي" data-stars="4"></div>
+      <div class="hotel" data-hotel="Martinenz Hotel Laleli" data-hotel-ar="مارتينينز لالالي" data-city="إسطنبول" data-area="فاتح-لالالي" data-stars="4"></div>
+      <div class="hotel" data-hotel="Four Sides Şişli" data-hotel-ar="فورسايدس شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="4"></div>
+      <div class="hotel" data-hotel="Mare Park Hotel Şişli" data-hotel-ar="ماري بارك شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="4"></div>
+
+      <div class="hotel" data-hotel="Akgün Istanbul Hotel Topkapı" data-hotel-ar="اكغون توب كابي" data-city="إسطنبول" data-area="توب كابي" data-stars="5"></div>
+      <div class="hotel" data-hotel="Valide Hotel Şişli" data-hotel-ar="فاليدا شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="3"></div>
+
+      <div class="hotel" data-hotel="The Marmara Pera" data-hotel-ar="ذا مرمرة بيرا تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+      <div class="hotel" data-hotel="Arts Hotel Taksim" data-hotel-ar="ارتس تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
+      <div class="hotel" data-hotel="Barceló Istanbul" data-hotel-ar="بارسيلو تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+      <div class="hotel" data-hotel="Nevi Hotel & Suites Taksim" data-hotel-ar="واجنحة نيفي تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
+      <div class="hotel" data-hotel="Renaissance Istanbul Polat Bosphorus Hotel" data-hotel-ar="رينيسانس بولات بوسفورس" data-city="إسطنبول" data-area="بيشكتاش" data-stars="5"></div>
     </div>
 
     <div class="footer-note">
@@ -193,7 +230,7 @@
 
   </main>
 
-  <!-- Lightbox (مرة واحدة فقط) -->
+  <!-- Lightbox (مرة واحدة فقط، خارج الـSVG) -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <div class="lightbox-box">
       <div class="lightbox-head">
@@ -217,6 +254,7 @@
     </div>
   </div>
 
+  <!-- JS واحد فقط (خليه آخر شي) -->
   <script src="hotels.js" defer></script>
 </body>
 </html>
