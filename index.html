@@ -5,245 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>SIAFA TRAVEL | سيافا ترافل حجوزات فنادق تركيا</title>
+<meta name="description" content="سيافا ترافل لحجوزات الفنادق في تركيا: حجوزات مؤكدة، أسعار منافسة، دفع عند الوصول، ودعم سريع عبر واتساب.">
+<link rel="canonical" href="https://www.siafatravel.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SIAFA TRAVEL | سيافا ترافل حجوزات فنادق تركيا">
+<meta property="og:description" content="سيافا ترافل لحجوزات الفنادق في تركيا: حجوزات مؤكدة، أسعار منافسة، دفع عند الوصول، ودعم سريع عبر واتساب.">
+<meta property="og:url" content="https://www.siafatravel.com/">
+<meta property="og:image" content="https://www.siafatravel.com/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SIAFA TRAVEL | سيافا ترافل حجوزات فنادق تركيا">
+<meta name="twitter:description" content="سيافا ترافل لحجوزات الفنادق في تركيا: حجوزات مؤكدة، أسعار منافسة، دفع عند الوصول، ودعم سريع عبر واتساب.">
+<meta name="twitter:image" content="https://www.siafatravel.com/logo.png">
+<link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --bg:#05060a;
-  --panel:#111217;
-  --gold:#d4af37;
-}
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="home.css">
 
-body{
-  margin:0;
-  font-family:'Cairo',sans-serif;
-  background:var(--bg);
-  color:#fff;
-  direction:rtl;
-}
-
-/* HERO WITH VIDEO */
-.hero{
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-}
-
-.hero-video{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:0;
-}
-
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.55);
-  z-index:1;
-}
-
-.hero-box{
-  position:relative;
-  z-index:2;
-  max-width:820px;
-  padding:0 16px;
-  transform: translateY(-35px);
-}
-
-/* ✅ Logo in hero */
-.hero-logo{
-  width:240px;                 /* كبرناه بوضوح */
-  max-width:85%;               /* ما يكسر بالموبايل */
-  margin:0 auto 18px auto;
-  display:block;
-  filter: drop-shadow(0 22px 40px rgba(0,0,0,0.75));
-  opacity:0.98;
-}
-
-/* موبايل */
-@media (max-width: 768px){
-  .hero-logo{
-    width:190px;
-    margin-bottom:16px;
-  }
-}
-
-h1{font-size:42px;margin:0 0 12px 0;}
-p{line-height:1.9; opacity:0.95; margin:0;}
-
-.btn{
-  background:var(--gold);
-  color:#000;
-  padding:15px 30px;
-  border-radius:999px;
-  text-decoration:none;
-  font-weight:bold;
-  display:inline-block;
-  margin-top:20px;
-  border:none;
-  cursor:pointer;
-  transition:0.25s;
-}
-.btn:hover{ transform:translateY(-3px); }
-
-.btn.secondary{
-  background:transparent;
-  color:#fff;
-  border:1px solid rgba(255,255,255,0.22);
-}
-
-/* ✅ خلفية تحت + Blur خفيف جداً */
-.main{
-  position:relative;
-  overflow:hidden;
-}
-
-.main::before{
-  content:"";
-  position:absolute;
-  inset:-40px;
-  background:
-    radial-gradient(900px 450px at 85% 15%, rgba(212,175,55,0.12), transparent 60%),
-    radial-gradient(900px 450px at 15% 55%, rgba(24,119,242,0.10), transparent 60%),
-    radial-gradient(700px 350px at 60% 90%, rgba(221,42,123,0.08), transparent 60%);
-  filter: blur(6px);
-  opacity:0.9;
-  pointer-events:none;
-}
-
-.main::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(5,6,10,0.88);
-  pointer-events:none;
-}
-
-.main > *{
-  position:relative;
-  z-index:1;
-}
-
-/* SECTIONS */
-.section{
-  padding:85px 20px;
-  max-width:1200px;
-  margin:auto;
-}
-
-h2{margin:0 0 18px 0;}
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:22px;
-}
-
-.feature{
-  background:rgba(17,18,23,0.92);
-  padding:24px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,0.06);
-  line-height:1.9;
-}
-
-.small{
-  font-size:13px;
-  opacity:0.75;
-  margin-top:14px;
-}
-
-/* FORM */
-form{
-  display:grid;
-  gap:14px;
-  max-width:620px;
-  margin:auto;
-}
-
-.field label{
-  display:block;
-  font-size:14px;
-  opacity:0.9;
-  margin:0 4px 6px 0;
-}
-
-input,select{
-  padding:12px;
-  border:none;
-  border-radius:10px;
-  width:100%;
-  box-sizing:border-box;
-  font-family:'Cairo',sans-serif;
-}
-
-input[type="date"]{
-  color:#111;
-}
-
-.hint{
-  font-size:12px;
-  opacity:0.75;
-  margin-top:-6px;
-}
-
-/* ✅ FLOAT ICONS (Luxury Glass) */
-.floats{
-  position:fixed;
-  left:18px;
-  bottom:25px;
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-  z-index:999;
-}
-
-.float-btn{
-  width:52px;
-  height:52px;
-  border-radius:14px; /* زوايا ناعمة */
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-decoration:none;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.15);
-  box-shadow:0 12px 25px rgba(0,0,0,0.45);
-  backdrop-filter:blur(10px);
-  transition:all 0.3s ease;
-}
-
-.float-btn svg{
-  width:22px;
-  height:22px;
-  fill:#fff;
-  display:block;
-}
-
-.float-btn:hover{
-  transform:translateY(-4px);
-  background:rgba(212,175,55,0.25);
-  border-color:rgba(212,175,55,0.6);
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:46px 20px;
-  background:#0b0c10;
-  border-top:1px solid rgba(255,255,255,0.06);
-  opacity:0.9;
-}
-</style>
 </head>
 
 <body>
@@ -278,15 +56,68 @@ footer{
 
   <!-- WHY US -->
   <section class="section" id="why">
-    <h2>⭐ لماذا تختار سيافا ترافل؟</h2>
-    <div class="cards">
-      <div class="feature">✔️ حجوزات مؤكدة قبل الوصول وإرسال إيصال رسمي (Voucher)</div>
-      <div class="feature">✔️ أسعار منافسة وقيمة مقابل المال (اقتصادي / متوسط / فاخر)</div>
-      <div class="feature">✔️ نرشح لك الأفضل حسب ميزانيتك ومكانك المفضل في إسطنبول وتركيا</div>
-      <div class="feature">✔️ خدمة عملاء عبر واتساب: <b>عربي / English / Türkçe</b></div>
-      <div class="feature">✔️ دعم ما بعد الحجز: تنسيق المطار والرحلات</div>
-      <div class="feature">✔️ تعامل منظم وشفاف… كل شيء واضح قبل تثبيت الحجز</div>
-    </div>
+    <details class="acc acc-primary" open>
+      <summary>
+        <span class="acc-title"><span class="acc-icon">⭐</span> لماذا تختار سيافا ترافل؟</span>
+        <span class="acc-chevron">⌄</span>
+      </summary>
+
+      <div class="acc-body">
+        <div class="cards">
+          <div class="feature">✔️ حجوزات مؤكدة قبل الوصول وإرسال إيصال رسمي (Voucher)</div>
+          <div class="feature">✔️ أسعار منافسة وقيمة مقابل المال (اقتصادي / متوسط / فاخر)</div>
+          <div class="feature">✔️ نرشح لك الأفضل حسب ميزانيتك ومكانك المفضل في إسطنبول وتركيا</div>
+          <div class="feature">✔️ خدمة عملاء عبر واتساب: <b>عربي / English / Türkçe</b></div>
+          <div class="feature">✔️ دعم ما بعد الحجز: تنسيق المطار والرحلات</div>
+          <div class="feature">✔️ تعامل منظم وشفاف… كل شيء واضح قبل تثبيت الحجز</div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ABOUT US -->
+  <section class="section" id="about">
+    <details class="acc" open>
+      <summary>
+        <span class="acc-title"><span class="acc-icon">🏢</span> من نحن؟</span>
+        <span class="acc-chevron">⌄</span>
+      </summary>
+
+      <div class="acc-body">
+        <div class="about-wrap">
+          <p class="about-intro">
+            سيافا ترافل شركة متخصصة بحجوزات فنادق تركيا منذ أكثر من <b>6 سنوات</b>، انطلقت بنمو سريع ووصلت لعملاء من دول متعددة حول العالم.
+            تركيزنا الأساسي هو <b>جودة الخدمة</b> والوضوح الكامل، مع الحفاظ على أسعار منافسة وثابتة بدون رسوم مفاجئة.
+          </p>
+
+          <div class="cards about-cards">
+            <div class="feature">
+              <b>📍 المقر ونطاق العمل</b><br>
+              مقرنا في <b>إسطنبول - باشاك شهير</b>، وعملنا يتركز على إسطنبول مع خدمات في ولايات أخرى مثل
+              <b>طرابزون، أنطاليا، ألانيا، بودروم</b>.
+            </div>
+
+            <div class="feature">
+              <b>✅ مبدأنا في الحجز</b><br>
+              نضمن أن الخدمة التي يراها العميل بالصور هي نفسها (أو أفضل) عند الوصول، ونعتمد استراتيجية
+              <b>الدفع عند الوصول</b> لرفع الشفافية وراحة العميل.
+            </div>
+
+            <div class="feature">
+              <b>🤝 طريقة التعامل</b><br>
+              التواصل معنا سهل ومفتوح دائمًا عبر واتساب وفيسبوك، مع ممثلي خدمة عملاء أصحاب خبرة لفهم الطلب
+              وترشيح أفضل الخيارات المتاحة حسب تاريخ الوصول.
+            </div>
+
+            <div class="feature">
+              <b>💳 تسعير واضح</b><br>
+              عند تثبيت الحجز يكون السعر <b>مثبت</b> كما هو في الفاوتشر الرسمي،
+              وشامل الضرائب دون زيادات مفاجئة.
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
   </section>
 
   <!-- CRITERIA (8) -->
@@ -322,14 +153,14 @@ footer{
     </summary>
 
     <div class="acc-body">
-      <div class="feature">
-        <b>1)</b> بتتواصلوا معنا على واتساب وبتحكوا مباشرة مع أحد ممثلي خدمة العملاء 👨‍💼👩‍💼<br>
-        <b>2)</b> بنسألكم كم سؤال بسيط (عدد الأشخاص – تاريخ الوصول – عدد الليالي – المستوى) وبنرشح لكم أفضل الخيارات 🏨<br>
-        <b>3)</b> بعد ما تختاروا الفندق المناسب، بنطلب <b>صور الجوازات</b> و<b>تذاكر الطيران</b> ✈️<br>
-        <b>4)</b> بنثبت الحجز رسميًا وبنرسل لكم <b>الإيصال/الفوتشر</b> 📄<br>
-        <b>5)</b> <b>الدفع يكون نقداً عند الوصول للفندق</b> 💵
+      <div class="faq-list method-list">
+        <article class="feature faq-item method-item"><h3>1) التواصل وطلب العرض</h3><p>تتواصل معنا مباشرة عبر واتساب، ونأخذ تفاصيل رحلتك الأساسية (التاريخ، عدد الأشخاص، المستوى المطلوب).</p></article>
+        <article class="feature faq-item method-item"><h3>2) ترشيح الخيارات</h3><p>نرسل لك الفنادق الأنسب حسب ميزانيتك والمنطقة التي تفضلها مع توضيح التفاصيل بشكل واضح.</p></article>
+        <article class="feature faq-item method-item"><h3>3) إرسال الوثائق</h3><p>بعد اختيار الفندق نطلب صور الجوازات وتذاكر الطيران لتجهيز التثبيت بشكل رسمي.</p></article>
+        <article class="feature faq-item method-item"><h3>4) تثبيت الحجز وإرسال الفاوتشر</h3><p>نثبت الحجز بشكل رسمي ونرسل لك إيصال/فاوتشر واضح يحتوي كامل بيانات الحجز.</p></article>
+        <article class="feature faq-item method-item"><h3>5) الدفع عند الوصول</h3><p>الدفع يكون نقدًا عند الوصول للفندق وبنفس السعر المثبت في الفاوتشر بدون زيادات مفاجئة.</p></article>
       </div>
-      <div class="small">ملاحظة: أي تفاصيل خاصة بالفندق أو الموسم بنوضحها لكم قبل تثبيت الحجز.</div>
+      <div class="small">ملاحظة: أي تفاصيل خاصة بالفندق أو الموسم نوضحها لكم قبل تثبيت الحجز.</div>
     </div>
   </details>
 </section>
@@ -368,6 +199,98 @@ footer{
   </details>
 </section>
 
+
+  <!-- PRIVACY -->
+  <section class="section" id="privacy">
+    <details class="acc">
+      <summary>
+        <span class="acc-title"><span class="acc-icon">🔒</span> سياسة الخصوصية</span>
+        <span class="acc-chevron">⌄</span>
+      </summary>
+      <div class="acc-body">
+        <div class="faq-list">
+          <article class="feature faq-item">
+            <h3>كيف نتعامل مع بياناتكم؟</h3>
+            <p>
+              نستخدم بيانات الضيف فقط لأغراض تثبيت الحجز ومشاركتها مع الفندق المعني بشكل آمن ومحدود.
+              وبعد انتهاء إجراءات الحجز والإقامة، يتم التخلص من البيانات غير الضرورية ولا يتم استخدامها لأي غرض تسويقي بدون موافقة العميل.
+            </p>
+          </article>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <details class="acc">
+      <summary>
+        <span class="acc-title"><span class="acc-icon">❓</span> الأسئلة الشائعة</span>
+        <span class="acc-chevron">⌄</span>
+      </summary>
+
+      <div class="acc-body">
+        <div class="faq-list">
+          <article class="feature faq-item">
+            <h3>هل الحجز مؤكد أم مبدئي؟</h3>
+            <p>
+              الحجز يكون <b>مؤكد 100%</b> بعد التثبيت، ونحن ننسق مع الفندق وندفع الرسوم المطلوبة لضمان تأكيد الحجز
+              وتجنب أي مشاكل عند الوصول.
+            </p>
+          </article>
+
+          <article class="feature faq-item">
+            <h3>كيف يتم الدفع؟</h3>
+            <p>
+              الدفع يتم عند الوصول للفندق وبشكل نقدي، وبنفس السعر المذكور في إيصال الحجز الرسمي (الفاوتشر)
+              الذي نرسله بعد التثبيت.
+            </p>
+          </article>
+
+          <article class="feature faq-item">
+            <h3>هل يمكن أن يكون الحجز مبدئي؟</h3>
+            <p>
+              نعم، لكن هذا يتم <b>بطلب مسبق من العميل</b>. إذا كان احتمال الإلغاء واردًا، نفضّل إبلاغنا من البداية
+              لنرتّب الحجز بصيغة مبدئية بدل الحجز المؤكد، وبشكل يحافظ على وضوح الشروط وراحة الطرفين.
+            </p>
+          </article>
+
+          <article class="feature faq-item">
+            <h3>هل يوجد إلغاء للحجز؟</h3>
+            <p>
+              نعم، الإلغاء مجاني قبل <b>48 ساعة</b> من تاريخ الوصول.
+              كما نفضّل عند طلب الحجز أن يوضح العميل من البداية إذا كان الحجز <b>مبدئيًا</b> أو <b>مؤكدًا</b>.
+            </p>
+          </article>
+
+          <article class="feature faq-item">
+            <h3>كم وقت الرد؟</h3>
+            <p>
+              فريق خدمة العملاء متواجد على مدار الساعة. غالبًا الرد يكون خلال ثوانٍ أو دقائق، وقد يتأخر أحيانًا
+              في أوقات الضغط أو الساعات المتأخرة من الليل.
+            </p>
+          </article>
+
+          <article class="feature faq-item">
+            <h3>هل يتم إرسال إيصال حجز رسمي؟</h3>
+            <p>
+              نعم، بعد تأكيد الحجز وإرسال الوثائق اللازمة، نرسل <b>فاوتشر رسمي</b> يمكن إبرازه للمندوب عند الوصول
+              أو في المطار عند الطلب.
+            </p>
+          </article>
+
+          <article class="feature faq-item">
+            <h3>ما الخدمات بعد الحجز؟</h3>
+            <p>
+              بعد الوصول يمكنكم التواصل مع الوكلاء لأي استشارة تخص الإقامة، ويتوفر لدينا أيضًا
+              خدمات المطار (ذهاب/عودة) ورحلات سياحية يومية.
+            </p>
+          </article>
+        </div>
+      </div>
+    </details>
+  </section>
+
   <!-- BOOKING FORM -->
   <section class="section" id="booking">
     <h2>📝 إرسال طلب حجز</h2>
@@ -375,13 +298,8 @@ footer{
     <form onsubmit="sendWhatsApp(); return false;">
 
       <div class="field">
-        <label for="name">الاسم</label>
-        <input type="text" id="name" placeholder="اكتب اسمك" required>
-      </div>
-
-      <div class="field">
-        <label for="country">الدولة</label>
-        <input type="text" id="country" placeholder="مثال: السعودية">
+        <label for="nationality">الجنسية</label>
+        <input type="text" id="nationality" placeholder="مثال: سعودي/عراقي/ليبي...">
       </div>
 
       <div class="field">
@@ -496,9 +414,29 @@ function calcCheckout(){
 document.getElementById("checkin").addEventListener("change", calcCheckout);
 document.getElementById("nights").addEventListener("input", calcCheckout);
 
+const primaryAcc = document.querySelector("#why .acc");
+const otherAccordions = [...document.querySelectorAll(".acc")].filter(acc => acc !== primaryAcc);
+
+primaryAcc.addEventListener("toggle", () => {
+  if(!primaryAcc.open){
+    primaryAcc.open = true;
+  }
+});
+
+otherAccordions.forEach((acc) => {
+  acc.addEventListener("toggle", () => {
+    if(acc.open){
+      otherAccordions.forEach((other) => {
+        if(other !== acc){
+          other.open = false;
+        }
+      });
+    }
+  });
+});
+
 function sendWhatsApp(){
-  const name = document.getElementById("name").value;
-  const country = document.getElementById("country").value;
+  const nationality = document.getElementById("nationality").value;
   const checkin = document.getElementById("checkin").value;
   const nights = document.getElementById("nights").value;
   const checkout = document.getElementById("checkout").value;
@@ -509,8 +447,7 @@ function sendWhatsApp(){
   const notes = document.getElementById("notes").value;
 
   const message = `طلب حجز جديد (سيافا ترافل - SIAFA TRAVEL):
-الاسم: ${name}
-الدولة: ${country}
+الجنسية: ${nationality}
 تاريخ الوصول: ${formatDateYYYYMMDDToArabic(checkin)} (إذا غير محدد، تاريخ تقريبي)
 عدد الليالي: ${nights}
 تاريخ المغادرة: ${checkout}

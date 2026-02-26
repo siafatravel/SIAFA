@@ -4,104 +4,30 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>الفنادق التي نتعامل معها | سيافا ترافل</title>
+<meta name="description" content="تصفح قائمة الفنادق التي نتعامل معها في إسطنبول مع صور الغلاف، التصنيف، المنطقة، وخاصية عرض الصور.">
+<link rel="canonical" href="https://www.siafatravel.com/hotels.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="الفنادق التي نتعامل معها | سيافا ترافل">
+<meta property="og:description" content="تصفح قائمة الفنادق التي نتعامل معها في إسطنبول مع صور الغلاف، التصنيف، المنطقة، وخاصية عرض الصور.">
+<meta property="og:url" content="https://www.siafatravel.com/hotels.html">
+<meta property="og:image" content="https://www.siafatravel.com/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="الفنادق التي نتعامل معها | سيافا ترافل">
+<meta name="twitter:description" content="تصفح قائمة الفنادق التي نتعامل معها في إسطنبول مع صور الغلاف، التصنيف، المنطقة، وخاصية عرض الصور.">
+<meta name="twitter:image" content="https://www.siafatravel.com/logo.png">
+<link rel="icon" type="image/png" href="logo.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --bg:#05060a;
-  --panel:#111217;
-  --gold:#d4af37;
-}
-body{
-  margin:0;
-  font-family:'Cairo',sans-serif;
-  background:var(--bg);
-  color:#fff;
-  direction:rtl;
-}
-.header{
-  padding:34px 18px;
-  text-align:center;
-  background:rgba(17,18,23,0.9);
-  border-bottom:1px solid rgba(255,255,255,0.06);
-}
-.header h1{ margin:0 0 10px 0; font-size:30px; }
-.header p{ margin:0; opacity:0.85; line-height:1.8; }
+<link rel="stylesheet" href="hotels.css">
 
-.container{
-  max-width:1000px;
-  margin:auto;
-  padding:28px 18px 70px;
-}
-.search{
-  display:flex;
-  gap:12px;
-  margin:18px 0 22px;
-  flex-wrap:wrap;
-}
-.search input{
-  flex:1;
-  min-width:240px;
-  padding:14px 14px;
-  border-radius:12px;
-  border:none;
-  font-family:'Cairo',sans-serif;
-}
-.btn{
-  background:var(--gold);
-  color:#000;
-  padding:14px 18px;
-  border-radius:999px;
-  font-weight:bold;
-  text-decoration:none;
-  border:none;
-  cursor:pointer;
-}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:14px;
-}
-.hotel{
-  background:rgba(17,18,23,0.92);
-  border:1px solid rgba(255,255,255,0.06);
-  border-radius:14px;
-  padding:16px;
-  line-height:1.8;
-}
-.hotel b{ display:block; font-size:16px; margin-bottom:6px; }
-.muted{ opacity:0.8; font-size:13px; }
-
-.footer-note{
-  margin-top:22px;
-  background:rgba(17,18,23,0.92);
-  border:1px solid rgba(255,255,255,0.06);
-  border-radius:14px;
-  padding:16px;
-  line-height:1.9;
-}
-.footer-note a{ color:#fff; }
-.top-actions{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:14px;
-}
-.secondary{
-  background:transparent;
-  color:#fff;
-  border:1px solid rgba(255,255,255,0.22);
-}
-</style>
 </head>
 
 <body>
 
 <div class="header">
   <h1>الفنادق التي نتعامل معها</h1>
-  <p>اكتب اسم الفندق في البحث لتجده بسرعة ✅</p>
+  <p>اضغط على أي صورة لفندق لعرضها بشكل مكبر والتنقل بين الصور ✅</p>
   <div class="top-actions">
     <a class="btn secondary" href="index.html">⬅ الرجوع للموقع الرئيسي</a>
     <a class="btn" href="https://wa.me/905317387785">تواصل واتساب</a>
@@ -112,28 +38,178 @@ body{
 
   <div class="search">
     <input id="q" type="text" placeholder="ابحث عن فندق… مثال: Marriott" oninput="filterHotels()" />
-    <button class="btn" onclick="document.getElementById('q').value=''; filterHotels();">مسح</button>
+    <select id="ratingFilter" onchange="filterHotels()" aria-label="فلتر التصنيف">
+      <option value="5">5 نجوم</option>
+      <option value="34">3-4 نجوم</option>
+      <option value="all" selected>كل التصنيفات</option>
+    </select>
+    <select id="areaFilter" onchange="filterHotels()" aria-label="فلتر المنطقة">
+      <option value="all" selected>كل المناطق</option>
+    </select>
+    <button class="btn" onclick="document.getElementById('q').value=''; document.getElementById('ratingFilter').value='all'; document.getElementById('areaFilter').value='all'; filterHotels();">مسح</button>
+  </div>
+
+  <section class="brand-marquee" aria-label="أبرز سلاسل الفنادق">
+    <div class="brand-track">
+      <span class="brand-pill">Marriott</span>
+      <span class="brand-pill">Hilton</span>
+      <span class="brand-pill">Ramada</span>
+      <span class="brand-pill">Radisson</span>
+      <span class="brand-pill">Divan</span>
+      <span class="brand-pill">Wyndham</span>
+      <span class="brand-pill">Crowne Plaza</span>
+      <span class="brand-pill">Renaissance</span>
+      <span class="brand-pill">DoubleTree</span>
+      <span class="brand-pill">Rotana</span>
+      <span class="brand-pill">Marriott</span>
+      <span class="brand-pill">Hilton</span>
+      <span class="brand-pill">Ramada</span>
+      <span class="brand-pill">Radisson</span>
+      <span class="brand-pill">Divan</span>
+      <span class="brand-pill">Wyndham</span>
+      <span class="brand-pill">Crowne Plaza</span>
+      <span class="brand-pill">Renaissance</span>
+      <span class="brand-pill">DoubleTree</span>
+      <span class="brand-pill">Rotana</span>
+    </div>
+  </section>
+
+  <section class="area-map" aria-label="خريطة تفاعلية مبسطة لسنتر إسطنبول">
+    <h2>🗺️ خريطة سنتر إسطنبول — واضحة وبسيطة</h2>
+    <p>مناطق رئيسية + معلم سياحي بشكل مختصر، مع خطوط مترو وترام واضحة. اضغط على أي نقطة في الخريطة.</p>
+
+    <div class="map-controls">
+      <label class="map-chip"><input type="checkbox" id="toggleMetro" checked> خطوط المترو</label>
+      <label class="map-chip"><input type="checkbox" id="toggleTram" checked> خط ترامواي T1</label>
+    </div>
+
+    <div class="map-wrap">
+      <svg id="istanbulMap" viewBox="0 0 1200 620" role="img" aria-label="خريطة سنتر إسطنبول مع المناطق والمعالم">
+        <rect x="0" y="0" width="1200" height="620" fill="rgba(118,196,232,.36)"/>
+
+        <path class="land-mass" d="M0 60 C180 70, 300 130, 390 230 C450 295, 520 330, 612 372 C666 398, 695 462, 680 620 L0 620 Z"/>
+        <path class="land-mass" d="M548 0 C650 70, 732 130, 805 220 C874 306, 958 360, 1088 410 C1155 438, 1190 495, 1200 620 L1200 0 Z"/>
+
+        <path class="bosphorus-fill" d="M585 0 C542 75, 530 143, 542 212 C558 288, 602 344, 640 395 C675 443, 683 515, 670 620 L602 620 C617 510, 609 446, 574 398 C534 343, 487 286, 472 214 C459 141, 478 73, 521 0 Z"/>
+        <path class="golden-horn-fill" d="M372 257 C430 224, 489 215, 548 228 C533 259, 510 286, 483 309 C448 337, 417 361, 397 391 C360 357, 348 306, 372 257 Z"/>
+        <path class="marmara-fill" d="M0 530 L660 620 L0 620 Z"/>
+
+        <path class="coast-line" d="M0 60 C180 70, 300 130, 390 230 C450 295, 520 330, 612 372 C666 398, 695 462, 680 620"/>
+        <path class="coast-line" d="M548 0 C650 70, 732 130, 805 220 C874 306, 958 360, 1088 410 C1155 438, 1190 495, 1200 620"/>
+
+        <path class="metro-line" data-layer="metro" d="M140 230 L280 244 L418 258 L574 274 L744 292 L914 307"/>
+        <path class="metro-line" data-layer="metro" d="M640 160 L720 210 L805 248"/>
+        <path class="tram-line" data-layer="tram" d="M145 275 L244 283 L337 292 L430 301 L518 309 L586 316"/>
+
+        <circle class="zone-bubble" cx="290" cy="312" r="150"/>
+        <circle class="zone-bubble" cx="590" cy="275" r="135"/>
+        <circle class="zone-bubble" cx="840" cy="275" r="150"/>
+
+        <g class="poi-group" tabindex="0" role="button" aria-label="جامع الفاتح" data-name="جامع الفاتح" data-info="ضمن منطقة الفاتح التاريخية." data-transit="M2 + ترام T1" transform="translate(176,304)">
+          <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+          <rect class="poi-label-bg" x="18" y="-20" width="152" height="26"/><text class="poi-label" x="94" y="-3" text-anchor="middle">الفاتح — جامع الفاتح</text>
+        </g>
+
+        <g class="poi-group" tabindex="0" role="button" aria-label="جامع آيا صوفيا" data-name="جامع آيا صوفيا" data-info="ضمن قلب منطقة سلطان أحمد." data-transit="ترام T1" transform="translate(292,320)">
+          <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+          <rect class="poi-label-bg" x="18" y="-20" width="170" height="26"/><text class="poi-label" x="103" y="-3" text-anchor="middle">سلطان أحمد — آيا صوفيا</text>
+        </g>
+
+        <g class="poi-group" tabindex="0" role="button" aria-label="جامع السليمانية" data-name="جامع السليمانية" data-info="قريب من أمينونو والقرن الذهبي." data-transit="T1 + مشي قصير" transform="translate(420,352)">
+          <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+          <rect class="poi-label-bg" x="18" y="-20" width="184" height="26"/><text class="poi-label" x="110" y="-3" text-anchor="middle">أمينونو — جامع السليمانية</text>
+        </g>
+
+        <g class="poi-group" tabindex="0" role="button" aria-label="كاراكوي" data-name="كاراكوي" data-info="منطقة عبور بحرية وقرب برج غلاطة." data-transit="M2 + T1" transform="translate(610,275)">
+          <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+          <rect class="poi-label-bg" x="18" y="-20" width="154" height="26"/><text class="poi-label" x="95" y="-3" text-anchor="middle">كراكوي — برج غلاطة</text>
+        </g>
+
+        <g class="poi-group" tabindex="0" role="button" aria-label="تقسيم وشارع الاستقلال" data-name="تقسيم وشارع الاستقلال" data-info="قلب بيوغلو العصري والحركة السياحية." data-transit="M2 + F1" transform="translate(785,300)">
+          <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+          <rect class="poi-label-bg" x="18" y="-20" width="182" height="26"/><text class="poi-label" x="109" y="-3" text-anchor="middle">تقسيم — شارع الاستقلال</text>
+        </g>
+
+        <g class="poi-group" tabindex="0" role="button" aria-label="مول جواهر شيشلي" data-name="مول جواهر شيشلي" data-info="أحد أشهر المولات في منطقة شيشلي." data-transit="M2 + متروباص" transform="translate(890,261)">
+          <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+          <rect class="poi-label-bg" x="18" y="-20" width="166" height="26"/><text class="poi-label" x="101" y="-3" text-anchor="middle">شيشلي — مول جواهر</text>
+        </g>
+
+        <text class="water-label" x="546" y="352" transform="rotate(-73 546,352)">البوسفور</text>
+        <text class="water-sub" x="80" y="572">بحر مرمرة</text>
+        <text class="water-sub" x="408" y="262">القرن الذهبي</text>
+      </svg>
+
+      <div class="info-badge" id="mapInfo"><b>معلومة سريعة:</b> اضغط على نقطة من الخريطة لعرض شرح المنطقة والمعلم. يمكنك الضغط على اسم المعلم أو النقطة نفسها.</div>
+    </div>
+
+    <div class="map-legend">
+      <span class="legend-item"><span class="legend-line metro-swatch"></span>مترو</span>
+      <span class="legend-item"><span class="legend-line tram-swatch"></span>ترامواي T1</span>
+      <span class="legend-item"><span class="legend-dot"></span>منطقة + معلم مختصر</span>
+    </div>
+  </section>
+
+  <div class="footer-note" style="margin:0 0 14px 0;">
+    الموقع قيد التطوير ويتم تحديثه باستمرار وإضافة فنادق جديدة بشكل دوري. إذا لم تجد الفندق المطلوب حالياً، تواصل معنا وسنوفّر لك خيارات إضافية مباشرة ✅
   </div>
 
   <div class="grid" id="hotelList">
+    <div class="hotel" data-hotel="Marriott Hotel Şişli" data-hotel-ar="ماريوت شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Hilton Istanbul Bomonti" data-hotel-ar="هيلتون بومونتي شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Sheraton Istanbul Levent" data-hotel-ar="شيراتون ليفينت" data-city="إسطنبول" data-area="ليفينت" data-stars="5"></div>
+    <div class="hotel" data-hotel="Ramada Plaza By Wyndham Sultanahmet" data-hotel-ar="رمادا سلطان احمد لالالي" data-city="إسطنبول" data-area="فاتح-لالالي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Divan Istanbul Taksim" data-hotel-ar="ديفان تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+    <div class="hotel" data-hotel="Point Hotel Taksim" data-hotel-ar="بوينت تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+    <div class="hotel" data-hotel="Crowne Plaza Old City" data-hotel-ar="كراون بلازا اولد سيتي لالالي" data-city="إسطنبول" data-area="فاتح-لالالي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Mercure Istanbul Bomonti" data-hotel-ar="ميركور بومونتي شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Holiday Inn Şişli" data-hotel-ar="هوليدي ان شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Arts Hotel Harbiye" data-hotel-ar="ارتس حربية تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+    <div class="hotel" data-hotel="Lions Royal Hotel" data-hotel-ar="ليونز رويال" data-city="إسطنبول" data-area="فاتح-لالالي" data-stars="4" data-note="افتتاح حديث"></div>
+    <div class="hotel" data-hotel="Mosaic Hotel Laleli" data-hotel-ar="موزاييك لالالي" data-city="إسطنبول" data-area="فاتح-لالالي" data-stars="4"></div>
+    <div class="hotel" data-hotel="Beethoven Premium Hotel Laleli" data-hotel-ar="بيتهوفن بريميوم لالالي" data-city="إسطنبول" data-area="فاتح-لالالي" data-stars="4"></div>
+    <div class="hotel" data-hotel="The Parma Downtown Laleli" data-hotel-ar="ذا براما داون تاون لالالي" data-city="إسطنبول" data-area="فاتح-لالالي" data-stars="4"></div>
+    <div class="hotel" data-hotel="Martinenz Hotel Laleli" data-hotel-ar="مارتينينز لالالي" data-city="إسطنبول" data-area="فاتح-لالالي" data-stars="4"></div>
+    <div class="hotel" data-hotel="Four Sides Şişli" data-hotel-ar="فورسايدس شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="4"></div>
+    <div class="hotel" data-hotel="Mare Park Hotel Şişli" data-hotel-ar="ماري بارك شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="4"></div>
+    <div class="hotel" data-hotel="Akgün Istanbul Hotel Topkapı" data-hotel-ar="اكغون توب كابي" data-city="إسطنبول" data-area="توب كابي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Valide Hotel Şişli" data-hotel-ar="فاليدا شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="3"></div>
+    <div class="hotel" data-hotel="Eresin Hotels Topkapı" data-hotel-ar="ارسين فاتح - توب كابي" data-city="إسطنبول" data-area="فاتح - توب كابي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Holiday Inn Istanbul City Topkapı" data-hotel-ar="هوليدي ان فاتح - توب كابي" data-city="إسطنبول" data-area="فاتح - توب كابي" data-stars="5"></div>
+    <div class="hotel" data-hotel="The Marmara Pera" data-hotel-ar="ذا مرمرة بيرا تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+    <div class="hotel" data-hotel="Arts Hotel Taksim" data-hotel-ar="ارتس تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
+    <div class="hotel" data-hotel="Barceló Istanbul" data-hotel-ar="بارسيلو تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+    <div class="hotel" data-hotel="Nevi Hotel & Suites Taksim" data-hotel-ar="واجنحة نيفي تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
+    <div class="hotel" data-hotel="Renaissance Istanbul Polat Bosphorus Hotel" data-hotel-ar="رينيسانس بولات بوسفورس" data-city="إسطنبول" data-area="بيشكتاش" data-stars="5"></div>
 
-    <!-- ✅ بدّل هذه الأسماء بأسماء فنادقك -->
-    <div class="hotel"><b>Marriott Hotel Şişli</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Hilton Istanbul Bomonti</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Sheraton Istanbul Levent</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Radisson Blu Şişli</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Ramada Plaza By Wyndham Sultanahmet</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Divan Istanbul Taksim</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Point Hotel Taksim</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Crowne Plaza Old City</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Mercure Istanbul Bomonti</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Holiday Inn Şişli</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Arts Hotel Harbiye</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Lions Royal Hotel</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Eresin Hotels Topkapi</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>Mercure Istanbul Bomonti</b><div class="muted">إسطنبول</div></div>
-    <div class="hotel"><b>The Craton Hotel</b><div class="muted">إسطنبول</div></div>
-
+    <div class="hotel" data-hotel="Grand Gülsoy Old City" data-hotel-ar="غراند غولسوي اولد سيتي لالالي" data-city="إسطنبول" data-area="فاتح-لالالي" data-stars="4"></div>
+    <div class="hotel" data-hotel="The Craton Hotel Şişli" data-hotel-ar="ذا كراتون شيشلي" data-city="إسطنبول" data-area="شيشلي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Titanic City Taksim" data-hotel-ar="تايتنك سيتي تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
+    <div class="hotel" data-hotel="Ramada Plaza Istanbul City Center" data-hotel-ar="رمادا بلازا اسطنبول سيتي سنتر شيشلي-عصمان بيه" data-city="إسطنبول" data-area="شيشلي-عثمان بيه" data-stars="5"></div>
+    <div class="hotel" data-hotel="Renaissance Polat Istanbul Hotel" data-hotel-ar="رينيسانس بولات بكر كوي" data-city="إسطنبول" data-area="بكر كوي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Crowne Plaza Florya" data-hotel-ar="كراون بلازا فلوريا" data-city="إسطنبول" data-area="فلوريا" data-stars="5"></div>
+    <div class="hotel" data-hotel="CVK Park Bosphorus Hotel Taksim" data-hotel-ar="cvk park تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+    <div class="hotel" data-hotel="Aloft Istanbul Karaköy" data-hotel-ar="aloft hotels كراكوي" data-city="إسطنبول" data-area="كراكوي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Ottomans Life Hotel Deluxe Fatih" data-hotel-ar="اوتومانز لايف ديلوكس الفاتح" data-city="إسطنبول" data-area="الفاتح" data-stars="5"></div>
+    <div class="hotel" data-hotel="Legacy Ottoman Hotel Eminönü" data-hotel-ar="ليغاسي اوتومانز امينونو" data-city="إسطنبول" data-area="امينونو" data-stars="5"></div>
+    <div class="hotel" data-hotel="DoubleTree by Hilton Topkapı" data-hotel-ar="دبل تري باي هيلتون توب كابي" data-city="إسطنبول" data-area="توب كابي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Hotel Zurich Istanbul Old City" data-hotel-ar="زوريخ اسطنبول اولد سيتي لالالي" data-city="إسطنبول" data-area="فاتح-لالالي" data-stars="4"></div>
+    <div class="hotel" data-hotel="Hilton Istanbul Maslak" data-hotel-ar="هيلتون اسطنبول مسلك" data-city="إسطنبول" data-area="مسلك" data-stars="5"></div>
+    <div class="hotel" data-hotel="Hilton Istanbul Bakırköy" data-hotel-ar="هيلتون اسطنبول بكركوي" data-city="إسطنبول" data-area="بكر كوي" data-stars="5"></div>
+    <div class="hotel" data-hotel="Golden Tulip Bayrampaşa" data-hotel-ar="غولدن توليب بايرم باشا" data-city="إسطنبول" data-area="بايرم باشا" data-stars="5"></div>
+    <div class="hotel" data-hotel="Windsor Hotel & Convention Center" data-hotel-ar="ويندسور هوتيل بايرم باشا" data-city="إسطنبول" data-area="بايرم باشا" data-stars="5"></div>
+    <div class="hotel" data-hotel="Wanda Vista Istanbul" data-hotel-ar="واندا فيستا محمود بيه" data-city="إسطنبول" data-area="محمود بيه" data-stars="5"></div>
+    <div class="hotel" data-hotel="Centro WestSide by Rotana" data-hotel-ar="سينترو ويست سايد باي روتانا محمود بيه" data-city="إسطنبول" data-area="محمود بيه" data-stars="5"></div>
+    <div class="hotel" data-hotel="Clarion Hotel Istanbul Mahmutbey" data-hotel-ar="كلاريون هوتيل محمود بيه" data-city="إسطنبول" data-area="محمود بيه" data-stars="5"></div>
+    <div class="hotel" data-hotel="Delta Hotels by Marriott Istanbul Levent" data-hotel-ar="ديلتا هوتيلز باي ماريوت اسطنبول ليفينت" data-city="إسطنبول" data-area="ليفينت" data-stars="5"></div>
+    <div class="hotel" data-hotel="Sorriso Hotel Laleli" data-hotel-ar="سوريسو هوتيل لالالي" data-city="إسطنبول" data-area="فاتح-لالالي" data-stars="4"></div>
+    <div class="hotel" data-hotel="Pera Istanbul Hotel Fatih" data-hotel-ar="بير اسطنبول هوتيل الفاتح" data-city="إسطنبول" data-area="الفاتح" data-stars="4"></div>
+    <div class="hotel" data-hotel="Radisson Blu Hotel Istanbul Ottomare" data-hotel-ar="راديسون بلو اسطنبول اوتومار زيتون بورنو" data-city="إسطنبول" data-area="زيتون بورنو" data-stars="5"></div>
+    <div class="hotel" data-hotel="Hilton Istanbul Bosphorus" data-hotel-ar="هيلتون اسطنبول البوسفور تقسيم - حربية" data-city="إسطنبول" data-area="تقسيم - حربية" data-stars="5"></div>
+    <div class="hotel" data-hotel="Elite World Istanbul Taksim" data-hotel-ar="ايليت وورلد تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="5"></div>
+    <div class="hotel" data-hotel="Elite World Comfy Taksim" data-hotel-ar="ايليت وورلد كومفي تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
+    <div class="hotel" data-hotel="Menu Hotel Taksim" data-hotel-ar="منيو هوتيل تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
+    <div class="hotel" data-hotel="Wish More Hotel İstanbul" data-hotel-ar="ويش مور بيرم باشا" data-city="إسطنبول" data-area="بايرم باشا" data-stars="5"></div>
   </div>
 
   <div class="footer-note">
@@ -144,16 +220,23 @@ body{
 
 </div>
 
-<script>
-function filterHotels(){
-  const q = (document.getElementById('q').value || '').toLowerCase().trim();
-  const items = document.querySelectorAll('#hotelList .hotel');
-  items.forEach(item=>{
-    const text = item.innerText.toLowerCase();
-    item.style.display = text.includes(q) ? '' : 'none';
-  });
-}
-</script>
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lightbox-box">
+    <div class="lightbox-head">
+      <div class="lightbox-title" id="lightboxTitle"></div>
+      <button class="lightbox-close" id="lightboxClose" aria-label="إغلاق">✕</button>
+    </div>
+    <div class="lightbox-main">
+      <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="السابق">‹</button>
+      <img id="lightboxImage" class="lightbox-image" alt="">
+      <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="التالي">›</button>
+    </div>
+    <div class="lightbox-strip" id="lightboxStrip"></div>
+  </div>
+</div>
+
+<script src="hotels.js" defer></script>
+
 
 </body>
 </html>
