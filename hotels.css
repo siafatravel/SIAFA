@@ -371,6 +371,7 @@ body{
   cursor:pointer;
   flex:0 0 auto;
 }
+
 .lightbox-thumb.active{
   border-color:var(--gold);
   opacity:1;
