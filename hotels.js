@@ -1,312 +1,385 @@
-/* hotels.js — Clean version (Manifest-based) */
+:root{
+  --bg:#05060a;
+  --panel:#111217;
+  --gold:#d4af37;
+}
 
-(() => {
-  "use strict";
+body{
+  margin:0;
+  font-family:'Cairo',sans-serif;
+  background:var(--bg);
+  color:#fff;
+  direction:rtl;
+}
 
-  // ===== Helpers =====
-  const $ = (sel, root = document) => root.querySelector(sel);
-  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+.header{
+  padding:34px 18px;
+  text-align:center;
+  background:rgba(17,18,23,0.9);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.header h1{ margin:0 0 10px 0; font-size:30px; }
+.header p{ margin:0; opacity:0.85; line-height:1.8; }
 
-  function buildLocalUrl(folder, filename) {
-    return `assets/hotels/${folder}/${filename}`;
-  }
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:28px 18px 70px;
+}
 
-  function getFolderFromCard(card) {
-    return (card?.dataset?.folder || "").trim();
-  }
+.search{
+  display:flex;
+  gap:12px;
+  margin:18px 0 22px;
+  flex-wrap:wrap;
+}
+.search input{
+  flex:1;
+  min-width:240px;
+  padding:14px 14px;
+  border-radius:12px;
+  border:none;
+  font-family:'Cairo',sans-serif;
+}
+.search select{
+  padding:14px 12px;
+  border-radius:12px;
+  border:none;
+  font-family:'Cairo',sans-serif;
+  background:#fff;
+  color:#111;
+  min-width:150px;
+}
 
-  async function loadManifest(folder) {
-    if (!folder) throw new Error("Missing folder");
-    const url = `assets/hotels/${folder}/manifest.json?v=${Date.now()}`;
-    const res = await fetch(url, { cache: "no-store" });
-    if (!res.ok) throw new Error("manifest not found");
-    return res.json();
-  }
+/* ===== Brand marquee (optional) ===== */
+.brand-marquee{
+  margin:0 0 18px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  background:rgba(17,18,23,.9);
+}
+.brand-track{
+  display:flex;
+  gap:10px;
+  width:max-content;
+  padding:10px;
+  animation: brandScroll 42s linear infinite;
+}
+.brand-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid rgba(212,175,55,.35);
+  background:rgba(255,255,255,.04);
+  color:#f1d37d;
+  font-weight:700;
+  font-size:13px;
+  white-space:nowrap;
+}
+@keyframes brandScroll{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
+}
 
-  // ===== Map interactions =====
-  function initMapInteractions() {
-    const metroToggle = $("#toggleMetro");
-    const tramToggle = $("#toggleTram");
-    const mapInfo = $("#mapInfo");
+/* ===== Map ===== */
+.area-map{
+  margin:0 0 16px;
+  background:rgba(17,18,23,0.95);
+  border:1px solid rgba(255,255,255,0.10);
+  border-radius:16px;
+  padding:16px;
+}
+.area-map h2{ margin:0 0 8px; font-size:24px; }
+.area-map p{ margin:0 0 12px; opacity:.92; font-size:16px; line-height:1.9; }
+.map-controls{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px; }
+.map-chip{
+  display:flex; align-items:center; gap:8px;
+  font-size:13px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  padding:8px 12px;
+}
+.map-chip input{ accent-color:#d4af37; }
 
-    const metroLines = $$('[data-layer="metro"]');
-    const tramLines = $$('[data-layer="tram"]');
-    const poiGroups = $$(".poi-group");
+.map-wrap{
+  position:relative;
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(180deg,#1f4a69 0%,#173d5a 50%,#12324a 100%);
+}
+#istanbulMap{ width:100%; height:auto; display:block; }
+.land-mass{ fill:#f2f4f6; stroke:#cad1d8; stroke-width:2; pointer-events:none; }
+.coast-line{ stroke:#5f7890; stroke-width:2; fill:none; opacity:.7; pointer-events:none; }
+.bosphorus-fill{ fill:#72c2e8; pointer-events:none; }
+.marmara-fill{ fill:#67b9de; pointer-events:none; }
+.golden-horn-fill{ fill:#79c7ea; pointer-events:none; }
+.metro-line{ stroke:#e9558f; stroke-width:5; fill:none; pointer-events:none; }
+.tram-line{ stroke:#2dcf96; stroke-width:5; fill:none; pointer-events:none; }
+.zone-bubble{ fill:rgba(212,175,55,.14); stroke:rgba(212,175,55,.45); stroke-width:2; pointer-events:none; }
 
-    const setLayerState = (elements, visible) => {
-      elements.forEach((el) => (el.style.display = visible ? "" : "none"));
-    };
+.poi-group{ cursor:pointer; }
+.poi-core{ fill:#ffcf5a; stroke:#0f1720; stroke-width:2; transition:.2s; }
+.poi-ring{ fill:none; stroke:rgba(255,208,99,.45); stroke-width:2; }
+.poi-label-bg{ fill:rgba(8,11,17,.82); stroke:rgba(255,255,255,.26); stroke-width:1; rx:8; pointer-events:none; }
+.poi-label{ fill:#fff; font-size:15px; font-family:'Cairo',sans-serif; pointer-events:none; font-weight:700; }
+.poi-group.is-active .poi-core{ fill:#fff2b7; transform:scale(1.1); transform-origin:center; }
+.poi-group.is-active .poi-ring{ stroke:rgba(255,208,99,.95); }
+.poi-hit{ fill:transparent; r:18; }
 
-    const activatePoi = (poi) => {
-      if (!poi || !mapInfo) return;
-      poiGroups.forEach((n) => n.classList.remove("is-active"));
-      poi.classList.add("is-active");
+.water-label{ fill:rgba(255,255,255,.92); font-size:24px; font-family:'Cairo',sans-serif; font-weight:700; }
+.water-sub{ fill:rgba(255,255,255,.85); font-size:16px; font-family:'Cairo',sans-serif; }
 
-      const name = poi.dataset.name || "";
-      const info = poi.dataset.info || "";
-      const transit = poi.dataset.transit || "—";
-      mapInfo.innerHTML = `<b>${name}</b><br>${info}<br><span style="opacity:.9">النقل الأقرب: ${transit}</span>`;
-    };
+.map-legend{ display:flex; gap:12px; flex-wrap:wrap; font-size:12px; opacity:.92; margin-top:12px; }
+.legend-item{ display:flex; align-items:center; gap:6px; }
+.legend-line{ width:22px; height:4px; border-radius:4px; }
+.metro-swatch{ background:#e9558f; }
+.tram-swatch{ background:#2dcf96; }
+.legend-dot{ width:10px; height:10px; border-radius:50%; background:#ffcf5a; display:inline-block; }
 
-    metroToggle?.addEventListener("change", () =>
-      setLayerState(metroLines, !!metroToggle.checked)
-    );
-    tramToggle?.addEventListener("change", () =>
-      setLayerState(tramLines, !!tramToggle.checked)
-    );
+.info-badge{
+  position:absolute;
+  left:12px;
+  bottom:12px;
+  max-width:420px;
+  background:rgba(8,11,17,.92);
+  border:1px solid rgba(255,255,255,.20);
+  border-radius:12px;
+  padding:12px 14px;
+  font-size:14px;
+  line-height:1.9;
+}
+.info-badge b{ color:#ffe08f; }
 
-    poiGroups.forEach((poi) => {
-      poi.addEventListener("click", (e) => {
-        e.stopPropagation();
-        activatePoi(poi);
-      });
-      poi.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          activatePoi(poi);
-        }
-      });
-    });
+@media (max-width:900px){
+  .poi-label{ font-size:13px; }
+}
+@media (max-width:768px){
+  .area-map{ padding:14px; }
+  .area-map p{ font-size:15px; }
+  .map-chip{ font-size:12px; }
+  .info-badge{ position:static; margin-top:10px; max-width:100%; font-size:13px; }
+  .poi-label{ font-size:12px; }
+}
 
-    if (poiGroups.length) activatePoi(poiGroups[0]);
-  }
+/* ===== List ===== */
+.btn{
+  background:var(--gold);
+  color:#000;
+  padding:14px 18px;
+  border-radius:999px;
+  font-weight:bold;
+  text-decoration:none;
+  border:none;
+  cursor:pointer;
+}
 
-  // ===== Area filter =====
-  function initAreaFilter() {
-    const areaFilter = $("#areaFilter");
-    if (!areaFilter) return;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:14px;
+}
 
-    const areas = [...new Set(
-      $$("#hotelList .hotel")
-        .map((h) => (h.dataset.area || "").trim())
-        .filter(Boolean)
-    )].sort((a, b) => a.localeCompare(b, "ar"));
+.hotel{
+  background:rgba(17,18,23,0.92);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:14px;
+  padding:12px;
+  line-height:1.8;
+}
 
-    for (const area of areas) {
-      const opt = document.createElement("option");
-      opt.value = area;
-      opt.textContent = area;
-      areaFilter.appendChild(opt);
-    }
-  }
+.hotel-thumb{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:10px;
+  display:block;
+  cursor:zoom-in;
+  border:1px solid rgba(255,255,255,0.12);
+}
 
-  // ===== Render hotels cards (cover from manifest) =====
-  async function renderHotels() {
-    const cards = $$("#hotelList .hotel");
+.hotel-meta{ padding:8px 4px 4px; }
 
-    for (const card of cards) {
-      const hotel = card.dataset.hotel || "";
-      const hotelAr = card.dataset.hotelAr || hotel;
-      const city = card.dataset.city || "";
-      const area = card.dataset.area || "";
-      const stars = Math.max(1, Math.min(parseInt(card.dataset.stars || "5", 10), 5));
-      const starsText = "★".repeat(stars);
-      const note = card.dataset.note ? ` (${card.dataset.note})` : "";
-      const folder = getFolderFromCard(card);
+.hotel-headline{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+}
 
-      const fallbackCover = "background123.jpg"; // موجود عندك غالباً
-      let coverUrl = fallbackCover;
+.hotel b{ display:block; font-size:16px; margin-bottom:2px; line-height:1.5; }
+.hotel-ar{ font-size:14px; color:rgba(255,255,255,0.92); }
 
-      try {
-        const m = await loadManifest(folder);
-        const coverName = String(m.cover || "cover.jpg").trim();
-        coverUrl = buildLocalUrl(folder, coverName);
-      } catch (_) {
-        coverUrl = fallbackCover;
-      }
+.hotel-rating{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  line-height:1.2;
+  flex:0 0 auto;
+}
+.rating-label{ font-size:11px; opacity:0.78; }
+.rating-stars{
+  color:#f5c84b;
+  letter-spacing:1px;
+  font-size:14px;
+  text-shadow:0 1px 6px rgba(212,175,55,.35);
+}
 
-      card.innerHTML = `
-        <img class="hotel-thumb" src="${coverUrl}" loading="lazy" alt="واجهة ${hotel}">
-        <div class="hotel-meta">
-          <div class="hotel-headline">
-            <div>
-              <b>${hotel}${note}</b>
-              <div class="hotel-ar">${hotelAr}${note}</div>
-            </div>
-            <div class="hotel-rating" aria-label="تصنيف ${stars} نجوم">
-              <span class="rating-label">التصنيف</span>
-              <span class="rating-stars">${starsText}</span>
-            </div>
-          </div>
-          <div class="muted">${city}${area ? ` - ${area}` : ""}</div>
-        </div>
-        <button class="gallery-btn" type="button">عرض الصور</button>
-      `;
-    }
-  }
+.muted{ opacity:0.8; font-size:13px; }
 
-  // ===== Filtering =====
-  function filterHotels() {
-    const q = ($("#q")?.value || "").toLowerCase().trim();
-    const rating = $("#ratingFilter")?.value || "all";
-    const area = $("#areaFilter")?.value || "all";
+.gallery-btn{
+  margin-top:8px;
+  width:100%;
+  background:transparent;
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:10px;
+  padding:10px;
+  cursor:pointer;
+}
 
-    const items = $$("#hotelList .hotel");
-    items.forEach((item) => {
-      const text = (item.innerText || "").toLowerCase();
-      const stars = parseInt(item.dataset.stars || "0", 10);
+.footer-note{
+  margin-top:22px;
+  background:rgba(17,18,23,0.92);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:14px;
+  padding:16px;
+  line-height:1.9;
+}
+.footer-note a{ color:#fff; }
 
-      const textMatch = text.includes(q);
+.top-actions{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+.secondary{
+  background:transparent;
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.22);
+}
 
-      const ratingMatch =
-        rating === "all"
-          ? true
-          : rating === "5"
-          ? stars === 5
-          : stars >= 3 && stars <= 4;
+/* ===== Lightbox ===== */
+.lightbox{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(5,6,10,0.9);
+  z-index:1200;
+  padding:14px;
+}
+.lightbox.open{ display:flex; }
 
-      const areaMatch = area === "all" ? true : (item.dataset.area || "") === area;
+.lightbox-box{
+  width:min(1000px, 100%);
+  max-height:92vh;
+  background:rgba(14,15,20,0.95);
+  border:1px solid rgba(255,255,255,0.16);
+  border-radius:16px;
+  padding:10px;
+}
 
-      item.style.display = textMatch && ratingMatch && areaMatch ? "" : "none";
-    });
-  }
+.lightbox-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:4px 4px 10px;
+}
+.lightbox-title{font-size:14px; opacity:0.88;}
 
-  function clearFilters() {
-    const q = $("#q");
-    const ratingFilter = $("#ratingFilter");
-    const areaFilter = $("#areaFilter");
-    if (q) q.value = "";
-    if (ratingFilter) ratingFilter.value = "all";
-    if (areaFilter) areaFilter.value = "all";
-    filterHotels();
-  }
+.lightbox-close,
+.lightbox-nav{
+  width:40px;
+  height:40px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.06);
+  color:#fff;
+  cursor:pointer;
+  font-size:22px;
+}
 
-  // ===== Lightbox =====
-  const lightbox = $("#lightbox");
-  const lightboxImage = $("#lightboxImage");
-  const lightboxTitle = $("#lightboxTitle");
-  const lightboxStrip = $("#lightboxStrip");
-  const lightboxLoading = $("#lightboxLoading");
+.lightbox-main{
+  position:relative;
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.12);
+}
 
-  let activeImages = [];
-  let activeIndex = 0;
-  let activeHotel = "";
+.lightbox-image{
+  width:100%;
+  max-height:66vh;
+  object-fit:contain;
+  display:block;
+  background:#0b0c10;
+}
 
-  function renderThumbs() {
-    if (!lightboxStrip) return;
-    lightboxStrip.innerHTML = activeImages
-      .map(
-        (src, idx) =>
-          `<img src="${src}" class="lightbox-thumb ${idx === activeIndex ? "active" : ""}"
-                data-idx="${idx}" loading="lazy" alt="${activeHotel} ${idx + 1}">`
-      )
-      .join("");
-  }
+.lightbox-prev,
+.lightbox-next{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+}
+.lightbox-prev{ left:8px; }
+.lightbox-next{ right:8px; }
 
-  function showImage(index) {
-    if (!activeImages.length || !lightboxImage || !lightboxTitle) return;
+.lightbox-strip{
+  margin-top:10px;
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+}
 
-    activeIndex = (index + activeImages.length) % activeImages.length;
-    lightboxImage.src = activeImages[activeIndex];
-    lightboxTitle.textContent = `${activeHotel} — صورة ${activeIndex + 1} من ${activeImages.length}`;
-    renderThumbs();
-  }
+.lightbox-thumb{
+  width:62px;
+  height:62px;
+  object-fit:cover;
+  border-radius:8px;
+  border:2px solid transparent;
+  opacity:.8;
+  cursor:pointer;
+  flex:0 0 auto;
+}
+.lightbox-thumb.active{
+  border-color:var(--gold);
+  opacity:1;
+}
 
-  async function openLightbox(card) {
-    if (!lightbox) return;
+/* subtle motion polish */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    activeHotel = card.dataset.hotel || "";
-    const folder = getFolderFromCard(card);
-    const fallbackCover = "background123.jpg";
+.area-map,
+.hotel,
+.footer-note {
+  animation: fadeInUp .5s ease both;
+}
 
-    lightbox.classList.add("open");
-    lightbox.setAttribute("aria-hidden", "false");
+.hotel {
+  transition: transform .24s ease, border-color .24s ease, box-shadow .24s ease;
+}
 
-    // Loading state
-    if (lightboxLoading) lightboxLoading.style.display = "";
-    if (lightboxImage) lightboxImage.style.display = "none";
-    if (lightboxTitle) lightboxTitle.textContent = `${activeHotel} — جارِ تحميل الصور…`;
-    if (lightboxStrip) lightboxStrip.innerHTML = "";
+.hotel:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212,175,55,.35);
+  box-shadow: 0 10px 24px rgba(0,0,0,.24);
+}
 
-    try {
-      const m = await loadManifest(folder);
+.hotel-thumb {
+  transition: transform .35s ease;
+}
 
-      const coverName = String(m.cover || "cover.jpg").trim();
-      const coverUrl = buildLocalUrl(folder, coverName);
-
-      const imgs = Array.isArray(m.images) ? m.images : [];
-      const galleryUrls = imgs
-        .map((name) => buildLocalUrl(folder, String(name).trim()))
-        .filter(Boolean);
-
-      // cover + gallery (بدون تكرار)
-      const merged = [coverUrl, ...galleryUrls.filter((u) => u !== coverUrl)];
-      activeImages = merged.length ? merged : [fallbackCover];
-    } catch (_) {
-      activeImages = [fallbackCover];
-    }
-
-    activeIndex = 0;
-
-    // Show
-    if (lightboxLoading) lightboxLoading.style.display = "none";
-    if (lightboxImage) lightboxImage.style.display = "";
-    showImage(0);
-  }
-
-  function closeLightbox() {
-    if (!lightbox) return;
-    lightbox.classList.remove("open");
-    lightbox.setAttribute("aria-hidden", "true");
-    if (lightboxImage) lightboxImage.src = "";
-
-    activeImages = [];
-    activeIndex = 0;
-    activeHotel = "";
-    if (lightboxStrip) lightboxStrip.innerHTML = "";
-  }
-
-  // ===== Init =====
-  async function init() {
-    await renderHotels();
-    initAreaFilter();
-    initMapInteractions();
-    filterHotels();
-
-    // UI events
-    $("#q")?.addEventListener("input", filterHotels);
-    $("#ratingFilter")?.addEventListener("change", filterHotels);
-    $("#areaFilter")?.addEventListener("change", filterHotels);
-    $("#clearBtn")?.addEventListener("click", clearFilters);
-
-    // Open lightbox from list
-    $("#hotelList")?.addEventListener("click", (e) => {
-      const target = e.target;
-      const card = target?.closest?.(".hotel");
-      if (!card) return;
-
-      const isImageClick = !!target.closest?.(".hotel-thumb");
-      const isButtonClick = !!target.closest?.(".gallery-btn");
-      if (!isImageClick && !isButtonClick) return;
-
-      openLightbox(card);
-    });
-
-    // Thumbs click
-    lightboxStrip?.addEventListener("click", (e) => {
-      const thumb = e.target?.closest?.(".lightbox-thumb");
-      if (!thumb) return;
-      showImage(parseInt(thumb.dataset.idx || "0", 10));
-    });
-
-    $("#lightboxPrev")?.addEventListener("click", () => showImage(activeIndex - 1));
-    $("#lightboxNext")?.addEventListener("click", () => showImage(activeIndex + 1));
-    $("#lightboxClose")?.addEventListener("click", closeLightbox);
-
-    lightbox?.addEventListener("click", (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (!lightbox?.classList.contains("open")) return;
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowLeft") showImage(activeIndex + 1);
-      if (e.key === "ArrowRight") showImage(activeIndex - 1);
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", init);
-
-  // لو حابب تضلّ الدوال Global (مش ضروري بس ما بضر)
-  window.filterHotels = filterHotels;
-})();
+.hotel:hover .hotel-thumb {
+  transform: scale(1.03);
+}

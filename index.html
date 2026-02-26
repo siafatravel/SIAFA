@@ -377,21 +377,22 @@
       });
     });
 
+    // WhatsApp sender
     function sendWhatsApp(){
-      const nationality = document.getElementById("nationality").value || "-";
+      const nationality = document.getElementById("nationality").value || "";
       const checkin = document.getElementById("checkin").value || "";
-      const nights = document.getElementById("nights").value || "-";
-      const checkout = document.getElementById("checkout").value || "-";
-      const adults = document.getElementById("adults").value || "-";
-      const children = document.getElementById("children").value || "0";
-      const childrenAges = document.getElementById("childrenAges").value || "-";
-      const budget = document.getElementById("budget").value || "-";
-      const notes = document.getElementById("notes").value || "-";
+      const nights = document.getElementById("nights").value || "";
+      const checkout = document.getElementById("checkout").value || "";
+      const adults = document.getElementById("adults").value || "";
+      const children = document.getElementById("children").value || "";
+      const childrenAges = document.getElementById("childrenAges").value || "";
+      const budget = document.getElementById("budget").value || "";
+      const notes = document.getElementById("notes").value || "";
 
       const msg =
 `طلب حجز جديد (سيافا ترافل - SIAFA TRAVEL):
 الجنسية: ${nationality}
-تاريخ الوصول: ${checkin ? formatDateYYYYMMDDToArabic(checkin) : "غير محدد (تاريخ تقريبي)"}
+تاريخ الوصول: ${formatDateYYYYMMDDToArabic(checkin)} (إذا غير محدد، تاريخ تقريبي)
 عدد الليالي: ${nights}
 تاريخ المغادرة: ${checkout}
 عدد البالغين: ${adults}
@@ -400,10 +401,13 @@
 المستوى: ${budget}
 ملاحظات: ${notes}`;
 
-      window.open(`https://wa.me/905317387785?text=${encodeURIComponent(msg)}`, "_blank");
+      const phone = "905317387785";
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+      window.open(url, "_blank");
     }
 
-    document.getElementById("bookingForm").addEventListener("submit", (e) => {
+    // Form submit
+    document.getElementById("bookingForm").addEventListener("submit", function(e){
       e.preventDefault();
       sendWhatsApp();
     });
