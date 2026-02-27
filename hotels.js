@@ -30,64 +30,104 @@
 
   // NOTE: مفاتيح الأسماء لازم تطابق data-hotel بالـHTML حرفياً
   const hotelCoverOverrides = {
+    // ✅ FIXED: Divan (كان عندك رابط ممكن ينكسر بسبب hotlink)
     "Divan Istanbul Taksim": [
-      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/42160386.jpg?k=b4fa2f801f4a5cefa00dd0c1fe5ab2b4ef4cb3b4bb944188d2f1384f4b5237ac&o=&hp=1",
+      "https://images.trvl-media.com/lodging/1000000/10000/4700/4601/52bea6e3.jpg?impolicy=resizecrop&ra=fit&rw=900",
+      "https://images.trvl-media.com/lodging/1000000/10000/4700/4601/52bea6e3.jpg?impolicy=resizecrop&ra=fit&rw=598",
     ],
+
+    // ✅ موجود عندك
     "Point Hotel Taksim": [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/06/3a/b8/point-hotel.jpg?w=900&h=500&s=1",
     ],
+
     "Crowne Plaza Old City": [
       "https://www.hotels-tr.net/data/Photos/OriginalPhoto/11986/1198611/1198611310/photo-crowne-plaza-istanbul-old-city-by-ihg-istanbul-1.JPEG",
     ],
+
     "Mercure Istanbul Bomonti": [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/1e/bd/9f/exterior.jpg?w=700&h=-1&s=1",
     ],
+
     "Holiday Inn Şişli": [
       "https://digital.ihg.com/is/image/ihg/holiday-inn-istanbul-5090389494-4x3",
     ],
+
     "Arts Hotel Harbiye": [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/0f/e4/06/arts-hotel-istanbul.jpg?w=900&h=-1&s=1",
     ],
+
+    // ✅ FIXED: Hilton Bomonti (ما كان عندك override أصلاً)
+    "Hilton Istanbul Bomonti": [
+      "https://images.trvl-media.com/lodging/7000000/6230000/6226800/6226720/c0561ffa.jpg?impolicy=resizecrop&ra=fit&rw=900",
+      "https://images.trvl-media.com/lodging/7000000/6230000/6226800/6226720/c0561ffa.jpg?impolicy=resizecrop&ra=fit&rw=598",
+    ],
+
+    // ✅ FIXED: Sheraton Levent (ما كان عندك override أصلاً)
+    "Sheraton Istanbul Levent": [
+      "https://cache.marriott.com/is/image/marriotts7prod/si-istsl-exterior-2-34488%3AWide-Hor?fit=constrain&wid=750",
+      "https://cache.marriott.com/is/image/marriotts7prod/si-istsl-exterior-15986%3AWide-Hor?fit=constrain&wid=750",
+    ],
+
+    // ✅ Lions Royal: حسب طلبك (Booking)
     "Lions Royal Hotel": [
+      "https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/746180737.jpg?k=8169a5057106a0232cfd0e6e619ee9fb3d6b84219a9832bfa29c1763f1d62d94&o=&s=1024x",
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/486996180.jpg?k=7cec9105f71ce2b1273f8b06ec81e46ce596e400ca7c905f6d1058b34dcf1cf5&o=&hp=1",
     ],
+
+    // ✅ Mosaic: ثبّتناه على مصدر أقل كسر
     "Mosaic Hotel Laleli": [
-      "https://www.mosaic-hotel.com/wp-content/uploads/2022/04/mustafa3bas_hotelfotografcisi_mustafa3bas_hotelfotografcisi_5M1A5747.jpg",
+      "https://images.trvl-media.com/lodging/7000000/6060000/6055700/6055645/e7f5fe74.jpg?impolicy=resizecrop&ra=fit&rw=900",
+      "https://images.trvl-media.com/lodging/7000000/6060000/6055700/6055645/e7f5fe74.jpg?impolicy=resizecrop&ra=fit&rw=598",
     ],
+
     "Beethoven Premium Hotel Laleli": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/286436520.jpg?k=45b8a3c6499d3fda73a63870a56f5709df5821364242f96140f603144fdd8f97&o=",
     ],
+
     "The Parma Downtown Laleli": [
       "https://lh3.googleusercontent.com/p/AF1QipOURXjUDXY3NW8MwErR-KxRQmdpK0vSBuYGMAjM=s1360-w1360-h1020-rw",
     ],
+
     "Martinenz Hotel Laleli": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/289742660.jpg?k=a71b4f6a2a424b95b106d78453346c983e952a836b5b1fe392c47fa80c5d7eb8&o=&hp=1",
     ],
+
     "Four Sides Şişli": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/249173676.jpg?k=2dbfdbb457d6b0863358da918d84e43bea8c00bc1f2fc7d96af7358d847db89d&o=&hp=1",
     ],
+
     "Mare Park Hotel Şişli": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/319791347.jpg?k=2c06ff0bcf139f872294ef702ad9f9038bd2333d57b55072728ddb91d9eb9c53&o=&hp=1",
     ],
+
     "Akgün Istanbul Hotel Topkapı": [
       "https://media-cdn.tripadvisor.com/media/photo-s/02/5d/f3/57/exterior.jpg",
     ],
+
     "Valide Hotel Şişli": [
       "https://lh3.googleusercontent.com/p/AF1QipMpvMLWqtgTCpyRr1ZSAXcOUkZgUVah8Nd18bbP=s1360-w1360-h1020-rw",
     ],
+
     "The Marmara Pera": [
       "https://www.hotel-board.com/picture/the-marmara-pera-hotel-6693957.jpg",
     ],
+
     "Arts Hotel Taksim": [
       "https://media-cdn.tripadvisor.com/media/photo-s/29/5d/37/e3/exterior.jpg",
     ],
+
     "Barceló Istanbul": [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/5e/5a/55/bist-view.jpg?w=700&h=-1&s=1",
     ],
+
     "Nevi Hotel & Suites Taksim": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/306099602.jpg?k=b67e38a7cfab1fe46121d526b511d931d2dc471411a6e7de077db508b976fd27&o=&hp=1",
     ],
+
+    // ✅ Renaissance Polat: حسب طلبك (Booking)
     "Renaissance Istanbul Polat Bosphorus Hotel": [
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/433346345.jpg?k=95768d076e2e2c810d5a251d83d01aa8655eca1968cc504ded4564aa0f4b8c77&o=",
       "https://cache.marriott.com/content/dam/marriott-renditions/ISTBR/istbr-exterior-9065-hor-feat.jpg",
     ],
   };
@@ -251,6 +291,8 @@
         <img class="hotel-thumb"
              src="${coverUrl}"
              loading="lazy"
+             decoding="async"
+             referrerpolicy="no-referrer"
              alt="واجهة ${hotel}"
              data-fallbacks='${JSON.stringify(fallbackCandidates)}'>
         <div class="hotel-meta">
@@ -328,6 +370,7 @@
                 class="lightbox-thumb ${idx === activeIndex ? "active" : ""}"
                 data-idx="${idx}"
                 loading="lazy"
+                referrerpolicy="no-referrer"
                 alt="${activeHotel} ${idx + 1}">`
       )
       .join("");
@@ -385,7 +428,7 @@
     // 2) If manifest exists: use local images
     if (folder) {
       try {
-        const { coverUrl, images } = await galleryFromManifest(folder);
+        const { images } = await galleryFromManifest(folder);
         activeImages = uniq(images).slice(0, 60);
         activeIndex = 0;
         if (lightboxLoading) lightboxLoading.style.display = "none";
@@ -397,16 +440,17 @@
       }
     }
 
-    // 3) Fallback: cover from card image + overrides + shared extras
-    const coverSrc =
-      card.querySelector(".hotel-thumb")?.currentSrc ||
-      card.querySelector(".hotel-thumb")?.src ||
-      "";
-
+    // 3) Fallback: cover from overrides/default + shared extras
     const overrideArr = hotelCoverOverrides[hotel] || [];
     const candidates = Array.isArray(overrideArr) ? overrideArr.slice(1) : [];
 
-    activeImages = defaultGalleryImages(overrideArr[0] || coverSrc || "background123.jpg", candidates);
+    const coverSrc =
+      overrideArr[0] ||
+      card.querySelector(".hotel-thumb")?.currentSrc ||
+      card.querySelector(".hotel-thumb")?.src ||
+      "background123.jpg";
+
+    activeImages = defaultGalleryImages(coverSrc, candidates);
     activeIndex = 0;
 
     if (lightboxLoading) lightboxLoading.style.display = "none";
@@ -431,6 +475,11 @@
         try {
           fallbacks = JSON.parse(img.dataset.fallbacks || "[]");
         } catch (_) {}
+
+        // ✅ إذا ما عنده fallbacks، استخدم sharedGalleryExtras تلقائيًا
+        if (!fallbacks.length) {
+          fallbacks = [...sharedGalleryExtras];
+        }
 
         const next = fallbacks.shift();
         img.dataset.fallbacks = JSON.stringify(fallbacks);
