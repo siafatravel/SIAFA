@@ -23,44 +23,35 @@
     "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg",
   ];
 
+  // ✅ بدون limit نهائياً
   function defaultGalleryImages(cover, candidates = []) {
-    const merged = uniq([cover, ...candidates, ...sharedGalleryExtras]);
-    return merged.slice(0, 15); // ✅ نخليها توصل لـ 15 بدل 9
+    return uniq([cover, ...candidates, ...sharedGalleryExtras]);
   }
 
   // NOTE: مفاتيح الأسماء لازم تطابق data-hotel بالـHTML حرفياً
   const hotelCoverOverrides = {
-    // =========================
     // ✅ فنادق كان عندك مشكلة بصورها
-    // =========================
     "Hilton Istanbul Bomonti": [
-      // صورة واضحة للواجهة (مضمونة)
       "https://images.trvl-media.com/lodging/7000000/6230000/6226800/6226720/c0561ffa.jpg?impolicy=resizecrop&ra=fit&rw=1200",
     ],
     "Sheraton Istanbul Levent": [
-      // مدخل/واجهة
       "https://images.trvl-media.com/lodging/1000000/910000/905000/904946/421a2a64.jpg?impolicy=resizecrop&ra=fit&rw=1200",
     ],
     "Divan Istanbul Taksim": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/42160386.jpg?k=b4fa2f801f4a5cefa00dd0c1fe5ab2b4ef4cb3b4bb944188d2f1384f4b5237ac&o=&hp=1",
     ],
     "Lions Royal Hotel": [
-      // ✅ الرابط اللي عطيتني ياه
       "https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/746180737.jpg?k=8169a5057106a0232cfd0e6e619ee9fb3d6b84219a9832bfa29c1763f1d62d94&o=&s=1024x",
     ],
     "Mosaic Hotel Laleli": [
       "https://www.mosaic-hotel.com/wp-content/uploads/2022/04/mustafa3bas_hotelfotografcisi_mustafa3bas_hotelfotografcisi_5M1A5747.jpg",
     ],
     "Renaissance Istanbul Polat Bosphorus Hotel": [
-      // ✅ الرابط اللي عطيتني ياه
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/433346345.jpg?k=95768d076e2e2c810d5a251d83d01aa8655eca1968cc504ded4564aa0f4b8c77&o=",
     ],
 
-    // =========================
     // ✅ إضافة/تصحيح أغلفة لفنادق موجودة عندك
-    // =========================
     "Ramada Plaza By Wyndham Sultanahmet": [
-      // غلاف مناسب (إذا بدك تبدله برابط ثاني ابعته وأنا بثبته)
       "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg",
     ],
     "Point Hotel Taksim": [
@@ -112,14 +103,11 @@
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/306099602.jpg?k=b67e38a7cfab1fe46121d526b511d931d2dc471411a6e7de077db508b976fd27&o=&hp=1",
     ],
 
-    // =========================
-    // ✅ الفنادق الجديدة — أغلفة
-    // =========================
+    // ✅ الفنادق الجديدة — أغلفة مؤقتة
     "Grand Hotel Gulsoy": [
       "https://images.trvl-media.com/lodging/2000000/1600000/1594200/1594173/2fbab688.jpg?impolicy=resizecrop&ra=fit&rw=1200",
     ],
     "The Craton Hotel Sisli": [
-      // غلاف مناسب مؤقت (إذا بدك صورة محددة للفندق ابعتلي رابطها)
       "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
     ],
     "Titanic City Taksim": [
@@ -150,7 +138,7 @@
       "https://images.trvl-media.com/lodging/20000000/19430000/19427300/19427241/b3c42e01.jpg?impolicy=resizecrop&ra=fit&rw=1200",
     ],
     "Hotel Zurich Istanbul": [
-      "https://images.trvl-media.com/lodging/2000000/1600000/1594200/1594173/2fbab688.jpg?impolicy=resizecrop&ra=fit&rw=1200",
+      "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg",
     ],
     "Hilton Istanbul Maslak": [
       "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg",
@@ -194,7 +182,7 @@
     "Elite World Comfy Istanbul Taksim": [
       "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg",
     ],
-    "Menua Hotel Taksim": [
+    "Mineo Hotel Taksim": [
       "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg",
     ],
     "Wish More Hotel Istanbul": [
@@ -203,61 +191,11 @@
   };
 
   // Optional: per-hotel custom gallery (absolute URLs)
-  // ✅ إذا حطيت هون صور الفندق (حتى 15)، الألبوم بصير خاص ومضمون
   const customHotelGalleries = {
     "Mercure Istanbul Bomonti": [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/1e/bd/9f/exterior.jpg?w=1200&h=-1&s=1",
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/467247046.jpg?k=48837db6f61fc6c147feaae2c848f351e9c013e1771edf6df78c6d3fdad450cd&o=&hp=1",
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768229.jpg?k=5dcecb13248a27d19085536ece1547b212d0dd085399c661846464f992fcea6a&o=",
-    ],
-
-    // ✅ CVK (كم صور إضافية جاهزة)
-    "CVK Park Bosphorus Hotel Istanbul": [
-      "https://image-tc.galaxy.tf/wijpeg-7qmepp9q0ezfe026g5zoh1u5y/superior-sea-king-2.jpg",
-      "https://image-tc.galaxy.tf/wijpeg-es7cmxg5bcwg2m1n86mb8z1j8/superior-sea-king-1.jpg",
-      "https://image-tc.galaxy.tf/wijpeg-9mz5aj4d4vn4e0nwvc0cmroe1/superior-garden-king.jpg",
-      "https://image-tc.galaxy.tf/wijpeg-drlw8q6pns1vgvx5ju0puk66f/corner-bosphorus-terrace-suite-bedroom.jpg",
-    ],
-
-    // ✅ Titanic City Taksim (غلاف + ممكن تزيد صور لاحقاً)
-    "Titanic City Taksim": [
-      "https://images.trvl-media.com/lodging/3000000/2010000/2001500/2001408/a72a5e6f.jpg?impolicy=resizecrop&ra=fit&rw=1200",
-      "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
-      "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg",
-    ],
-
-    // ✅ Hilton Bomonti
-    "Hilton Istanbul Bomonti": [
-      "https://images.trvl-media.com/lodging/7000000/6230000/6226800/6226720/c0561ffa.jpg?impolicy=resizecrop&ra=fit&rw=1200",
-      "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg",
-      "https://images.pexels.com/photos/2034335/pexels-photo-2034335.jpeg",
-    ],
-
-    // ✅ Sheraton Levent
-    "Sheraton Istanbul Levent": [
-      "https://images.trvl-media.com/lodging/1000000/910000/905000/904946/421a2a64.jpg?impolicy=resizecrop&ra=fit&rw=1200",
-      "https://images.trvl-media.com/lodging/1000000/910000/905000/904946/fff472de.jpg?impolicy=resizecrop&ra=fit&rw=1200",
-    ],
-
-    // ✅ Grand Gulsoy
-    "Grand Hotel Gulsoy": [
-      "https://images.trvl-media.com/lodging/2000000/1600000/1594200/1594173/2fbab688.jpg?impolicy=resizecrop&ra=fit&rw=1200",
-      "https://images.trvl-media.com/lodging/2000000/1600000/1594200/1594173/310494ee.jpg?impolicy=resizecrop&ra=fit&rw=1200",
-    ],
-
-    // ✅ DoubleTree Topkapi
-    "DoubleTree by Hilton Istanbul Topkapi": [
-      "https://images.trvl-media.com/lodging/20000000/19430000/19427300/19427241/b3c42e01.jpg?impolicy=resizecrop&ra=fit&rw=1200",
-    ],
-
-    // ✅ Lions Royal (غلافك)
-    "Lions Royal Hotel": [
-      "https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/746180737.jpg?k=8169a5057106a0232cfd0e6e619ee9fb3d6b84219a9832bfa29c1763f1d62d94&o=&s=1024x",
-    ],
-
-    // ✅ Renaissance Polat Bosphorus (غلافك)
-    "Renaissance Istanbul Polat Bosphorus Hotel": [
-      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/433346345.jpg?k=95768d076e2e2c810d5a251d83d01aa8655eca1968cc504ded4564aa0f4b8c77&o=",
     ],
   };
 
@@ -433,26 +371,14 @@
 
       const textMatch = text.includes(q);
       const ratingMatch =
-        rating === "all"
-          ? true
-          : rating === "5"
-          ? stars === 5
-          : stars >= 3 && stars <= 4;
+        rating === "all" ? true :
+        rating === "5" ? stars === 5 :
+        stars >= 3 && stars <= 4;
 
       const areaMatch = area === "all" ? true : (item.dataset.area || "") === area;
 
       item.style.display = textMatch && ratingMatch && areaMatch ? "" : "none";
     });
-  }
-
-  function clearFilters() {
-    const q = $("#q");
-    const ratingFilter = $("#ratingFilter");
-    const areaFilter = $("#areaFilter");
-    if (q) q.value = "";
-    if (ratingFilter) ratingFilter.value = "all";
-    if (areaFilter) areaFilter.value = "all";
-    filterHotels();
   }
 
   // =========================
@@ -471,7 +397,6 @@
   function renderThumbs() {
     if (!lightboxStrip) return;
     lightboxStrip.innerHTML = activeImages
-      .slice(0, 15)
       .map(
         (src, idx) =>
           `<img src="${src}"
@@ -486,10 +411,9 @@
   function showImage(index) {
     if (!activeImages.length || !lightboxImage || !lightboxTitle) return;
 
-    const max = Math.min(activeImages.length, 15);
-    activeIndex = (index + max) % max;
+    activeIndex = (index + activeImages.length) % activeImages.length;
     lightboxImage.src = activeImages[activeIndex];
-    lightboxTitle.textContent = `${activeHotel} — صورة ${activeIndex + 1} من ${max}`;
+    lightboxTitle.textContent = `${activeHotel} — صورة ${activeIndex + 1} من ${activeImages.length}`;
     renderThumbs();
   }
 
@@ -525,7 +449,7 @@
     // 1) If custom hotel gallery exists: use it first
     const custom = customHotelGalleries[hotel];
     if (Array.isArray(custom) && custom.length) {
-      activeImages = uniq(custom).slice(0, 15);
+      activeImages = uniq(custom);
       activeIndex = 0;
       if (lightboxLoading) lightboxLoading.style.display = "none";
       if (lightboxImage) lightboxImage.style.display = "";
@@ -537,7 +461,7 @@
     if (folder) {
       try {
         const { images } = await galleryFromManifest(folder);
-        activeImages = uniq(images).slice(0, 15);
+        activeImages = uniq(images);
         activeIndex = 0;
         if (lightboxLoading) lightboxLoading.style.display = "none";
         if (lightboxImage) lightboxImage.style.display = "";
@@ -604,7 +528,6 @@
     $("#q")?.addEventListener("input", filterHotels);
     $("#ratingFilter")?.addEventListener("change", filterHotels);
     $("#areaFilter")?.addEventListener("change", filterHotels);
-    $("#clearBtn")?.addEventListener("click", clearFilters);
 
     $("#hotelList")?.addEventListener("click", (e) => {
       const target = e.target;
