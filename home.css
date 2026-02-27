@@ -80,6 +80,7 @@ p{ line-height:1.9; opacity:0.95; margin:0; }
    ========================= */
 .hero{
   height:100vh;
+  background:url("background123.jpg") center/cover no-repeat;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -89,6 +90,7 @@ p{ line-height:1.9; opacity:0.95; margin:0; }
 }
 
 .hero-video{
+  display:block;
   position:absolute;
   inset:0;
   width:100%;
