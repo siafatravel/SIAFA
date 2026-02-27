@@ -30,7 +30,7 @@
 
   // NOTE: مفاتيح الأسماء لازم تطابق data-hotel بالـHTML حرفياً
   const hotelCoverOverrides = {
-    "Divan Istanbul": [
+    "Divan Istanbul Taksim": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/42160386.jpg?k=b4fa2f801f4a5cefa00dd0c1fe5ab2b4ef4cb3b4bb944188d2f1384f4b5237ac&o=&hp=1",
     ],
     "Point Hotel Taksim": [
@@ -74,12 +74,6 @@
     ],
     "Valide Hotel Şişli": [
       "https://lh3.googleusercontent.com/p/AF1QipMpvMLWqtgTCpyRr1ZSAXcOUkZgUVah8Nd18bbP=s1360-w1360-h1020-rw",
-    ],
-    "Eresin Hotels Topkapı": [
-      "https://image-tc.galaxy.tf/wijpeg-99ed0ya4e1zgmfr1a93gt0lj8/standard.jpg?crop=247%2C0%2C1107%2C830",
-    ],
-    "Holiday Inn Istanbul City Topkapı": [
-      "https://digital.ihg.com/is/image/ihg/holiday-inn-istanbul-6224485588-4x3",
     ],
     "The Marmara Pera": [
       "https://www.hotel-board.com/picture/the-marmara-pera-hotel-6693957.jpg",

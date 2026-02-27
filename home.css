@@ -80,6 +80,7 @@ p{ line-height:1.9; opacity:0.95; margin:0; }
    ========================= */
 .hero{
   height:100vh;
+  background:url("background123.jpg") center/cover no-repeat;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -89,6 +90,7 @@ p{ line-height:1.9; opacity:0.95; margin:0; }
 }
 
 .hero-video{
+  display:block;
   position:absolute;
   inset:0;
   width:100%;
@@ -176,12 +178,12 @@ p{ line-height:1.9; opacity:0.95; margin:0; }
    SECTIONS
    ========================= */
 .main .section{
-  padding:72px 20px;
+  padding:44px 20px;
   max-width:1200px;
   margin:auto;
   position:relative;
   animation:fadeUp .55s ease both;
-  min-height:100vh;
+  min-height:auto;
 }
 
 .main .section::after{
