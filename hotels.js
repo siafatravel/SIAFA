@@ -105,7 +105,6 @@
 
     // ✅ الفنادق الجديدة — أغلفة مؤقتة
     "Grand Hotel Gulsoy": [
-      "https://images.trvl-media.com/lodging/2000000/1600000/1594200/1594173/2fbab688.jpg?impolicy=resizecrop&ra=fit&rw=1200",
     ],
     "The Craton Hotel Sisli": [
       "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
