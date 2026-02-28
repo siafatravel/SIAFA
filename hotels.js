@@ -35,7 +35,7 @@
       "https://images.trvl-media.com/lodging/7000000/6230000/6226800/6226720/c0561ffa.jpg?impolicy=resizecrop&ra=fit&rw=1200",
     ],
     "Sheraton Istanbul Levent": [
-      "https://images.trvl-media.com/lodging/1000000/910000/905000/904946/421a2a64.jpg?impolicy=resizecrop&ra=fit&rw=1200",
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/490724874.jpg?k=fc2752dbf8f45261a208709f2c9cf1fcc873a3e147512cce025c3fceea1b7370&o=",
     ],
     "Divan Istanbul Taksim": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/42160386.jpg?k=b4fa2f801f4a5cefa00dd0c1fe5ab2b4ef4cb3b4bb944188d2f1384f4b5237ac&o=&hp=1",
