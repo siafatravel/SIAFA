@@ -91,7 +91,7 @@
       "https://lh3.googleusercontent.com/p/AF1QipMpvMLWqtgTCpyRr1ZSAXcOUkZgUVah8Nd18bbP=s1360-w1360-h1020-rw",
     ],
     "The Marmara Pera": [
-      "https://www.hotel-board.com/picture/the-marmara-pera-hotel-6693957.jpg",
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/27433582.jpg?k=d3f705634e0ba105be0f8de5c8960aa6a61da5dc3d224caa4989ef9b8c6cd026&o=",
     ],
     "Arts Hotel Taksim": [
       "https://media-cdn.tripadvisor.com/media/photo-s/29/5d/37/e3/exterior.jpg",
@@ -116,22 +116,22 @@
       "https://images.pexels.com/photos/2034335/pexels-photo-2034335.jpeg",
     ],
     "Renaissance Polat Istanbul Hotel": [
-      "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg",
+      "https://i.travelapi.com/lodging/1000000/10000/1100/1060/cc2fd998_z.jpg",
     ],
     "Crowne Plaza Istanbul Florya": [
-      "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg",
+      "https://www.istanbulprivatetour.net/img/original/17268385021770028281.webp",
     ],
     "CVK Park Bosphorus Hotel Istanbul": [
       "https://image-tc.galaxy.tf/wijpeg-7qmepp9q0ezfe026g5zoh1u5y/superior-sea-king-2.jpg",
     ],
     "Aloft Istanbul Karakoy": [
-      "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg",
+      "https://media.licdn.com/dms/image/v2/D4D22AQGxjQV6Y2fCNQ/feedshare-shrink_800/B4DZoQ1.m8IkAg-/0/1761219180133?e=2147483647&v=beta&t=GDWL4B5lzGxN4D-ggMDeFwqcRbENbx5VuylzsXG1PAc",
     ],
     "Ottomans Life Hotel Deluxe": [
-      "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg",
+      "https://www.ottomanslifedeluxe.com/public/uploads/home_welcome_video_bg.webp",
     ],
     "Legacy Ottoman Hotel": [
-      "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg",
+      "https://legacy-ottoman-hotel.hotel-istanbul.net/data/Photos/OriginalPhoto/12749/1274942/1274942710/photo-legacy-ottoman-hotel-istanbul-old-city-istanbul-4.JPEG",
     ],
     "DoubleTree by Hilton Istanbul Topkapi": [
       "https://images.trvl-media.com/lodging/20000000/19430000/19427300/19427241/b3c42e01.jpg?impolicy=resizecrop&ra=fit&rw=1200",
@@ -140,10 +140,10 @@
       "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg",
     ],
     "Hilton Istanbul Maslak": [
-      "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg",
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/821637359.jpg?k=f66c90927a0dc7ba778ce1c0809522ae7e2384a777c0d8723e355e352aadb3e2&o=",
     ],
     "Hilton Istanbul Bakirkoy": [
-      "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
+      "https://www.turizmekstra.com/images/haberler/konaklama/1000x606/hilton-istanbuldaki-zincirini-bakirkoy-ile-genisletti_5b3bbebbd3b70.jpg",
     ],
     "Golden Tulip Istanbul Bayrampasa": [
       "https://images.pexels.com/photos/2034335/pexels-photo-2034335.jpeg",
@@ -152,13 +152,13 @@
       "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg",
     ],
     "Wanda Vista Istanbul": [
-      "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg",
+      "https://cf.bstatic.com/xdata/images/hotel/max500/538031042.jpg?k=ebd124d1573985cafb7c3519f3fcded48caab145ea97d4834e7905a9de65b4d2&o=&hp=1",
     ],
     "Centro WestSide by Rotana Istanbul": [
-      "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/b5/6a/73/getlstd-property-photo.jpg?w=900&h=-1&s=1",
     ],
     "Clarion Hotel Istanbul Mahmutbey": [
-      "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg",
+      "https://www.tatilhatti.com/images/istanbul/bagcilar/clarion-hotel-istanbul-mahmutbey/clarion-hotel-istanbul-mahmutbey-istanbul-bagcilar_1.jpg",
     ],
     "Delta Hotels by Marriott Istanbul Levent": [
       "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg",
