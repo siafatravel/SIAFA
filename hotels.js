@@ -38,13 +38,13 @@
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/490724874.jpg?k=fc2752dbf8f45261a208709f2c9cf1fcc873a3e147512cce025c3fceea1b7370&o=",
     ],
     "Divan Istanbul Taksim": [
-      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/42160386.jpg?k=b4fa2f801f4a5cefa00dd0c1fe5ab2b4ef4cb3b4bb944188d2f1384f4b5237ac&o=&hp=1",
+      "https://images.sunshine.co.uk/ss/htl/2/4/4/24461-2-l.jpg",
     ],
     "Lions Royal Hotel": [
       "https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/746180737.jpg?k=8169a5057106a0232cfd0e6e619ee9fb3d6b84219a9832bfa29c1763f1d62d94&o=&s=1024x",
     ],
     "Mosaic Hotel Laleli": [
-      "https://www.mosaic-hotel.com/wp-content/uploads/2022/04/mustafa3bas_hotelfotografcisi_mustafa3bas_hotelfotografcisi_5M1A5747.jpg",
+      "https://tophotels.ru/icache/hotel_photos/83/112/93412/2615901_740x550.jpg",
     ],
     "Renaissance Istanbul Polat Bosphorus Hotel": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/433346345.jpg?k=95768d076e2e2c810d5a251d83d01aa8655eca1968cc504ded4564aa0f4b8c77&o=",
@@ -107,7 +107,7 @@
     "Grand Hotel Gulsoy": [
     ],
     "The Craton Hotel Sisli": [
-      "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/327324954.jpg?k=f9ae98a50707a4c5f78356a8c85460d4a3fc5ea1effdb671a9e84a9743951a40&o=",
     ],
     "Titanic City Taksim": [
       "https://images.trvl-media.com/lodging/3000000/2010000/2001500/2001408/a72a5e6f.jpg?impolicy=resizecrop&ra=fit&rw=1200",
