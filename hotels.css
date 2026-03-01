@@ -380,7 +380,7 @@ body{
 }
 
 /* =========================
-   Brand marquee (no gaps)
+   Brand marquee (true infinite)
    ========================= */
 .brand-marquee{
   margin:0 0 18px;
@@ -388,21 +388,17 @@ body{
   border:1px solid rgba(255,255,255,.12);
   border-radius:14px;
   background:rgba(17,18,23,.9);
-}
-
-.brand-marquee-inner{
-  display:flex;
-  width:max-content;
-  gap:10px;
-  padding:10px;
-  animation:brandScroll 28s linear infinite;
-  will-change:transform;
+  position:relative;
 }
 
 .brand-track{
   display:flex;
   gap:10px;
   width:max-content;
+  padding:10px;
+  will-change:transform;
+  transform:translate3d(0,0,0);
+  animation:brandScroll var(--marquee-duration, 28s) linear infinite;
 }
 
 .brand-logo-pill{
@@ -418,7 +414,7 @@ body{
   font-weight:700;
   font-size:13px;
   white-space:nowrap;
-  min-height:36px;
+  flex:0 0 auto;
 }
 
 .brand-logo-pill img{
@@ -430,49 +426,21 @@ body{
   background:#fff;
 }
 
-/* ✅ إذا اللوغو فشل تحميله (مثل حالتك) نعمل fallback حرف أول داخل دائرة */
-.brand-logo-pill.no-logo::before{
-  content:attr(data-brand);
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:18px;
-  height:18px;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(255,255,255,.10);
-  color:#fff;
-  font-size:10px;
-  font-weight:800;
-  overflow:hidden;
-  white-space:nowrap;
-}
-
-/* نخلي الـ before يطلع أول حرف عملياً */
-.brand-logo-pill.no-logo::before{
-  content: attr(data-brand);
-}
-.brand-logo-pill.no-logo::before{
-  /* “قص” المحتوى بصرياً ليبان أول حرف */
-  padding-left:6px; /* يخلي أول حرف ظاهر أكثر */
-}
-
 .brand-logo-pill b{
   font-size:12.5px;
   letter-spacing:.2px;
 }
 
-/* تحريك بدون فراغ: لأن في Track A + Track B */
+/* الحركة: المسافة محسوبة بالـpx من JS */
 @keyframes brandScroll{
-  from{ transform:translateX(0); }
-  to{ transform:translateX(-50%); }
+  from{ transform:translate3d(0,0,0); }
+  to{ transform:translate3d(calc(-1 * var(--marquee-distance, 300px)), 0, 0); }
 }
 
-/* خيار لطيف: وقف الحركة عند اللمس/الماوس */
-.brand-marquee:hover .brand-marquee-inner{
+/* وقف الحركة عند اللمس/الماوس */
+.brand-marquee:hover .brand-track{
   animation-play-state:paused;
 }
-
 /* =========================
    No-JS note
    ========================= */
