@@ -380,7 +380,7 @@ body{
 }
 
 /* =========================
-   Brand marquee (true infinite)
+   Brand marquee (FIXED - no gaps)
    ========================= */
 .brand-marquee{
   margin:0 0 18px;
@@ -388,7 +388,10 @@ body{
   border:1px solid rgba(255,255,255,.12);
   border-radius:14px;
   background:rgba(17,18,23,.9);
-  position:relative;
+  animation:fadeInUp .5s ease both;
+
+  /* مهم: نخليه LTR حتى ما يخرب على iOS مع RTL */
+  direction:ltr;
 }
 
 .brand-track{
@@ -396,9 +399,17 @@ body{
   gap:10px;
   width:max-content;
   padding:10px;
+
+  /* ممنوع يلف سطر */
+  flex-wrap:nowrap;
+
+  /* الحركة بتاخد مسافة محسوبة من JS */
+  animation:brandScroll 34s linear infinite;
   will-change:transform;
-  transform:translate3d(0,0,0);
-  animation:brandScroll var(--marquee-duration, 28s) linear infinite;
+}
+
+.brand-marquee:hover .brand-track{
+  animation-play-state:paused;
 }
 
 .brand-logo-pill{
@@ -414,6 +425,8 @@ body{
   font-weight:700;
   font-size:13px;
   white-space:nowrap;
+
+  /* مهم: كل عنصر ثابت وما ينضغط */
   flex:0 0 auto;
 }
 
@@ -424,6 +437,7 @@ body{
   object-fit:cover;
   border:1px solid rgba(255,255,255,.22);
   background:#fff;
+  flex:0 0 auto;
 }
 
 .brand-logo-pill b{
@@ -431,29 +445,11 @@ body{
   letter-spacing:.2px;
 }
 
-/* الحركة: المسافة محسوبة بالـpx من JS */
+/* JS رح يحط المتغير --marquee-distance */
 @keyframes brandScroll{
-  from{ transform:translate3d(0,0,0); }
-  to{ transform:translate3d(calc(-1 * var(--marquee-distance, 300px)), 0, 0); }
+  from{ transform:translateX(0); }
+  to{ transform:translateX(calc(-1 * var(--marquee-distance, 600px))); }
 }
-
-/* وقف الحركة عند اللمس/الماوس */
-.brand-marquee:hover .brand-track{
-  animation-play-state:paused;
-}
-/* =========================
-   No-JS note
-   ========================= */
-.nojs-note{
-  display:block;
-  margin:0 0 16px;
-  padding:10px 14px;
-  border:1px solid rgba(212,175,55,.28);
-  border-radius:10px;
-  background:rgba(212,175,55,.08);
-  color:#f5dc8a;
-}
-
 /* =========================
    Subtle motion
    ========================= */
