@@ -104,8 +104,7 @@
     ],
 
     // ✅ الفنادق الجديدة — أغلفة مؤقتة
-    "Grand Hotel Gulsoy": [
-    ],
+    "Grand Hotel Gulsoy": [],
     "The Craton Hotel Sisli": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/327324954.jpg?k=f9ae98a50707a4c5f78356a8c85460d4a3fc5ea1effdb671a9e84a9743951a40&o=",
     ],
@@ -227,6 +226,50 @@
 
     const merged = uniq([coverUrl, ...galleryUrls]);
     return { coverUrl, images: merged };
+  }
+
+  // =========================
+  // Brand marquee (TRUE infinite loop)
+  // =========================
+  function initBrandMarquee() {
+    const wrap = document.querySelector(".brand-marquee");
+    const track = document.querySelector("#brandTrack");
+    if (!wrap || !track) return;
+
+    // عناصر أصلية (كما بالـHTML)
+    const original = Array.from(track.children);
+    if (!original.length) return;
+
+    // إعادة بناء التراك من الأصل (لتفادي تكرار عند resize / re-init)
+    track.innerHTML = "";
+    original.forEach((el) => track.appendChild(el));
+
+    // كرر العناصر حتى يصير التراك أطول من عرض الشاشة بكفاية
+    const minWidth = wrap.clientWidth * 2.2;
+    while (track.scrollWidth < minWidth) {
+      original.forEach((el) => track.appendChild(el.cloneNode(true)));
+    }
+
+    // كرر مرة إضافية لنعمل حلقة ناعمة
+    original.forEach((el) => track.appendChild(el.cloneNode(true)));
+
+    // مسافة الحركة هي نصف عرض التراك (نقطة تكرار مضمونة)
+    const distance = Math.floor(track.scrollWidth / 2);
+
+    // سرعة تقريبية ثابتة (px/s)
+    const speed = 70; // أكبر = أسرع
+    const duration = Math.max(12, distance / speed);
+
+    track.style.setProperty("--marquee-distance", `${distance}px`);
+    track.style.setProperty("--marquee-duration", `${duration}s`);
+  }
+
+  function bindMarqueeResize() {
+    let t = null;
+    window.addEventListener("resize", () => {
+      clearTimeout(t);
+      t = setTimeout(initBrandMarquee, 150);
+    });
   }
 
   // =========================
@@ -521,6 +564,10 @@
     initAreaFilter();
     initMapInteractions();
     initImageFallback();
+
+    // ✅ حل اللوغوز المتحركة (بدون فراغ)
+    initBrandMarquee();
+    bindMarqueeResize();
 
     filterHotels();
 
