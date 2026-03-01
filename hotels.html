@@ -60,32 +60,138 @@
       </button>
     </div>
 
-    <!-- Brand marquee -->
-    <section class="brand-marquee" aria-label="أبرز سلاسل الفنادق في إسطنبول">
-      <div class="brand-track" role="list">
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/marriott.com" alt="Marriott logo" loading="lazy"><b>Marriott</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/hilton.com" alt="Hilton logo" loading="lazy"><b>Hilton</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/wyndhamhotels.com" alt="Wyndham logo" loading="lazy"><b>Wyndham</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/ihg.com" alt="IHG logo" loading="lazy"><b>IHG</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/radissonhotels.com" alt="Radisson logo" loading="lazy"><b>Radisson</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/accor.com" alt="Accor logo" loading="lazy"><b>Accor</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/barcelo.com" alt="Barcelo logo" loading="lazy"><b>Barceló</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/rotana.com" alt="Rotana logo" loading="lazy"><b>Rotana</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/divan.com.tr" alt="Divan logo" loading="lazy"><b>Divan</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/titanic.com.tr" alt="Titanic logo" loading="lazy"><b>Titanic</b></span>
+  <!-- Brand marquee (no gaps + reliable logos) -->
+<section class="brand-marquee" aria-label="أبرز سلاسل الفنادق في إسطنبول">
+  <div class="brand-marquee-inner" aria-hidden="true">
 
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/marriott.com" alt="Marriott logo" loading="lazy"><b>Marriott</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/hilton.com" alt="Hilton logo" loading="lazy"><b>Hilton</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/wyndhamhotels.com" alt="Wyndham logo" loading="lazy"><b>Wyndham</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/ihg.com" alt="IHG logo" loading="lazy"><b>IHG</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/radissonhotels.com" alt="Radisson logo" loading="lazy"><b>Radisson</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/accor.com" alt="Accor logo" loading="lazy"><b>Accor</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/barcelo.com" alt="Barcelo logo" loading="lazy"><b>Barceló</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/rotana.com" alt="Rotana logo" loading="lazy"><b>Rotana</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/divan.com.tr" alt="Divan logo" loading="lazy"><b>Divan</b></span>
-        <span class="brand-logo-pill" role="listitem"><img src="https://logo.clearbit.com/titanic.com.tr" alt="Titanic logo" loading="lazy"><b>Titanic</b></span>
-      </div>
-    </section>
+    <!-- Track A -->
+    <div class="brand-track">
+      <span class="brand-logo-pill" data-brand="Marriott">
+        <img src="https://www.google.com/s2/favicons?domain=marriott.com&sz=64" alt="Marriott" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Marriott</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="Hilton">
+        <img src="https://www.google.com/s2/favicons?domain=hilton.com&sz=64" alt="Hilton" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Hilton</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="Wyndham">
+        <img src="https://www.google.com/s2/favicons?domain=wyndhamhotels.com&sz=64" alt="Wyndham" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Wyndham</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="IHG">
+        <img src="https://www.google.com/s2/favicons?domain=ihg.com&sz=64" alt="IHG" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>IHG</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="Radisson">
+        <img src="https://www.google.com/s2/favicons?domain=radissonhotels.com&sz=64" alt="Radisson" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Radisson</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="Accor">
+        <img src="https://www.google.com/s2/favicons?domain=accor.com&sz=64" alt="Accor" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Accor</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="Barceló">
+        <img src="https://www.google.com/s2/favicons?domain=barcelo.com&sz=64" alt="Barceló" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Barceló</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="Rotana">
+        <img src="https://www.google.com/s2/favicons?domain=rotana.com&sz=64" alt="Rotana" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Rotana</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="Divan">
+        <img src="https://www.google.com/s2/favicons?domain=divan.com.tr&sz=64" alt="Divan" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Divan</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="Titanic">
+        <img src="https://www.google.com/s2/favicons?domain=titanic.com.tr&sz=64" alt="Titanic" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Titanic</b>
+      </span>
+    </div>
+
+    <!-- Track B (clone) -->
+    <div class="brand-track">
+      <span class="brand-logo-pill" data-brand="Marriott">
+        <img src="https://www.google.com/s2/favicons?domain=marriott.com&sz=64" alt="Marriott" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Marriott</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="Hilton">
+        <img src="https://www.google.com/s2/favicons?domain=hilton.com&sz=64" alt="Hilton" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Hilton</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="Wyndham">
+        <img src="https://www.google.com/s2/favicons?domain=wyndhamhotels.com&sz=64" alt="Wyndham" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Wyndham</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="IHG">
+        <img src="https://www.google.com/s2/favicons?domain=ihg.com&sz=64" alt="IHG" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>IHG</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="Radisson">
+        <img src="https://www.google.com/s2/favicons?domain=radissonhotels.com&sz=64" alt="Radisson" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Radisson</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="Accor">
+        <img src="https://www.google.com/s2/favicons?domain=accor.com&sz=64" alt="Accor" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Accor</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="Barceló">
+        <img src="https://www.google.com/s2/favicons?domain=barcelo.com&sz=64" alt="Barceló" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Barceló</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="Rotana">
+        <img src="https://www.google.com/s2/favicons?domain=rotana.com&sz=64" alt="Rotana" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Rotana</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="Divan">
+        <img src="https://www.google.com/s2/favicons?domain=divan.com.tr&sz=64" alt="Divan" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Divan</b>
+      </span>
+
+      <span class="brand-logo-pill" data-brand="Titanic">
+        <img src="https://www.google.com/s2/favicons?domain=titanic.com.tr&sz=64" alt="Titanic" loading="lazy"
+             onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+        <b>Titanic</b>
+      </span>
+    </div>
+
+  </div>
+</section>
 
     <!-- Map -->
     <section class="area-map" aria-label="خريطة تفاعلية مبسطة لسنتر إسطنبول">
