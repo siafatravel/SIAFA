@@ -229,46 +229,45 @@
   }
 
   // =========================
-  // Brand marquee (TRUE infinite loop)
+  // Brand marquee (no-gap loop)
   // =========================
   function initBrandMarquee() {
-    const wrap = document.querySelector(".brand-marquee");
-    const track = document.querySelector("#brandTrack");
-    if (!wrap || !track) return;
+    const marquee = document.querySelector(".brand-marquee");
+    const track = document.querySelector(".brand-track");
+    if (!marquee || !track) return;
 
-    // عناصر أصلية (كما بالـHTML)
-    const original = Array.from(track.children);
-    if (!original.length) return;
+    // اجلب العناصر الأصلية (لو كانت فاضية لا تعمل شيء)
+    const originalItems = Array.from(track.children);
+    if (!originalItems.length) return;
 
-    // إعادة بناء التراك من الأصل (لتفادي تكرار عند resize / re-init)
+    // نظّف وارجع حط نسخة واحدة فقط (حتى لو كنت مكررهم بالـHTML)
     track.innerHTML = "";
-    original.forEach((el) => track.appendChild(el));
+    originalItems.forEach((n) => track.appendChild(n.cloneNode(true)));
 
-    // كرر العناصر حتى يصير التراك أطول من عرض الشاشة بكفاية
-    const minWidth = wrap.clientWidth * 2.2;
-    while (track.scrollWidth < minWidth) {
-      original.forEach((el) => track.appendChild(el.cloneNode(true)));
+    const targetWidth = marquee.offsetWidth * 2.2;
+
+    // كرر حتى يصير العرض كافي (مستحيل يفضى)
+    while (track.scrollWidth < targetWidth) {
+      originalItems.forEach((n) => track.appendChild(n.cloneNode(true)));
     }
 
-    // كرر مرة إضافية لنعمل حلقة ناعمة
-    original.forEach((el) => track.appendChild(el.cloneNode(true)));
+    // ضيف نسخة ثانية كاملة لعمل loop ناعم
+    const itemsNow = Array.from(track.children);
+    itemsNow.forEach((n) => track.appendChild(n.cloneNode(true)));
 
-    // مسافة الحركة هي نصف عرض التراك (نقطة تكرار مضمونة)
-    const distance = Math.floor(track.scrollWidth / 2);
+    // احسب مسافة الحركة = نصف العرض (لأن عندنا نسختين)
+    requestAnimationFrame(() => {
+      const half = track.scrollWidth / 2;
+      track.style.setProperty("--marquee-distance", `${half}px`);
+    });
 
-    // سرعة تقريبية ثابتة (px/s)
-    const speed = 70; // أكبر = أسرع
-    const duration = Math.max(12, distance / speed);
-
-    track.style.setProperty("--marquee-distance", `${distance}px`);
-    track.style.setProperty("--marquee-duration", `${duration}s`);
-  }
-
-  function bindMarqueeResize() {
-    let t = null;
+    // إعادة ضبط عند تغيير الحجم (موبايل/تدوير)
+    let resizeTimer = null;
     window.addEventListener("resize", () => {
-      clearTimeout(t);
-      t = setTimeout(initBrandMarquee, 150);
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        initBrandMarquee();
+      }, 200);
     });
   }
 
@@ -565,9 +564,8 @@
     initMapInteractions();
     initImageFallback();
 
-    // ✅ حل اللوغوز المتحركة (بدون فراغ)
+    // ✅ إصلاح الشريط المتحرك (بدون فراغ)
     initBrandMarquee();
-    bindMarqueeResize();
 
     filterHotels();
 
