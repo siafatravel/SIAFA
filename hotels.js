@@ -52,7 +52,7 @@
 
     // ✅ إضافة/تصحيح أغلفة لفنادق موجودة عندك
     "Ramada Plaza By Wyndham Sultanahmet": [
-      "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg",
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/522066008.jpg?k=864ac63962c2a83d843a5b0a69b8ce9c121861001b85e7e473cc826d9446a818&o=",
     ],
     "Point Hotel Taksim": [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/06/3a/b8/point-hotel.jpg?w=1200&h=700&s=1",
@@ -94,7 +94,7 @@
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/27433582.jpg?k=d3f705634e0ba105be0f8de5c8960aa6a61da5dc3d224caa4989ef9b8c6cd026&o=",
     ],
     "Arts Hotel Taksim": [
-      "https://media-cdn.tripadvisor.com/media/photo-s/29/5d/37/e3/exterior.jpg",
+      "https://www.tatilbon.com/urunresim/28477_b.jpg",
     ],
     "Barceló Istanbul": [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/5e/5a/55/bist-view.jpg?w=1200&h=-1&s=1",
@@ -110,10 +110,10 @@
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/327324954.jpg?k=f9ae98a50707a4c5f78356a8c85460d4a3fc5ea1effdb671a9e84a9743951a40&o=",
     ],
     "Titanic City Taksim": [
-      "https://images.trvl-media.com/lodging/3000000/2010000/2001500/2001408/a72a5e6f.jpg?impolicy=resizecrop&ra=fit&rw=1200",
+      "https://cdn3.enuygun.com/media/lib/uploads/image/titanic-city-taksim-istanbul-dis-mekan-76000558.jpg",
     ],
     "Ramada Plaza Istanbul City Center": [
-      "https://images.pexels.com/photos/2034335/pexels-photo-2034335.jpeg",
+      "https://photos.hotelbeds.com/giata/bigger/08/086140/086140a_hb_a_005.jpg",
     ],
     "Renaissance Polat Istanbul Hotel": [
       "https://i.travelapi.com/lodging/1000000/10000/1100/1060/cc2fd998_z.jpg",
@@ -122,7 +122,7 @@
       "https://www.istanbulprivatetour.net/img/original/17268385021770028281.webp",
     ],
     "CVK Park Bosphorus Hotel Istanbul": [
-      "https://image-tc.galaxy.tf/wijpeg-7qmepp9q0ezfe026g5zoh1u5y/superior-sea-king-2.jpg",
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/503097759.jpg?k=2ae66da63b80df51caf7d911dd9156f93dfd68a895132bf861624b7c1089e18a&o=",
     ],
     "Aloft Istanbul Karakoy": [
       "https://media.licdn.com/dms/image/v2/D4D22AQGxjQV6Y2fCNQ/feedshare-shrink_800/B4DZoQ1.m8IkAg-/0/1761219180133?e=2147483647&v=beta&t=GDWL4B5lzGxN4D-ggMDeFwqcRbENbx5VuylzsXG1PAc",
@@ -137,7 +137,7 @@
       "https://images.trvl-media.com/lodging/20000000/19430000/19427300/19427241/b3c42e01.jpg?impolicy=resizecrop&ra=fit&rw=1200",
     ],
     "Hotel Zurich Istanbul": [
-      "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg",
+      "https://imgkit.otelz.com/turkiye/istanbul/fatih/hotel-zurich-istanbul-539963410.png?tr=w-450,h-330,fo-auto,q-80",
     ],
     "Hilton Istanbul Maslak": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/821637359.jpg?k=f66c90927a0dc7ba778ce1c0809522ae7e2384a777c0d8723e355e352aadb3e2&o=",
@@ -146,10 +146,10 @@
       "https://www.turizmekstra.com/images/haberler/konaklama/1000x606/hilton-istanbuldaki-zincirini-bakirkoy-ile-genisletti_5b3bbebbd3b70.jpg",
     ],
     "Golden Tulip Istanbul Bayrampasa": [
-      "https://images.pexels.com/photos/2034335/pexels-photo-2034335.jpeg",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/3d/a7/e6/exterior.jpg?w=1200&h=1200&s=1",
     ],
     "Windsor Hotel & Convention Center Istanbul": [
-      "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg",
+      "https://cdn3.enuygun.com/media/lib/1x420/uploads/image/windsor-convention-center-istanbul-one-cikan-resim-76585880.webp",
     ],
     "Wanda Vista Istanbul": [
       "https://cf.bstatic.com/xdata/images/hotel/max500/538031042.jpg?k=ebd124d1573985cafb7c3519f3fcded48caab145ea97d4834e7905a9de65b4d2&o=&hp=1",
@@ -161,31 +161,31 @@
       "https://www.tatilhatti.com/images/istanbul/bagcilar/clarion-hotel-istanbul-mahmutbey/clarion-hotel-istanbul-mahmutbey-istanbul-bagcilar_1.jpg",
     ],
     "Delta Hotels by Marriott Istanbul Levent": [
-      "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg",
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/627957763.jpg?k=9218b84175a62be4a46f8859f6200d009942b74d38326a4439939904084b6e77&o=",
     ],
-    "Surisso Hotel Laleli": [
-      "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
+    "Sorriso Hotel Laleli": [
+      "https://images.trvl-media.com/lodging/6000000/5770000/5769000/5768907/5feb092b.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill",
     ],
-    "Bey Istanbul Hotel": [
-      "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg",
+    "Berr Istanbul Hotel": [
+      "https://cf.bstatic.com/xdata/images/hotel/max500/72814827.jpg?k=c1961ac716e2932cf7be17d8b065cbad1a96bc026a2e27d1ebe947a66e20d6c7&o=&hp=1",
     ],
     "Radisson Blu Hotel Istanbul Ottomare": [
-      "https://images.pexels.com/photos/2034335/pexels-photo-2034335.jpeg",
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/603514877.jpg?k=d1aee82997506eb161a3060e05da9a67a71e6559efacb1fcb01e303f50d3bfad&o=",
     ],
     "Hilton Istanbul Bosphorus": [
-      "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg",
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/802863305.jpg?k=7ba07cd895776656199ad3d51bc76520bd42b934a5e11896d8d8e08e5af0f29b&o=",
     ],
     "Elite World Istanbul Taksim": [
-      "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg",
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/151213806.jpg?k=76932cca976a2c9e5b2fc3f9a507130aa623b9a730f565ce7baad67e1397bae9&o=",
     ],
     "Elite World Comfy Istanbul Taksim": [
-      "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg",
+      "https://images.odamax.com/imgproxy/img/1024x768/odamax/image/upload/Elite_World_Comfy_stanbul_Taksim_Hotel_202508261449150_Onur_Kuru_ELITE_WORLD_COMFY35.JPG",
     ],
     "Mineo Hotel Taksim": [
-      "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg",
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/744650968.jpg?k=8c560ff8b8d89066901aee99cd5fa6e3944b7e0e41abc978261ea44bbd9ae84e&o=",
     ],
     "Wish More Hotel Istanbul": [
-      "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg",
+      "https://pix10.agoda.net/hotelImages/145/1450706/1450706_17042118250052543142.jpg?ca=6&ce=1&s=414x232",
     ],
   };
 
