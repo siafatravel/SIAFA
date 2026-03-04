@@ -9,6 +9,146 @@
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const uniq = (arr) => [...new Set((arr || []).filter(Boolean))];
   const HOTELS_PER_PAGE = 20;
+  let currentLang = "ar";
+  let hotelsDataCache = [];
+
+  const I18N = {
+    ar: {
+      pageTitle: "الفنادق التي نتعامل معها",
+      pageSubtitle: "اضغط على أي صورة لفندق لعرضها بشكل مكبر والتنقل بين الصور ✅",
+      backHome: "⬅ الرجوع للموقع الرئيسي",
+      whatsapp: "تواصل واتساب",
+      noJsNote: "يمكنك تصفح الفنادق حتى بدون JavaScript. للتجربة الأفضل (بحث أسرع + معرض صور تفاعلي) يُفضّل تفعيل JavaScript.",
+      searchPlaceholder: "ابحث عن فندق… مثال: Marriott",
+      ratingAll: "كل التصنيفات",
+      ratingFive: "5 نجوم",
+      rating34: "3-4 نجوم",
+      areaAll: "كل المناطق",
+      clear: "مسح",
+      legendMetro: "مترو",
+      legendTram: "ترامواي T1",
+      legendPoi: "منطقة + معلم مختصر",
+      devNote: "الموقع قيد التطوير ويتم تحديثه باستمرار وإضافة فنادق جديدة بشكل دوري وقد لا تكون بعض الصور أدناه دقيقة.\nإذا لم تجد الفندق المطلوب حالياً، تواصل معنا وسنوفّر لك خيارات إضافية مباشرة ✅",
+      noJsHotelsNote: "لعرض قائمة الفنادق بشكل كامل، يرجى تفعيل JavaScript.",
+      moreOptionsNote: "يوجد خيارات أخرى أيضاً حسب التوفر والتاريخ والمستوى المطلوب.<br>للتأكد أو طلب فندق غير موجود في القائمة، تواصل معنا على واتساب:<br><a href=\"https://wa.me/905317387785\">905317387785</a>",
+      statusPage: (page, totalPages, total) => `صفحة ${page} من ${totalPages} — إجمالي ${total} فندق`,
+      statusNoResults: "لا توجد نتائج مطابقة للفلاتر الحالية",
+      ratingLabel: "التصنيف",
+      galleryBtn: "عرض الصور",
+      detailsBtn: "عرض التفاصيل",
+      areaFilterAria: "فلتر المنطقة",
+      ratingFilterAria: "فلتر التصنيف",
+    },
+    en: {
+      pageTitle: "Our Partner Hotels",
+      pageSubtitle: "Click any hotel image to open it in a larger gallery view ✅",
+      backHome: "⬅ Back to Home",
+      whatsapp: "WhatsApp Contact",
+      noJsNote: "You can still browse hotels without JavaScript, but for the best experience (faster search + interactive gallery), please enable JavaScript.",
+      searchPlaceholder: "Search hotels… e.g., Marriott",
+      ratingAll: "All ratings",
+      ratingFive: "5 stars",
+      rating34: "3-4 stars",
+      areaAll: "All areas",
+      clear: "Clear",
+      legendMetro: "Metro",
+      legendTram: "Tram T1",
+      legendPoi: "Area + landmark",
+      devNote: "The website is under continuous development, and hotels are added regularly. Some images below may not always be perfectly accurate.\nIf you cannot find your desired hotel, contact us and we will provide more options directly ✅",
+      noJsHotelsNote: "To view the full hotels list, please enable JavaScript.",
+      moreOptionsNote: "More options are available depending on season, date, and required level.<br>For verification or to request a hotel not listed here, contact us on WhatsApp:<br><a href=\"https://wa.me/905317387785\">905317387785</a>",
+      statusPage: (page, totalPages, total) => `Page ${page} of ${totalPages} — Total ${total} hotels`,
+      statusNoResults: "No hotels match the current filters",
+      ratingLabel: "Rating",
+      galleryBtn: "View photos",
+      detailsBtn: "View details",
+      areaFilterAria: "Area filter",
+      ratingFilterAria: "Rating filter",
+    },
+  };
+
+  function getT() {
+    return I18N[currentLang] || I18N.ar;
+  }
+
+  function detectInitialLang() {
+    const qp = new URLSearchParams(window.location.search).get("lang");
+    const stored = localStorage.getItem("site_lang");
+    const candidate = (qp || stored || "ar").toLowerCase();
+    return candidate === "en" ? "en" : "ar";
+  }
+
+  function setLang(lang) {
+    currentLang = lang === "en" ? "en" : "ar";
+    localStorage.setItem("site_lang", currentLang);
+
+    const url = new URL(window.location.href);
+    url.searchParams.set("lang", currentLang);
+    window.history.replaceState({}, "", url.toString());
+
+    applyLanguage();
+    if (hotelsDataCache.length) renderHotels(hotelsDataCache);
+    hydrateHotels();
+    filterHotels(true);
+  }
+
+  function applyLanguage() {
+    const t = getT();
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = currentLang === "en" ? "ltr" : "rtl";
+
+    $("#pageTitle").textContent = t.pageTitle;
+    $("#pageSubtitle").textContent = t.pageSubtitle;
+    $("#backHomeBtn").textContent = t.backHome;
+    $("#whatsappBtn").textContent = t.whatsapp;
+    const nojs = $("#noJsNote");
+    if (nojs) nojs.textContent = t.noJsNote;
+
+    const q = $("#q");
+    if (q) q.placeholder = t.searchPlaceholder;
+    const ratingAll = $("#ratingAllOption");
+    if (ratingAll) ratingAll.textContent = t.ratingAll;
+    const ratingFive = $("#ratingFiveOption");
+    if (ratingFive) ratingFive.textContent = t.ratingFive;
+    const rating34 = $("#ratingThreeFourOption");
+    if (rating34) rating34.textContent = t.rating34;
+    const areaAll = $("#areaAllOption");
+    if (areaAll) areaAll.textContent = t.areaAll;
+    const clearBtn = $("#clearFiltersBtn");
+    if (clearBtn) clearBtn.textContent = t.clear;
+
+    const ratingFilter = $("#ratingFilter");
+    if (ratingFilter) ratingFilter.setAttribute("aria-label", t.ratingFilterAria);
+    const areaFilter = $("#areaFilter");
+    if (areaFilter) areaFilter.setAttribute("aria-label", t.areaFilterAria);
+
+    const mapInfo = $("#mapInfo");
+    if (mapInfo) {
+      const text = (mapInfo.textContent || "").trim();
+      if (!text || text.includes("معلومة سريعة") || text.includes("Quick tip")) {
+        mapInfo.innerHTML = currentLang === "en" ? mapInfo.dataset.defaultEn : mapInfo.dataset.defaultAr;
+      }
+    }
+
+    const legendMetro = $("#legendMetro");
+    if (legendMetro) legendMetro.lastChild.textContent = t.legendMetro;
+    const legendTram = $("#legendTram");
+    if (legendTram) legendTram.lastChild.textContent = t.legendTram;
+    const legendPoi = $("#legendPoi");
+    if (legendPoi) legendPoi.lastChild.textContent = t.legendPoi;
+
+    const devNote = $("#devNote");
+    if (devNote) devNote.textContent = t.devNote;
+    const noJsHotelsNote = $("#noJsHotelsNote");
+    if (noJsHotelsNote) noJsHotelsNote.textContent = t.noJsHotelsNote;
+    const moreOptionsNote = $("#moreOptionsNote");
+    if (moreOptionsNote) moreOptionsNote.innerHTML = t.moreOptionsNote;
+
+    const prev = $("#pagePrev");
+    if (prev) prev.textContent = currentLang === "en" ? "Previous page" : "الصفحة السابقة";
+    const next = $("#pageNext");
+    if (next) next.textContent = currentLang === "en" ? "Next page" : "الصفحة التالية";
+  }
 
   // =========================
   // Fallback shared gallery (when no local manifest)
@@ -216,7 +356,7 @@
   // Local assets (manifest) support
   // =========================
   function buildLocalUrl(folder, filename) {
-    return `assets/hotels/${folder}/${filename}`;
+    return `assets/hotels/${escapeHtml(folder)}/${filename}`;
   }
 
   function getFolderFromCard(card) {
@@ -225,7 +365,7 @@
 
   async function loadManifest(folder) {
     if (!folder) throw new Error("Missing folder");
-    const url = `assets/hotels/${folder}/manifest.json?v=${Date.now()}`;
+    const url = `assets/hotels/${escapeHtml(folder)}/manifest.json?v=${Date.now()}`;
     const res = await fetch(url, { cache: "no-store" });
     if (!res.ok) throw new Error("manifest not found");
     return res.json();
@@ -366,6 +506,82 @@
     if (poiGroups.length) activatePoi(poiGroups[0]);
   }
 
+
+  // =========================
+  // Hotels data source (central JSON)
+  // =========================
+  async function loadHotelsData() {
+    const sources = ["data/hotels-list.json", "/data/hotels-list.json"];
+    for (const src of sources) {
+      try {
+        const res = await fetch(src, { cache: "no-store" });
+        if (!res.ok) continue;
+        const data = await res.json();
+        if (Array.isArray(data) && data.length) return data;
+      } catch (_) {}
+    }
+    return [];
+  }
+
+  function starsText(stars) {
+    const n = Math.max(0, Number(stars) || 0);
+    return "★".repeat(n);
+  }
+
+  function escapeHtml(value = "") {
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#39;");
+  }
+
+  function renderHotels(hotels = []) {
+    const list = $("#hotelList");
+    if (!list) return;
+
+    if (!Array.isArray(hotels) || !hotels.length) {
+      list.innerHTML = '<div class="footer-note">تعذّر تحميل قائمة الفنادق حالياً. جرّب تحديث الصفحة أو تواصل معنا عبر واتساب.</div>';
+      return;
+    }
+
+    list.innerHTML = hotels
+      .map((h) => {
+        const hotel = h.hotel || "";
+        const hotelAr = h.hotelAr || hotel;
+        const city = h.city || "إسطنبول";
+        const area = h.area || "";
+        const stars = Number(h.stars) || 0;
+        const slug = h.slug || "";
+        const folder = h.folder || "";
+        const cover = h.cover || "background123.jpg";
+        const alt = h.alt || `واجهة ${hotel}`;
+        const detailsHref = h.detailsHref || `hotels/${slug}.html`;
+        return `<article class="hotel" data-hotel="${escapeHtml(hotel)}" data-hotel-ar="${escapeHtml(hotelAr)}" data-city="${escapeHtml(city)}" data-area="${escapeHtml(area)}" data-stars="${escapeHtml(stars)}" data-slug="${escapeHtml(slug)}" data-folder="${escapeHtml(folder)}">
+    <img class="hotel-thumb" src="${escapeHtml(cover)}" loading="lazy" decoding="async" width="1200" height="800" alt="${escapeHtml(alt)}" data-fallbacks='[]'>
+    <div class="hotel-meta">
+      <div class="hotel-headline">
+        <div>
+          <b>${escapeHtml(hotel)}</b>
+          <div class="hotel-ar">${escapeHtml(hotelAr)}</div>
+        </div>
+        <div class="hotel-rating" aria-label="${escapeHtml(getT().ratingLabel)} ${escapeHtml(stars)}">
+          <span class="rating-label">${escapeHtml(getT().ratingLabel)}</span>
+          <span class="rating-stars">${starsText(stars)}</span>
+        </div>
+      </div>
+      <div class="muted">${escapeHtml(city)} - ${escapeHtml(area)}</div>
+    </div>
+    <div class="hotel-actions">
+      <button class="gallery-btn" type="button">${escapeHtml(getT().galleryBtn)}</button>
+      <a class="details-btn" href="${escapeHtml(detailsHref)}">${escapeHtml(getT().detailsBtn)}</a>
+    </div>
+  </article>`;
+      })
+      .join("\n\n");
+  }
+
   // =========================
   // Area filter
   // =========================
@@ -433,9 +649,10 @@
 
     // ✅ تصحيح السطر اللي كان مكسور
     if (status) {
+      const t = getT();
       status.textContent = total
-        ? `صفحة ${currentPage} من ${totalPages} — إجمالي ${total} فندق`
-        : "لا توجد نتائج مطابقة للفلاتر الحالية";
+        ? t.statusPage(currentPage, totalPages, total)
+        : t.statusNoResults;
     }
 
     if (prevBtn) prevBtn.disabled = currentPage <= 1 || !total;
@@ -614,6 +831,13 @@
   // Init
   // =========================
   async function init() {
+    currentLang = detectInitialLang();
+    applyLanguage();
+
+    const hotels = await loadHotelsData();
+    hotelsDataCache = Array.isArray(hotels) ? hotels : [];
+    if (hotelsDataCache.length) renderHotels(hotelsDataCache);
+
     hydrateHotels();
     initAreaFilter();
     initMapInteractions();
@@ -624,6 +848,9 @@
     initBrandMarquee();
 
     filterHotels(true);
+
+    $("#langAr")?.addEventListener("click", () => setLang("ar"));
+    $("#langEn")?.addEventListener("click", () => setLang("en"));
 
     $("#q")?.addEventListener("input", () => filterHotels(true));
     $("#ratingFilter")?.addEventListener("change", () => filterHotels(true));
