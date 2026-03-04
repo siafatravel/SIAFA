@@ -56,7 +56,7 @@
         <option value="all" selected>كل المناطق</option>
       </select>
       <button class="btn" type="button"
-        onclick="document.getElementById('q').value=''; document.getElementById('ratingFilter').value='all'; document.getElementById('areaFilter').value='all'; filterHotels();">
+        onclick="document.getElementById('q').value=''; document.getElementById('ratingFilter').value='all'; document.getElementById('areaFilter').value='all'; filterHotels(true);">
         مسح
       </button>
     </div>
@@ -295,6 +295,11 @@
       <a href="https://wa.me/905317387785">905317387785</a>
     </div>
 
+    <div class="pagination" id="hotelsPagination" aria-label="تصفح صفحات الفنادق">
+      <button class="btn secondary" id="pageNext" type="button">الصفحة التالية</button>
+      <span class="pagination-status" id="paginationStatus">صفحة 1 من 1</span>
+      <button class="btn secondary" id="pagePrev" type="button">الصفحة السابقة</button>
+    </div>
   </main>
 
   <!-- Lightbox -->
