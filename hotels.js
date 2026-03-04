@@ -14,9 +14,9 @@
   // Fallback shared gallery (when no local manifest)
   // =========================
   const sharedGalleryExtras = [
-    "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
-    "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg",
-    "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg",
+    "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1455587734955-081b22074882?auto=format&fit=crop&w=1200&q=80",
   ];
 
   // ✅ بدون limit نهائياً
@@ -100,7 +100,9 @@
     ],
 
     // ✅ الفنادق الجديدة — أغلفة مؤقتة
-    "Grand Hotel Gulsoy": [],
+    "Grand Hotel Gulsoy": [
+      "assets/hotels/grand-gulsoy/cover.jpg",
+    ],
     "The Craton Hotel Sisli": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/327324954.jpg?k=f9ae98a50707a4c5f78356a8c85460d4a3fc5ea1effdb671a9e84a9743951a40&o=",
     ],
@@ -155,6 +157,9 @@
     "Clarion Hotel Istanbul Mahmutbey": [
       "https://www.tatilhatti.com/images/istanbul/bagcilar/clarion-hotel-istanbul-mahmutbey/clarion-hotel-istanbul-mahmutbey-istanbul-bagcilar_1.jpg",
     ],
+    "Marriott Hotel Şişli": [
+      "assets/hotels/marriott-hotel-sisli/cover.jpg",
+    ],
     "Delta Hotels by Marriott Istanbul Levent": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/627957763.jpg?k=9218b84175a62be4a46f8859f6200d009942b74d38326a4439939904084b6e77&o=",
     ],
@@ -186,6 +191,20 @@
 
   // Optional: per-hotel custom gallery (absolute URLs)
   const customHotelGalleries = {
+    "Marriott Hotel Şişli": [
+      "assets/hotels/marriott-hotel-sisli/cover.jpg",
+      "assets/hotels/marriott-hotel-sisli/1.jpeg",
+      "assets/hotels/marriott-hotel-sisli/2.jpg",
+      "assets/hotels/marriott-hotel-sisli/3.webp",
+      "assets/hotels/marriott-hotel-sisli/4.jpg",
+    ],
+    "Grand Hotel Gulsoy": [
+      "assets/hotels/grand-gulsoy/cover.jpg",
+      "assets/hotels/grand-gulsoy/grand-gulsoy-001.jpg",
+      "assets/hotels/grand-gulsoy/grand-gulsoy-002.webp",
+      "assets/hotels/grand-gulsoy/grand-gulsoy-003.jpg",
+      "assets/hotels/grand-gulsoy/grand-gulsoy-004.jpg",
+    ],
     "Mercure Istanbul Bomonti": [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/1e/bd/9f/exterior.jpg?w=1200&h=-1&s=1",
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/467247046.jpg?k=48837db6f61fc6c147feaae2c848f351e9c013e1771edf6df78c6d3fdad450cd&o=&hp=1",
