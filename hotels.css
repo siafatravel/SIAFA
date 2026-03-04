@@ -286,6 +286,31 @@ body{
   margin-top:14px;
 }
 
+
+
+.pagination{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin:18px 0 6px;
+  flex-wrap:wrap;
+}
+
+.pagination-status{
+  font-size:13px;
+  opacity:.9;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;
+  padding:8px 14px;
+}
+
+.pagination .btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
 /* =========================
    Lightbox
    ========================= */
@@ -431,13 +456,28 @@ body{
 }
 
 .brand-logo-pill img{
-  width:18px;
-  height:18px;
-  border-radius:50%;
-  object-fit:cover;
+  width:20px;
+  height:20px;
+  border-radius:6px;
+  object-fit:contain;
   border:1px solid rgba(255,255,255,.22);
   background:#fff;
+  padding:2px;
   flex:0 0 auto;
+}
+
+.brand-logo-pill.no-logo::before{
+  content:attr(data-brand);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:20px;
+  height:20px;
+  border-radius:6px;
+  font-size:10px;
+  font-weight:700;
+  color:#111;
+  background:#f1d37d;
 }
 
 .brand-logo-pill b{

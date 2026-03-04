@@ -8,6 +8,7 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const uniq = (arr) => [...new Set((arr || []).filter(Boolean))];
+  const HOTELS_PER_PAGE = 20;
 
   // =========================
   // Fallback shared gallery (when no local manifest)
@@ -231,10 +232,15 @@
   // =========================
   // Brand marquee (no-gap loop)
   // =========================
+  let marqueeResizeBound = false;
+
   function initBrandMarquee() {
     const marquee = document.querySelector(".brand-marquee");
     const track = document.querySelector(".brand-track");
     if (!marquee || !track) return;
+
+    if (track.dataset.marqueeReady === "1") return;
+    track.dataset.marqueeReady = "1";
 
     // اجلب العناصر الأصلية (لو كانت فاضية لا تعمل شيء)
     const originalItems = Array.from(track.children);
@@ -261,14 +267,26 @@
       track.style.setProperty("--marquee-distance", `${half}px`);
     });
 
-    // إعادة ضبط عند تغيير الحجم (موبايل/تدوير)
-    let resizeTimer = null;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        initBrandMarquee();
-      }, 200);
+    // سرعة ثابتة بالبكسل/الثانية بدل مدة ثابتة (حتى ما تحسها تتغير)
+    requestAnimationFrame(() => {
+      const half = track.scrollWidth / 2;
+      const pxPerSecond = 72;
+      const duration = Math.max(24, half / pxPerSecond);
+      track.style.animationDuration = `${duration}s`;
     });
+
+    // إعادة ضبط عند تغيير الحجم (موبايل/تدوير)
+    if (!marqueeResizeBound) {
+      marqueeResizeBound = true;
+      let resizeTimer = null;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          track.dataset.marqueeReady = "0";
+          initBrandMarquee();
+        }, 200);
+      }, { passive: true });
+    }
   }
 
   // =========================
@@ -400,13 +418,44 @@
   // =========================
   // Filtering
   // =========================
-  function filterHotels() {
+  let currentPage = 1;
+
+  function applyPagination(visibleItems = []) {
+    const total = visibleItems.length;
+    const totalPages = Math.max(1, Math.ceil(total / HOTELS_PER_PAGE));
+    currentPage = Math.min(Math.max(currentPage, 1), totalPages);
+
+    const status = $("#paginationStatus");
+    const prevBtn = $("#pagePrev");
+    const nextBtn = $("#pageNext");
+    const wrapper = $("#hotelsPagination");
+
+    $$("#hotelList .hotel").forEach((item) => (item.style.display = "none"));
+
+    const start = (currentPage - 1) * HOTELS_PER_PAGE;
+    const pageItems = visibleItems.slice(start, start + HOTELS_PER_PAGE);
+    pageItems.forEach((item) => (item.style.display = ""));
+
+    if (status) {
+      status.textContent = total
+        ? `صفحة ${currentPage} من ${totalPages} — إجمالي ${total} فندق`
+        : "لا توجد نتائج مطابقة للفلاتر الحالية";
+    }
+
+    if (prevBtn) prevBtn.disabled = currentPage <= 1 || !total;
+    if (nextBtn) nextBtn.disabled = currentPage >= totalPages || !total;
+    if (wrapper) wrapper.style.display = total ? "flex" : "none";
+  }
+
+  function filterHotels(resetPage = false) {
+    if (resetPage) currentPage = 1;
+
     const q = ($("#q")?.value || "").toLowerCase().trim();
     const rating = $("#ratingFilter")?.value || "all";
     const area = $("#areaFilter")?.value || "all";
 
     const items = $$("#hotelList .hotel");
-    items.forEach((item) => {
+    const filteredItems = items.filter((item) => {
       const text = (item.innerText || "").toLowerCase();
       const stars = parseInt(item.dataset.stars || "0", 10);
 
@@ -417,8 +466,23 @@
         stars >= 3 && stars <= 4;
 
       const areaMatch = area === "all" ? true : (item.dataset.area || "") === area;
+      return textMatch && ratingMatch && areaMatch;
+    });
 
-      item.style.display = textMatch && ratingMatch && areaMatch ? "" : "none";
+    applyPagination(filteredItems);
+  }
+
+  function initPaginationControls() {
+    $("#pagePrev")?.addEventListener("click", () => {
+      currentPage -= 1;
+      filterHotels();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    $("#pageNext")?.addEventListener("click", () => {
+      currentPage += 1;
+      filterHotels();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
 
@@ -563,15 +627,16 @@
     initAreaFilter();
     initMapInteractions();
     initImageFallback();
+    initPaginationControls();
 
     // ✅ إصلاح الشريط المتحرك (بدون فراغ)
     initBrandMarquee();
 
-    filterHotels();
+    filterHotels(true);
 
-    $("#q")?.addEventListener("input", filterHotels);
-    $("#ratingFilter")?.addEventListener("change", filterHotels);
-    $("#areaFilter")?.addEventListener("change", filterHotels);
+    $("#q")?.addEventListener("input", () => filterHotels(true));
+    $("#ratingFilter")?.addEventListener("change", () => filterHotels(true));
+    $("#areaFilter")?.addEventListener("change", () => filterHotels(true));
 
     $("#hotelList")?.addEventListener("click", (e) => {
       const target = e.target;
