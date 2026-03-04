@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>SIAFA TRAVEL | سيافا ترافل حجوزات فنادق تركيا</title>
   <meta name="description" content="سيافا ترافل لحجوزات الفنادق في تركيا: حجوزات مؤكدة، أسعار منافسة، دفع عند الوصول، ودعم سريع عبر واتساب.">
-
   <link rel="canonical" href="https://www.siafatravel.com/">
 
   <meta property="og:type" content="website">
@@ -30,17 +29,36 @@
 <body>
 
   <!-- HERO -->
-  <section class="hero">
-    <video autoplay muted loop playsinline class="hero-video">
-      <source src="hero.mp4" type="video/mp4">
-    </video>
+<!-- HERO -->
+<section class="hero">
+  <video
+    id="heroVideo"
+    class="hero-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    webkit-playsinline
+    preload="metadata"
+    poster="background123.jpg"
+  >
+    <source src="hero.mp4" type="video/mp4">
+  </video>
 
-    <div class="hero-box">
-      <img src="logo.png" alt="SIAFA TRAVEL Logo" class="hero-logo">
-      <h1>سيافا ترافل — SIAFA TRAVEL</h1>
-      <p>حجوزات فنادق في تركيا 🇹🇷 <br>أسعار منافسة — دعم سريع — حجوزات مؤكدة</p>
+  <div class="hero-box">
+    <img src="logo.png" alt="SIAFA TRAVEL Logo" class="hero-logo">
+    <h1>سيافا ترافل — SIAFA TRAVEL</h1>
+    <p>حجوزات فنادق في تركيا 🇹🇷 <br>أسعار منافسة — دعم سريع — حجوزات مؤكدة</p>
+
+    <a class="btn" href="https://wa.me/905317387785">تواصل عبر واتساب</a>
+
+    <div style="margin-top:10px">
+      <a class="btn secondary" href="#booking">إرسال طلب حجز</a>
+      <a class="btn secondary" href="hotels.html" style="margin-right:8px">الفنادق التي نتعامل معها</a>
+      <a class="btn secondary" href="guarantee.html" style="margin-right:8px">ضماناتنا</a>
     </div>
-  </section>
+  </div>
+</section>
 
   <div class="main">
 
@@ -51,6 +69,7 @@
           <span class="acc-title"><span class="acc-icon">⭐</span> لماذا تختار سيافا ترافل؟</span>
           <span class="acc-chevron">⌄</span>
         </summary>
+
         <div class="acc-body">
           <div class="cards">
             <div class="feature">✔️ حجوزات مؤكدة قبل الوصول وإرسال إيصال رسمي (Voucher)</div>
@@ -71,6 +90,7 @@
           <span class="acc-title"><span class="acc-icon">🏢</span> من نحن؟</span>
           <span class="acc-chevron">⌄</span>
         </summary>
+
         <div class="acc-body">
           <div class="about-wrap">
             <p class="about-intro">
@@ -115,6 +135,7 @@
           <span class="acc-title"><span class="acc-icon">🏨</span> معايير الفنادق التي نتعامل معها</span>
           <span class="acc-chevron">⌄</span>
         </summary>
+
         <div class="acc-body">
           <div class="cards">
             <div class="feature">✔️ اختيار الفنادق بعناية فائقة ومدروسة</div>
@@ -147,15 +168,7 @@
             <article class="feature faq-item method-item"><h3>4) تثبيت الحجز وإرسال الفاوتشر</h3><p>نثبت الحجز بشكل رسمي ونرسل لك إيصال/فاوتشر واضح يحتوي كامل بيانات الحجز.</p></article>
             <article class="feature faq-item method-item"><h3>5) الدفع عند الوصول</h3><p>الدفع يكون نقدًا عند الوصول للفندق وبنفس السعر المثبت في الفاوتشر بدون زيادات مفاجئة.</p></article>
           </div>
-
           <div class="small">ملاحظة: أي تفاصيل خاصة بالفندق أو الموسم نوضحها لكم قبل تثبيت الحجز.</div>
-
-          <div style="margin-top:10px">
-            <a class="btn" href="https://wa.me/905317387785">تواصل عبر واتساب</a>
-            <a class="btn secondary" href="#booking" style="margin-right:8px">إرسال طلب حجز</a>
-            <a class="btn secondary" href="hotels.html" style="margin-right:8px">الفنادق التي نتعامل معها</a>
-            <a class="btn secondary" href="guarantee.html" style="margin-right:8px">ضماناتنا</a>
-          </div>
         </div>
       </details>
     </section>
@@ -373,15 +386,15 @@
     }
 
     function sendWhatsApp(){
-      const nationality  = document.getElementById("nationality")?.value || "-";
-      const checkin      = document.getElementById("checkin")?.value || "";
-      const nights       = document.getElementById("nights")?.value || "-";
-      const checkout     = document.getElementById("checkout")?.value || "-";
-      const adults       = document.getElementById("adults")?.value || "-";
-      const children     = document.getElementById("children")?.value || "0";
+      const nationality = document.getElementById("nationality")?.value || "-";
+      const checkin = document.getElementById("checkin")?.value || "";
+      const nights = document.getElementById("nights")?.value || "-";
+      const checkout = document.getElementById("checkout")?.value || "-";
+      const adults = document.getElementById("adults")?.value || "-";
+      const children = document.getElementById("children")?.value || "0";
       const childrenAges = document.getElementById("childrenAges")?.value || "-";
-      const budget       = document.getElementById("budget")?.value || "-";
-      const notes        = document.getElementById("notes")?.value || "-";
+      const budget = document.getElementById("budget")?.value || "-";
+      const notes = document.getElementById("notes")?.value || "-";
 
       const msg =
 `طلب حجز جديد (سيافا ترافل - SIAFA TRAVEL):
@@ -398,14 +411,14 @@
       window.open(`https://wa.me/905317387785?text=${encodeURIComponent(msg)}`, "_blank");
     }
 
+    // Init on DOM ready
     document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("checkin")?.addEventListener("change", calcCheckout);
       document.getElementById("nights")?.addEventListener("input", calcCheckout);
 
       // keep "why" always open + close others on open
       const primaryAcc = document.querySelector("#why .acc");
-      const allAccs = Array.from(document.querySelectorAll(".acc"));
-      const otherAccordions = allAccs.filter(a => a !== primaryAcc);
+      const otherAccordions = Array.from(document.querySelectorAll(".acc")).filter(a => a !== primaryAcc);
 
       primaryAcc?.addEventListener("toggle", () => {
         if(primaryAcc && !primaryAcc.open) primaryAcc.open = true;
@@ -424,6 +437,13 @@
         calcCheckout();
         sendWhatsApp();
       });
+
+      const heroVideo = document.getElementById("heroVideo");
+      if (heroVideo) {
+        const tryPlay = () => heroVideo.play().catch(() => {});
+        heroVideo.addEventListener("loadeddata", tryPlay, { once: true });
+        tryPlay();
+      }
     });
   </script>
 

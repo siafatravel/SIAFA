@@ -23,40 +23,51 @@
     "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg",
   ];
 
+  // ✅ بدون limit نهائياً
   function defaultGalleryImages(cover, candidates = []) {
-    const merged = uniq([cover, ...candidates, ...sharedGalleryExtras]);
-    return merged.slice(0, 9);
+    return uniq([cover, ...candidates, ...sharedGalleryExtras]);
   }
 
   // NOTE: مفاتيح الأسماء لازم تطابق data-hotel بالـHTML حرفياً
   const hotelCoverOverrides = {
-    "Divan Istanbul": [
-      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/42160386.jpg?k=b4fa2f801f4a5cefa00dd0c1fe5ab2b4ef4cb3b4bb944188d2f1384f4b5237ac&o=&hp=1",
+    // ✅ فنادق كان عندك مشكلة بصورها
+    "Hilton Istanbul Bomonti": [
+      "https://images.trvl-media.com/lodging/7000000/6230000/6226800/6226720/c0561ffa.jpg?impolicy=resizecrop&ra=fit&rw=1200",
+    ],
+    "Sheraton Istanbul Levent": [
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/490724874.jpg?k=fc2752dbf8f45261a208709f2c9cf1fcc873a3e147512cce025c3fceea1b7370&o=",
     ],
     "Divan Istanbul Taksim": [
-      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/42160386.jpg?k=b4fa2f801f4a5cefa00dd0c1fe5ab2b4ef4cb3b4bb944188d2f1384f4b5237ac&o=&hp=1",
+      "https://images.sunshine.co.uk/ss/htl/2/4/4/24461-2-l.jpg",
+    ],
+    "Lions Royal Hotel": [
+      "https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/746180737.jpg?k=8169a5057106a0232cfd0e6e619ee9fb3d6b84219a9832bfa29c1763f1d62d94&o=&s=1024x",
+    ],
+    "Mosaic Hotel Laleli": [
+      "https://tophotels.ru/icache/hotel_photos/83/112/93412/2615901_740x550.jpg",
+    ],
+    "Renaissance Istanbul Polat Bosphorus Hotel": [
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/433346345.jpg?k=95768d076e2e2c810d5a251d83d01aa8655eca1968cc504ded4564aa0f4b8c77&o=",
     ],
 
+    // ✅ إضافة/تصحيح أغلفة لفنادق موجودة عندك
+    "Ramada Plaza By Wyndham Sultanahmet": [
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/522066008.jpg?k=864ac63962c2a83d843a5b0a69b8ce9c121861001b85e7e473cc826d9446a818&o=",
+    ],
     "Point Hotel Taksim": [
-      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/06/3a/b8/point-hotel.jpg?w=900&h=500&s=1",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/06/3a/b8/point-hotel.jpg?w=1200&h=700&s=1",
     ],
     "Crowne Plaza Old City": [
       "https://www.hotels-tr.net/data/Photos/OriginalPhoto/11986/1198611/1198611310/photo-crowne-plaza-istanbul-old-city-by-ihg-istanbul-1.JPEG",
     ],
     "Mercure Istanbul Bomonti": [
-      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/1e/bd/9f/exterior.jpg?w=700&h=-1&s=1",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/1e/bd/9f/exterior.jpg?w=1200&h=-1&s=1",
     ],
     "Holiday Inn Şişli": [
       "https://digital.ihg.com/is/image/ihg/holiday-inn-istanbul-5090389494-4x3",
     ],
     "Arts Hotel Harbiye": [
-      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/0f/e4/06/arts-hotel-istanbul.jpg?w=900&h=-1&s=1",
-    ],
-    "Lions Royal Hotel": [
-      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/486996180.jpg?k=7cec9105f71ce2b1273f8b06ec81e46ce596e400ca7c905f6d1058b34dcf1cf5&o=&hp=1",
-    ],
-    "Mosaic Hotel Laleli": [
-      "https://www.mosaic-hotel.com/wp-content/uploads/2022/04/mustafa3bas_hotelfotografcisi_mustafa3bas_hotelfotografcisi_5M1A5747.jpg",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/0f/e4/06/arts-hotel-istanbul.jpg?w=1200&h=-1&s=1",
     ],
     "Beethoven Premium Hotel Laleli": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/286436520.jpg?k=45b8a3c6499d3fda73a63870a56f5709df5821364242f96140f603144fdd8f97&o=",
@@ -79,51 +90,115 @@
     "Valide Hotel Şişli": [
       "https://lh3.googleusercontent.com/p/AF1QipMpvMLWqtgTCpyRr1ZSAXcOUkZgUVah8Nd18bbP=s1360-w1360-h1020-rw",
     ],
-    "Eresin Hotels Topkapı": [
-      "https://image-tc.galaxy.tf/wijpeg-99ed0ya4e1zgmfr1a93gt0lj8/standard.jpg?crop=247%2C0%2C1107%2C830",
-    ],
-    "Holiday Inn Istanbul City Topkapı": [
-      "https://digital.ihg.com/is/image/ihg/holiday-inn-istanbul-6224485588-4x3",
-    ],
-
     "The Marmara Pera": [
-      "https://www.hotel-board.com/picture/the-marmara-pera-hotel-6693957.jpg",
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/27433582.jpg?k=d3f705634e0ba105be0f8de5c8960aa6a61da5dc3d224caa4989ef9b8c6cd026&o=",
     ],
-    "The Marmara Taksim": [
-      "https://picsum.photos/seed/the-marmara-taksim-exterior/1200/760",
-    ],
-
     "Arts Hotel Taksim": [
-      "https://media-cdn.tripadvisor.com/media/photo-s/29/5d/37/e3/exterior.jpg",
+      "https://www.tatilbon.com/urunresim/28477_b.jpg",
     ],
     "Barceló Istanbul": [
-      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/5e/5a/55/bist-view.jpg?w=700&h=-1&s=1",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/5e/5a/55/bist-view.jpg?w=1200&h=-1&s=1",
     ],
     "Nevi Hotel & Suites Taksim": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/306099602.jpg?k=b67e38a7cfab1fe46121d526b511d931d2dc471411a6e7de077db508b976fd27&o=&hp=1",
     ],
-    "Renaissance Istanbul Polat Bosphorus Hotel": [
-      "https://cache.marriott.com/content/dam/marriott-renditions/ISTBR/istbr-exterior-9065-hor-feat.jpg",
+
+    // ✅ الفنادق الجديدة — أغلفة مؤقتة
+    "Grand Hotel Gulsoy": [],
+    "The Craton Hotel Sisli": [
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/327324954.jpg?k=f9ae98a50707a4c5f78356a8c85460d4a3fc5ea1effdb671a9e84a9743951a40&o=",
+    ],
+    "Titanic City Taksim": [
+      "https://cdn3.enuygun.com/media/lib/uploads/image/titanic-city-taksim-istanbul-dis-mekan-76000558.jpg",
+    ],
+    "Ramada Plaza Istanbul City Center": [
+      "https://photos.hotelbeds.com/giata/bigger/08/086140/086140a_hb_a_005.jpg",
+    ],
+    "Renaissance Polat Istanbul Hotel": [
+      "https://i.travelapi.com/lodging/1000000/10000/1100/1060/cc2fd998_z.jpg",
+    ],
+    "Crowne Plaza Istanbul Florya": [
+      "https://www.istanbulprivatetour.net/img/original/17268385021770028281.webp",
+    ],
+    "CVK Park Bosphorus Hotel Istanbul": [
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/503097759.jpg?k=2ae66da63b80df51caf7d911dd9156f93dfd68a895132bf861624b7c1089e18a&o=",
+    ],
+    "Aloft Istanbul Karakoy": [
+      "https://media.licdn.com/dms/image/v2/D4D22AQGxjQV6Y2fCNQ/feedshare-shrink_800/B4DZoQ1.m8IkAg-/0/1761219180133?e=2147483647&v=beta&t=GDWL4B5lzGxN4D-ggMDeFwqcRbENbx5VuylzsXG1PAc",
+    ],
+    "Ottomans Life Hotel Deluxe": [
+      "https://www.ottomanslifedeluxe.com/public/uploads/home_welcome_video_bg.webp",
+    ],
+    "Legacy Ottoman Hotel": [
+      "https://legacy-ottoman-hotel.hotel-istanbul.net/data/Photos/OriginalPhoto/12749/1274942/1274942710/photo-legacy-ottoman-hotel-istanbul-old-city-istanbul-4.JPEG",
+    ],
+    "DoubleTree by Hilton Istanbul Topkapi": [
+      "https://images.trvl-media.com/lodging/20000000/19430000/19427300/19427241/b3c42e01.jpg?impolicy=resizecrop&ra=fit&rw=1200",
+    ],
+    "Hotel Zurich Istanbul": [
+      "https://imgkit.otelz.com/turkiye/istanbul/fatih/hotel-zurich-istanbul-539963410.png?tr=w-450,h-330,fo-auto,q-80",
+    ],
+    "Hilton Istanbul Maslak": [
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/821637359.jpg?k=f66c90927a0dc7ba778ce1c0809522ae7e2384a777c0d8723e355e352aadb3e2&o=",
+    ],
+    "Hilton Istanbul Bakirkoy": [
+      "https://www.turizmekstra.com/images/haberler/konaklama/1000x606/hilton-istanbuldaki-zincirini-bakirkoy-ile-genisletti_5b3bbebbd3b70.jpg",
+    ],
+    "Golden Tulip Istanbul Bayrampasa": [
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/3d/a7/e6/exterior.jpg?w=1200&h=1200&s=1",
+    ],
+    "Windsor Hotel & Convention Center Istanbul": [
+      "https://cdn3.enuygun.com/media/lib/1x420/uploads/image/windsor-convention-center-istanbul-one-cikan-resim-76585880.webp",
+    ],
+    "Wanda Vista Istanbul": [
+      "https://cf.bstatic.com/xdata/images/hotel/max500/538031042.jpg?k=ebd124d1573985cafb7c3519f3fcded48caab145ea97d4834e7905a9de65b4d2&o=&hp=1",
+    ],
+    "Centro WestSide by Rotana Istanbul": [
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/b5/6a/73/getlstd-property-photo.jpg?w=900&h=-1&s=1",
+    ],
+    "Clarion Hotel Istanbul Mahmutbey": [
+      "https://www.tatilhatti.com/images/istanbul/bagcilar/clarion-hotel-istanbul-mahmutbey/clarion-hotel-istanbul-mahmutbey-istanbul-bagcilar_1.jpg",
+    ],
+    "Delta Hotels by Marriott Istanbul Levent": [
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/627957763.jpg?k=9218b84175a62be4a46f8859f6200d009942b74d38326a4439939904084b6e77&o=",
+    ],
+    "Sorriso Hotel Laleli": [
+      "https://images.trvl-media.com/lodging/6000000/5770000/5769000/5768907/5feb092b.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill",
+    ],
+    "Berr Istanbul Hotel": [
+      "https://cf.bstatic.com/xdata/images/hotel/max500/72814827.jpg?k=c1961ac716e2932cf7be17d8b065cbad1a96bc026a2e27d1ebe947a66e20d6c7&o=&hp=1",
+    ],
+    "Radisson Blu Hotel Istanbul Ottomare": [
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/603514877.jpg?k=d1aee82997506eb161a3060e05da9a67a71e6559efacb1fcb01e303f50d3bfad&o=",
+    ],
+    "Hilton Istanbul Bosphorus": [
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/802863305.jpg?k=7ba07cd895776656199ad3d51bc76520bd42b934a5e11896d8d8e08e5af0f29b&o=",
+    ],
+    "Elite World Istanbul Taksim": [
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/151213806.jpg?k=76932cca976a2c9e5b2fc3f9a507130aa623b9a730f565ce7baad67e1397bae9&o=",
+    ],
+    "Elite World Comfy Istanbul Taksim": [
+      "https://images.odamax.com/imgproxy/img/1024x768/odamax/image/upload/Elite_World_Comfy_stanbul_Taksim_Hotel_202508261449150_Onur_Kuru_ELITE_WORLD_COMFY35.JPG",
+    ],
+    "Mineo Hotel Taksim": [
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/744650968.jpg?k=8c560ff8b8d89066901aee99cd5fa6e3944b7e0e41abc978261ea44bbd9ae84e&o=",
+    ],
+    "Wish More Hotel Istanbul": [
+      "https://pix10.agoda.net/hotelImages/145/1450706/1450706_17042118250052543142.jpg?ca=6&ce=1&s=414x232",
     ],
   };
 
   // Optional: per-hotel custom gallery (absolute URLs)
   const customHotelGalleries = {
     "Mercure Istanbul Bomonti": [
-      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/1e/bd/9f/exterior.jpg?w=700&h=-1&s=1",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/1e/bd/9f/exterior.jpg?w=1200&h=-1&s=1",
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/467247046.jpg?k=48837db6f61fc6c147feaae2c848f351e9c013e1771edf6df78c6d3fdad450cd&o=&hp=1",
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768229.jpg?k=5dcecb13248a27d19085536ece1547b212d0dd085399c661846464f992fcea6a&o=",
-      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768232.jpg?k=0f3e057e3bfcd0454150a8af620b08bed6a8390fe79c367030ad652bfe5fd8c1&o=",
-      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768236.jpg?k=4d4f6272b2eab529a9fd89abf2cf20a4ac2ec5b16d06ac535f83f50cbcb9f670&o=",
-      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768247.jpg?k=a1d640f4507fa8ebafdf5ab66df2837bd1dbf28dc0f4d1647f41c252d5c78836&o=",
-      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768238.jpg?k=f8388867bc64da11ad71f58f0ffd8c8d6ddf87ec0e680b8c5f76d6773d3cfd2b&o=",
-      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768243.jpg?k=e5a6ec428f44920d908379f4f7112922e4d9a8f95ff9ad6d7f4c1a4f4f59e0f5&o=",
-      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/265768251.jpg?k=c9fb3409b6d40422f6b4623a4f56de39d6ef8cc58e4458b4f4e72b8ff06ddfe4&o=",
     ],
   };
 
   // =========================
-  // Local assets (manifest) support (optional)
+  // Local assets (manifest) support
   // =========================
   function buildLocalUrl(folder, filename) {
     return `assets/hotels/${folder}/${filename}`;
@@ -151,6 +226,49 @@
 
     const merged = uniq([coverUrl, ...galleryUrls]);
     return { coverUrl, images: merged };
+  }
+
+  // =========================
+  // Brand marquee (no-gap loop)
+  // =========================
+  function initBrandMarquee() {
+    const marquee = document.querySelector(".brand-marquee");
+    const track = document.querySelector(".brand-track");
+    if (!marquee || !track) return;
+
+    // اجلب العناصر الأصلية (لو كانت فاضية لا تعمل شيء)
+    const originalItems = Array.from(track.children);
+    if (!originalItems.length) return;
+
+    // نظّف وارجع حط نسخة واحدة فقط (حتى لو كنت مكررهم بالـHTML)
+    track.innerHTML = "";
+    originalItems.forEach((n) => track.appendChild(n.cloneNode(true)));
+
+    const targetWidth = marquee.offsetWidth * 2.2;
+
+    // كرر حتى يصير العرض كافي (مستحيل يفضى)
+    while (track.scrollWidth < targetWidth) {
+      originalItems.forEach((n) => track.appendChild(n.cloneNode(true)));
+    }
+
+    // ضيف نسخة ثانية كاملة لعمل loop ناعم
+    const itemsNow = Array.from(track.children);
+    itemsNow.forEach((n) => track.appendChild(n.cloneNode(true)));
+
+    // احسب مسافة الحركة = نصف العرض (لأن عندنا نسختين)
+    requestAnimationFrame(() => {
+      const half = track.scrollWidth / 2;
+      track.style.setProperty("--marquee-distance", `${half}px`);
+    });
+
+    // إعادة ضبط عند تغيير الحجم (موبايل/تدوير)
+    let resizeTimer = null;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        initBrandMarquee();
+      }, 200);
+    });
   }
 
   // =========================
@@ -304,16 +422,6 @@
     });
   }
 
-  function clearFilters() {
-    const q = $("#q");
-    const ratingFilter = $("#ratingFilter");
-    const areaFilter = $("#areaFilter");
-    if (q) q.value = "";
-    if (ratingFilter) ratingFilter.value = "all";
-    if (areaFilter) areaFilter.value = "all";
-    filterHotels();
-  }
-
   // =========================
   // Lightbox
   // =========================
@@ -379,10 +487,10 @@
 
     openLightboxUI(hotel);
 
-    // 1) custom gallery
+    // 1) If custom hotel gallery exists: use it first
     const custom = customHotelGalleries[hotel];
     if (Array.isArray(custom) && custom.length) {
-      activeImages = uniq(custom).slice(0, 9);
+      activeImages = uniq(custom);
       activeIndex = 0;
       if (lightboxLoading) lightboxLoading.style.display = "none";
       if (lightboxImage) lightboxImage.style.display = "";
@@ -390,11 +498,11 @@
       return;
     }
 
-    // 2) manifest local
+    // 2) If manifest exists: use local images
     if (folder) {
       try {
         const { images } = await galleryFromManifest(folder);
-        activeImages = uniq(images).slice(0, 60);
+        activeImages = uniq(images);
         activeIndex = 0;
         if (lightboxLoading) lightboxLoading.style.display = "none";
         if (lightboxImage) lightboxImage.style.display = "";
@@ -403,7 +511,7 @@
       } catch (_) {}
     }
 
-    // 3) fallback
+    // 3) Fallback: cover from card image + overrides + shared extras
     const coverSrc =
       card.querySelector(".hotel-thumb")?.currentSrc ||
       card.querySelector(".hotel-thumb")?.src ||
@@ -421,7 +529,7 @@
   }
 
   // =========================
-  // Image fallback chain (covers)
+  // Image fallback chain (for covers)
   // =========================
   function initImageFallback() {
     const list = $("#hotelList");
@@ -456,12 +564,14 @@
     initMapInteractions();
     initImageFallback();
 
+    // ✅ إصلاح الشريط المتحرك (بدون فراغ)
+    initBrandMarquee();
+
     filterHotels();
 
     $("#q")?.addEventListener("input", filterHotels);
     $("#ratingFilter")?.addEventListener("change", filterHotels);
     $("#areaFilter")?.addEventListener("change", filterHotels);
-    $("#clearBtn")?.addEventListener("click", clearFilters);
 
     $("#hotelList")?.addEventListener("click", (e) => {
       const target = e.target;
