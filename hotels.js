@@ -11,7 +11,7 @@
   const HOTELS_PER_PAGE = 20;
 
   // =========================
-  // Fallback shared gallery
+  // Fallback shared gallery (when no local manifest)
   // =========================
   const sharedGalleryExtras = [
     "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
@@ -19,12 +19,14 @@
     "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg",
   ];
 
+  // ✅ بدون limit نهائياً
   function defaultGalleryImages(cover, candidates = []) {
     return uniq([cover, ...candidates, ...sharedGalleryExtras]);
   }
 
-  // NOTE: keys must match data-hotel exactly
+  // NOTE: مفاتيح الأسماء لازم تطابق data-hotel بالـHTML حرفياً
   const hotelCoverOverrides = {
+    // ✅ فنادق كان عندك مشكلة بصورها
     "Hilton Istanbul Bomonti": [
       "https://images.trvl-media.com/lodging/7000000/6230000/6226800/6226720/c0561ffa.jpg?impolicy=resizecrop&ra=fit&rw=1200",
     ],
@@ -43,6 +45,8 @@
     "Renaissance Istanbul Polat Bosphorus Hotel": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/433346345.jpg?k=95768d076e2e2c810d5a251d83d01aa8655eca1968cc504ded4564aa0f4b8c77&o=",
     ],
+
+    // ✅ إضافة/تصحيح أغلفة لفنادق موجودة عندك
     "Ramada Plaza By Wyndham Sultanahmet": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/522066008.jpg?k=864ac63962c2a83d843a5b0a69b8ce9c121861001b85e7e473cc826d9446a818&o=",
     ],
@@ -94,6 +98,9 @@
     "Nevi Hotel & Suites Taksim": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/306099602.jpg?k=b67e38a7cfab1fe46121d526b511d931d2dc471411a6e7de077db508b976fd27&o=&hp=1",
     ],
+
+    // ✅ الفنادق الجديدة — أغلفة مؤقتة
+    "Grand Hotel Gulsoy": [],
     "The Craton Hotel Sisli": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/327324954.jpg?k=f9ae98a50707a4c5f78356a8c85460d4a3fc5ea1effdb671a9e84a9743951a40&o=",
     ],
@@ -177,7 +184,7 @@
     ],
   };
 
-  // Optional: per-hotel custom gallery
+  // Optional: per-hotel custom gallery (absolute URLs)
   const customHotelGalleries = {
     "Mercure Istanbul Bomonti": [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/1e/bd/9f/exterior.jpg?w=1200&h=-1&s=1",
@@ -245,26 +252,32 @@
     track.dataset.marqueeReady = "1";
     lastMarqueeWidth = currentWidth;
 
+    // اجلب العناصر الأصلية (لو كانت فاضية لا تعمل شيء)
     const originalItems = Array.from(track.children);
     if (!originalItems.length) return;
 
+    // نظّف وارجع حط نسخة واحدة فقط (حتى لو كنت مكررهم بالـHTML)
     track.innerHTML = "";
     originalItems.forEach((n) => track.appendChild(n.cloneNode(true)));
 
     const targetWidth = marquee.offsetWidth * 2.2;
 
+    // كرر حتى يصير العرض كافي (مستحيل يفضى)
     while (track.scrollWidth < targetWidth) {
       originalItems.forEach((n) => track.appendChild(n.cloneNode(true)));
     }
 
+    // ضيف نسخة ثانية كاملة لعمل loop ناعم
     const itemsNow = Array.from(track.children);
     itemsNow.forEach((n) => track.appendChild(n.cloneNode(true)));
 
+    // احسب مسافة الحركة = نصف العرض (لأن عندنا نسختين)
     requestAnimationFrame(() => {
       const half = track.scrollWidth / 2;
       track.style.setProperty("--marquee-distance", `${half}px`);
     });
 
+    // سرعة ثابتة بالبكسل/الثانية بدل مدة ثابتة (حتى ما تحسها تتغير)
     requestAnimationFrame(() => {
       const half = track.scrollWidth / 2;
       const pxPerSecond = 72;
@@ -272,6 +285,7 @@
       track.style.animationDuration = `${duration}s`;
     });
 
+    // إعادة ضبط عند تغيير الحجم (موبايل/تدوير)
     if (!marqueeResizeBound) {
       marqueeResizeBound = true;
       let resizeTimer = null;
@@ -374,6 +388,7 @@
       let coverUrl = fallbackCover;
       let fallbackCandidates = [];
 
+      // 1) local manifest if available
       if (folder) {
         try {
           const { coverUrl: localCover } = await galleryFromManifest(folder);
@@ -381,6 +396,7 @@
         } catch (_) {}
       }
 
+      // 2) override by hotel name if exists
       const overrideArr = hotelCoverOverrides[hotel];
       if (Array.isArray(overrideArr) && overrideArr.length) {
         coverUrl = overrideArr[0] || coverUrl;
@@ -416,7 +432,7 @@
   }
 
   // =========================
-  // Filtering + Pagination
+  // Filtering
   // =========================
   let currentPage = 1;
 
@@ -432,23 +448,20 @@
 
     $$("#hotelList .hotel").forEach((item) => (item.style.display = "none"));
 
-    if (!total) {
-      if (status) status.textContent = "لا توجد نتائج مطابقة للفلاتر الحالية";
-      if (prevBtn) prevBtn.disabled = true;
-      if (nextBtn) nextBtn.disabled = true;
-      if (wrapper) wrapper.style.display = "none";
-      return;
-    }
-
     const start = (currentPage - 1) * HOTELS_PER_PAGE;
     const pageItems = visibleItems.slice(start, start + HOTELS_PER_PAGE);
     pageItems.forEach((item) => (item.style.display = ""));
 
-    if (status) status.textContent = `صفحة ${currentPage} من ${totalPages} — إجمالي ${total} فندق`;
+    // ✅ تصحيح السطر اللي كان مكسور
+    if (status) {
+      status.textContent = total
+        ? `صفحة ${currentPage} من ${totalPages} — إجمالي ${total} فندق`
+        : "لا توجد نتائج مطابقة للفلاتر الحالية";
+    }
 
-    if (prevBtn) prevBtn.disabled = currentPage <= 1;
-    if (nextBtn) nextBtn.disabled = currentPage >= totalPages;
-    if (wrapper) wrapper.style.display = "flex";
+    if (prevBtn) prevBtn.disabled = currentPage <= 1 || !total;
+    if (nextBtn) nextBtn.disabled = currentPage >= totalPages || !total;
+    if (wrapper) wrapper.style.display = total ? "flex" : "none";
   }
 
   function filterHotels(resetPage = false) {
@@ -467,7 +480,7 @@
       const ratingMatch =
         rating === "all" ? true :
         rating === "5" ? stars === 5 :
-        (stars >= 3 && stars <= 4);
+        stars >= 3 && stars <= 4;
 
       const areaMatch = area === "all" ? true : (item.dataset.area || "") === area;
       return textMatch && ratingMatch && areaMatch;
@@ -479,13 +492,13 @@
   function initPaginationControls() {
     $("#pagePrev")?.addEventListener("click", () => {
       currentPage -= 1;
-      filterHotels(false);
+      filterHotels();
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
     $("#pageNext")?.addEventListener("click", () => {
       currentPage += 1;
-      filterHotels(false);
+      filterHotels();
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
@@ -565,12 +578,14 @@
     const overrideArr = hotelCoverOverrides[hotel] || [];
     const candidates = Array.isArray(overrideArr) ? overrideArr.slice(1) : [];
 
+    // عرض فوري لتجنب تأخير الفتح على الجوال
     activeImages = defaultGalleryImages(overrideArr[0] || coverSrc || "background123.jpg", candidates);
     activeIndex = 0;
     if (lightboxLoading) lightboxLoading.style.display = "none";
     if (lightboxImage) lightboxImage.style.display = "";
     showImage(0);
 
+    // ترقية لاحقة للصور الأفضل بدون تعليق الواجهة
     const custom = customHotelGalleries[hotel];
     if (Array.isArray(custom) && custom.length) {
       activeImages = uniq(custom);
@@ -591,7 +606,7 @@
   }
 
   // =========================
-  // Image fallback chain (covers)
+  // Image fallback chain (for covers)
   // =========================
   function initImageFallback() {
     const list = $("#hotelList");
@@ -626,6 +641,8 @@
     initMapInteractions();
     initImageFallback();
     initPaginationControls();
+
+    // ✅ إصلاح الشريط المتحرك (بدون فراغ)
     initBrandMarquee();
 
     filterHotels(true);
@@ -670,6 +687,6 @@
 
   document.addEventListener("DOMContentLoaded", init);
 
-  // keep global for inline calls
+  // keep global for inline calls (if any)
   window.filterHotels = filterHotels;
 })();
