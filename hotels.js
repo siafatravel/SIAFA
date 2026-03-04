@@ -570,7 +570,6 @@
       activeImages = uniq(custom);
       activeIndex = 0;
       showImage(0);
-      return;
     }
 
     if (folder) {
