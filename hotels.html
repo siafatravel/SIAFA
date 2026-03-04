@@ -35,17 +35,19 @@
 
   <!-- ✅ تحميل واحد فقط -->
   <link rel="stylesheet" href="hotels.css">
+  <style>.language-switcher{display:flex;align-items:center;gap:8px;justify-content:flex-start;margin-bottom:10px}.language-switcher select{padding:4px 6px;border-radius:8px}html[dir="ltr"] body{direction:ltr}</style>
 </head>
 
 <body>
 
   <header class="header">
-    <h1>الفنادق التي نتعامل معها</h1>
-    <p>اضغط على أي صورة لفندق لعرضها بشكل مكبر والتنقل بين الصور ✅</p>
+    <div class="language-switcher"><label for="languageSelect">🌐</label><select id="languageSelect"><option value="ar">العربية</option><option value="en">English</option></select></div>
+    <h1 id="hotelsTitle">الفنادق التي نتعامل معها</h1>
+    <p><span id="hotelsSubtitle">اضغط على أي صورة لفندق لعرضها بشكل مكبر والتنقل بين الصور ✅</span></p>
 
     <div class="top-actions">
-      <a class="btn secondary" href="index.html">⬅ الرجوع للموقع الرئيسي</a>
-      <a class="btn" href="https://wa.me/905317387785" rel="noopener">تواصل واتساب</a>
+      <a class="btn secondary" href="index.html"><span id="backHomeText">⬅ الرجوع للموقع الرئيسي</span></a>
+      <a class="btn" href="https://wa.me/905317387785" rel="noopener"><span id="waText">تواصل واتساب</span></a>
     </div>
   </header>
 
@@ -68,7 +70,7 @@
       </select>
       <button class="btn" type="button"
         onclick="document.getElementById('q').value=''; document.getElementById('ratingFilter').value='all'; document.getElementById('areaFilter').value='all'; filterHotels(true);">
-        مسح
+        <span id="clearFiltersText">مسح</span>
       </button>
     </div>
 

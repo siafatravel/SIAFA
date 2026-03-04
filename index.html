@@ -546,6 +546,40 @@
       if (langSelect) langSelect.value = currentLanguage;
     }
 
+
+    function applyExtendedIndexLanguage() {
+      if (currentLanguage !== "en") return;
+
+      const whyTitle = document.querySelector('#why .acc-title');
+      if (whyTitle) whyTitle.innerHTML = '<span class="acc-icon">⭐</span> Why choose SIAFA TRAVEL?';
+      const whyFeatures = document.querySelectorAll('#why .feature');
+      const whyEn = [
+        '✔️ Confirmed reservations before arrival with an official voucher.',
+        '✔️ Competitive rates and great value (Economy / Mid-range / Luxury).',
+        '✔️ Personalized hotel recommendations based on your budget and preferred area in Istanbul and Turkey.',
+        '✔️ WhatsApp customer support: Arabic / English / Turkish.',
+        '✔️ Post-booking support: airport transfers and tours.',
+        '✔️ Transparent and organized process from start to confirmation.'
+      ];
+      whyFeatures.forEach((el,i)=>{ if(whyEn[i]) el.textContent = whyEn[i]; });
+
+      const aboutTitle = document.querySelector('#about .acc-title');
+      if (aboutTitle) aboutTitle.innerHTML = '<span class="acc-icon">🏢</span> Who are we?';
+      const hotelsTitle = document.querySelector('#hotels .acc-title');
+      if (hotelsTitle) hotelsTitle.innerHTML = '<span class="acc-icon">🏨</span> Hotel categories we provide';
+      const methodTitle = document.querySelector('#method .acc-title');
+      if (methodTitle) methodTitle.innerHTML = '<span class="acc-icon">💬</span> Booking and payment process';
+      const servicesTitle = document.querySelector('#services .acc-title');
+      if (servicesTitle) servicesTitle.innerHTML = '<span class="acc-icon">🧳</span> Our services in Turkey';
+      const faqTitle = document.querySelector('#faq .acc-title');
+      if (faqTitle) faqTitle.innerHTML = '<span class="acc-icon">❓</span> Frequently asked questions';
+      const privacyTitle = document.querySelector('#privacy .acc-title');
+      if (privacyTitle) privacyTitle.innerHTML = '<span class="acc-icon">🔒</span> Privacy policy';
+
+      const footer = document.querySelector('footer');
+      if (footer) footer.textContent = 'All rights reserved © 2026 SIAFA TRAVEL';
+    }
+
     function sendWhatsApp(){
       const nationality = document.getElementById("nationality")?.value || "-";
       const checkin = document.getElementById("checkin")?.value || "";
@@ -601,10 +635,11 @@ ${t("booking.notes")}: ${notes}`;
       });
 
       document.getElementById("languageSelect")?.addEventListener("change", (e) => {
-        applyLanguage(e.target.value);
+        localStorage.setItem("siafaLang", e.target.value); window.location.reload();
       });
 
       applyLanguage(currentLanguage);
+      applyExtendedIndexLanguage();
 
       const heroVideo = document.getElementById("heroVideo");
       if (heroVideo) {
