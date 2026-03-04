@@ -4,8 +4,6 @@
   --gold:#d4af37;
 }
 
-html{ scroll-behavior:smooth; }
-
 body{
   margin:0;
   font-family:'Cairo',sans-serif;
@@ -289,7 +287,7 @@ body{
 }
 
 /* =========================
-   Pagination (أنيق ومتناسق)
+   Pagination
    ========================= */
 .pagination{
   display:flex;
@@ -298,31 +296,27 @@ body{
   gap:10px;
   margin:18px 0 6px;
   flex-wrap:wrap;
-
-  background:
-    radial-gradient(900px 120px at 50% 0%, rgba(212,175,55,.18), transparent 60%),
-    rgba(17,18,23,.92);
-  border:1px solid rgba(212,175,55,.28);
+  background:linear-gradient(135deg,#f9cf47,#f2b600);
+  border:1px solid rgba(255,255,255,.4);
   border-radius:14px;
   padding:10px 14px;
-  box-shadow:0 10px 26px rgba(0,0,0,.28);
+  box-shadow:0 8px 22px rgba(242,182,0,.32);
 }
 
 .pagination-status{
-  font-size:13px;
+  font-size:14px;
   font-weight:700;
-  color:#f7e3a6;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.14);
+  color:#2a1a00;
+  background:rgba(255,255,255,.65);
+  border:1px solid rgba(42,26,0,.24);
   border-radius:999px;
-  padding:8px 14px;
-  opacity:.95;
+  padding:9px 16px;
 }
 
 .pagination .btn.secondary{
-  background:rgba(8,11,17,.55);
+  background:#2a1a00;
   color:#ffe08a;
-  border-color:rgba(212,175,55,.28);
+  border-color:#2a1a00;
 }
 
 .pagination .btn.secondary:hover{
@@ -428,7 +422,7 @@ body{
 }
 
 /* =========================
-   Brand marquee (true loop)
+   Brand marquee (FIXED - no gaps)
    ========================= */
 .brand-marquee{
   margin:0 0 18px;
@@ -447,7 +441,11 @@ body{
   gap:10px;
   width:max-content;
   padding:10px;
+
+  /* ممنوع يلف سطر */
   flex-wrap:nowrap;
+
+  /* الحركة بتاخد مسافة محسوبة من JS */
   animation:brandScroll 34s linear infinite;
   will-change:transform;
 }
@@ -469,6 +467,8 @@ body{
   font-weight:700;
   font-size:13px;
   white-space:nowrap;
+
+  /* مهم: كل عنصر ثابت وما ينضغط */
   flex:0 0 auto;
 }
 
@@ -502,6 +502,7 @@ body{
   letter-spacing:.2px;
 }
 
+/* JS رح يحط المتغير --marquee-distance */
 @keyframes brandScroll{
   from{ transform:translateX(0); }
   to{ transform:translateX(calc(-1 * var(--marquee-distance, 600px))); }
