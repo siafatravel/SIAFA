@@ -369,65 +369,25 @@
   }
 
   // =========================
-  // Render hotel cards
+  // Hydrate static hotel cards
   // =========================
-  async function renderHotels() {
+  function hydrateHotels() {
     const cards = $$("#hotelList .hotel");
-    const fallbackCover = "background123.jpg";
-
     for (const card of cards) {
       const hotel = (card.dataset.hotel || "").trim();
       const hotelAr = card.dataset.hotelAr || hotel;
       const city = card.dataset.city || "";
       const area = card.dataset.area || "";
-      const stars = Math.max(1, Math.min(parseInt(card.dataset.stars || "5", 10), 5));
-      const starsText = "★".repeat(stars);
-      const note = card.dataset.note ? ` (${card.dataset.note})` : "";
-      const folder = getFolderFromCard(card);
-
-      let coverUrl = fallbackCover;
-      let fallbackCandidates = [];
-
-      // 1) local manifest if available
-      if (folder) {
-        try {
-          const { coverUrl: localCover } = await galleryFromManifest(folder);
-          coverUrl = localCover;
-        } catch (_) {}
-      }
-
-      // 2) override by hotel name if exists
-      const overrideArr = hotelCoverOverrides[hotel];
-      if (Array.isArray(overrideArr) && overrideArr.length) {
-        coverUrl = overrideArr[0] || coverUrl;
-        fallbackCandidates = overrideArr.slice(1);
-      }
-
       card.dataset.search = `${hotel} ${hotelAr} ${city} ${area}`.toLowerCase();
 
-      card.innerHTML = `
-        <img class="hotel-thumb"
-             src="${coverUrl}"
-             loading="lazy"
-             decoding="async"
-             fetchpriority="low"
-             alt="واجهة ${hotel}"
-             data-fallbacks='${JSON.stringify(fallbackCandidates)}'>
-        <div class="hotel-meta">
-          <div class="hotel-headline">
-            <div>
-              <b>${hotel}${note}</b>
-              <div class="hotel-ar">${hotelAr}${note}</div>
-            </div>
-            <div class="hotel-rating" aria-label="تصنيف ${stars} نجوم">
-              <span class="rating-label">التصنيف</span>
-              <span class="rating-stars">${starsText}</span>
-            </div>
-          </div>
-          <div class="muted">${city}${area ? ` - ${area}` : ""}</div>
-        </div>
-        <button class="gallery-btn" type="button">عرض الصور</button>
-      `;
+      const img = card.querySelector(".hotel-thumb");
+      if (img) {
+        const overrideArr = hotelCoverOverrides[hotel] || [];
+        const fallbacks = Array.isArray(overrideArr) ? overrideArr.slice(1) : [];
+        if (!img.dataset.fallbacks || img.dataset.fallbacks === "[]") {
+          img.dataset.fallbacks = JSON.stringify(fallbacks);
+        }
+      }
     }
   }
 
@@ -636,7 +596,7 @@
   // Init
   // =========================
   async function init() {
-    await renderHotels();
+    hydrateHotels();
     initAreaFilter();
     initMapInteractions();
     initImageFallback();
