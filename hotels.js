@@ -101,7 +101,7 @@
 
     // ✅ الفنادق الجديدة — أغلفة مؤقتة
     "Grand Hotel Gulsoy": [
-      "https://cf.bstatic.com/xdata/images/hotel/max500/11908314.jpg?k=59b5610b09959c48d16e1e06d9a0248987ae3cd2dda3cedf1cca6d35be8fb208&o=&hp=1",
+      "assets/hotels/grand-gulsoy/cover.jpg",
     ],
     "The Craton Hotel Sisli": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/327324954.jpg?k=f9ae98a50707a4c5f78356a8c85460d4a3fc5ea1effdb671a9e84a9743951a40&o=",
@@ -158,7 +158,7 @@
       "https://www.tatilhatti.com/images/istanbul/bagcilar/clarion-hotel-istanbul-mahmutbey/clarion-hotel-istanbul-mahmutbey-istanbul-bagcilar_1.jpg",
     ],
     "Marriott Hotel Şişli": [
-      "https://www.cvent.com/venues/_next/image?url=https%3A%2F%2Fimages.cvent.com%2Fcsn%2F7f3338b9-a12c-4dd4-8071-1d2d5f25967a%2Fimages%2Fd6d8b56a00804d3aac776e14755e3804_large!_!642c4435a1cd4d15f4bf5cd156fc295e.jpg&w=3840&q=75",
+      "assets/hotels/marriott-hotel-sisli/cover.jpg",
     ],
     "Delta Hotels by Marriott Istanbul Levent": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/627957763.jpg?k=9218b84175a62be4a46f8859f6200d009942b74d38326a4439939904084b6e77&o=",
@@ -191,6 +191,20 @@
 
   // Optional: per-hotel custom gallery (absolute URLs)
   const customHotelGalleries = {
+    "Marriott Hotel Şişli": [
+      "assets/hotels/marriott-hotel-sisli/cover.jpg",
+      "assets/hotels/marriott-hotel-sisli/1.jpeg",
+      "assets/hotels/marriott-hotel-sisli/2.jpg",
+      "assets/hotels/marriott-hotel-sisli/3.webp",
+      "assets/hotels/marriott-hotel-sisli/4.jpg",
+    ],
+    "Grand Hotel Gulsoy": [
+      "assets/hotels/grand-gulsoy/cover.jpg",
+      "assets/hotels/grand-gulsoy/grand-gulsoy-001.jpg",
+      "assets/hotels/grand-gulsoy/grand-gulsoy-002.webp",
+      "assets/hotels/grand-gulsoy/grand-gulsoy-003.jpg",
+      "assets/hotels/grand-gulsoy/grand-gulsoy-004.jpg",
+    ],
     "Mercure Istanbul Bomonti": [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/1e/bd/9f/exterior.jpg?w=1200&h=-1&s=1",
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/467247046.jpg?k=48837db6f61fc6c147feaae2c848f351e9c013e1771edf6df78c6d3fdad450cd&o=&hp=1",
