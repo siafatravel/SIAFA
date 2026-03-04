@@ -580,54 +580,6 @@
       if (footer) footer.textContent = 'All rights reserved © 2026 SIAFA TRAVEL';
     }
 
-    function applyFullIndexEnglishContent() {
-      if (currentLanguage !== "en") return;
-      const replacements = new Map([
-        ["من نحن؟", "Who are we?"],
-        ["سيافا ترافل شركة متخصصة بحجوزات فنادق تركيا منذ أكثر من <b>6 سنوات</b>، انطلقت بنمو سريع ووصلت لعملاء من دول متعددة حول العالم.
-              تركيزنا الأساسي هو <b>جودة الخدمة</b> والوضوح الكامل، مع الحفاظ على أسعار منافسة وثابتة بدون رسوم مفاجئة.", "SIAFA TRAVEL is specialized in hotel bookings in Turkey for over <b>6 years</b>. Our focus is <b>service quality</b>, full transparency, and competitive rates without surprise fees."],
-        ["📍 المقر ونطاق العمل", "📍 Office & coverage"],
-        ["📞 طريقة التواصل", "📞 Communication"],
-        ["⏱️ سرعة الاستجابة", "⏱️ Response speed"],
-        ["🏨 فئات الفنادق التي نوفرها", "🏨 Hotel categories we provide"],
-        ["✔️ فنادق اقتصادية نظيفة بمواقع عملية", "✔️ Clean economy hotels in practical locations"],
-        ["✔️ فنادق 4 نجوم مريحة وقريبة من الأماكن الحيوية", "✔️ Comfortable 4-star hotels near key areas"],
-        ["✔️ تقييمات قوية من النزلاء وتجارب إيجابية", "✔️ Strong guest ratings and positive experiences"],
-        ["✔️ لا نتعامل مع فنادق عشوائية أو منخفضة الجودة", "✔️ We do not work with random low-quality hotels"],
-        ["✔️ توازن مثالي بين الجودة والسعر المناسب", "✔️ Balanced value between quality and price"],
-        ["✔️ مناسبة لجميع الفئات (أفراد / أصدقاء / عائلات)", "✔️ Suitable for individuals, friends, and families"],
-        ["هدفنا إن الإقامة تكون جزء ممتع وآمن من رحلتكم 😊", "Our goal is to make your stay a safe and enjoyable part of your trip 😊"],
-        ["طريقة الحجز والدفع", "Booking and payment process"],
-        ["1) التواصل وطلب العرض", "1) Contact us and request an offer"],
-        ["2) ترشيح الخيارات", "2) We recommend the best options"],
-        ["3) إرسال الوثائق", "3) Send required documents"],
-        ["4) تثبيت الحجز وإرسال الفاوتشر", "4) Confirm booking and receive voucher"],
-        ["5) الدفع عند الوصول", "5) Pay on arrival"],
-        ["خدماتنا في تركيا", "Our services in Turkey"],
-        ["الأسئلة الشائعة", "Frequently asked questions"],
-        ["سياسة الخصوصية", "Privacy policy"],
-        ["جميع الحقوق محفوظة © 2026 SIAFA TRAVEL", "All rights reserved © 2026 SIAFA TRAVEL"],
-        ["هل الحجز مؤكد أم مبدئي؟", "Is the booking confirmed or tentative?"],
-        ["كيف يتم الدفع؟", "How is payment done?"],
-        ["هل يوجد إلغاء للحجز؟", "Is cancellation available?"],
-        ["كم وقت الرد؟", "How fast do you reply?"],
-        ["هل يتم إرسال إيصال حجز رسمي؟", "Do you send an official booking voucher?"],
-        ["ما الخدمات بعد الحجز؟", "What post-booking services are available?"],
-      ]);
-
-      document.querySelectorAll('summary .acc-title, .about-intro, .feature, .small, .faq-item h3, .faq-item p, .method-item h3, .method-item p, footer').forEach((el) => {
-        const html = el.innerHTML.trim();
-        if (replacements.has(html)) {
-          el.innerHTML = replacements.get(html);
-          return;
-        }
-        const txt = el.textContent.trim();
-        if (replacements.has(txt)) {
-          el.textContent = replacements.get(txt);
-        }
-      });
-    }
-
     function sendWhatsApp(){
       const nationality = document.getElementById("nationality")?.value || "-";
       const checkin = document.getElementById("checkin")?.value || "";
