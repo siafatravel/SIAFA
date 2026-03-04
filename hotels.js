@@ -216,7 +216,7 @@
   // Local assets (manifest) support
   // =========================
   function buildLocalUrl(folder, filename) {
-    return `assets/hotels/${folder}/${filename}`;
+    return `assets/hotels/${escapeHtml(folder)}/${filename}`;
   }
 
   function getFolderFromCard(card) {
@@ -225,7 +225,7 @@
 
   async function loadManifest(folder) {
     if (!folder) throw new Error("Missing folder");
-    const url = `assets/hotels/${folder}/manifest.json?v=${Date.now()}`;
+    const url = `assets/hotels/${escapeHtml(folder)}/manifest.json?v=${Date.now()}`;
     const res = await fetch(url, { cache: "no-store" });
     if (!res.ok) throw new Error("manifest not found");
     return res.json();
@@ -364,6 +364,82 @@
     });
 
     if (poiGroups.length) activatePoi(poiGroups[0]);
+  }
+
+
+  // =========================
+  // Hotels data source (central JSON)
+  // =========================
+  async function loadHotelsData() {
+    const sources = ["data/hotels-list.json", "/data/hotels-list.json"];
+    for (const src of sources) {
+      try {
+        const res = await fetch(src, { cache: "no-store" });
+        if (!res.ok) continue;
+        const data = await res.json();
+        if (Array.isArray(data) && data.length) return data;
+      } catch (_) {}
+    }
+    return [];
+  }
+
+  function starsText(stars) {
+    const n = Math.max(0, Number(stars) || 0);
+    return "★".repeat(n);
+  }
+
+  function escapeHtml(value = "") {
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#39;");
+  }
+
+  function renderHotels(hotels = []) {
+    const list = $("#hotelList");
+    if (!list) return;
+
+    if (!Array.isArray(hotels) || !hotels.length) {
+      list.innerHTML = '<div class="footer-note">تعذّر تحميل قائمة الفنادق حالياً. جرّب تحديث الصفحة أو تواصل معنا عبر واتساب.</div>';
+      return;
+    }
+
+    list.innerHTML = hotels
+      .map((h) => {
+        const hotel = h.hotel || "";
+        const hotelAr = h.hotelAr || hotel;
+        const city = h.city || "إسطنبول";
+        const area = h.area || "";
+        const stars = Number(h.stars) || 0;
+        const slug = h.slug || "";
+        const folder = h.folder || "";
+        const cover = h.cover || "background123.jpg";
+        const alt = h.alt || `واجهة ${hotel}`;
+        const detailsHref = h.detailsHref || `hotels/${slug}.html`;
+        return `<article class="hotel" data-hotel="${escapeHtml(hotel)}" data-hotel-ar="${escapeHtml(hotelAr)}" data-city="${escapeHtml(city)}" data-area="${escapeHtml(area)}" data-stars="${escapeHtml(stars)}" data-slug="${escapeHtml(slug)}" data-folder="${escapeHtml(folder)}">
+    <img class="hotel-thumb" src="${escapeHtml(cover)}" loading="lazy" decoding="async" width="1200" height="800" alt="${escapeHtml(alt)}" data-fallbacks='[]'>
+    <div class="hotel-meta">
+      <div class="hotel-headline">
+        <div>
+          <b>${escapeHtml(hotel)}</b>
+          <div class="hotel-ar">${escapeHtml(hotelAr)}</div>
+        </div>
+        <div class="hotel-rating" aria-label="تصنيف ${escapeHtml(stars)} نجوم">
+          <span class="rating-label">التصنيف</span>
+          <span class="rating-stars">${starsText(stars)}</span>
+        </div>
+      </div>
+      <div class="muted">${escapeHtml(city)} - ${escapeHtml(area)}</div>
+    </div>
+    <div class="hotel-actions">
+      <button class="gallery-btn" type="button">عرض الصور</button>
+      <a class="details-btn" href="${escapeHtml(detailsHref)}">عرض التفاصيل</a>
+    </div>
+  </article>`;
+      })
+      .join("\n\n");
   }
 
   // =========================
@@ -614,6 +690,9 @@
   // Init
   // =========================
   async function init() {
+    const hotels = await loadHotelsData();
+    if (hotels.length) renderHotels(hotels);
+
     hydrateHotels();
     initAreaFilter();
     initMapInteractions();
