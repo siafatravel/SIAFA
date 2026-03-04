@@ -11,8 +11,8 @@
   const HOTELS_PER_PAGE = 20;
   let currentLanguage = localStorage.getItem("siafaLang") || "ar";
   const i18n = {
-    ar:{loadError:'تعذّر تحميل قائمة الفنادق حالياً. جرّب تحديث الصفحة أو تواصل معنا عبر واتساب.',rating:'التصنيف',showPhotos:'عرض الصور',showDetails:'عرض التفاصيل',page:(c,t,n)=>`صفحة ${c} من ${t} — إجمالي ${n} فندق`,empty:'لا توجد نتائج مطابقة للفلاتر الحالية',img:'صورة',loading:'جارِ تحميل الصور…',title:'الفنادق التي نتعامل معها',subtitle:'اضغط على أي صورة لفندق لعرضها بشكل مكبر والتنقل بين الصور ✅',back:'⬅ الرجوع للموقع الرئيسي',wa:'تواصل واتساب',clear:'مسح',search:'ابحث عن فندق… مثال: Marriott'},
-    en:{loadError:'Unable to load hotels list right now. Please refresh or contact us on WhatsApp.',rating:'Rating',showPhotos:'View photos',showDetails:'View details',page:(c,t,n)=>`Page ${c} of ${t} — Total ${n} hotels`,empty:'No matching results for current filters',img:'Image',loading:'Loading photos…',title:'Our Partner Hotels',subtitle:'Click any hotel image to view it enlarged and browse the gallery ✅',back:'⬅ Back to homepage',wa:'WhatsApp Contact',clear:'Clear',search:'Search hotel... e.g. Marriott'}
+    ar:{loadError:'تعذّر تحميل قائمة الفنادق حالياً. جرّب تحديث الصفحة أو تواصل معنا عبر واتساب.',rating:'التصنيف',showPhotos:'عرض الصور',showDetails:'عرض التفاصيل',page:(c,t,n)=>`صفحة ${c} من ${t} — إجمالي ${n} فندق`,empty:'لا توجد نتائج مطابقة للفلاتر الحالية',img:'صورة',loading:'جارِ تحميل الصور…',title:'الفنادق التي نتعامل معها',subtitle:'اضغط على أي صورة لفندق لعرضها بشكل مكبر والتنقل بين الصور ✅',back:'⬅ الرجوع للموقع الرئيسي',wa:'تواصل واتساب',clear:'مسح',search:'ابحث عن فندق… مثال: Marriott',noscript:'يمكنك تصفح الفنادق حتى بدون JavaScript. للتجربة الأفضل (بحث أسرع + معرض صور تفاعلي) يُفضّل تفعيل JavaScript.',titleDoc:'الفنادق التي نتعامل معها | سيافا ترافل',areaAria:'فلتر المنطقة',ratingAria:'فلتر التصنيف'},
+    en:{loadError:'Unable to load hotels list right now. Please refresh or contact us on WhatsApp.',rating:'Rating',showPhotos:'View photos',showDetails:'View details',page:(c,t,n)=>`Page ${c} of ${t} — Total ${n} hotels`,empty:'No matching results for current filters',img:'Image',loading:'Loading photos…',title:'Our Partner Hotels',subtitle:'Click any hotel image to view it enlarged and browse the gallery ✅',back:'⬅ Back to homepage',wa:'WhatsApp Contact',clear:'Clear',search:'Search hotel... e.g. Marriott',noscript:'You can browse hotels without JavaScript, but for best experience (faster search + interactive gallery) enable JavaScript.',titleDoc:'Our Partner Hotels | SIAFA TRAVEL',areaAria:'Area filter',ratingAria:'Rating filter'}
   };
   const areaEnMap={"شيشلي":"Sisli","تقسيم":"Taksim","فاتح-لالالي":"Fatih-Laleli","لالالي":"Laleli","ليفينت":"Levent","فلوريا":"Florya","توبكابي":"Topkapi","كاراكوي":"Karakoy","بكركوي":"Bakirkoy","بيرم باشا":"Bayrampasa","محمود بيه":"Mahmutbey","اوتومار":"Ottomare","ماسلاك":"Maslak","بيشكتاش":"Besiktas"};
   const cityEnMap={"إسطنبول":"Istanbul"};
@@ -707,6 +707,10 @@
     const w=document.getElementById('waText'); if(w) w.textContent=tr.wa;
     const c=document.getElementById('clearFiltersText'); if(c) c.textContent=tr.clear;
     const q=document.getElementById('q'); if(q) q.placeholder=tr.search;
+    document.title = tr.titleDoc;
+    const ns=document.querySelector('.nojs-note'); if(ns) ns.textContent=tr.noscript;
+    const af=document.getElementById('areaFilter'); if(af) af.setAttribute('aria-label', tr.areaAria);
+    const rf2=document.getElementById('ratingFilter'); if(rf2) rf2.setAttribute('aria-label', tr.ratingAria);
     const rf=document.getElementById('ratingFilter'); if(rf){rf.options[0].text=currentLanguage==='en'?'All ratings':'كل التصنيفات'; rf.options[1].text=currentLanguage==='en'?'5 stars':'5 نجوم'; rf.options[2].text=currentLanguage==='en'?'3-4 stars':'3-4 نجوم';}
 
   }

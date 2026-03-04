@@ -353,8 +353,8 @@
       </a>
 
       <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a class="btn secondary" href="hotels.html">شاهد الفنادق</a>
-        <a class="btn" href="https://wa.me/905317387785">تواصل واتساب</a>
+        <a class="btn secondary" href="hotels.html" id="topHotelsBtn">شاهد الفنادق</a>
+        <a class="btn" href="https://wa.me/905317387785" id="topWaBtn">تواصل واتساب</a>
       </div>
     </div>
   </div>
@@ -369,8 +369,8 @@
       </p>
 
       <div class="hero-actions">
-        <a class="btn" href="https://wa.me/905317387785">تواصل الآن</a>
-        <a class="btn secondary" href="index.html#booking">إرسال طلب حجز</a>
+        <a class="btn" href="https://wa.me/905317387785" id="heroContactBtn">تواصل الآن</a>
+        <a class="btn secondary" href="index.html#booking" id="heroBookingBtn">إرسال طلب حجز</a>
       </div>
     </div>
 
@@ -598,8 +598,8 @@
     </div>
 
     <div class="footer">
-      <a class="btn secondary" href="index.html">رجوع للرئيسية</a>
-      <a class="btn" href="https://wa.me/905317387785">تواصل واتساب</a>
+      <a class="btn secondary" href="index.html" id="backHomeBtn">رجوع للرئيسية</a>
+      <a class="btn" href="https://wa.me/905317387785" id="bottomWaBtn">تواصل واتساب</a>
     </div>
 
   </div>
@@ -623,8 +623,15 @@
       const d=['After confirmation, we send an official voucher with hotel name, dates, and full booking details.','The hotel in your voucher is exactly the hotel we confirm with you, with full transparency.','The room and service level match the confirmed details, or better subject to availability.','The confirmed voucher rate is the same amount paid at the hotel reception, with no hidden fees.','We clarify all important booking details in writing before final confirmation.','Our team remains available after booking to support arrival, check-in, and related requests.'];
       gtitles.forEach((el,i)=>{if(t[i]) el.textContent=t[i];});
       gtexts.forEach((el,i)=>{if(d[i]) el.textContent=d[i];});
-      const btns=[...document.querySelectorAll('a.btn')];
-      btns.forEach(b=>{ if(b.textContent.includes('واتساب')) b.textContent='WhatsApp Contact'; if(b.textContent.includes('تواصل الآن')) b.textContent='Contact now'; if(b.textContent.includes('إرسال طلب حجز')) b.textContent='Send booking request'; if(b.textContent.includes('رجوع للرئيسية')) b.textContent='Back to home'; if(b.textContent.includes('شاهد الفنادق')) b.textContent='View hotels'; });
+      const set=(id,val)=>{const el=document.getElementById(id); if(el) el.textContent=val;};
+      set('topHotelsBtn','View hotels');
+      set('topWaBtn','WhatsApp Contact');
+      set('heroContactBtn','Contact now');
+      set('heroBookingBtn','Send booking request');
+      set('backHomeBtn','Back to home');
+      set('bottomWaBtn','WhatsApp Contact');
+      const note = document.querySelector('.note');
+      if(note) note.innerHTML='<b>Important note:</b> Terms may vary depending on season and hotel policy. We always clarify details before confirmation.';
       const brandSmall=document.querySelector('.brand small'); if(brandSmall) brandSmall.textContent='Our guarantees — trust with no surprises';
     }
   }
