@@ -55,7 +55,7 @@
         <option value="all" selected>كل المناطق</option>
       </select>
       <button class="btn" type="button"
-        onclick="document.getElementById('q').value=''; document.getElementById('ratingFilter').value='all'; document.getElementById('areaFilter').value='all'; filterHotels();">
+        onclick="document.getElementById('q').value=''; document.getElementById('ratingFilter').value='all'; document.getElementById('areaFilter').value='all'; filterHotels(true);">
         مسح
       </button>
     </div>
@@ -65,62 +65,58 @@
   <div class="brand-track" id="brandTrack" role="list">
     <!-- عدّل الروابط من هون بكل بساطة -->
     <span class="brand-logo-pill" role="listitem" data-brand="Marriott">
-      <img src="https://www.google.com/s2/favicons?domain=marriott.com&sz=64" alt="Marriott" loading="lazy"
+      <img src="https://cdn.simpleicons.org/marriott/8B1E3F" alt="Marriott" loading="lazy"
            onerror="this.remove(); this.parentElement.classList.add('no-logo')">
       <b>Marriott</b>
     </span>
 
     <span class="brand-logo-pill" role="listitem" data-brand="Hilton">
-      <img src="https://www.google.com/s2/favicons?domain=hilton.com&sz=64" alt="Hilton" loading="lazy"
+      <img src="https://cdn.simpleicons.org/hilton/003A70" alt="Hilton" loading="lazy"
            onerror="this.remove(); this.parentElement.classList.add('no-logo')">
       <b>Hilton</b>
     </span>
 
     <span class="brand-logo-pill" role="listitem" data-brand="Wyndham">
-      <img src="https://www.google.com/s2/favicons?domain=wyndhamhotels.com&sz=64" alt="Wyndham" loading="lazy"
+      <img src="https://cdn.simpleicons.org/wyndhamhotelsandresorts/1E4AA8" alt="Wyndham" loading="lazy"
            onerror="this.remove(); this.parentElement.classList.add('no-logo')">
       <b>Wyndham</b>
     </span>
 
     <span class="brand-logo-pill" role="listitem" data-brand="IHG">
-      <img src="https://www.google.com/s2/favicons?domain=ihg.com&sz=64" alt="IHG" loading="lazy"
+      <img src="https://cdn.simpleicons.org/intercontinentalhotelsgroup/CB9B51" alt="IHG" loading="lazy"
            onerror="this.remove(); this.parentElement.classList.add('no-logo')">
       <b>IHG</b>
     </span>
 
     <span class="brand-logo-pill" role="listitem" data-brand="Radisson">
-      <img src="https://www.google.com/s2/favicons?domain=radissonhotels.com&sz=64" alt="Radisson" loading="lazy"
+      <img src="https://cdn.simpleicons.org/radissonhotels/11344D" alt="Radisson" loading="lazy"
            onerror="this.remove(); this.parentElement.classList.add('no-logo')">
       <b>Radisson</b>
     </span>
 
     <span class="brand-logo-pill" role="listitem" data-brand="Accor">
-      <img src="https://www.google.com/s2/favicons?domain=accor.com&sz=64" alt="Accor" loading="lazy"
+      <img src="https://cdn.simpleicons.org/accor/8B6F47" alt="Accor" loading="lazy"
            onerror="this.remove(); this.parentElement.classList.add('no-logo')">
       <b>Accor</b>
     </span>
 
     <span class="brand-logo-pill" role="listitem" data-brand="Barceló">
-      <img src="https://www.google.com/s2/favicons?domain=barcelo.com&sz=64" alt="Barceló" loading="lazy"
+      <img src="https://cdn.simpleicons.org/barcelohotelsandresorts/1A3561" alt="Barceló" loading="lazy"
            onerror="this.remove(); this.parentElement.classList.add('no-logo')">
       <b>Barceló</b>
     </span>
 
     <span class="brand-logo-pill" role="listitem" data-brand="Rotana">
-      <img src="https://www.google.com/s2/favicons?domain=rotana.com&sz=64" alt="Rotana" loading="lazy"
+      <img src="https://cdn.simpleicons.org/rotana/8C5E32" alt="Rotana" loading="lazy"
            onerror="this.remove(); this.parentElement.classList.add('no-logo')">
       <b>Rotana</b>
     </span>
 
-    <span class="brand-logo-pill" role="listitem" data-brand="Divan">
-      <img src="https://www.google.com/s2/favicons?domain=divan.com.tr&sz=64" alt="Divan" loading="lazy"
-           onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+    <span class="brand-logo-pill no-logo" role="listitem" data-brand="D">
       <b>Divan</b>
     </span>
 
-    <span class="brand-logo-pill" role="listitem" data-brand="Titanic">
-      <img src="https://www.google.com/s2/favicons?domain=titanic.com.tr&sz=64" alt="Titanic" loading="lazy"
-           onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+    <span class="brand-logo-pill no-logo" role="listitem" data-brand="T">
       <b>Titanic</b>
     </span>
   </div>
@@ -290,6 +286,12 @@
       <div class="hotel" data-hotel="Mineo Hotel Taksim" data-hotel-ar="منيو تقسيم" data-city="إسطنبول" data-area="تقسيم" data-stars="4"></div>
       <div class="hotel" data-hotel="Wish More Hotel Istanbul" data-hotel-ar="ويش مور بيرم باشا" data-city="إسطنبول" data-area="بيرم باشا" data-stars="5"></div>
 
+    </div>
+
+    <div class="pagination" id="hotelsPagination" aria-label="تصفح صفحات الفنادق">
+      <button class="btn secondary" id="pageNext" type="button">الصفحة التالية</button>
+      <span class="pagination-status" id="paginationStatus">صفحة 1 من 1</span>
+      <button class="btn secondary" id="pagePrev" type="button">الصفحة السابقة</button>
     </div>
   </main>
 

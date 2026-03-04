@@ -202,6 +202,8 @@ body{
   padding:12px;
   line-height:1.8;
   transition:transform .24s ease, border-color .24s ease, box-shadow .24s ease;
+  content-visibility:auto;
+  contain-intrinsic-size: 280px 300px;
 }
 
 .hotel-thumb{
@@ -286,11 +288,53 @@ body{
   margin-top:14px;
 }
 
+
+
+.pagination{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin:18px 0 6px;
+  flex-wrap:wrap;
+  background:linear-gradient(135deg,#f9cf47,#f2b600);
+  border:1px solid rgba(255,255,255,.4);
+  border-radius:14px;
+  padding:10px 14px;
+  box-shadow:0 8px 22px rgba(242,182,0,.32);
+}
+
+.pagination-status{
+  font-size:14px;
+  font-weight:700;
+  color:#2a1a00;
+  background:rgba(255,255,255,.65);
+  border:1px solid rgba(42,26,0,.24);
+  border-radius:999px;
+  padding:9px 16px;
+}
+
+.pagination .btn.secondary{
+  background:#2a1a00;
+  color:#ffe08a;
+  border-color:#2a1a00;
+}
+
+.pagination .btn.secondary:hover{
+  filter:brightness(1.08);
+}
+
+.pagination .btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
 /* =========================
    Lightbox
    ========================= */
 .lightbox{
   position:fixed;
+  touch-action:manipulation;
   inset:0;
   display:none;
   align-items:center;
@@ -431,13 +475,28 @@ body{
 }
 
 .brand-logo-pill img{
-  width:18px;
-  height:18px;
-  border-radius:50%;
-  object-fit:cover;
+  width:20px;
+  height:20px;
+  border-radius:6px;
+  object-fit:contain;
   border:1px solid rgba(255,255,255,.22);
   background:#fff;
+  padding:2px;
   flex:0 0 auto;
+}
+
+.brand-logo-pill.no-logo::before{
+  content:attr(data-brand);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:20px;
+  height:20px;
+  border-radius:6px;
+  font-size:10px;
+  font-weight:700;
+  color:#111;
+  background:#f1d37d;
 }
 
 .brand-logo-pill b{
