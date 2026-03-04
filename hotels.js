@@ -101,7 +101,7 @@
 
     // ✅ الفنادق الجديدة — أغلفة مؤقتة
     "Grand Hotel Gulsoy": [
-      "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1200&q=80",
+      "https://cf.bstatic.com/xdata/images/hotel/max500/11908314.jpg?k=59b5610b09959c48d16e1e06d9a0248987ae3cd2dda3cedf1cca6d35be8fb208&o=&hp=1",
     ],
     "The Craton Hotel Sisli": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/327324954.jpg?k=f9ae98a50707a4c5f78356a8c85460d4a3fc5ea1effdb671a9e84a9743951a40&o=",
@@ -158,7 +158,7 @@
       "https://www.tatilhatti.com/images/istanbul/bagcilar/clarion-hotel-istanbul-mahmutbey/clarion-hotel-istanbul-mahmutbey-istanbul-bagcilar_1.jpg",
     ],
     "Marriott Hotel Şişli": [
-      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1200&q=80",
+      "https://www.cvent.com/venues/_next/image?url=https%3A%2F%2Fimages.cvent.com%2Fcsn%2F7f3338b9-a12c-4dd4-8071-1d2d5f25967a%2Fimages%2Fd6d8b56a00804d3aac776e14755e3804_large!_!642c4435a1cd4d15f4bf5cd156fc295e.jpg&w=3840&q=75",
     ],
     "Delta Hotels by Marriott Istanbul Levent": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/627957763.jpg?k=9218b84175a62be4a46f8859f6200d009942b74d38326a4439939904084b6e77&o=",
