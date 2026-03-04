@@ -14,9 +14,9 @@
   // Fallback shared gallery (when no local manifest)
   // =========================
   const sharedGalleryExtras = [
-    "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
-    "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg",
-    "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg",
+    "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1455587734955-081b22074882?auto=format&fit=crop&w=1200&q=80",
   ];
 
   // ✅ بدون limit نهائياً
@@ -100,7 +100,9 @@
     ],
 
     // ✅ الفنادق الجديدة — أغلفة مؤقتة
-    "Grand Hotel Gulsoy": [],
+    "Grand Hotel Gulsoy": [
+      "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1200&q=80",
+    ],
     "The Craton Hotel Sisli": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/327324954.jpg?k=f9ae98a50707a4c5f78356a8c85460d4a3fc5ea1effdb671a9e84a9743951a40&o=",
     ],
@@ -154,6 +156,9 @@
     ],
     "Clarion Hotel Istanbul Mahmutbey": [
       "https://www.tatilhatti.com/images/istanbul/bagcilar/clarion-hotel-istanbul-mahmutbey/clarion-hotel-istanbul-mahmutbey-istanbul-bagcilar_1.jpg",
+    ],
+    "Marriott Hotel Şişli": [
+      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1200&q=80",
     ],
     "Delta Hotels by Marriott Istanbul Levent": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/627957763.jpg?k=9218b84175a62be4a46f8859f6200d009942b74d38326a4439939904084b6e77&o=",
