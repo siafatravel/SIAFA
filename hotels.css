@@ -95,7 +95,6 @@ body{
   border:1px solid rgba(255,255,255,.12);
   background:linear-gradient(180deg,#1f4a69 0%,#173d5a 50%,#12324a 100%);
 }
-
 #istanbulMap{ width:100%; height:auto; display:block; }
 
 .land-mass{ fill:#f2f4f6; stroke:#cad1d8; stroke-width:2; pointer-events:none; }
@@ -236,7 +235,6 @@ body{
   line-height:1.2;
   flex:0 0 auto;
 }
-
 .rating-label{ font-size:11px; opacity:0.78; }
 .rating-stars{
   color:#f5c84b;
@@ -373,7 +371,6 @@ body{
   cursor:pointer;
   flex:0 0 auto;
 }
-
 .lightbox-thumb.active{
   border-color:var(--gold);
   opacity:1;
@@ -450,6 +447,20 @@ body{
   from{ transform:translateX(0); }
   to{ transform:translateX(calc(-1 * var(--marquee-distance, 600px))); }
 }
+
+/* =========================
+   No-JS Note
+   ========================= */
+.nojs-note{
+  display:block;
+  margin:0 0 16px;
+  padding:10px 14px;
+  border:1px solid rgba(212,175,55,.28);
+  border-radius:10px;
+  background:rgba(212,175,55,.08);
+  color:#f5dc8a;
+}
+
 /* =========================
    Subtle motion
    ========================= */
