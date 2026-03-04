@@ -48,6 +48,13 @@
 </head>
 
 <body>
+  <div class="language-switcher">
+    <label for="languageSelect">🌐</label>
+    <select id="languageSelect" aria-label="Language selector">
+      <option value="ar">العربية</option>
+      <option value="en">English</option>
+    </select>
+  </div>
 
   <!-- HERO -->
 <!-- HERO -->
@@ -68,15 +75,15 @@
 
   <div class="hero-box">
     <img src="logo.png" alt="SIAFA TRAVEL Logo" class="hero-logo" decoding="async" width="220" height="220">
-    <h1>سيافا ترافل — SIAFA TRAVEL</h1>
-    <p>حجوزات فنادق في تركيا 🇹🇷 <br>أسعار منافسة — دعم سريع — حجوزات مؤكدة</p>
+    <h1 data-i18n="hero.title">سيافا ترافل — SIAFA TRAVEL</h1>
+    <p data-i18n="hero.subtitle" data-i18n-html="true">حجوزات فنادق في تركيا 🇹🇷 <br>أسعار منافسة — دعم سريع — حجوزات مؤكدة</p>
 
-    <a class="btn" href="https://wa.me/905317387785">تواصل عبر واتساب</a>
+    <a class="btn" href="https://wa.me/905317387785" data-i18n="hero.whatsapp">تواصل عبر واتساب</a>
 
     <div style="margin-top:10px">
-      <a class="btn secondary" href="#booking">إرسال طلب حجز</a>
-      <a class="btn secondary" href="hotels.html" style="margin-right:8px">الفنادق التي نتعامل معها</a>
-      <a class="btn secondary" href="guarantee.html" style="margin-right:8px">ضماناتنا</a>
+      <a class="btn secondary" href="#booking" data-i18n="hero.booking">إرسال طلب حجز</a>
+      <a class="btn secondary" href="hotels.html" style="margin-right:8px" data-i18n="hero.hotels">الفنادق التي نتعامل معها</a>
+      <a class="btn secondary" href="guarantee.html" style="margin-right:8px" data-i18n="hero.guarantee">ضماناتنا</a>
     </div>
   </div>
 </section>
@@ -267,63 +274,63 @@
 
     <!-- BOOKING FORM -->
     <section class="section" id="booking">
-      <h2>📝 إرسال طلب حجز</h2>
+      <h2 data-i18n="booking.title">📝 إرسال طلب حجز</h2>
 
       <div class="booking-form-wrap">
         <form id="bookingForm">
           <div class="field">
-            <label for="nationality">الجنسية</label>
-            <input type="text" id="nationality" placeholder="مثال: سعودي/عراقي/ليبي...">
+            <label for="nationality" data-i18n="booking.nationalityLabel">الجنسية</label>
+            <input type="text" id="nationality" placeholder="مثال: سعودي/عراقي/ليبي..." data-i18n-placeholder="booking.nationalityPlaceholder">
           </div>
 
           <div class="field">
-            <label for="checkin">تاريخ الوصول</label>
+            <label for="checkin" data-i18n="booking.checkinLabel">تاريخ الوصول</label>
             <input type="date" id="checkin">
-            <div class="hint">إذا التاريخ غير محدد، اختر تاريخ تقريبي.</div>
+            <div class="hint" data-i18n="booking.checkinHint">إذا التاريخ غير محدد، اختر تاريخ تقريبي.</div>
           </div>
 
           <div class="field">
-            <label for="nights">عدد الليالي</label>
-            <input type="number" id="nights" placeholder="مثال: 5" min="1">
+            <label for="nights" data-i18n="booking.nightsLabel">عدد الليالي</label>
+            <input type="number" id="nights" placeholder="مثال: 5" min="1" data-i18n-placeholder="booking.nightsPlaceholder">
           </div>
 
           <div class="field">
-            <label for="checkout">تاريخ المغادرة (يُحسب تلقائياً)</label>
-            <input type="text" id="checkout" placeholder="سيظهر بعد اختيار تاريخ الوصول وعدد الليالي" readonly>
+            <label for="checkout" data-i18n="booking.checkoutLabel">تاريخ المغادرة (يُحسب تلقائياً)</label>
+            <input type="text" id="checkout" placeholder="سيظهر بعد اختيار تاريخ الوصول وعدد الليالي" readonly data-i18n-placeholder="booking.checkoutPlaceholder">
           </div>
 
           <div class="field">
-            <label for="adults">عدد البالغين</label>
-            <input type="number" id="adults" placeholder="مثال: 2" min="1">
+            <label for="adults" data-i18n="booking.adultsLabel">عدد البالغين</label>
+            <input type="number" id="adults" placeholder="مثال: 2" min="1" data-i18n-placeholder="booking.adultsPlaceholder">
           </div>
 
           <div class="field">
-            <label for="children">عدد الأطفال (إن وجد)</label>
-            <input type="number" id="children" placeholder="مثال: 1" min="0">
+            <label for="children" data-i18n="booking.childrenLabel">عدد الأطفال (إن وجد)</label>
+            <input type="number" id="children" placeholder="مثال: 1" min="0" data-i18n-placeholder="booking.childrenPlaceholder">
           </div>
 
           <div class="field">
-            <label for="childrenAges">أعمار الأطفال (مثال: 3, 7)</label>
-            <input type="text" id="childrenAges" placeholder="مثال: 3, 7">
+            <label for="childrenAges" data-i18n="booking.childrenAgesLabel">أعمار الأطفال (مثال: 3, 7)</label>
+            <input type="text" id="childrenAges" placeholder="مثال: 3, 7" data-i18n-placeholder="booking.childrenAgesPlaceholder">
           </div>
 
           <div class="field">
-            <label for="budget">المستوى</label>
+            <label for="budget" data-i18n="booking.budgetLabel">المستوى</label>
             <select id="budget">
-              <option>اقتصادي</option>
-              <option>متوسط</option>
-              <option>فاخر</option>
+              <option data-i18n="booking.budgetEconomy">اقتصادي</option>
+              <option data-i18n="booking.budgetMid">متوسط</option>
+              <option data-i18n="booking.budgetLuxury">فاخر</option>
             </select>
           </div>
 
           <div class="field">
-            <label for="notes">ملاحظات (اختياري)</label>
-            <input type="text" id="notes" placeholder="مثال: منطقة شيشلي / قريب من تقسيم / إطلالة...">
+            <label for="notes" data-i18n="booking.notesLabel">ملاحظات (اختياري)</label>
+            <input type="text" id="notes" placeholder="مثال: منطقة شيشلي / قريب من تقسيم / إطلالة..." data-i18n-placeholder="booking.notesPlaceholder">
           </div>
 
-          <button class="btn" type="submit">إرسال الطلب عبر واتساب</button>
+          <button class="btn" type="submit" data-i18n="booking.submit">إرسال الطلب عبر واتساب</button>
 
-          <div class="small booking-foot">
+          <div class="small booking-foot" data-i18n="booking.footnote">
             بعد الإرسال، سيقوم أحد ممثلي خدمة العملاء بالتواصل معك وتأكيد التفاصيل.
           </div>
         </form>
@@ -406,6 +413,173 @@
       checkoutEl.value = `${d}-${m}-${y}`;
     }
 
+    const translations = {
+      ar: {
+        dir: "rtl",
+        title: "SIAFA TRAVEL | سيافا ترافل حجوزات فنادق تركيا",
+        hero: {
+          title: "سيافا ترافل — SIAFA TRAVEL",
+          subtitle: "حجوزات فنادق في تركيا 🇹🇷 <br>أسعار منافسة — دعم سريع — حجوزات مؤكدة",
+          whatsapp: "تواصل عبر واتساب",
+          booking: "إرسال طلب حجز",
+          hotels: "الفنادق التي نتعامل معها",
+          guarantee: "ضماناتنا"
+        },
+        booking: {
+          title: "📝 إرسال طلب حجز",
+          nationalityLabel: "الجنسية",
+          nationalityPlaceholder: "مثال: سعودي/عراقي/ليبي...",
+          checkinLabel: "تاريخ الوصول",
+          checkinHint: "إذا التاريخ غير محدد، اختر تاريخ تقريبي.",
+          nightsLabel: "عدد الليالي",
+          nightsPlaceholder: "مثال: 5",
+          checkoutLabel: "تاريخ المغادرة (يُحسب تلقائياً)",
+          checkoutPlaceholder: "سيظهر بعد اختيار تاريخ الوصول وعدد الليالي",
+          adultsLabel: "عدد البالغين",
+          adultsPlaceholder: "مثال: 2",
+          childrenLabel: "عدد الأطفال (إن وجد)",
+          childrenPlaceholder: "مثال: 1",
+          childrenAgesLabel: "أعمار الأطفال (مثال: 3, 7)",
+          childrenAgesPlaceholder: "مثال: 3, 7",
+          budgetLabel: "المستوى",
+          budgetEconomy: "اقتصادي",
+          budgetMid: "متوسط",
+          budgetLuxury: "فاخر",
+          notesLabel: "ملاحظات (اختياري)",
+          notesPlaceholder: "مثال: منطقة شيشلي / قريب من تقسيم / إطلالة...",
+          submit: "إرسال الطلب عبر واتساب",
+          footnote: "بعد الإرسال، سيقوم أحد ممثلي خدمة العملاء بالتواصل معك وتأكيد التفاصيل.",
+          messageTitle: "طلب حجز جديد (سيافا ترافل - SIAFA TRAVEL):",
+          nationality: "الجنسية",
+          checkin: "تاريخ الوصول",
+          checkinUnknown: "غير محدد (تاريخ تقريبي)",
+          nights: "عدد الليالي",
+          checkout: "تاريخ المغادرة",
+          adults: "عدد البالغين",
+          children: "عدد الأطفال",
+          childrenAges: "أعمار الأطفال",
+          budget: "المستوى",
+          notes: "ملاحظات"
+        }
+      },
+      en: {
+        dir: "ltr",
+        title: "SIAFA TRAVEL | Hotel Booking in Turkey",
+        hero: {
+          title: "SIAFA TRAVEL",
+          subtitle: "Hotel bookings in Turkey 🇹🇷 <br>Competitive rates — Fast support — Confirmed reservations",
+          whatsapp: "Contact us on WhatsApp",
+          booking: "Send booking request",
+          hotels: "Our partner hotels",
+          guarantee: "Our guarantees"
+        },
+        booking: {
+          title: "📝 Send a booking request",
+          nationalityLabel: "Nationality",
+          nationalityPlaceholder: "Example: Saudi / Iraqi / Libyan...",
+          checkinLabel: "Check-in date",
+          checkinHint: "If your date is not final, choose an approximate date.",
+          nightsLabel: "Number of nights",
+          nightsPlaceholder: "Example: 5",
+          checkoutLabel: "Check-out date (calculated automatically)",
+          checkoutPlaceholder: "Will appear after choosing check-in date and nights",
+          adultsLabel: "Number of adults",
+          adultsPlaceholder: "Example: 2",
+          childrenLabel: "Number of children (if any)",
+          childrenPlaceholder: "Example: 1",
+          childrenAgesLabel: "Children ages (example: 3, 7)",
+          childrenAgesPlaceholder: "Example: 3, 7",
+          budgetLabel: "Category",
+          budgetEconomy: "Economy",
+          budgetMid: "Mid-range",
+          budgetLuxury: "Luxury",
+          notesLabel: "Notes (optional)",
+          notesPlaceholder: "Example: Sisli area / close to Taksim / good view...",
+          submit: "Send request via WhatsApp",
+          footnote: "After sending, one of our customer support agents will contact you to confirm details.",
+          messageTitle: "New booking request (SIAFA TRAVEL):",
+          nationality: "Nationality",
+          checkin: "Check-in date",
+          checkinUnknown: "Not specified (approximate date)",
+          nights: "Number of nights",
+          checkout: "Check-out date",
+          adults: "Number of adults",
+          children: "Number of children",
+          childrenAges: "Children ages",
+          budget: "Category",
+          notes: "Notes"
+        }
+      }
+    };
+
+    let currentLanguage = localStorage.getItem("siafaLang") || "ar";
+
+    function t(path) {
+      return path.split(".").reduce((acc, key) => (acc ? acc[key] : undefined), translations[currentLanguage]);
+    }
+
+    function applyLanguage(language) {
+      currentLanguage = translations[language] ? language : "ar";
+      localStorage.setItem("siafaLang", currentLanguage);
+
+      const langConfig = translations[currentLanguage];
+      document.documentElement.lang = currentLanguage;
+      document.documentElement.dir = langConfig.dir;
+      document.title = langConfig.title;
+
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const value = t(el.dataset.i18n);
+        if (!value) return;
+        if (el.dataset.i18nHtml === "true") {
+          el.innerHTML = value;
+        } else {
+          el.textContent = value;
+        }
+      });
+
+      document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+        const value = t(el.dataset.i18nPlaceholder);
+        if (value) el.setAttribute("placeholder", value);
+      });
+
+      const langSelect = document.getElementById("languageSelect");
+      if (langSelect) langSelect.value = currentLanguage;
+    }
+
+
+    function applyExtendedIndexLanguage() {
+      if (currentLanguage !== "en") return;
+
+      const whyTitle = document.querySelector('#why .acc-title');
+      if (whyTitle) whyTitle.innerHTML = '<span class="acc-icon">⭐</span> Why choose SIAFA TRAVEL?';
+      const whyFeatures = document.querySelectorAll('#why .feature');
+      const whyEn = [
+        '✔️ Confirmed reservations before arrival with an official voucher.',
+        '✔️ Competitive rates and great value (Economy / Mid-range / Luxury).',
+        '✔️ Personalized hotel recommendations based on your budget and preferred area in Istanbul and Turkey.',
+        '✔️ WhatsApp customer support: Arabic / English / Turkish.',
+        '✔️ Post-booking support: airport transfers and tours.',
+        '✔️ Transparent and organized process from start to confirmation.'
+      ];
+      whyFeatures.forEach((el,i)=>{ if(whyEn[i]) el.textContent = whyEn[i]; });
+
+      const aboutTitle = document.querySelector('#about .acc-title');
+      if (aboutTitle) aboutTitle.innerHTML = '<span class="acc-icon">🏢</span> Who are we?';
+      const hotelsTitle = document.querySelector('#hotels .acc-title');
+      if (hotelsTitle) hotelsTitle.innerHTML = '<span class="acc-icon">🏨</span> Hotel categories we provide';
+      const methodTitle = document.querySelector('#method .acc-title');
+      if (methodTitle) methodTitle.innerHTML = '<span class="acc-icon">💬</span> Booking and payment process';
+      const servicesTitle = document.querySelector('#services .acc-title');
+      if (servicesTitle) servicesTitle.innerHTML = '<span class="acc-icon">🧳</span> Our services in Turkey';
+      const faqTitle = document.querySelector('#faq .acc-title');
+      if (faqTitle) faqTitle.innerHTML = '<span class="acc-icon">❓</span> Frequently asked questions';
+      const privacyTitle = document.querySelector('#privacy .acc-title');
+      if (privacyTitle) privacyTitle.innerHTML = '<span class="acc-icon">🔒</span> Privacy policy';
+
+      const footer = document.querySelector('footer');
+      if (footer) footer.textContent = 'All rights reserved © 2026 SIAFA TRAVEL';
+    }
+
     function sendWhatsApp(){
       const nationality = document.getElementById("nationality")?.value || "-";
       const checkin = document.getElementById("checkin")?.value || "";
@@ -417,17 +591,18 @@
       const budget = document.getElementById("budget")?.value || "-";
       const notes = document.getElementById("notes")?.value || "-";
 
+      const checkinValue = checkin ? formatDateYYYYMMDDToArabic(checkin) : t("booking.checkinUnknown");
       const msg =
-`طلب حجز جديد (سيافا ترافل - SIAFA TRAVEL):
-الجنسية: ${nationality}
-تاريخ الوصول: ${checkin ? formatDateYYYYMMDDToArabic(checkin) : "غير محدد (تاريخ تقريبي)"}
-عدد الليالي: ${nights}
-تاريخ المغادرة: ${checkout}
-عدد البالغين: ${adults}
-عدد الأطفال: ${children}
-أعمار الأطفال: ${childrenAges}
-المستوى: ${budget}
-ملاحظات: ${notes}`;
+`${t("booking.messageTitle")}
+${t("booking.nationality")}: ${nationality}
+${t("booking.checkin")}: ${checkinValue}
+${t("booking.nights")}: ${nights}
+${t("booking.checkout")}: ${checkout}
+${t("booking.adults")}: ${adults}
+${t("booking.children")}: ${children}
+${t("booking.childrenAges")}: ${childrenAges}
+${t("booking.budget")}: ${budget}
+${t("booking.notes")}: ${notes}`;
 
       window.open(`https://wa.me/905317387785?text=${encodeURIComponent(msg)}`, "_blank");
     }
@@ -458,6 +633,13 @@
         calcCheckout();
         sendWhatsApp();
       });
+
+      document.getElementById("languageSelect")?.addEventListener("change", (e) => {
+        localStorage.setItem("siafaLang", e.target.value); window.location.reload();
+      });
+
+      applyLanguage(currentLanguage);
+      applyExtendedIndexLanguage();
 
       const heroVideo = document.getElementById("heroVideo");
       if (heroVideo) {
