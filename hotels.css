@@ -202,6 +202,8 @@ body{
   padding:12px;
   line-height:1.8;
   transition:transform .24s ease, border-color .24s ease, box-shadow .24s ease;
+  content-visibility:auto;
+  contain-intrinsic-size: 280px 300px;
 }
 
 .hotel-thumb{
@@ -316,6 +318,7 @@ body{
    ========================= */
 .lightbox{
   position:fixed;
+  touch-action:manipulation;
   inset:0;
   display:none;
   align-items:center;

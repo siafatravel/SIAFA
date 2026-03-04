@@ -17,11 +17,6 @@
     "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
     "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg",
     "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg",
-    "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg",
-    "https://images.pexels.com/photos/2034335/pexels-photo-2034335.jpeg",
-    "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg",
-    "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg",
-    "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg",
   ];
 
   // ✅ بدون limit نهائياً
@@ -217,6 +212,18 @@
     return res.json();
   }
 
+  async function withTimeout(promise, ms = 1200) {
+    let timer = null;
+    const timeout = new Promise((_, reject) => {
+      timer = setTimeout(() => reject(new Error("timeout")), ms);
+    });
+    try {
+      return await Promise.race([promise, timeout]);
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
   async function galleryFromManifest(folder) {
     const m = await loadManifest(folder);
     const coverName = String(m.cover || "cover.jpg").trim();
@@ -233,14 +240,17 @@
   // Brand marquee (no-gap loop)
   // =========================
   let marqueeResizeBound = false;
+  let lastMarqueeWidth = 0;
 
   function initBrandMarquee() {
     const marquee = document.querySelector(".brand-marquee");
     const track = document.querySelector(".brand-track");
     if (!marquee || !track) return;
 
-    if (track.dataset.marqueeReady === "1") return;
+    const currentWidth = Math.round(marquee.offsetWidth || 0);
+    if (track.dataset.marqueeReady === "1" && currentWidth === lastMarqueeWidth) return;
     track.dataset.marqueeReady = "1";
+    lastMarqueeWidth = currentWidth;
 
     // اجلب العناصر الأصلية (لو كانت فاضية لا تعمل شيء)
     const originalItems = Array.from(track.children);
@@ -282,6 +292,8 @@
       window.addEventListener("resize", () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
+          const widthNow = Math.round(marquee.offsetWidth || 0);
+          if (Math.abs(widthNow - lastMarqueeWidth) < 2) return;
           track.dataset.marqueeReady = "0";
           initBrandMarquee();
         }, 200);
@@ -391,10 +403,14 @@
         fallbackCandidates = overrideArr.slice(1);
       }
 
+      card.dataset.search = `${hotel} ${hotelAr} ${city} ${area}`.toLowerCase();
+
       card.innerHTML = `
         <img class="hotel-thumb"
              src="${coverUrl}"
              loading="lazy"
+             decoding="async"
+             fetchpriority="low"
              alt="واجهة ${hotel}"
              data-fallbacks='${JSON.stringify(fallbackCandidates)}'>
         <div class="hotel-meta">
@@ -456,7 +472,7 @@
 
     const items = $$("#hotelList .hotel");
     const filteredItems = items.filter((item) => {
-      const text = (item.innerText || "").toLowerCase();
+      const text = item.dataset.search || "";
       const stars = parseInt(item.dataset.stars || "0", 10);
 
       const textMatch = text.includes(q);
@@ -536,11 +552,13 @@
     if (!lightbox) return;
     lightbox.classList.remove("open");
     lightbox.setAttribute("aria-hidden", "true");
-    if (lightboxImage) lightboxImage.src = "";
     activeImages = [];
     activeIndex = 0;
     activeHotel = "";
     if (lightboxStrip) lightboxStrip.innerHTML = "";
+    requestAnimationFrame(() => {
+      if (lightboxImage) lightboxImage.src = "";
+    });
   }
 
   async function openLightbox(card) {
@@ -551,31 +569,6 @@
 
     openLightboxUI(hotel);
 
-    // 1) If custom hotel gallery exists: use it first
-    const custom = customHotelGalleries[hotel];
-    if (Array.isArray(custom) && custom.length) {
-      activeImages = uniq(custom);
-      activeIndex = 0;
-      if (lightboxLoading) lightboxLoading.style.display = "none";
-      if (lightboxImage) lightboxImage.style.display = "";
-      showImage(0);
-      return;
-    }
-
-    // 2) If manifest exists: use local images
-    if (folder) {
-      try {
-        const { images } = await galleryFromManifest(folder);
-        activeImages = uniq(images);
-        activeIndex = 0;
-        if (lightboxLoading) lightboxLoading.style.display = "none";
-        if (lightboxImage) lightboxImage.style.display = "";
-        showImage(0);
-        return;
-      } catch (_) {}
-    }
-
-    // 3) Fallback: cover from card image + overrides + shared extras
     const coverSrc =
       card.querySelector(".hotel-thumb")?.currentSrc ||
       card.querySelector(".hotel-thumb")?.src ||
@@ -584,12 +577,31 @@
     const overrideArr = hotelCoverOverrides[hotel] || [];
     const candidates = Array.isArray(overrideArr) ? overrideArr.slice(1) : [];
 
+    // عرض فوري لتجنب تأخير الفتح على الجوال
     activeImages = defaultGalleryImages(overrideArr[0] || coverSrc || "background123.jpg", candidates);
     activeIndex = 0;
-
     if (lightboxLoading) lightboxLoading.style.display = "none";
     if (lightboxImage) lightboxImage.style.display = "";
     showImage(0);
+
+    // ترقية لاحقة للصور الأفضل بدون تعليق الواجهة
+    const custom = customHotelGalleries[hotel];
+    if (Array.isArray(custom) && custom.length) {
+      activeImages = uniq(custom);
+      activeIndex = 0;
+      showImage(0);
+      return;
+    }
+
+    if (folder) {
+      try {
+        const { images } = await withTimeout(galleryFromManifest(folder), 1200);
+        if (!lightbox?.classList.contains("open") || activeHotel !== hotel) return;
+        activeImages = uniq(images);
+        activeIndex = 0;
+        showImage(0);
+      } catch (_) {}
+    }
   }
 
   // =========================
