@@ -94,6 +94,11 @@
     }
     .brand b{ letter-spacing:0.5px; }
     .brand small{ display:block; opacity:.8; margin-top:2px; font-size:12px; }
+    .language-switcher{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.06);padding:6px 10px;border-radius:10px;border:1px solid rgba(255,255,255,0.15)}
+    .language-switcher select{background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:4px 6px;font-family:inherit}
+    .language-switcher option{color:#111}
+    html[dir="ltr"] body{direction:ltr}
+
 
     .btn{
       background:var(--gold);
@@ -338,6 +343,7 @@
 
   <div class="topbar">
     <div class="topbar-inner">
+      <div class="language-switcher"><label for="languageSelect">🌐</label><select id="languageSelect"><option value="ar">العربية</option><option value="en">English</option></select></div>
       <a class="brand" href="index.html">
         <img src="logo.png" alt="SIAFA TRAVEL" loading="lazy" decoding="async" width="120" height="120">
         <div>
@@ -347,8 +353,8 @@
       </a>
 
       <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a class="btn secondary" href="hotels.html">شاهد الفنادق</a>
-        <a class="btn" href="https://wa.me/905317387785">تواصل واتساب</a>
+        <a class="btn secondary" href="hotels.html" id="topHotelsBtn">شاهد الفنادق</a>
+        <a class="btn" href="https://wa.me/905317387785" id="topWaBtn">تواصل واتساب</a>
       </div>
     </div>
   </div>
@@ -363,8 +369,8 @@
       </p>
 
       <div class="hero-actions">
-        <a class="btn" href="https://wa.me/905317387785">تواصل الآن</a>
-        <a class="btn secondary" href="index.html#booking">إرسال طلب حجز</a>
+        <a class="btn" href="https://wa.me/905317387785" id="heroContactBtn">تواصل الآن</a>
+        <a class="btn secondary" href="index.html#booking" id="heroBookingBtn">إرسال طلب حجز</a>
       </div>
     </div>
 
@@ -592,11 +598,47 @@
     </div>
 
     <div class="footer">
-      <a class="btn secondary" href="index.html">رجوع للرئيسية</a>
-      <a class="btn" href="https://wa.me/905317387785">تواصل واتساب</a>
+      <a class="btn secondary" href="index.html" id="backHomeBtn">رجوع للرئيسية</a>
+      <a class="btn" href="https://wa.me/905317387785" id="bottomWaBtn">تواصل واتساب</a>
     </div>
 
   </div>
+
+
+<script>
+(function(){
+  const lang = localStorage.getItem('siafaLang') || 'ar';
+  const sel = document.getElementById('languageSelect');
+  if (sel) sel.value = lang;
+  function apply(l){
+    document.documentElement.lang=l;
+    document.documentElement.dir=l==='en'?'ltr':'rtl';
+    if(l==='en'){
+      document.title='Our Guarantees | SIAFA TRAVEL';
+      const h1=document.querySelector('.hero h1'); if(h1) h1.textContent='Our guarantees... your peace of mind comes first';
+      const p=document.querySelector('.hero p'); if(p) p.innerHTML='We work with a clear and organized process: <b>same agreed hotel</b>, <b>same level promised before confirmation</b>, and <b>official voucher/invoice</b> with full clarity before booking confirmation.';
+      const gtitles=[...document.querySelectorAll('.gtitle')];
+      const gtexts=[...document.querySelectorAll('.gtext')];
+      const t=['Official voucher/invoice after booking confirmation','Same agreed hotel','Same level promised before confirmation','Fixed price with no surprise increases','Full clarity before we say "Booked"','Post-booking support'];
+      const d=['After confirmation, we send an official voucher with hotel name, dates, and full booking details.','The hotel in your voucher is exactly the hotel we confirm with you, with full transparency.','The room and service level match the confirmed details, or better subject to availability.','The confirmed voucher rate is the same amount paid at the hotel reception, with no hidden fees.','We clarify all important booking details in writing before final confirmation.','Our team remains available after booking to support arrival, check-in, and related requests.'];
+      gtitles.forEach((el,i)=>{if(t[i]) el.textContent=t[i];});
+      gtexts.forEach((el,i)=>{if(d[i]) el.textContent=d[i];});
+      const set=(id,val)=>{const el=document.getElementById(id); if(el) el.textContent=val;};
+      set('topHotelsBtn','View hotels');
+      set('topWaBtn','WhatsApp Contact');
+      set('heroContactBtn','Contact now');
+      set('heroBookingBtn','Send booking request');
+      set('backHomeBtn','Back to home');
+      set('bottomWaBtn','WhatsApp Contact');
+      const note = document.querySelector('.note');
+      if(note) note.innerHTML='<b>Important note:</b> Terms may vary depending on season and hotel policy. We always clarify details before confirmation.';
+      const brandSmall=document.querySelector('.brand small'); if(brandSmall) brandSmall.textContent='Our guarantees — trust with no surprises';
+    }
+  }
+  apply(lang);
+  sel?.addEventListener('change',e=>{localStorage.setItem('siafaLang',e.target.value); window.location.reload();});
+})();
+</script>
 
 </body>
 </html>
