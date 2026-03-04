@@ -9,6 +9,14 @@
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const uniq = (arr) => [...new Set((arr || []).filter(Boolean))];
   const HOTELS_PER_PAGE = 20;
+  let currentLanguage = localStorage.getItem("siafaLang") || "ar";
+  const i18n = {
+    ar:{loadError:'تعذّر تحميل قائمة الفنادق حالياً. جرّب تحديث الصفحة أو تواصل معنا عبر واتساب.',rating:'التصنيف',showPhotos:'عرض الصور',showDetails:'عرض التفاصيل',page:(c,t,n)=>`صفحة ${c} من ${t} — إجمالي ${n} فندق`,empty:'لا توجد نتائج مطابقة للفلاتر الحالية',img:'صورة',loading:'جارِ تحميل الصور…',title:'الفنادق التي نتعامل معها',subtitle:'اضغط على أي صورة لفندق لعرضها بشكل مكبر والتنقل بين الصور ✅',back:'⬅ الرجوع للموقع الرئيسي',wa:'تواصل واتساب',clear:'مسح',search:'ابحث عن فندق… مثال: Marriott',noscript:'يمكنك تصفح الفنادق حتى بدون JavaScript. للتجربة الأفضل (بحث أسرع + معرض صور تفاعلي) يُفضّل تفعيل JavaScript.',titleDoc:'الفنادق التي نتعامل معها | سيافا ترافل',areaAria:'فلتر المنطقة',ratingAria:'فلتر التصنيف'},
+    en:{loadError:'Unable to load hotels list right now. Please refresh or contact us on WhatsApp.',rating:'Rating',showPhotos:'View photos',showDetails:'View details',page:(c,t,n)=>`Page ${c} of ${t} — Total ${n} hotels`,empty:'No matching results for current filters',img:'Image',loading:'Loading photos…',title:'Our Partner Hotels',subtitle:'Click any hotel image to view it enlarged and browse the gallery ✅',back:'⬅ Back to homepage',wa:'WhatsApp Contact',clear:'Clear',search:'Search hotel... e.g. Marriott',noscript:'You can browse hotels without JavaScript, but for best experience (faster search + interactive gallery) enable JavaScript.',titleDoc:'Our Partner Hotels | SIAFA TRAVEL',areaAria:'Area filter',ratingAria:'Rating filter'}
+  };
+  const areaEnMap={"شيشلي":"Sisli","تقسيم":"Taksim","فاتح-لالالي":"Fatih-Laleli","لالالي":"Laleli","ليفينت":"Levent","فلوريا":"Florya","توبكابي":"Topkapi","كاراكوي":"Karakoy","بكركوي":"Bakirkoy","بيرم باشا":"Bayrampasa","محمود بيه":"Mahmutbey","اوتومار":"Ottomare","ماسلاك":"Maslak","بيشكتاش":"Besiktas"};
+  const cityEnMap={"إسطنبول":"Istanbul"};
+
 
   // =========================
   // Fallback shared gallery (when no local manifest)
@@ -402,7 +410,7 @@
     if (!list) return;
 
     if (!Array.isArray(hotels) || !hotels.length) {
-      list.innerHTML = '<div class="footer-note">تعذّر تحميل قائمة الفنادق حالياً. جرّب تحديث الصفحة أو تواصل معنا عبر واتساب.</div>';
+      list.innerHTML = `<div class="footer-note">${i18n[currentLanguage].loadError}</div>`;
       return;
     }
 
@@ -411,31 +419,34 @@
         const hotel = h.hotel || "";
         const hotelAr = h.hotelAr || hotel;
         const city = h.city || "إسطنبول";
+        const cityLabel = currentLanguage === "en" ? (cityEnMap[city] || city) : city;
         const area = h.area || "";
+        const areaLabel = currentLanguage === "en" ? (areaEnMap[area] || area) : area;
         const stars = Number(h.stars) || 0;
         const slug = h.slug || "";
         const folder = h.folder || "";
         const cover = h.cover || "background123.jpg";
         const alt = h.alt || `واجهة ${hotel}`;
-        const detailsHref = h.detailsHref || `hotels/${slug}.html`;
+        const detailsHrefRaw = h.detailsHref || `hotels/${slug}.html`;
+        const detailsHref = currentLanguage === "en" ? `/en/${detailsHrefRaw}` : detailsHrefRaw;
         return `<article class="hotel" data-hotel="${escapeHtml(hotel)}" data-hotel-ar="${escapeHtml(hotelAr)}" data-city="${escapeHtml(city)}" data-area="${escapeHtml(area)}" data-stars="${escapeHtml(stars)}" data-slug="${escapeHtml(slug)}" data-folder="${escapeHtml(folder)}">
     <img class="hotel-thumb" src="${escapeHtml(cover)}" loading="lazy" decoding="async" width="1200" height="800" alt="${escapeHtml(alt)}" data-fallbacks='[]'>
     <div class="hotel-meta">
       <div class="hotel-headline">
         <div>
           <b>${escapeHtml(hotel)}</b>
-          <div class="hotel-ar">${escapeHtml(hotelAr)}</div>
+          <div class="hotel-ar">${escapeHtml(currentLanguage === "en" ? hotel : hotelAr)}</div>
         </div>
-        <div class="hotel-rating" aria-label="تصنيف ${escapeHtml(stars)} نجوم">
-          <span class="rating-label">التصنيف</span>
+        <div class="hotel-rating" aria-label="${escapeHtml(i18n[currentLanguage].rating)} ${escapeHtml(stars)} stars">
+          <span class="rating-label">${i18n[currentLanguage].rating}</span>
           <span class="rating-stars">${starsText(stars)}</span>
         </div>
       </div>
-      <div class="muted">${escapeHtml(city)} - ${escapeHtml(area)}</div>
+      <div class="muted">${escapeHtml(cityLabel)} - ${escapeHtml(areaLabel)}</div>
     </div>
     <div class="hotel-actions">
-      <button class="gallery-btn" type="button">عرض الصور</button>
-      <a class="details-btn" href="${escapeHtml(detailsHref)}">عرض التفاصيل</a>
+      <button class="gallery-btn" type="button">${i18n[currentLanguage].showPhotos}</button>
+      <a class="details-btn" href="${escapeHtml(detailsHref)}">${i18n[currentLanguage].showDetails}</a>
     </div>
   </article>`;
       })
@@ -448,17 +459,18 @@
   function initAreaFilter() {
     const areaFilter = $("#areaFilter");
     if (!areaFilter) return;
+    areaFilter.innerHTML = `<option value="all" selected>${currentLanguage==="en"?"All areas":"كل المناطق"}</option>`;
 
     const areas = uniq(
       $$("#hotelList .hotel")
         .map((h) => (h.dataset.area || "").trim())
         .filter(Boolean)
-    ).sort((a, b) => a.localeCompare(b, "ar"));
+    ).sort((a, b) => a.localeCompare(b, currentLanguage === "en" ? "en" : "ar"));
 
     for (const area of areas) {
       const opt = document.createElement("option");
       opt.value = area;
-      opt.textContent = area;
+      opt.textContent = currentLanguage === "en" ? (areaEnMap[area] || area) : area;
       areaFilter.appendChild(opt);
     }
   }
@@ -510,8 +522,8 @@
     // ✅ تصحيح السطر اللي كان مكسور
     if (status) {
       status.textContent = total
-        ? `صفحة ${currentPage} من ${totalPages} — إجمالي ${total} فندق`
-        : "لا توجد نتائج مطابقة للفلاتر الحالية";
+        ? i18n[currentLanguage].page(currentPage, totalPages, total)
+        : i18n[currentLanguage].empty;
     }
 
     if (prevBtn) prevBtn.disabled = currentPage <= 1 || !total;
@@ -590,7 +602,7 @@
 
     activeIndex = (index + activeImages.length) % activeImages.length;
     lightboxImage.src = activeImages[activeIndex];
-    lightboxTitle.textContent = `${activeHotel} — صورة ${activeIndex + 1} من ${activeImages.length}`;
+    lightboxTitle.textContent = `${activeHotel} — ${i18n[currentLanguage].img} ${activeIndex + 1} / ${activeImages.length}`;
     renderThumbs();
   }
 
@@ -600,7 +612,7 @@
     lightbox?.setAttribute("aria-hidden", "false");
     if (lightboxLoading) lightboxLoading.style.display = "";
     if (lightboxImage) lightboxImage.style.display = "none";
-    if (lightboxTitle) lightboxTitle.textContent = `${hotelName} — جارِ تحميل الصور…`;
+    if (lightboxTitle) lightboxTitle.textContent = `${hotelName} — ${i18n[currentLanguage].loading}`;
     if (lightboxStrip) lightboxStrip.innerHTML = "";
   }
 
@@ -686,10 +698,29 @@
     );
   }
 
+  function applyHotelsPageLanguage(){
+    const tr=i18n[currentLanguage];
+    const s=document.getElementById('languageSelect'); if(s) s.value=currentLanguage;
+    document.documentElement.lang=currentLanguage; document.documentElement.dir=currentLanguage==='en'?'ltr':'rtl';
+    const titleEl=document.getElementById('hotelsTitle'); if(titleEl) titleEl.textContent=tr.title;
+    const sub=document.getElementById('hotelsSubtitle'); if(sub) sub.textContent=tr.subtitle;
+    const b=document.getElementById('backHomeText'); if(b) b.textContent=tr.back;
+    const w=document.getElementById('waText'); if(w) w.textContent=tr.wa;
+    const c=document.getElementById('clearFiltersText'); if(c) c.textContent=tr.clear;
+    const q=document.getElementById('q'); if(q) q.placeholder=tr.search;
+    document.title = tr.titleDoc;
+    const ns=document.querySelector('.nojs-note'); if(ns) ns.textContent=tr.noscript;
+    const af=document.getElementById('areaFilter'); if(af) af.setAttribute('aria-label', tr.areaAria);
+    const rf2=document.getElementById('ratingFilter'); if(rf2) rf2.setAttribute('aria-label', tr.ratingAria);
+    const rf=document.getElementById('ratingFilter'); if(rf){rf.options[0].text=currentLanguage==='en'?'All ratings':'كل التصنيفات'; rf.options[1].text=currentLanguage==='en'?'5 stars':'5 نجوم'; rf.options[2].text=currentLanguage==='en'?'3-4 stars':'3-4 نجوم';}
+
+  }
+
   // =========================
   // Init
   // =========================
   async function init() {
+    applyHotelsPageLanguage();
     const hotels = await loadHotelsData();
     if (hotels.length) renderHotels(hotels);
 
@@ -703,6 +734,8 @@
     initBrandMarquee();
 
     filterHotels(true);
+
+    document.getElementById("languageSelect")?.addEventListener("change", async (e)=>{ currentLanguage=e.target.value; localStorage.setItem("siafaLang", currentLanguage); applyHotelsPageLanguage(); const data = await loadHotelsData(); renderHotels(data); hydrateHotels(); initAreaFilter(); filterHotels(true); });
 
     $("#q")?.addEventListener("input", () => filterHotels(true));
     $("#ratingFilter")?.addEventListener("change", () => filterHotels(true));
