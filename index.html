@@ -48,14 +48,6 @@
 </head>
 
 <body>
-  <div class="language-switcher">
-    <label for="languageSelect">🌐</label>
-    <select id="languageSelect" aria-label="Language selector">
-      <option value="ar">العربية</option>
-      <option value="en">English</option>
-    </select>
-  </div>
-
   <!-- HERO -->
 <!-- HERO -->
 <section class="hero">
@@ -512,7 +504,8 @@
       }
     };
 
-    let currentLanguage = localStorage.getItem("siafaLang") || "ar";
+    const isEnglishPath = /^\/en(?:\/|$)/.test(window.location.pathname);
+    let currentLanguage = isEnglishPath ? "en" : "ar";
 
     function t(path) {
       return path.split(".").reduce((acc, key) => (acc ? acc[key] : undefined), translations[currentLanguage]);
@@ -542,8 +535,6 @@
         if (value) el.setAttribute("placeholder", value);
       });
 
-      const langSelect = document.getElementById("languageSelect");
-      if (langSelect) langSelect.value = currentLanguage;
     }
 
 
@@ -632,10 +623,6 @@ ${t("booking.notes")}: ${notes}`;
         e.preventDefault();
         calcCheckout();
         sendWhatsApp();
-      });
-
-      document.getElementById("languageSelect")?.addEventListener("change", (e) => {
-        localStorage.setItem("siafaLang", e.target.value); window.location.reload();
       });
 
       applyLanguage(currentLanguage);
