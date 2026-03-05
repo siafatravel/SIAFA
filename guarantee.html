@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="ضماناتنا | SIAFA TRAVEL">
   <meta name="twitter:description" content="ضمانات واضحة وموثوقة من سيافا ترافل: حجز مؤكد، التزام بالسعر، ودعم كامل قبل وبعد الوصول.">
   <meta name="twitter:image" content="https://www.siafatravel.com/logo.png">
-  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="icon" type="image/png" href="logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
@@ -344,7 +344,7 @@
   <div class="topbar">
     <div class="topbar-inner">
       <div class="language-switcher"><label for="languageSelect">🌐</label><select id="languageSelect"><option value="ar">العربية</option><option value="en">English</option></select></div>
-      <a class="brand" href="/">
+      <a class="brand" href="index.html">
         <img src="logo.png" alt="SIAFA TRAVEL" loading="lazy" decoding="async" width="120" height="120">
         <div>
           <b>SIAFA TRAVEL</b>
@@ -353,7 +353,7 @@
       </a>
 
       <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a class="btn secondary" href="/hotels" id="topHotelsBtn">شاهد الفنادق</a>
+        <a class="btn secondary" href="hotels.html" id="topHotelsBtn">شاهد الفنادق</a>
         <a class="btn" href="https://wa.me/905317387785" id="topWaBtn">تواصل واتساب</a>
       </div>
     </div>
@@ -370,7 +370,7 @@
 
       <div class="hero-actions">
         <a class="btn" href="https://wa.me/905317387785" id="heroContactBtn">تواصل الآن</a>
-        <a class="btn secondary" href="/#booking" id="heroBookingBtn">إرسال طلب حجز</a>
+        <a class="btn secondary" href="index.html#booking" id="heroBookingBtn">إرسال طلب حجز</a>
       </div>
     </div>
 
@@ -598,7 +598,7 @@
     </div>
 
     <div class="footer">
-      <a class="btn secondary" href="/" id="backHomeBtn">رجوع للرئيسية</a>
+      <a class="btn secondary" href="index.html" id="backHomeBtn">رجوع للرئيسية</a>
       <a class="btn" href="https://wa.me/905317387785" id="bottomWaBtn">تواصل واتساب</a>
     </div>
 
@@ -607,21 +607,12 @@
 
 <script>
 (function(){
-  const isEnglishPath = /(?:^\/en(?:\/|$)|\/en\/?$)/.test(window.location.pathname);
-  const lang = isEnglishPath ? 'en' : (localStorage.getItem('siafaLang') || 'ar');
+  const lang = localStorage.getItem('siafaLang') || 'ar';
   const sel = document.getElementById('languageSelect');
   if (sel) sel.value = lang;
   function apply(l){
     document.documentElement.lang=l;
     document.documentElement.dir=l==='en'?'ltr':'rtl';
-
-    const homeHref = l==='en' ? '/en' : '/';
-    const hotelsHref = l==='en' ? '/hotels/en' : '/hotels';
-    const bookingHref = l==='en' ? '/en#booking' : '/#booking';
-    const brand = document.querySelector('.brand'); if (brand) brand.setAttribute('href', homeHref);
-    const topHotels = document.getElementById('topHotelsBtn'); if (topHotels) topHotels.setAttribute('href', hotelsHref);
-    const heroBooking = document.getElementById('heroBookingBtn'); if (heroBooking) heroBooking.setAttribute('href', bookingHref);
-    const backHome = document.getElementById('backHomeBtn'); if (backHome) backHome.setAttribute('href', homeHref);
     if(l==='en'){
       document.title='Our Guarantees | SIAFA TRAVEL';
       const h1=document.querySelector('.hero h1'); if(h1) h1.textContent='Our guarantees... your peace of mind comes first';
@@ -645,11 +636,7 @@
     }
   }
   apply(lang);
-  sel?.addEventListener('change',e=>{
-    const nextLang = e.target.value;
-    localStorage.setItem('siafaLang',nextLang);
-    window.location.href = nextLang === 'en' ? '/guarantee/en' : '/guarantee';
-  });
+  sel?.addEventListener('change',e=>{localStorage.setItem('siafaLang',e.target.value); window.location.reload();});
 })();
 </script>
 

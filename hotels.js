@@ -9,7 +9,7 @@
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const uniq = (arr) => [...new Set((arr || []).filter(Boolean))];
   const HOTELS_PER_PAGE = 20;
-  const isEnglishPath = /(?:^\/en(?:\/|$)|\/en\/?$)/.test(window.location.pathname);
+  const isEnglishPath = /^\/en(?:\/|$)/.test(window.location.pathname);
   let currentLanguage = isEnglishPath ? "en" : "ar";
   const i18n = {
     ar:{loadError:'تعذّر تحميل قائمة الفنادق حالياً. جرّب تحديث الصفحة أو تواصل معنا عبر واتساب.',rating:'التصنيف',showPhotos:'عرض الصور',showDetails:'عرض التفاصيل',page:(c,t,n)=>`صفحة ${c} من ${t} — إجمالي ${n} فندق`,empty:'لا توجد نتائج مطابقة للفلاتر الحالية',img:'صورة',loading:'جارِ تحميل الصور…',title:'الفنادق التي نتعامل معها',subtitle:'اضغط على أي صورة لفندق لعرضها بشكل مكبر والتنقل بين الصور ✅',back:'⬅ الرجوع للموقع الرئيسي',wa:'تواصل واتساب',clear:'مسح',search:'ابحث عن فندق… مثال: Marriott',noscript:'يمكنك تصفح الفنادق حتى بدون JavaScript. للتجربة الأفضل (بحث أسرع + معرض صور تفاعلي) يُفضّل تفعيل JavaScript.',titleDoc:'الفنادق التي نتعامل معها | سيافا ترافل',areaAria:'فلتر المنطقة',ratingAria:'فلتر التصنيف'},
@@ -17,13 +17,6 @@
   };
   const areaEnMap={"شيشلي":"Sisli","تقسيم":"Taksim","فاتح-لالالي":"Fatih-Laleli","لالالي":"Laleli","ليفينت":"Levent","فلوريا":"Florya","توبكابي":"Topkapi","كاراكوي":"Karakoy","بكركوي":"Bakirkoy","بيرم باشا":"Bayrampasa","محمود بيه":"Mahmutbey","اوتومار":"Ottomare","ماسلاك":"Maslak","بيشكتاش":"Besiktas"};
   const cityEnMap={"إسطنبول":"Istanbul"};
-
-  function toAbsoluteUrl(path = "") {
-    const value = String(path || "").trim();
-    if (!value) return value;
-    if (/^(?:https?:)?\/\//.test(value) || value.startsWith("/")) return value;
-    return `/${value.replace(/^\.\//, "")}`;
-  }
 
 
   // =========================
@@ -232,7 +225,7 @@
   // Local assets (manifest) support
   // =========================
   function buildLocalUrl(folder, filename) {
-    return `/assets/hotels/${escapeHtml(folder)}/${filename}`;
+    return `assets/hotels/${escapeHtml(folder)}/${filename}`;
   }
 
   function getFolderFromCard(card) {
@@ -241,7 +234,7 @@
 
   async function loadManifest(folder) {
     if (!folder) throw new Error("Missing folder");
-    const url = `/assets/hotels/${escapeHtml(folder)}/manifest.json?v=${Date.now()}`;
+    const url = `assets/hotels/${escapeHtml(folder)}/manifest.json?v=${Date.now()}`;
     const res = await fetch(url, { cache: "no-store" });
     if (!res.ok) throw new Error("manifest not found");
     return res.json();
@@ -387,7 +380,7 @@
   // Hotels data source (central JSON)
   // =========================
   async function loadHotelsData() {
-    const sources = ["/data/hotels-list.json", "data/hotels-list.json"];
+    const sources = ["data/hotels-list.json", "/data/hotels-list.json"];
     for (const src of sources) {
       try {
         const res = await fetch(src, { cache: "no-store" });
@@ -433,9 +426,9 @@
         const stars = Number(h.stars) || 0;
         const slug = h.slug || "";
         const folder = h.folder || "";
-        const cover = toAbsoluteUrl(h.cover || "background123.jpg");
+        const cover = h.cover || "background123.jpg";
         const alt = h.alt || `واجهة ${hotel}`;
-        const detailsHref = h.detailsHref || (currentLanguage === "en" ? `/hotels/${slug}/en` : `/hotels/${slug}`);
+        const detailsHref = h.detailsHref || `hotels/${slug}.html`;
         return `<article class="hotel" data-hotel="${escapeHtml(hotel)}" data-hotel-ar="${escapeHtml(hotelAr)}" data-city="${escapeHtml(city)}" data-area="${escapeHtml(area)}" data-stars="${escapeHtml(stars)}" data-slug="${escapeHtml(slug)}" data-folder="${escapeHtml(folder)}">
     <img class="hotel-thumb" src="${escapeHtml(cover)}" loading="lazy" decoding="async" width="1200" height="800" alt="${escapeHtml(alt)}" data-fallbacks='[]'>
     <div class="hotel-meta">
@@ -644,17 +637,16 @@
 
     openLightboxUI(hotel);
 
-    const coverSrc = toAbsoluteUrl(
+    const coverSrc =
       card.querySelector(".hotel-thumb")?.currentSrc ||
       card.querySelector(".hotel-thumb")?.src ||
-      ""
-    );
+      "";
 
     const overrideArr = hotelCoverOverrides[hotel] || [];
     const candidates = Array.isArray(overrideArr) ? overrideArr.slice(1) : [];
 
     // عرض فوري لتجنب تأخير الفتح على الجوال
-    activeImages = defaultGalleryImages(overrideArr[0] || coverSrc || "/background123.jpg", candidates).map((img) => toAbsoluteUrl(img));
+    activeImages = defaultGalleryImages(overrideArr[0] || coverSrc || "background123.jpg", candidates);
     activeIndex = 0;
     if (lightboxLoading) lightboxLoading.style.display = "none";
     if (lightboxImage) lightboxImage.style.display = "";
@@ -663,7 +655,7 @@
     // ترقية لاحقة للصور الأفضل بدون تعليق الواجهة
     const custom = customHotelGalleries[hotel];
     if (Array.isArray(custom) && custom.length) {
-      activeImages = uniq(custom.map((img) => toAbsoluteUrl(img)));
+      activeImages = uniq(custom);
       activeIndex = 0;
       showImage(0);
     }
