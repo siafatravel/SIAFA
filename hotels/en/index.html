@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>الفنادق التي نتعامل معها | سيافا ترافل</title>
+  <meta name="description" content="تصفح قائمة الفنادق التي نتعامل معها في إسطنبول مع صور الغلاف، التصنيف، المنطقة، وخاصية عرض الصور.">
+  <link rel="canonical" href="https://www.siafatravel.com/hotels/en">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="الفنادق التي نتعامل معها | سيافا ترافل">
+  <meta property="og:description" content="تصفح قائمة الفنادق التي نتعامل معها في إسطنبول مع صور الغلاف، التصنيف، المنطقة، وخاصية عرض الصور.">
+  <meta property="og:url" content="https://www.siafatravel.com/hotels/en">
+  <meta property="og:image" content="https://www.siafatravel.com/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="الفنادق التي نتعامل معها | سيافا ترافل">
+  <meta name="twitter:description" content="تصفح قائمة الفنادق التي نتعامل معها في إسطنبول مع صور الغلاف، التصنيف، المنطقة، وخاصية عرض الصور.">
+  <meta name="twitter:image" content="https://www.siafatravel.com/logo.png">
+
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://cf.bstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="//cf.bstatic.com">
+  <link rel="preconnect" href="https://images.trvl-media.com" crossorigin>
+  <link rel="dns-prefetch" href="//images.trvl-media.com">
+  <link rel="preconnect" href="https://dynamic-media-cdn.tripadvisor.com" crossorigin>
+  <link rel="dns-prefetch" href="//dynamic-media-cdn.tripadvisor.com">
+  <link rel="preconnect" href="https://images.pexels.com" crossorigin>
+  <link rel="dns-prefetch" href="//images.pexels.com">
+  <link rel="preconnect" href="https://pix10.agoda.net" crossorigin>
+  <link rel="dns-prefetch" href="//pix10.agoda.net">
+
+  <!-- ✅ تحميل واحد فقط -->
+  <link rel="stylesheet" href="/hotels.css">
+  <style>html[dir="ltr"] body{direction:ltr}</style>
+</head>
+
+<body>
+
+  <header class="header">
+    <h1 id="hotelsTitle">الفنادق التي نتعامل معها</h1>
+    <p><span id="hotelsSubtitle">اضغط على أي صورة لفندق لعرضها بشكل مكبر والتنقل بين الصور ✅</span></p>
+
+    <div class="top-actions">
+      <a class="btn secondary" href="/en"><span id="backHomeText">⬅ الرجوع للموقع الرئيسي</span></a>
+      <a class="btn" href="https://wa.me/905317387785" rel="noopener"><span id="waText">تواصل واتساب</span></a>
+    </div>
+  </header>
+
+  <noscript class="nojs-note">
+    يمكنك تصفح الفنادق حتى بدون JavaScript. للتجربة الأفضل (بحث أسرع + معرض صور تفاعلي) يُفضّل تفعيل JavaScript.
+  </noscript>
+
+  <main class="container">
+
+    <!-- Filters -->
+    <div class="search">
+      <input id="q" type="text" placeholder="ابحث عن فندق… مثال: Marriott" oninput="filterHotels()" />
+      <select id="ratingFilter" onchange="filterHotels()" aria-label="فلتر التصنيف">
+        <option value="all" selected>كل التصنيفات</option>
+        <option value="5">5 نجوم</option>
+        <option value="34">3-4 نجوم</option>
+      </select>
+      <select id="areaFilter" onchange="filterHotels()" aria-label="فلتر المنطقة">
+        <option value="all" selected>كل المناطق</option>
+      </select>
+      <button class="btn" type="button"
+        onclick="document.getElementById('q').value=''; document.getElementById('ratingFilter').value='all'; document.getElementById('areaFilter').value='all'; filterHotels(true);">
+        <span id="clearFiltersText">مسح</span>
+      </button>
+    </div>
+
+    <!-- Brand marquee (infinite loop) -->
+    <section class="brand-marquee" aria-label="أبرز سلاسل الفنادق في إسطنبول">
+      <div class="brand-track" id="brandTrack" role="list">
+        <span class="brand-logo-pill" role="listitem" data-brand="Marriott">
+          <img src="https://cdn.simpleicons.org/marriott/8B1E3F" alt="Marriott" loading="lazy" decoding="async" width="20" height="20"
+               onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+          <b>Marriott</b>
+        </span>
+
+        <span class="brand-logo-pill" role="listitem" data-brand="Hilton">
+          <img src="https://cdn.simpleicons.org/hilton/003A70" alt="Hilton" loading="lazy" decoding="async" width="20" height="20"
+               onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+          <b>Hilton</b>
+        </span>
+
+        <span class="brand-logo-pill" role="listitem" data-brand="Wyndham">
+          <img src="https://cdn.simpleicons.org/wyndhamhotelsandresorts/1E4AA8" alt="Wyndham" loading="lazy" decoding="async" width="20" height="20"
+               onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+          <b>Wyndham</b>
+        </span>
+
+        <span class="brand-logo-pill" role="listitem" data-brand="IHG">
+          <img src="https://cdn.simpleicons.org/intercontinentalhotelsgroup/CB9B51" alt="IHG" loading="lazy" decoding="async" width="20" height="20"
+               onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+          <b>IHG</b>
+        </span>
+
+        <span class="brand-logo-pill" role="listitem" data-brand="Radisson">
+          <img src="https://cdn.simpleicons.org/radissonhotels/11344D" alt="Radisson" loading="lazy" decoding="async" width="20" height="20"
+               onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+          <b>Radisson</b>
+        </span>
+
+        <span class="brand-logo-pill" role="listitem" data-brand="Accor">
+          <img src="https://cdn.simpleicons.org/accor/8B6F47" alt="Accor" loading="lazy" decoding="async" width="20" height="20"
+               onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+          <b>Accor</b>
+        </span>
+
+        <span class="brand-logo-pill" role="listitem" data-brand="Barceló">
+          <img src="https://cdn.simpleicons.org/barcelohotelsandresorts/1A3561" alt="Barceló" loading="lazy" decoding="async" width="20" height="20"
+               onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+          <b>Barceló</b>
+        </span>
+
+        <span class="brand-logo-pill" role="listitem" data-brand="Rotana">
+          <img src="https://cdn.simpleicons.org/rotana/8C5E32" alt="Rotana" loading="lazy" decoding="async" width="20" height="20"
+               onerror="this.remove(); this.parentElement.classList.add('no-logo')">
+          <b>Rotana</b>
+        </span>
+
+        <span class="brand-logo-pill no-logo" role="listitem" data-brand="D">
+          <b>Divan</b>
+        </span>
+
+        <span class="brand-logo-pill no-logo" role="listitem" data-brand="T">
+          <b>Titanic</b>
+        </span>
+      </div>
+    </section>
+
+    <!-- Map -->
+    <section class="area-map" aria-label="خريطة تفاعلية مبسطة لسنتر إسطنبول">
+      <h2>🗺️ خريطة سنتر إسطنبول — واضحة وبسيطة</h2>
+      <p>مناطق رئيسية + معلم سياحي بشكل مختصر، مع خطوط مترو وترام واضحة. اضغط على أي نقطة في الخريطة.</p>
+
+      <div class="map-controls">
+        <label class="map-chip"><input type="checkbox" id="toggleMetro" checked> خطوط المترو</label>
+        <label class="map-chip"><input type="checkbox" id="toggleTram" checked> خط ترامواي T1</label>
+      </div>
+
+      <div class="map-wrap">
+        <svg id="istanbulMap" viewBox="0 0 1200 620" role="img" aria-label="خريطة سنتر إسطنبول مع المناطق والمعالم">
+          <rect x="0" y="0" width="1200" height="620" fill="rgba(118,196,232,.36)"/>
+
+          <path class="land-mass" d="M0 60 C180 70, 300 130, 390 230 C450 295, 520 330, 612 372 C666 398, 695 462, 680 620 L0 620 Z"/>
+          <path class="land-mass" d="M548 0 C650 70, 732 130, 805 220 C874 306, 958 360, 1088 410 C1155 438, 1190 495, 1200 620 L1200 0 Z"/>
+
+          <path class="bosphorus-fill" d="M585 0 C542 75, 530 143, 542 212 C558 288, 602 344, 640 395 C675 443, 683 515, 670 620 L602 620 C617 510, 609 446, 574 398 C534 343, 487 286, 472 214 C459 141, 478 73, 521 0 Z"/>
+          <path class="golden-horn-fill" d="M372 257 C430 224, 489 215, 548 228 C533 259, 510 286, 483 309 C448 337, 417 361, 397 391 C360 357, 348 306, 372 257 Z"/>
+          <path class="marmara-fill" d="M0 530 L660 620 L0 620 Z"/>
+
+          <path class="coast-line" d="M0 60 C180 70, 300 130, 390 230 C450 295, 520 330, 612 372 C666 398, 695 462, 680 620"/>
+          <path class="coast-line" d="M548 0 C650 70, 732 130, 805 220 C874 306, 958 360, 1088 410 C1155 438, 1190 495, 1200 620"/>
+
+          <path class="metro-line" data-layer="metro" d="M140 230 L280 244 L418 258 L574 274 L744 292 L914 307"/>
+          <path class="metro-line" data-layer="metro" d="M640 160 L720 210 L805 248"/>
+          <path class="tram-line" data-layer="tram" d="M145 275 L244 283 L337 292 L430 301 L518 309 L586 316"/>
+
+          <circle class="zone-bubble" cx="290" cy="312" r="150"/>
+          <circle class="zone-bubble" cx="590" cy="275" r="135"/>
+          <circle class="zone-bubble" cx="840" cy="275" r="150"/>
+
+          <!-- POIs -->
+          <g class="poi-group" tabindex="0" role="button" aria-label="جامع الفاتح"
+             data-name="جامع الفاتح" data-info="ضمن منطقة الفاتح التاريخية." data-transit="M2 + ترام T1"
+             transform="translate(176,304)">
+            <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+            <rect class="poi-label-bg" x="18" y="-20" width="152" height="26"/>
+            <text class="poi-label" x="94" y="-3" text-anchor="middle">الفاتح — جامع الفاتح</text>
+          </g>
+
+          <g class="poi-group" tabindex="0" role="button" aria-label="جامع آيا صوفيا"
+             data-name="جامع آيا صوفيا" data-info="ضمن قلب منطقة سلطان أحمد." data-transit="ترام T1"
+             transform="translate(292,320)">
+            <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+            <rect class="poi-label-bg" x="18" y="-20" width="170" height="26"/>
+            <text class="poi-label" x="103" y="-3" text-anchor="middle">سلطان أحمد — آيا صوفيا</text>
+          </g>
+
+          <g class="poi-group" tabindex="0" role="button" aria-label="جامع السليمانية"
+             data-name="جامع السليمانية" data-info="قريب من أمينونو والقرن الذهبي." data-transit="T1 + مشي قصير"
+             transform="translate(420,352)">
+            <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+            <rect class="poi-label-bg" x="18" y="-20" width="184" height="26"/>
+            <text class="poi-label" x="110" y="-3" text-anchor="middle">أمينونو — جامع السليمانية</text>
+          </g>
+
+          <g class="poi-group" tabindex="0" role="button" aria-label="كاراكوي"
+             data-name="كاراكوي" data-info="منطقة عبور بحرية وقرب برج غلاطة." data-transit="M2 + T1"
+             transform="translate(610,275)">
+            <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+            <rect class="poi-label-bg" x="18" y="-20" width="154" height="26"/>
+            <text class="poi-label" x="95" y="-3" text-anchor="middle">كراكوي — برج غلاطة</text>
+          </g>
+
+          <g class="poi-group" tabindex="0" role="button" aria-label="تقسيم وشارع الاستقلال"
+             data-name="تقسيم وشارع الاستقلال" data-info="قلب بيوغلو العصري والحركة السياحية." data-transit="M2 + F1"
+             transform="translate(785,300)">
+            <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+            <rect class="poi-label-bg" x="18" y="-20" width="182" height="26"/>
+            <text class="poi-label" x="109" y="-3" text-anchor="middle">تقسيم — شارع الاستقلال</text>
+          </g>
+
+          <g class="poi-group" tabindex="0" role="button" aria-label="مول جواهر شيشلي"
+             data-name="مول جواهر شيشلي" data-info="أحد أشهر المولات في منطقة شيشلي." data-transit="M2 + متروباص"
+             transform="translate(890,261)">
+            <circle class="poi-hit" r="22"/><circle class="poi-ring" r="16"/><circle class="poi-core" r="8"/>
+            <rect class="poi-label-bg" x="18" y="-20" width="166" height="26"/>
+            <text class="poi-label" x="101" y="-3" text-anchor="middle">شيشلي — مول جواهر</text>
+          </g>
+
+          <text class="water-label" x="546" y="352" transform="rotate(-73 546,352)">البوسفور</text>
+          <text class="water-sub" x="80" y="572">بحر مرمرة</text>
+          <text class="water-sub" x="408" y="262">القرن الذهبي</text>
+        </svg>
+
+        <div class="info-badge" id="mapInfo">
+          <b>معلومة سريعة:</b> اضغط على نقطة من الخريطة لعرض شرح المنطقة والمعلم.
+        </div>
+      </div>
+
+      <div class="map-legend">
+        <span class="legend-item"><span class="legend-line metro-swatch"></span>مترو</span>
+        <span class="legend-item"><span class="legend-line tram-swatch"></span>ترامواي T1</span>
+        <span class="legend-item"><span class="legend-dot"></span>منطقة + معلم مختصر</span>
+      </div>
+    </section>
+
+    <div class="footer-note" style="margin:0 0 14px 0;">
+      الموقع قيد التطوير ويتم تحديثه باستمرار وإضافة فنادق جديدة بشكل دوري وقد لا تكون بعض الصور أدناه دقيقة.
+      إذا لم تجد الفندق المطلوب حالياً، تواصل معنا وسنوفّر لك خيارات إضافية مباشرة ✅
+    </div>
+<!-- Hotels list -->
+<div class="grid" id="hotelList">
+  <!-- يتم توليد بطاقات الفنادق من data/hotels-list.json عبر hotels.js -->
+</div>
+
+<noscript>
+  <div class="footer-note" style="margin:0 0 14px 0;">
+    لعرض قائمة الفنادق بشكل كامل، يرجى تفعيل JavaScript.
+  </div>
+</noscript>
+
+<div class="pagination" id="hotelsPagination" aria-label="تصفح صفحات الفنادق">
+      <button class="btn secondary" id="pageNext" type="button">الصفحة التالية</button>
+      <span class="pagination-status" id="paginationStatus">صفحة 1 من 1</span>
+      <button class="btn secondary" id="pagePrev" type="button">الصفحة السابقة</button>
+    </div>
+
+    <div class="footer-note">
+      يوجد خيارات أخرى أيضاً حسب التوفر والتاريخ والمستوى المطلوب.<br>
+      للتأكد أو طلب فندق غير موجود في القائمة، تواصل معنا على واتساب:
+      <a href="https://wa.me/905317387785">905317387785</a>
+    </div>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-box">
+      <div class="lightbox-head">
+        <div class="lightbox-title" id="lightboxTitle"></div>
+        <button class="lightbox-close" id="lightboxClose" aria-label="إغلاق">✕</button>
+      </div>
+
+      <div class="lightbox-main">
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="السابق">‹</button>
+        <img id="lightboxImage" class="lightbox-image" alt="" decoding="async" width="1200" height="800">
+        <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="التالي">›</button>
+      </div>
+
+      <div class="lightbox-strip" id="lightboxStrip"></div>
+    </div>
+  </div>
+
+  <!-- ✅ hotels.js مع fallback -->
+  <script src="/hotels.js" defer onerror="(function(){var sc=document.createElement('script');sc.src='/hotels.js';sc.defer=true;document.body.appendChild(sc);}())"></script>
+</body>
+</html>

@@ -22,7 +22,7 @@
 <body>
   <main class="hotel-detail">
     <div class="language-switcher"><select id="languageSelect"><option value="ar">العربية</option><option value="en">English</option></select></div>
-    <div class="top-actions"><a class="btn secondary" href="../hotels.html" id="backBtn">⬅ العودة لقائمة الفنادق</a><a class="btn" href="https://wa.me/905317387785?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%87%D9%84%20%D9%8A%D9%85%D9%83%D9%86%D9%86%D9%8A%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%A7%D9%83%D8%AB%D8%B1%20%D8%AD%D9%88%D9%84%20%D9%81%D9%86%D8%AF%D9%82%20Beethoven%20Premium%20Hotel%20Laleli" id="infoBtn">معلومات عن الفندق</a></div>
+    <div class="top-actions"><a class="btn secondary" href="/hotels" id="backBtn">⬅ العودة لقائمة الفنادق</a><a class="btn" href="https://wa.me/905317387785?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%87%D9%84%20%D9%8A%D9%85%D9%83%D9%86%D9%86%D9%8A%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%A7%D9%83%D8%AB%D8%B1%20%D8%AD%D9%88%D9%84%20%D9%81%D9%86%D8%AF%D9%82%20Beethoven%20Premium%20Hotel%20Laleli" id="infoBtn">معلومات عن الفندق</a></div>
     <section class="detail-card"><h1 id="hotelNameAr">بيتهوفن بريميوم لالالي</h1><p id="hotelNameEn">Beethoven Premium Hotel Laleli</p><p id="metaAr">التصنيف: ★★★★ | المنطقة: فاتح-لالالي | المدينة: إسطنبول</p><p id="metaEn" style="display:none">Rating: ★★★★ | Area: Fatih-Laleli | City: Istanbul</p></section>
     <section class="detail-card"><h2 id="imagesTitle">الصور</h2><div class="detail-gallery">
         <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/286436520.jpg?k=45b8a3c6499d3fda73a63870a56f5709df5821364242f96140f603144fdd8f97&amp;amp;o=" alt="Beethoven Premium Hotel Laleli" loading="lazy" decoding="async" width="1200" height="800">
@@ -36,7 +36,8 @@
 <script>
 (function(){
   const sel=document.getElementById('languageSelect');
-  const lang=localStorage.getItem('siafaLang')||'ar';
+  const isEnglishPath=/(?:^\/en(?:\/|$)|\/en\/?$)/.test(window.location.pathname);
+  const lang=isEnglishPath?'en':(localStorage.getItem('siafaLang')||'ar');
   function apply(l){
     const en=l==='en';
     document.documentElement.lang=en?'en':'ar';
@@ -50,7 +51,11 @@
     document.getElementById('amenEn').style.display=en?'':'none';
     document.getElementById('hotelNameAr').textContent=en?"Beethoven Premium Hotel Laleli":"\u0628\u064a\u062a\u0647\u0648\u0641\u0646 \u0628\u0631\u064a\u0645\u064a\u0648\u0645 \u0644\u0627\u0644\u0627\u0644\u064a";
     document.getElementById('hotelNameEn').textContent=en?"\u0628\u064a\u062a\u0647\u0648\u0641\u0646 \u0628\u0631\u064a\u0645\u064a\u0648\u0645 \u0644\u0627\u0644\u0627\u0644\u064a":"Beethoven Premium Hotel Laleli";
-    document.getElementById('backBtn').textContent=en?'⬅ Back to hotels list':'⬅ العودة لقائمة الفنادق';
+    const backBtn=document.getElementById('backBtn');
+    if(backBtn){
+      backBtn.textContent=en?'⬅ Back to hotels list':'⬅ العودة لقائمة الفنادق';
+      backBtn.setAttribute('href', en?'/hotels/en':'/hotels');
+    }
     document.getElementById('infoBtn').textContent=en?'Hotel information':'معلومات عن الفندق';
     document.getElementById('imagesTitle').textContent=en?'Photos':'الصور';
     document.getElementById('aboutTitle').textContent=en?'Hotel overview':'تعريف الفندق';
@@ -58,7 +63,11 @@
     document.getElementById('contactBtn').textContent=en?'Contact on WhatsApp':'تواصل على الواتس اب';
   }
   apply(lang);
-  sel.addEventListener('change',e=>{localStorage.setItem('siafaLang',e.target.value); apply(e.target.value);});
+  sel.addEventListener('change',e=>{
+    const nextLang=e.target.value;
+    localStorage.setItem('siafaLang', nextLang);
+    apply(nextLang);
+  });
 })();
 </script>
 </body>
