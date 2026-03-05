@@ -9,7 +9,8 @@
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const uniq = (arr) => [...new Set((arr || []).filter(Boolean))];
   const HOTELS_PER_PAGE = 20;
-  let currentLanguage = localStorage.getItem("siafaLang") || "ar";
+  const isEnglishPath = /^\/en(?:\/|$)/.test(window.location.pathname);
+  let currentLanguage = isEnglishPath ? "en" : "ar";
   const i18n = {
     ar:{loadError:'تعذّر تحميل قائمة الفنادق حالياً. جرّب تحديث الصفحة أو تواصل معنا عبر واتساب.',rating:'التصنيف',showPhotos:'عرض الصور',showDetails:'عرض التفاصيل',page:(c,t,n)=>`صفحة ${c} من ${t} — إجمالي ${n} فندق`,empty:'لا توجد نتائج مطابقة للفلاتر الحالية',img:'صورة',loading:'جارِ تحميل الصور…',title:'الفنادق التي نتعامل معها',subtitle:'اضغط على أي صورة لفندق لعرضها بشكل مكبر والتنقل بين الصور ✅',back:'⬅ الرجوع للموقع الرئيسي',wa:'تواصل واتساب',clear:'مسح',search:'ابحث عن فندق… مثال: Marriott',noscript:'يمكنك تصفح الفنادق حتى بدون JavaScript. للتجربة الأفضل (بحث أسرع + معرض صور تفاعلي) يُفضّل تفعيل JavaScript.',titleDoc:'الفنادق التي نتعامل معها | سيافا ترافل',areaAria:'فلتر المنطقة',ratingAria:'فلتر التصنيف'},
     en:{loadError:'Unable to load hotels list right now. Please refresh or contact us on WhatsApp.',rating:'Rating',showPhotos:'View photos',showDetails:'View details',page:(c,t,n)=>`Page ${c} of ${t} — Total ${n} hotels`,empty:'No matching results for current filters',img:'Image',loading:'Loading photos…',title:'Our Partner Hotels',subtitle:'Click any hotel image to view it enlarged and browse the gallery ✅',back:'⬅ Back to homepage',wa:'WhatsApp Contact',clear:'Clear',search:'Search hotel... e.g. Marriott',noscript:'You can browse hotels without JavaScript, but for best experience (faster search + interactive gallery) enable JavaScript.',titleDoc:'Our Partner Hotels | SIAFA TRAVEL',areaAria:'Area filter',ratingAria:'Rating filter'}
@@ -699,11 +700,11 @@
 
   function applyHotelsPageLanguage(){
     const tr=i18n[currentLanguage];
-    const s=document.getElementById('languageSelect'); if(s) s.value=currentLanguage;
     document.documentElement.lang=currentLanguage; document.documentElement.dir=currentLanguage==='en'?'ltr':'rtl';
     const titleEl=document.getElementById('hotelsTitle'); if(titleEl) titleEl.textContent=tr.title;
     const sub=document.getElementById('hotelsSubtitle'); if(sub) sub.textContent=tr.subtitle;
     const b=document.getElementById('backHomeText'); if(b) b.textContent=tr.back;
+    const backHomeLink=document.querySelector('.top-actions a.secondary'); if(backHomeLink) backHomeLink.setAttribute('href', currentLanguage==='en'?'/en':'/');
     const w=document.getElementById('waText'); if(w) w.textContent=tr.wa;
     const c=document.getElementById('clearFiltersText'); if(c) c.textContent=tr.clear;
     const q=document.getElementById('q'); if(q) q.placeholder=tr.search;
@@ -733,8 +734,6 @@
     initBrandMarquee();
 
     filterHotels(true);
-
-    document.getElementById("languageSelect")?.addEventListener("change", async (e)=>{ currentLanguage=e.target.value; localStorage.setItem("siafaLang", currentLanguage); applyHotelsPageLanguage(); const data = await loadHotelsData(); renderHotels(data); hydrateHotels(); initAreaFilter(); filterHotels(true); });
 
     $("#q")?.addEventListener("input", () => filterHotels(true));
     $("#ratingFilter")?.addEventListener("change", () => filterHotels(true));
