@@ -721,8 +721,12 @@
   // =========================
   async function init() {
     applyHotelsPageLanguage();
-    const hotels = await loadHotelsData();
-    if (hotels.length) renderHotels(hotels);
+
+    const hasStaticCards = $$("#hotelList .hotel").length > 0;
+    if (!hasStaticCards) {
+      const hotels = await loadHotelsData();
+      if (hotels.length) renderHotels(hotels);
+    }
 
     hydrateHotels();
     initAreaFilter();
