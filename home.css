@@ -962,24 +962,155 @@ html[dir="ltr"] body{ direction:ltr; }
   border:1px solid rgba(255,255,255,.15);
 }
 
-.hotel-card{ text-decoration:none; color:#fff; }
+.hotel-picks{
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:20px;
+}
+
+.hotel-card{
+  text-decoration:none;
+  color:#fff;
+  padding:0 !important;
+  display:flex;
+  flex-direction:column;
+  min-height:100%;
+}
+
 .hotel-cover{
   width:100%;
-  height:180px;
+  height:220px;
   object-fit:cover;
-  border-radius:12px;
-  margin-bottom:12px;
+  border-radius:16px 16px 0 0;
+  margin:0;
+}
+
+.hotel-card-body{
+  padding:16px 16px 18px;
 }
 
 .hotel-en{
   color:#f2d57a;
   font-family:'Playfair Display','Cairo',serif;
-  margin:0 0 6px;
+  margin:0 0 10px;
   letter-spacing:.7px;
+  font-size:15px;
+}
+
+.hotel-meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:14px;
+  color:#dbe4ff;
+  font-size:14px;
+}
+
+.hotel-stars{ color:#f8d874; letter-spacing:1px; font-size:15px; }
+.hotel-area{ opacity:.9; }
+
+.hotel-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  border:1px solid rgba(212,175,55,.5);
+  color:#fff1bf;
+  border-radius:12px;
+  padding:8px 12px;
+  font-weight:700;
+  background:rgba(212,175,55,.12);
+  transition:background .2s ease, border-color .2s ease;
+}
+
+.hotel-card:hover .hotel-cta{
+  background:rgba(212,175,55,.2);
+  border-color:rgba(212,175,55,.8);
+}
+
+.hotels-all-btn{ display:inline-flex; margin-top:24px; }
+
+.hotel-brand-marquee{
+  position:relative;
+  overflow:hidden;
+  border-radius:16px;
+  padding:8px 0;
+}
+
+.hotel-brand-marquee::before,
+.hotel-brand-marquee::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:64px;
+  z-index:2;
+  pointer-events:none;
+}
+
+.hotel-brand-marquee::before{
+  right:0;
+  background:linear-gradient(to left, rgba(10,12,20,1), rgba(10,12,20,0));
+}
+
+.hotel-brand-marquee::after{
+  left:0;
+  background:linear-gradient(to right, rgba(10,12,20,1), rgba(10,12,20,0));
+}
+
+.hotel-brand-track{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:max-content;
+  animation:luxuryBrandSlide 42s linear infinite;
+}
+
+.hotel-brand-card{
+  min-height:78px;
+  min-width:180px;
+  border-radius:14px;
+  border:1px solid rgba(212,175,55,.32);
+  background:linear-gradient(165deg,rgba(14,17,27,.95),rgba(10,12,20,.95));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:10px 16px;
+  box-shadow:0 8px 22px rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.03);
+}
+
+.hotel-brand-card span{
+  font-family:'Playfair Display','Cairo',serif;
+  color:#f3e1a2;
+  font-size:20px;
+  letter-spacing:.5px;
+}
+
+@keyframes luxuryBrandSlide{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hotel-brand-track{ animation:none; }
 }
 
 .page-links-grid{ grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
 .page-link-card{ text-decoration:none; color:#fff; }
+
+
+@media (max-width:992px){
+  .hotel-picks{ grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+}
+
+@media (max-width:640px){
+  .hotel-picks{ grid-template-columns:1fr !important; }
+  .hotel-brand-marquee::before,
+  .hotel-brand-marquee::after{ width:34px; }
+  .hotel-brand-card{ min-width:150px; min-height:70px; }
+  .hotel-cover{ height:200px; }
+}
 
 @media (max-width:640px){
   .brand-title{ font-size:46px; }
