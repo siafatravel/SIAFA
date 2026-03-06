@@ -148,23 +148,21 @@ p{ line-height:1.9; opacity:0.95; margin:0; }
 
 /* Logo in hero */
 .hero-logo{
-  width:280px;
-  max-width:88%;
-  margin:12px auto 16px auto;
+  width:240px;
+  max-width:78vw;
+  height:auto;
+  margin:8px auto 14px auto;
   display:block;
   filter:drop-shadow(0 22px 40px rgba(0,0,0,0.78));
-  background:rgba(10,12,18,0.35);
-  border:1px solid rgba(255,255,255,0.22);
-  border-radius:50%;
-  padding:10px;
   opacity:0.98;
 }
 
 @media (max-width:768px){
   .hero-logo{
-    width:220px;
-    margin-top:8px;
-    margin-bottom:14px;
+    width:190px;
+    max-width:68vw;
+    margin-top:6px;
+    margin-bottom:12px;
   }
 }
 
