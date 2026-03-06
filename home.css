@@ -888,3 +888,78 @@ html[dir="ltr"] body{ direction:ltr; }
   .hero-actions{ flex-direction:column; }
   .hero-actions .btn{ width:100%; }
 }
+
+
+.brand-title{
+  font-family:'Playfair Display','Cairo',serif;
+  font-size:62px;
+  font-weight:700;
+  letter-spacing:.5px;
+  margin-bottom:2px;
+  color:#fff6d2;
+  text-shadow:0 8px 24px rgba(0,0,0,.45);
+}
+
+.brand-subtitle{
+  font-size:18px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:#f2d57a;
+  margin:0 0 14px;
+}
+
+.booking-btn{
+  background:#f0c419;
+  color:#111;
+  border:1px solid rgba(255,255,255,.4);
+}
+
+.hero-links{ margin-top:10px; }
+.hero-link{
+  text-decoration:none;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.26);
+  border-radius:999px;
+  padding:8px 16px;
+  font-size:14px;
+  background:rgba(8,10,16,.48);
+}
+
+.area-card .area-images{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:12px;
+}
+
+.area-card .area-images img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.15);
+}
+
+.hotel-card{ text-decoration:none; color:#fff; }
+.hotel-cover{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:12px;
+}
+
+.hotel-en{
+  color:#f2d57a;
+  font-family:'Playfair Display','Cairo',serif;
+  margin:0 0 6px;
+  letter-spacing:.7px;
+}
+
+.page-links-grid{ grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+.page-link-card{ text-decoration:none; color:#fff; }
+
+@media (max-width:640px){
+  .brand-title{ font-size:46px; }
+  .brand-subtitle{ font-size:14px; letter-spacing:2px; }
+}
