@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>برامج سياحية | سيافا ترافل</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="home.css">
+  <style>
+    body.tours-page::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:url('https://trippati.com/wp-content/uploads/2020/11/masukiye.jpg') center/cover no-repeat;
+      filter:blur(2px);
+      z-index:-3;
+    }
+    body.tours-page::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:linear-gradient(180deg, rgba(5,10,8,.78), rgba(6,10,14,.9));
+      z-index:-2;
+    }
+  </style>
+</head>
+<body class="tours-page">
+  <main class="main">
+    <section class="section compact-section">
+      <div class="section-head">
+        <h2>🧭 رحلاتنا</h2>
+        <p>برامج سياحية يومية مختارة بعناية لتجربة ممتعة ومنظمة داخل إسطنبول وما حولها.</p>
+      </div>
+
+      <div class="cards">
+        <article class="feature">صبنجة ومعشوقية</article>
+        <article class="feature">جزر الأميرات</article>
+        <article class="feature">بورصة وجبال أولوداغ</article>
+        <article class="feature">شيلا وأغوا</article>
+        <article class="feature">ازميت</article>
+        <article class="feature">يالوفا</article>
+        <article class="feature">سهرات سفن البوسفور</article>
+        <article class="feature">تكتات أكواريوم فلوريا</article>
+        <article class="feature">تكت مدينة الملاهي فيالاند</article>
+      </div>
+
+      <div class="hero-actions" style="justify-content:flex-start; margin-top:20px;">
+        <a class="btn" href="https://wa.me/905317387785">احجز برنامجك عبر واتساب</a>
+        <a class="btn secondary" href="/">العودة للرئيسية</a>
+      </div>
+    </section>
+  </main>
+
+  <div class="floats">
+    <a class="float-btn wa" href="https://wa.me/905317387785" title="WhatsApp" aria-label="WhatsApp">💬</a>
+  </div>
+</body>
+</html>
