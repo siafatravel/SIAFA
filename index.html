@@ -286,6 +286,16 @@
           <article class="hotel-brand-card" role="listitem" aria-hidden="true" data-brand="Rotana"><span>Rotana</span></article>
           <article class="hotel-brand-card" role="listitem" aria-hidden="true" data-brand="Barceló"><span>Barceló</span></article>
           <article class="hotel-brand-card" role="listitem" aria-hidden="true" data-brand="Titanic"><span>Titanic</span></article>
+          <article class="hotel-brand-card" role="listitem" aria-hidden="true" data-brand="Hilton"><span>Hilton</span></article>
+          <article class="hotel-brand-card" role="listitem" aria-hidden="true" data-brand="Marriott"><span>Marriott</span></article>
+          <article class="hotel-brand-card" role="listitem" aria-hidden="true" data-brand="Wyndham"><span>Wyndham</span></article>
+          <article class="hotel-brand-card" role="listitem" aria-hidden="true" data-brand="IHG"><span>IHG</span></article>
+          <article class="hotel-brand-card" role="listitem" aria-hidden="true" data-brand="Sheraton"><span>Sheraton</span></article>
+          <article class="hotel-brand-card" role="listitem" aria-hidden="true" data-brand="Accor"><span>Accor</span></article>
+          <article class="hotel-brand-card" role="listitem" aria-hidden="true" data-brand="Radisson"><span>Radisson</span></article>
+          <article class="hotel-brand-card" role="listitem" aria-hidden="true" data-brand="Rotana"><span>Rotana</span></article>
+          <article class="hotel-brand-card" role="listitem" aria-hidden="true" data-brand="Barceló"><span>Barceló</span></article>
+          <article class="hotel-brand-card" role="listitem" aria-hidden="true" data-brand="Titanic"><span>Titanic</span></article>
         </div>
       </div>
     </section>
@@ -310,19 +320,6 @@
       </div>
     </section>
 
-    <section class="section compact-section" id="company-pages">
-      <div class="section-head">
-        <h2>تعرف أكثر على سيافا</h2>
-        <p>حوّلنا الأقسام المهمة إلى صفحات مستقلة بتصميم راقٍ لسهولة التصفح بضغطة واحدة.</p>
-      </div>
-      <div class="cards page-links-grid">
-        <a class="feature page-link-card" href="/why-siafa.html"><h3>⭐ لماذا نختار سيافا ترافل؟</h3><p>القيم الأساسية ونقاط القوة التي تميّزنا.</p></a>
-        <a class="feature page-link-card" href="/about-siafa.html"><h3>🏢 من نحن</h3><p>نبذة الشركة، الخبرة، وطريقة العمل.</p></a>
-        <a class="feature page-link-card" href="/hotel-criteria.html"><h3>🏨 معايير اختيار الفنادق</h3><p>كيف ننتقي الفنادق بعناية لكل فئة.</p></a>
-        <a class="feature page-link-card" href="/booking-method.html"><h3>💬 طريقة الحجز والدفع</h3><p>خطوات واضحة من الاستفسار وحتى الفاوتشر.</p></a>
-        <a class="feature page-link-card" href="/faq.html"><h3>❓ الأسئلة الشائعة</h3><p>إجابات مباشرة على أكثر الاستفسارات تكراراً.</p></a>
-      </div>
-    </section>
 
     <section class="section" id="booking">
       <h2 data-i18n="booking.title">📝 إرسال طلب حجز</h2>
@@ -388,7 +385,15 @@
     </section>
 
     <footer>
-      جميع الحقوق محفوظة © 2026 SIAFA TRAVEL
+      <div class="footer-copy">جميع الحقوق محفوظة © 2026 SIAFA TRAVEL</div>
+      <nav class="footer-links" aria-label="روابط معلومات الشركة">
+        <a href="/why-siafa.html">لماذا نختار سيافا؟</a>
+        <a href="/about-siafa.html">من نحن</a>
+        <a href="/hotel-criteria.html">معايير اختيار الفنادق</a>
+        <a href="/booking-method.html">طريقة الحجز والدفع</a>
+        <a href="/faq.html">الأسئلة الشائعة</a>
+        <a href="/guarantee">ضماناتنا</a>
+      </nav>
     </footer>
 
   </div>
@@ -607,7 +612,7 @@
       if (privacyTitle) privacyTitle.innerHTML = '<span class="acc-icon">🔒</span> Privacy policy';
 
       const footer = document.querySelector('footer');
-      if (footer) footer.textContent = 'All rights reserved © 2026 SIAFA TRAVEL';
+      if (footer) footer.innerHTML = '<div class="footer-copy">All rights reserved © 2026 SIAFA TRAVEL</div><nav class="footer-links" aria-label="Company information links"><a href="/why-siafa.html">Why choose SIAFA?</a><a href="/about-siafa.html">About us</a><a href="/hotel-criteria.html">Hotel selection criteria</a><a href="/booking-method.html">Booking & payment method</a><a href="/faq.html">FAQ</a><a href="/guarantee">Our guarantees</a></nav>';
     }
 
 
