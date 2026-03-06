@@ -1193,3 +1193,96 @@ html[dir="ltr"] body{ direction:ltr; }
   .brand-title{ font-size:46px; }
   .brand-subtitle{ font-size:14px; letter-spacing:2px; }
 }
+
+/* ===== Homepage polish: luxury booking form + footer links ===== */
+#booking .booking-form-wrap{
+  max-width:760px;
+  margin:0 auto;
+}
+
+#booking form{
+  max-width:760px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+  border-radius:22px;
+  border:1px solid rgba(212,175,55,.28);
+  background:
+    radial-gradient(900px 340px at 12% -8%, rgba(212,175,55,.16), transparent 64%),
+    linear-gradient(165deg, rgba(14,15,20,.95), rgba(9,10,14,.96));
+  box-shadow:
+    0 24px 46px rgba(0,0,0,.36),
+    0 0 0 1px rgba(255,255,255,.04) inset;
+  padding:24px;
+}
+
+#booking .field{ position:relative; }
+#booking .field:nth-child(9),
+#booking .field:nth-child(10){
+  grid-column:1 / -1;
+}
+
+#booking .field label{
+  font-weight:700;
+  letter-spacing:.1px;
+  color:#f8f0d2;
+}
+
+#booking input,
+#booking select{
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.16);
+  background:linear-gradient(160deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+}
+
+#booking input:hover,
+#booking select:hover{
+  border-color:rgba(212,175,55,.38);
+}
+
+#booking button[type="submit"]{
+  grid-column:1 / -1;
+  margin-top:4px;
+  padding:13px 20px;
+  font-weight:800;
+  font-size:16px;
+  border-radius:12px;
+  box-shadow:0 12px 24px rgba(0,0,0,.3);
+}
+
+@media (max-width:700px){
+  #booking form{ grid-template-columns:1fr; }
+  #booking .field:nth-child(9),
+  #booking .field:nth-child(10),
+  #booking button[type="submit"]{ grid-column:auto; }
+}
+
+
+.footer-links{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:12px;
+}
+
+.footer-links a{
+  text-decoration:none;
+  color:#eef2ff;
+  font-size:13px;
+  padding:6px 11px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.04);
+  transition:border-color .2s ease, color .2s ease, background .2s ease;
+}
+
+.footer-links a:hover{
+  color:#fff8dc;
+  border-color:rgba(212,175,55,.55);
+  background:rgba(212,175,55,.12);
+}
+
+.footer-copy{
+  font-size:14px;
+  opacity:.88;
+}
