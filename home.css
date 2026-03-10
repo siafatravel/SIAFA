@@ -1170,6 +1170,7 @@ html[dir="ltr"] body{ direction:ltr; }
 }
 
 .hotel-brand-card{
+  flex:0 0 auto;
   min-height:78px;
   min-width:180px;
   border-radius:14px;
@@ -1191,10 +1192,9 @@ html[dir="ltr"] body{ direction:ltr; }
   text-shadow:0 0 8px rgba(212,175,55,.28), 0 0 18px rgba(212,175,55,.16);
 }
 
-
 @keyframes luxuryBrandSlide{
   from{ transform:translateX(0); }
-  to{ transform:translateX(-33.3333%); }
+  to{ transform:translateX(-50%); }
 }
 
 @media (prefers-reduced-motion: reduce){
