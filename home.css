@@ -71,23 +71,37 @@ body::after{
   gap:8px;
   background:rgba(0,0,0,0.55);
   border:1px solid rgba(255,255,255,0.25);
-  border-radius:10px;
-  padding:8px 10px;
+  border-radius:999px;
+  padding:6px;
   backdrop-filter:blur(5px);
 }
 
-.language-switcher label{ color:#fff; font-size:14px; }
-
-.language-switcher select{
-  border-radius:7px;
-  border:1px solid rgba(255,255,255,0.35);
-  background:rgba(255,255,255,0.16);
+.lang-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  text-decoration:none;
   color:#fff;
-  padding:4px 6px;
-  font-family:inherit;
+  border:1px solid transparent;
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:14px;
+  font-weight:700;
+  transition:all .2s ease;
 }
 
-.language-switcher option{ color:#111; }
+.lang-chip:hover{
+  transform:translateY(-1px);
+  border-color:rgba(255,255,255,0.25);
+  background:rgba(255,255,255,0.08);
+}
+
+html[lang="ar"] .lang-chip-ar,
+html[lang="en"] .lang-chip-en{
+  background:var(--gold);
+  color:#000;
+}
+
 
 h1{ font-size:42px; margin:0 0 12px 0; }
 p{ line-height:1.9; opacity:0.95; margin:0; }
@@ -1299,4 +1313,14 @@ html[dir="ltr"] body{ direction:ltr; }
   #booking .field:nth-child(10),
   #booking button[type="submit"]{ grid-column:auto; }
   #testimonials .compact-cta h3{ font-size:22px; }
+}
+
+
+@media (max-width:600px){
+  body .language-switcher{
+    top:10px;
+    left:10px;
+    right:10px;
+    justify-content:center;
+  }
 }
