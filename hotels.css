@@ -1,15 +1,52 @@
 :root{
-  --bg:#05060a;
+  --bg:#07111f;
   --panel:#111217;
   --gold:#d4af37;
+  --bg-navy:#0b1f38;
+  --bg-royal:#153b73;
 }
 
 body{
   margin:0;
   font-family:'Cairo',sans-serif;
-  background:var(--bg);
+  background:
+    radial-gradient(1160px 620px at 10% 8%, rgba(39,99,191,0.38), transparent 58%),
+    radial-gradient(920px 500px at 88% 10%, rgba(212,175,55,0.24), transparent 58%),
+    radial-gradient(1040px 580px at 52% 100%, rgba(10,31,56,0.48), transparent 66%),
+    linear-gradient(145deg, #122b4d 0%, #0b1830 34%, #08111f 66%, #100d0a 100%);
   color:#fff;
   direction:rtl;
+  min-height:100vh;
+  position:relative;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(940px 380px at 50% -6%, rgba(255,255,255,0.06), transparent 62%),
+    radial-gradient(720px 320px at 16% 24%, rgba(90,155,255,0.10), transparent 60%),
+    radial-gradient(620px 300px at 84% 20%, rgba(255,214,117,0.10), transparent 56%),
+    repeating-linear-gradient(
+      120deg,
+      rgba(255,255,255,0.012) 0 1px,
+      transparent 1px 72px
+    );
+  opacity:0.28;
+  z-index:-2;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(140% 90% at 50% -10%, transparent 52%, rgba(2,5,11,0.22) 100%),
+    linear-gradient(180deg, rgba(255,255,255,0.02), transparent 18%, transparent 82%, rgba(0,0,0,0.12));
+  z-index:-1;
 }
 
 /* =========================
@@ -18,8 +55,9 @@ body{
 .header{
   padding:34px 18px;
   text-align:center;
-  background:rgba(17,18,23,0.9);
-  border-bottom:1px solid rgba(255,255,255,0.06);
+  background:linear-gradient(180deg, rgba(14,18,28,0.88), rgba(10,14,23,0.76));
+  border-bottom:1px solid rgba(212,175,55,0.16);
+  box-shadow:0 16px 40px rgba(0,0,0,0.18);
 }
 .header h1{ margin:0 0 10px 0; font-size:30px; }
 .header p{ margin:0; opacity:0.85; line-height:1.8; }
@@ -38,6 +76,17 @@ body{
   max-width:1000px;
   margin:auto;
   padding:28px 18px 70px;
+}
+
+.container::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(920px 420px at 88% 16%, rgba(212,175,55,0.10), transparent 62%),
+    radial-gradient(920px 440px at 12% 56%, rgba(48,111,204,0.10), transparent 62%);
+  z-index:-1;
 }
 
 /* =========================
@@ -72,10 +121,11 @@ body{
    ========================= */
 .area-map{
   margin:0 0 16px;
-  background:rgba(17,18,23,0.95);
-  border:1px solid rgba(255,255,255,0.10);
+  background:linear-gradient(180deg, rgba(17,18,23,0.96), rgba(13,16,24,0.94));
+  border:1px solid rgba(212,175,55,0.14);
   border-radius:16px;
   padding:16px;
+  box-shadow:0 18px 40px rgba(0,0,0,0.16);
 }
 .area-map h2{ margin:0 0 8px; font-size:24px; }
 .area-map p{ margin:0 0 12px; opacity:.92; font-size:16px; line-height:1.9; }
@@ -205,14 +255,15 @@ body{
 }
 
 .hotel{
-  background:rgba(17,18,23,0.92);
-  border:1px solid rgba(255,255,255,0.06);
+  background:linear-gradient(180deg, rgba(17,18,23,0.94), rgba(12,16,25,0.94));
+  border:1px solid rgba(212,175,55,0.10);
   border-radius:14px;
   padding:12px;
   line-height:1.8;
   transition:transform .24s ease, border-color .24s ease, box-shadow .24s ease;
   content-visibility:auto;
   contain-intrinsic-size: 280px 300px;
+  box-shadow:0 16px 34px rgba(0,0,0,0.15);
 }
 
 .hotel-thumb{
