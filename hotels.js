@@ -8,15 +8,43 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const uniq = (arr) => [...new Set((arr || []).filter(Boolean))];
+  const normalizeAssetUrl = (url = "") => /^assets\//.test(String(url)) ? `/${url}` : String(url);
   const HOTELS_PER_PAGE = 20;
-  const isEnglishPath = /^\/en(?:\/|$)/.test(window.location.pathname);
+  const isEnglishPath = /(?:^|\/)en(?:\/|$)/.test(window.location.pathname);
   let currentLanguage = isEnglishPath ? "en" : "ar";
   const i18n = {
-    ar:{loadError:'تعذّر تحميل قائمة الفنادق حالياً. جرّب تحديث الصفحة أو تواصل معنا عبر واتساب.',rating:'التصنيف',showPhotos:'عرض الصور',showDetails:'عرض التفاصيل',page:(c,t,n)=>`صفحة ${c} من ${t} — إجمالي ${n} فندق`,empty:'لا توجد نتائج مطابقة للفلاتر الحالية',img:'صورة',loading:'جارِ تحميل الصور…',title:'الفنادق التي نتعامل معها',subtitle:'اضغط على أي صورة لفندق لعرضها بشكل مكبر والتنقل بين الصور ✅',back:'⬅ الرجوع للموقع الرئيسي',wa:'تواصل واتساب',clear:'مسح',search:'ابحث عن فندق… مثال: Marriott',noscript:'يمكنك تصفح الفنادق حتى بدون JavaScript. للتجربة الأفضل (بحث أسرع + معرض صور تفاعلي) يُفضّل تفعيل JavaScript.',titleDoc:'الفنادق التي نتعامل معها | سيافا ترافل',areaAria:'فلتر المنطقة',ratingAria:'فلتر التصنيف'},
-    en:{loadError:'Unable to load hotels list right now. Please refresh or contact us on WhatsApp.',rating:'Rating',showPhotos:'View photos',showDetails:'View details',page:(c,t,n)=>`Page ${c} of ${t} — Total ${n} hotels`,empty:'No matching results for current filters',img:'Image',loading:'Loading photos…',title:'Our Partner Hotels',subtitle:'Click any hotel image to view it enlarged and browse the gallery ✅',back:'⬅ Back to homepage',wa:'WhatsApp Contact',clear:'Clear',search:'Search hotel... e.g. Marriott',noscript:'You can browse hotels without JavaScript, but for best experience (faster search + interactive gallery) enable JavaScript.',titleDoc:'Our Partner Hotels | SIAFA TRAVEL',areaAria:'Area filter',ratingAria:'Rating filter'}
+    ar:{loadError:'تعذّر تحميل قائمة الفنادق حالياً. جرّب تحديث الصفحة أو تواصل معنا عبر واتساب.',rating:'التصنيف',showPhotos:'عرض الصور',showDetails:'عرض التفاصيل',page:(c,t,n)=>`صفحة ${c} من ${t} — إجمالي ${n} فندق`,empty:'لا توجد نتائج مطابقة للفلاتر الحالية',img:'صورة',loading:'جارِ تحميل الصور…',title:'الفنادق التي نتعامل معها',subtitle:'اضغط على أي صورة لفندق لعرضها بشكل مكبر والتنقل بين الصور ✅',back:'⬅ الرجوع للموقع الرئيسي',wa:'تواصل واتساب',clear:'مسح',search:'ابحث عن فندق… مثال: Marriott',noscript:'يمكنك تصفح الفنادق حتى بدون JavaScript. للتجربة الأفضل (بحث أسرع + معرض صور تفاعلي) يُفضّل تفعيل JavaScript.',titleDoc:'الفنادق التي نتعامل معها | سيافا ترافل',areaAria:'فلتر المنطقة',ratingAria:'فلتر التصنيف',brandAria:'أبرز سلاسل الفنادق في إسطنبول',mapTitle:'الخريطة التفاعلية للمناطق السياحية والفنادق',mapSubtitle:'حدّد خطوط النقل أو اضغط على النقاط لمعرفة نبذة عن المنطقة وما يحيط بها.',metroLabel:'خطوط المترو',tramLabel:'خط ترامواي T1',mapAria:'خريطة سنتر إسطنبول مع المناطق والمعالم',nearestTransit:'النقل الأقرب',legendMetro:'مترو',legendTram:'ترامواي T1',legendPoi:'منطقة + معلم مختصر',nextPage:'الصفحة التالية',prevPage:'الصفحة السابقة',pageAria:'تصفح صفحات الفنادق',moreOptions:'يوجد خيارات أخرى أيضاً حسب التوفر والتاريخ والمستوى المطلوب.',moreOptionsContact:'للتأكد أو طلب فندق غير موجود في القائمة، تواصل معنا على واتساب:',lightboxClose:'إغلاق',mapInfoIntro:'معلومة سريعة: اضغط على نقطة من الخريطة لعرض شرح المنطقة والمعلم.',footerNote:'الموقع قيد التطوير ويتم تحديثه باستمرار وإضافة فنادق جديدة بشكل دوري وقد لا تكون بعض الصور أدناه دقيقة. إذا لم تجد الفندق المطلوب حالياً، تواصل معنا وسنوفّر لك خيارات إضافية مباشرة ✅'},
+    en:{loadError:'Unable to load hotels list right now. Please refresh or contact us on WhatsApp.',rating:'Rating',showPhotos:'View photos',showDetails:'View details',page:(c,t,n)=>`Page ${c} of ${t} — Total ${n} hotels`,empty:'No matching results for current filters',img:'Image',loading:'Loading photos…',title:'Our Partner Hotels',subtitle:'Click any hotel image to view it enlarged and browse the gallery ✅',back:'⬅ Back to homepage',wa:'WhatsApp Contact',clear:'Clear',search:'Search hotel... e.g. Marriott',noscript:'You can browse hotels without JavaScript, but for best experience (faster search + interactive gallery) enable JavaScript.',titleDoc:'Our Partner Hotels | SIAFA TRAVEL',areaAria:'Area filter',ratingAria:'Rating filter',brandAria:'Top hotel chains in Istanbul',mapTitle:'Interactive map of tourist districts and hotel areas',mapSubtitle:'Toggle transport lines or tap the points to view a quick area brief.',metroLabel:'Metro lines',tramLabel:'Tram T1 line',mapAria:'Central Istanbul map with districts and landmarks',nearestTransit:'Nearest transit',legendMetro:'Metro',legendTram:'Tram T1',legendPoi:'District + landmark',nextPage:'Next page',prevPage:'Previous page',pageAria:'Browse hotel pages',moreOptions:'More options are also available depending on availability, dates, and your requested level.',moreOptionsContact:'To confirm or request a hotel not listed, contact us on WhatsApp:',lightboxClose:'Close',mapInfoIntro:'Quick info: tap a point on the map to view area details and nearby landmark.',footerNote:'The website is continuously updated and new hotels are added regularly. Some images below may not always be fully accurate. If your preferred hotel is missing, contact us and we will provide extra options directly ✅'}
   };
-  const areaEnMap={"شيشلي":"Sisli","تقسيم":"Taksim","فاتح-لالالي":"Fatih-Laleli","لالالي":"Laleli","ليفينت":"Levent","فلوريا":"Florya","توبكابي":"Topkapi","كاراكوي":"Karakoy","بكركوي":"Bakirkoy","بيرم باشا":"Bayrampasa","محمود بيه":"Mahmutbey","اوتومار":"Ottomare","ماسلاك":"Maslak","بيشكتاش":"Besiktas"};
+  const areaEnMap={"شيشلي":"Sisli","تقسيم":"Taksim","تقسيم-حربية":"Taksim-Harbiye","فاتح":"Fatih","الفاتح":"Fatih","أمينونو":"Eminonu","امينونو":"Eminonu","فاتح-لالالي":"Fatih-Laleli","لالالي":"Laleli","ليفينت":"Levent","فلوريا":"Florya","توبكابي":"Topkapi","توب كابي":"Topkapi","كاراكوي":"Karakoy","كراكوي":"Karakoy","بكركوي":"Bakirkoy","بيرم باشا":"Bayrampasa","محمود بيه":"Mahmutbey","اوتومار":"Ottomare","ماسلاك":"Maslak","مسلك":"Maslak","زيتون بورنو":"Zeytinburnu","شيشلي-عثمان بيه":"Sisli-Osmanbey","بيشكتاش":"Besiktas"};
   const cityEnMap={"إسطنبول":"Istanbul"};
+
+const poiTranslations = [
+    {
+      ar:{aria:'جامع الفاتح',name:'جامع الفاتح',info:'ضمن منطقة الفاتح التاريخية.',transit:'M2 + ترام T1',label:'الفاتح — جامع الفاتح'},
+      en:{aria:'Fatih Mosque',name:'Fatih Mosque',info:'Inside the historic Fatih district.',transit:'M2 + Tram T1',label:'Fatih — Fatih Mosque'}
+    },
+    {
+      ar:{aria:'جامع آيا صوفيا',name:'جامع آيا صوفيا',info:'ضمن قلب منطقة سلطان أحمد.',transit:'ترام T1',label:'سلطان أحمد — آيا صوفيا'},
+      en:{aria:'Hagia Sophia Mosque',name:'Hagia Sophia Mosque',info:'In the heart of Sultanahmet district.',transit:'Tram T1',label:'Sultanahmet — Hagia Sophia'}
+    },
+    {
+      ar:{aria:'جامع السليمانية',name:'جامع السليمانية',info:'قريب من أمينونو والقرن الذهبي.',transit:'T1 + مشي قصير',label:'أمينونو — جامع السليمانية'},
+      en:{aria:'Suleymaniye Mosque',name:'Suleymaniye Mosque',info:'Close to Eminonu and the Golden Horn.',transit:'T1 + short walk',label:'Eminonu — Suleymaniye Mosque'}
+    },
+    {
+      ar:{aria:'كاراكوي',name:'كاراكوي',info:'منطقة عبور بحرية وقرب برج غلاطة.',transit:'M2 + T1',label:'كراكوي — برج غلاطة'},
+      en:{aria:'Karakoy',name:'Karakoy',info:'A ferry hub near Galata Tower.',transit:'M2 + T1',label:'Karakoy — Galata Tower'}
+    },
+    {
+      ar:{aria:'تقسيم وشارع الاستقلال',name:'تقسيم وشارع الاستقلال',info:'قلب بيوغلو العصري والحركة السياحية.',transit:'M2 + F1',label:'تقسيم — شارع الاستقلال'},
+      en:{aria:'Taksim and Istiklal Street',name:'Taksim and Istiklal Street',info:'The modern heart of Beyoglu and tourist activity.',transit:'M2 + F1',label:'Taksim — Istiklal Street'}
+    },
+    {
+      ar:{aria:'مول جواهر شيشلي',name:'مول جواهر شيشلي',info:'أحد أشهر المولات في منطقة شيشلي.',transit:'M2 + متروباص',label:'شيشلي — مول جواهر'},
+      en:{aria:'Cevahir Mall Sisli',name:'Cevahir Mall Sisli',info:'One of the most famous malls in Sisli.',transit:'M2 + Metrobus',label:'Sisli — Cevahir Mall'}
+    }
+  ];
 
 
   // =========================
@@ -30,7 +58,7 @@
 
   // ✅ بدون limit نهائياً
   function defaultGalleryImages(cover, candidates = []) {
-    return uniq([cover, ...candidates, ...sharedGalleryExtras]);
+    return uniq([cover, ...candidates, ...sharedGalleryExtras]).map(normalizeAssetUrl);
   }
 
   // NOTE: مفاتيح الأسماء لازم تطابق data-hotel بالـHTML حرفياً
@@ -225,7 +253,7 @@
   // Local assets (manifest) support
   // =========================
   function buildLocalUrl(folder, filename) {
-    return `assets/hotels/${escapeHtml(folder)}/${filename}`;
+    return `/assets/hotels/${escapeHtml(folder)}/${filename}`;
   }
 
   function getFolderFromCard(card) {
@@ -353,7 +381,7 @@
       const name = poi.dataset.name || "";
       const info = poi.dataset.info || "";
       const transit = poi.dataset.transit || "—";
-      mapInfo.innerHTML = `<b>${name}</b><br>${info}<br><span style="opacity:.9">النقل الأقرب: ${transit}</span>`;
+      mapInfo.innerHTML = `<b>${name}</b><br>${info}<br><span style="opacity:.9">${i18n[currentLanguage].nearestTransit}: ${transit}</span>`;
     };
 
     metroToggle?.addEventListener("change", () => setLayerState(metroLines, !!metroToggle.checked));
@@ -426,7 +454,7 @@
         const stars = Number(h.stars) || 0;
         const slug = h.slug || "";
         const folder = h.folder || "";
-        const cover = h.cover || "background123.jpg";
+        const cover = normalizeAssetUrl(h.cover || "background123.jpg");
         const alt = h.alt || `واجهة ${hotel}`;
         const detailsHref = h.detailsHref || `hotels/${slug}.html`;
         return `<article class="hotel" data-hotel="${escapeHtml(hotel)}" data-hotel-ar="${escapeHtml(hotelAr)}" data-city="${escapeHtml(city)}" data-area="${escapeHtml(area)}" data-stars="${escapeHtml(stars)}" data-slug="${escapeHtml(slug)}" data-folder="${escapeHtml(folder)}">
@@ -655,7 +683,7 @@
     // ترقية لاحقة للصور الأفضل بدون تعليق الواجهة
     const custom = customHotelGalleries[hotel];
     if (Array.isArray(custom) && custom.length) {
-      activeImages = uniq(custom);
+      activeImages = uniq(custom).map(normalizeAssetUrl);
       activeIndex = 0;
       showImage(0);
     }
@@ -714,6 +742,42 @@
     const rf2=document.getElementById('ratingFilter'); if(rf2) rf2.setAttribute('aria-label', tr.ratingAria);
     const rf=document.getElementById('ratingFilter'); if(rf){rf.options[0].text=currentLanguage==='en'?'All ratings':'كل التصنيفات'; rf.options[1].text=currentLanguage==='en'?'5 stars':'5 نجوم'; rf.options[2].text=currentLanguage==='en'?'3-4 stars':'3-4 نجوم';}
 
+    const brandMarquee=document.querySelector('.brand-marquee'); if(brandMarquee) brandMarquee.setAttribute('aria-label', tr.brandAria);
+    const mapTitle=document.querySelector('.area-map h2'); if(mapTitle) mapTitle.textContent=tr.mapTitle;
+    const mapSubtitle=document.querySelector('.area-map > p'); if(mapSubtitle) mapSubtitle.textContent=tr.mapSubtitle;
+    const chips=$$('.map-chip'); if(chips[0]) chips[0].lastChild.textContent=` ${tr.metroLabel}`; if(chips[1]) chips[1].lastChild.textContent=` ${tr.tramLabel}`;
+    const mapSvg=document.getElementById('istanbulMap'); if(mapSvg) mapSvg.setAttribute('aria-label', tr.mapAria);
+    const legends=$$('.map-legend .legend-item'); if(legends[0]) legends[0].lastChild.textContent=tr.legendMetro; if(legends[1]) legends[1].lastChild.textContent=tr.legendTram; if(legends[2]) legends[2].lastChild.textContent=tr.legendPoi;
+    const footer=document.querySelector('.footer-note'); if(footer) footer.textContent=tr.footerNote;
+    const mapInfo=document.getElementById('mapInfo'); if(mapInfo) mapInfo.innerHTML = `<b>${tr.mapInfoIntro}</b>`;
+    const nextBtn=document.getElementById('pageNext'); if(nextBtn) nextBtn.textContent=tr.nextPage;
+    const prevBtn=document.getElementById('pagePrev'); if(prevBtn) prevBtn.textContent=tr.prevPage;
+    const pagination=document.getElementById('hotelsPagination'); if(pagination) pagination.setAttribute('aria-label', tr.pageAria);
+    const footerNotes=$$('.footer-note'); if(footerNotes[1]) footerNotes[1].innerHTML = `${tr.moreOptions}<br>${tr.moreOptionsContact} <a href="https://wa.me/905317387785">905317387785</a>`;
+    const lightboxClose=document.getElementById('lightboxClose'); if(lightboxClose) lightboxClose.setAttribute('aria-label', tr.lightboxClose);
+
+    const waters=$$('.water-sub'); const waterLabel=document.querySelector('.water-label');
+    if(currentLanguage==='en'){
+      if(waterLabel) waterLabel.textContent='Bosphorus';
+      if(waters[0]) waters[0].textContent='Sea of Marmara';
+      if(waters[1]) waters[1].textContent='Golden Horn';
+    } else {
+      if(waterLabel) waterLabel.textContent='البوسفور';
+      if(waters[0]) waters[0].textContent='بحر مرمرة';
+      if(waters[1]) waters[1].textContent='القرن الذهبي';
+    }
+
+    const poiGroups=$$('.poi-group');
+    poiGroups.forEach((poi, idx)=>{
+      const trPoi=poiTranslations[idx]?.[currentLanguage];
+      if(!trPoi) return;
+      poi.setAttribute('aria-label', trPoi.aria);
+      poi.dataset.name = trPoi.name;
+      poi.dataset.info = trPoi.info;
+      poi.dataset.transit = trPoi.transit;
+      const label=poi.querySelector('.poi-label'); if(label) label.textContent = trPoi.label;
+    });
+
   }
 
   // =========================
@@ -722,11 +786,8 @@
   async function init() {
     applyHotelsPageLanguage();
 
-    const hasStaticCards = $$("#hotelList .hotel").length > 0;
-    if (!hasStaticCards) {
-      const hotels = await loadHotelsData();
-      if (hotels.length) renderHotels(hotels);
-    }
+    const hotels = await loadHotelsData();
+    if (hotels.length) renderHotels(hotels);
 
     hydrateHotels();
     initAreaFilter();

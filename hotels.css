@@ -1,15 +1,54 @@
 :root{
-  --bg:#05060a;
+  --bg:#07111f;
   --panel:#111217;
   --gold:#d4af37;
+  --bg-navy:#0b1f38;
+  --bg-royal:#153b73;
+  --frame:rgba(212,175,55,0.32);
 }
 
 body{
   margin:0;
   font-family:'Cairo',sans-serif;
-  background:var(--bg);
+  background:
+    radial-gradient(1180px 560px at 10% 8%, rgba(21,59,115,0.30), transparent 60%),
+    radial-gradient(920px 500px at 88% 10%, rgba(212,175,55,0.18), transparent 62%),
+    radial-gradient(980px 560px at 52% 100%, rgba(10,31,56,0.42), transparent 68%),
+    linear-gradient(135deg, #0f2340 0%, #0a1527 34%, #091321 62%, #12100d 100%);
   color:#fff;
   direction:rtl;
+  min-height:100vh;
+  position:relative;
+  box-shadow:inset 0 0 0 1px var(--frame);
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(1000px 440px at 50% -10%, rgba(255,255,255,0.05), transparent 64%),
+    repeating-linear-gradient(
+      120deg,
+      rgba(255,255,255,0.012) 0 1px,
+      transparent 1px 72px
+    );
+  opacity:0.20;
+  z-index:-2;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:10px;
+  pointer-events:none;
+  border:1px solid rgba(212,175,55,0.28);
+  border-radius:26px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,243,210,0.05),
+    0 0 34px rgba(212,175,55,0.08);
+  z-index:20;
 }
 
 /* =========================
@@ -18,8 +57,9 @@ body{
 .header{
   padding:34px 18px;
   text-align:center;
-  background:rgba(17,18,23,0.9);
-  border-bottom:1px solid rgba(255,255,255,0.06);
+  background:linear-gradient(180deg, rgba(14,18,28,0.88), rgba(10,14,23,0.76));
+  border-bottom:1px solid rgba(212,175,55,0.16);
+  box-shadow:0 16px 40px rgba(0,0,0,0.18);
 }
 .header h1{ margin:0 0 10px 0; font-size:30px; }
 .header p{ margin:0; opacity:0.85; line-height:1.8; }
@@ -38,6 +78,17 @@ body{
   max-width:1000px;
   margin:auto;
   padding:28px 18px 70px;
+}
+
+.container::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(920px 420px at 88% 16%, rgba(212,175,55,0.10), transparent 62%),
+    radial-gradient(920px 440px at 12% 56%, rgba(48,111,204,0.10), transparent 62%);
+  z-index:-1;
 }
 
 /* =========================
@@ -72,10 +123,11 @@ body{
    ========================= */
 .area-map{
   margin:0 0 16px;
-  background:rgba(17,18,23,0.95);
-  border:1px solid rgba(255,255,255,0.10);
+  background:linear-gradient(180deg, rgba(17,18,23,0.96), rgba(13,16,24,0.94));
+  border:1px solid rgba(212,175,55,0.14);
   border-radius:16px;
   padding:16px;
+  box-shadow:0 18px 40px rgba(0,0,0,0.16);
 }
 .area-map h2{ margin:0 0 8px; font-size:24px; }
 .area-map p{ margin:0 0 12px; opacity:.92; font-size:16px; line-height:1.9; }
@@ -205,14 +257,15 @@ body{
 }
 
 .hotel{
-  background:rgba(17,18,23,0.92);
-  border:1px solid rgba(255,255,255,0.06);
+  background:linear-gradient(180deg, rgba(17,18,23,0.94), rgba(12,16,25,0.94));
+  border:1px solid rgba(212,175,55,0.10);
   border-radius:14px;
   padding:12px;
   line-height:1.8;
   transition:transform .24s ease, border-color .24s ease, box-shadow .24s ease;
   content-visibility:auto;
   contain-intrinsic-size: 280px 300px;
+  box-shadow:0 16px 34px rgba(0,0,0,0.15);
 }
 
 .hotel-thumb{
