@@ -622,5 +622,41 @@
     "cover": "https://lh3.googleusercontent.com/p/AF1QipMpvMLWqtgTCpyRr1ZSAXcOUkZgUVah8Nd18bbP=s1360-w1360-h1020-rw",
     "alt": "واجهة Valide Hotel Şişli",
     "detailsHref": "hotels/valide-hotel-sisli.html"
+  },
+  {
+    "hotel": "Sura Hagia Sophia Hotel",
+    "hotelAr": "فندق سورا آيا صوفيا",
+    "city": "إسطنبول",
+    "area": "سلطان أحمد",
+    "stars": 5,
+    "slug": "sura-hagia-sophia-hotel",
+    "folder": "",
+    "cover": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/231221848.jpg?k=2fccf6158e2f29f73f2d685cb9e3522a04c90cb1e17b7434fda8f2bb1fd0de39&o=",
+    "alt": "واجهة Sura Hagia Sophia Hotel",
+    "detailsHref": "hotels/sura-hagia-sophia-hotel.html"
+  },
+  {
+    "hotel": "The Elysium Taksim",
+    "hotelAr": "فندق ذا إليسيوم إسطنبول تقسيم",
+    "city": "إسطنبول",
+    "area": "تقسيم",
+    "stars": 5,
+    "slug": "the-elysium-taksim",
+    "folder": "",
+    "cover": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/49091022.jpg?k=83427309dc8f54ec4cf64e341a954769fcb7ea9f50baf617f84f8bf16c4f8766&o=",
+    "alt": "واجهة The Elysium Taksim",
+    "detailsHref": "hotels/the-elysium-taksim.html"
+  },
+  {
+    "hotel": "Ramada Plaza by Wyndham Silivri",
+    "hotelAr": "فندق رمادا بلازا باي ويندام سليفري",
+    "city": "إسطنبول",
+    "area": "سليفري",
+    "stars": 5,
+    "slug": "ramada-plaza-by-wyndham-silivri",
+    "folder": "",
+    "cover": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/604342250.jpg?k=fd4e355f3fdb44ac4664d6e2af2b8d2367f7f293cf2f4cf45ac90d6487d77be2&o=",
+    "alt": "واجهة Ramada Plaza by Wyndham Silivri",
+    "detailsHref": "hotels/ramada-plaza-by-wyndham-silivri.html"
   }
 ]
