@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>الفنادق التي نتعامل معها | سيافا ترافل</title>
-  <meta name="description" content="تصفح قائمة الفنادق التي نتعامل معها في إسطنبول مع صور الغلاف، التصنيف، المنطقة، وخاصية عرض الصور.">
+  <title>Our Partner Hotels | SIAFA TRAVEL</title>
+  <meta name="description" content="Browse our partner hotels in Istanbul with cover images, ratings, area filters, and photo galleries.">
   <link rel="canonical" href="https://www.siafatravel.com/en/hotels.html">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="الفنادق التي نتعامل معها | سيافا ترافل">
-  <meta property="og:description" content="تصفح قائمة الفنادق التي نتعامل معها في إسطنبول مع صور الغلاف، التصنيف، المنطقة، وخاصية عرض الصور.">
-  <meta property="og:url" content="https://www.siafatravel.com/hotels.html">
+  <meta property="og:title" content="Our Partner Hotels | SIAFA TRAVEL">
+  <meta property="og:description" content="Browse our partner hotels in Istanbul with cover images, ratings, area filters, and photo galleries.">
+  <meta property="og:url" content="https://www.siafatravel.com/en/hotels.html">
   <meta property="og:image" content="https://www.siafatravel.com/logo.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="الفنادق التي نتعامل معها | سيافا ترافل">
-  <meta name="twitter:description" content="تصفح قائمة الفنادق التي نتعامل معها في إسطنبول مع صور الغلاف، التصنيف، المنطقة، وخاصية عرض الصور.">
+  <meta name="twitter:title" content="Our Partner Hotels | SIAFA TRAVEL">
+  <meta name="twitter:description" content="Browse our partner hotels in Istanbul with cover images, ratings, area filters, and photo galleries.">
   <meta name="twitter:image" content="https://www.siafatravel.com/logo.png">
 
   <link rel="icon" type="image/png" href="/logo.png">
@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://pix10.agoda.net" crossorigin>
   <link rel="dns-prefetch" href="//pix10.agoda.net">
 
-  <!-- ✅ تحميل واحد فقط -->
+  <!-- Single CSS load -->
   <link rel="stylesheet" href="/hotels.css">
   <style>html[dir="ltr"] body{direction:ltr}</style>
 </head>
@@ -41,40 +41,40 @@
 <body>
 
   <header class="header">
-    <h1 id="hotelsTitle">الفنادق التي نتعامل معها</h1>
-    <p><span id="hotelsSubtitle">اضغط على أي صورة لفندق لعرضها بشكل مكبر والتنقل بين الصور ✅</span></p>
+    <h1 id="hotelsTitle">Our Partner Hotels</h1>
+    <p><span id="hotelsSubtitle">Click any hotel image to enlarge it and browse the gallery ✅</span></p>
 
     <div class="top-actions">
-      <a class="btn secondary" href="/en/"><span id="backHomeText">⬅ الرجوع للموقع الرئيسي</span></a>
-      <a class="btn" href="https://wa.me/905317387785" rel="noopener"><span id="waText">تواصل واتساب</span></a>
+      <a class="btn secondary" href="/en/"><span id="backHomeText">⬅ Back to homepage</span></a>
+      <a class="btn" href="https://wa.me/905317387785" rel="noopener"><span id="waText">WhatsApp Contact</span></a>
     </div>
   </header>
 
   <noscript class="nojs-note">
-    يمكنك تصفح الفنادق حتى بدون JavaScript. للتجربة الأفضل (بحث أسرع + معرض صور تفاعلي) يُفضّل تفعيل JavaScript.
+    You can browse hotels without JavaScript. For the best experience (faster search + interactive gallery), enable JavaScript.
   </noscript>
 
   <main class="container">
 
     <!-- Filters -->
     <div class="search">
-      <input id="q" type="text" placeholder="ابحث عن فندق… مثال: Marriott" oninput="filterHotels()" />
-      <select id="ratingFilter" onchange="filterHotels()" aria-label="فلتر التصنيف">
-        <option value="all" selected>كل التصنيفات</option>
-        <option value="5">5 نجوم</option>
-        <option value="34">3-4 نجوم</option>
+      <input id="q" type="text" placeholder="Search hotel... e.g. Marriott" oninput="filterHotels()" />
+      <select id="ratingFilter" onchange="filterHotels()" aria-label="Rating filter">
+        <option value="all" selected>All ratings</option>
+        <option value="5">5 Stars</option>
+        <option value="34">3-4 Stars</option>
       </select>
-      <select id="areaFilter" onchange="filterHotels()" aria-label="فلتر المنطقة">
-        <option value="all" selected>كل المناطق</option>
+      <select id="areaFilter" onchange="filterHotels()" aria-label="Area filter">
+        <option value="all" selected>All areas</option>
       </select>
       <button class="btn" type="button"
         onclick="document.getElementById('q').value=''; document.getElementById('ratingFilter').value='all'; document.getElementById('areaFilter').value='all'; filterHotels(true);">
-        <span id="clearFiltersText">مسح</span>
+        <span id="clearFiltersText">Clear</span>
       </button>
     </div>
 
     <!-- Brand marquee (infinite loop) -->
-    <section class="brand-marquee" aria-label="أبرز سلاسل الفنادق في إسطنبول">
+    <section class="brand-marquee" aria-label="Top hotel chains in Istanbul">
       <div class="brand-track" id="brandTrack" role="list">
         <span class="brand-logo-pill" role="listitem" data-brand="Marriott">
           <img src="https://cdn.simpleicons.org/marriott/8B1E3F" alt="Marriott" loading="lazy" decoding="async" width="20" height="20"
