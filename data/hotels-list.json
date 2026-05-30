@@ -658,5 +658,29 @@
     "cover": "https://ak-d.tripcdn.com/images/1mc1j12000rqwtzdw9C46_R_960_660_R5_D.jpg",
     "alt": "واجهة Ramada Plaza by Wyndham Silivri",
     "detailsHref": "hotels/ramada-plaza-by-wyndham-silivri.html"
+  },
+  {
+    "hotel": "Hyatt Regency Istanbul Ataköy",
+    "hotelAr": "حياة ريجنسي إسطنبول أتاكوي",
+    "city": "إسطنبول",
+    "area": "أتاكوي",
+    "stars": 5,
+    "slug": "hyatt-regency-istanbul-atakoy",
+    "folder": "",
+    "cover": "https://images.trvl-media.com/lodging/10000000/9130000/9127700/9127669/w3840h2556x0y4-cc39baac.jpg?impolicy=resizecrop&ra=fit&rw=1200",
+    "alt": "واجهة ومسبح Hyatt Regency Istanbul Ataköy",
+    "detailsHref": "hotels/hyatt-regency-istanbul-atakoy.html"
+  },
+  {
+    "hotel": "Rixos Tersane Istanbul",
+    "hotelAr": "ريكسوس تيرسانة إسطنبول تقسيم",
+    "city": "إسطنبول",
+    "area": "تقسيم",
+    "stars": 5,
+    "slug": "rixos-tersane-istanbul",
+    "folder": "",
+    "cover": "https://www.rixos.com/sites/default/files/2025-10/Rixos%20Tersane%20Istanbul%20%282%29%20%281%29_0.png?twic=v1%2Ffocus%3Dauto%2Fcover%3D1%3A1%2Fresize%3D776",
+    "alt": "واجهة Rixos Tersane Istanbul على القرن الذهبي",
+    "detailsHref": "hotels/rixos-tersane-istanbul.html"
   }
 ]
